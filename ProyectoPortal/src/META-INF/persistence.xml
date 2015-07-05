@@ -1,32 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="JPAportal" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="ProyectoPortalPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>Tablas.Tsubmodulo</class>
-    <class>Tablas.TdetalleEntrega</class>
-    <class>Tablas.Tfacultad</class>
-    <class>Tablas.Trecurso</class>
-    <class>Tablas.Ttipoasignacion</class>
-    <class>Tablas.TseccionCursos</class>
-    <class>Tablas.Tactividad</class>
+    <class>Tablas.Tmodulo_1</class>
+    <class>Tablas.Tdetalleasignacionvip_1</class>
+    <class>Tablas.Tpersona_1</class>
+    <class>Tablas.Tentrega_1</class>
+    <class>Tablas.Tactividad_1</class>
+    <class>Tablas.Ttipoasignacion_1</class>
+    <class>Tablas.Tpermisos_1</class>
+    <class>Tablas.TcursoCiclo_1</class>
+    <class>Tablas.Trolusuario_1</class>
+    <class>Tablas.Tsubmodulo_1</class>
+    <class>Tablas.Tiposangre_1</class>
+    <class>Tablas.Tarchivos_1</class>
+    <class>Tablas.Trecurso_1</class>
+    <class>Tablas.Tcarrera_1</class>
+    <class>Tablas.TdetalleEntrega_1</class>
+    <class>Tablas.Tfacultad_1</class>
+    <class>Tablas.Tseccion_1</class>
+    <class>Tablas.Tciclo_1</class>
+    <class>Tablas.Tasignados_1</class>
+    <class>Tablas.TseccionCursos_1</class>
+    <class>Tablas.Tcurso_1</class>
+    <class>Tablas.Ttipoactividad_1</class>
+    <class>Tablas.Tusuarios_1</class>
     <class>Tablas.Tentrega</class>
+    <class>Tablas.Tcurso</class>
+    <class>Tablas.Tmodulo</class>
+    <class>Tablas.Tpersona</class>
     <class>Tablas.Trolusuario</class>
-    <class>Tablas.Tusuarios</class>
+    <class>Tablas.Tarchivos</class>
+    <class>Tablas.Tcarrera</class>
+    <class>Tablas.Ttipoactividad</class>
+    <class>Tablas.TdetalleEntrega</class>
+    <class>Tablas.Tiposangre</class>
+    <class>Tablas.Ttipoasignacion</class>
     <class>Tablas.Tdetalleasignacionvip</class>
     <class>Tablas.Tasignados</class>
-    <class>Tablas.Tpermisos</class>
-    <class>Tablas.Ttipoactividad</class>
-    <class>Tablas.Tpersona</class>
-    <class>Tablas.Tmodulo</class>
-    <class>Tablas.Tcurso</class>
-    <class>Tablas.Tseccion</class>
     <class>Tablas.Tciclo</class>
-    <class>Tablas.Tcarrera</class>
-    <class>Tablas.Tiposangre</class>
+    <class>Tablas.Tseccion</class>
+    <class>Tablas.TseccionCursos</class>
+    <class>Tablas.Tactividad</class>
+    <class>Tablas.Tsubmodulo</class>
+    <class>Tablas.Trecurso</class>
+    <class>Tablas.Tpermisos</class>
     <class>Tablas.TcursoCiclo</class>
-    <class>Tablas.Tarchivos</class>
+    <class>Tablas.Tusuarios</class>
+    <class>Tablas.Tfacultad</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/permisosus?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/PermisosUs?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="1234"/>

@@ -22,10 +22,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Rosario
+ * @author Cliente
  */
 @Entity
-@Table(catalog = "permisosus", schema = "")
+@Table(name = "ttipoasignacion")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Ttipoasignacion.findAll", query = "SELECT t FROM Ttipoasignacion t"),
@@ -37,10 +37,12 @@ public class Ttipoasignacion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
+    @Column(name = "FechaInicial")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaInicial;
+    @Column(name = "FechaFinal")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaFinal;
 

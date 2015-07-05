@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author Rosario
+ * @author Cliente
  */
 public class TarchivosJpaController implements Serializable {
 

@@ -19,10 +19,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Rosario
+ * @author Cliente
  */
 @Entity
-@Table(catalog = "permisosus", schema = "")
+@Table(name = "tasignados")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tasignados.findAll", query = "SELECT t FROM Tasignados t"),
@@ -34,13 +34,13 @@ public class Tasignados implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "TSeccion_Cursos_id", nullable = false)
+    @Column(name = "TSeccion_Cursos_id")
     private int tSeccionCursosid;
     @Basic(optional = false)
-    @Column(name = "TUsuarios_id", nullable = false)
+    @Column(name = "TUsuarios_id")
     private int tUsuariosid;
 
     public Tasignados() {

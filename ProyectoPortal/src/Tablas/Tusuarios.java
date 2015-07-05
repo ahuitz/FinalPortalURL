@@ -19,29 +19,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Rosario
+ * @author Cliente
  */
 @Entity
-@Table(catalog = "permisosus", schema = "")
+@Table(name = "tusuarios")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tusuarios.findAll", query = "SELECT t FROM Tusuarios t"),
     @NamedQuery(name = "Tusuarios.findById", query = "SELECT t FROM Tusuarios t WHERE t.id = :id"),
     @NamedQuery(name = "Tusuarios.findByUsuario", query = "SELECT t FROM Tusuarios t WHERE t.usuario = :usuario"),
-    @NamedQuery(name = "Tusuarios.findByTRolUsuarioid", query = "SELECT t FROM Tusuarios t WHERE t.tRolUsuarioid = :tRolUsuarioid")})
+    @NamedQuery(name = "Tusuarios.findByTPersonaid", query = "SELECT t FROM Tusuarios t WHERE t.tPersonaid = :tPersonaid")})
 public class Tusuarios implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 12)
+    @Column(name = "usuario")
     private String usuario;
     @Basic(optional = false)
-    @Column(name = "TRolUsuario_id", nullable = false)
-    private int tRolUsuarioid;
+    @Column(name = "TPersona_id")
+    private int tPersonaid;
 
     public Tusuarios() {
     }
@@ -50,10 +50,10 @@ public class Tusuarios implements Serializable {
         this.id = id;
     }
 
-    public Tusuarios(Integer id, String usuario, int tRolUsuarioid) {
+    public Tusuarios(Integer id, String usuario, int tPersonaid) {
         this.id = id;
         this.usuario = usuario;
-        this.tRolUsuarioid = tRolUsuarioid;
+        this.tPersonaid = tPersonaid;
     }
 
     public Integer getId() {
@@ -72,12 +72,12 @@ public class Tusuarios implements Serializable {
         this.usuario = usuario;
     }
 
-    public int getTRolUsuarioid() {
-        return tRolUsuarioid;
+    public int getTPersonaid() {
+        return tPersonaid;
     }
 
-    public void setTRolUsuarioid(int tRolUsuarioid) {
-        this.tRolUsuarioid = tRolUsuarioid;
+    public void setTPersonaid(int tPersonaid) {
+        this.tPersonaid = tPersonaid;
     }
 
     @Override

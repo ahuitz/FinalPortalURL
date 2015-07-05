@@ -19,10 +19,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Rosario
+ * @author Cliente
  */
 @Entity
-@Table(catalog = "permisosus", schema = "")
+@Table(name = "tpermisos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tpermisos.findAll", query = "SELECT t FROM Tpermisos t"),
@@ -37,22 +37,22 @@ public class Tpermisos implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "eliminar")
     private boolean eliminar;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "modificar")
     private boolean modificar;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "buscar")
     private boolean buscar;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "crear")
     private boolean crear;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "extraer")
     private boolean extraer;
 
     public Tpermisos() {

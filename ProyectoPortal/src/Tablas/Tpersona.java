@@ -19,10 +19,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Rosario
+ * @author Cliente
  */
 @Entity
-@Table(catalog = "permisosus", schema = "")
+@Table(name = "tpersona")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tpersona.findAll", query = "SELECT t FROM Tpersona t"),
@@ -37,48 +37,44 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Tpersona.findByFechaNac", query = "SELECT t FROM Tpersona t WHERE t.fechaNac = :fechaNac"),
     @NamedQuery(name = "Tpersona.findByGenero", query = "SELECT t FROM Tpersona t WHERE t.genero = :genero"),
     @NamedQuery(name = "Tpersona.findByEstado", query = "SELECT t FROM Tpersona t WHERE t.estado = :estado"),
-    @NamedQuery(name = "Tpersona.findByTipoSangreid", query = "SELECT t FROM Tpersona t WHERE t.tipoSangreid = :tipoSangreid"),
-    @NamedQuery(name = "Tpersona.findByTUsuariosid", query = "SELECT t FROM Tpersona t WHERE t.tUsuariosid = :tUsuariosid")})
+    @NamedQuery(name = "Tpersona.findByTipoSangreid", query = "SELECT t FROM Tpersona t WHERE t.tipoSangreid = :tipoSangreid")})
 public class Tpersona implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 7)
+    @Column(name = "carne")
     private String carne;
     @Basic(optional = false)
-    @Column(nullable = false, length = 40)
+    @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "apellido")
     private String apellido;
     @Basic(optional = false)
-    @Column(nullable = false, length = 50)
+    @Column(name = "direccion")
     private String direccion;
-    @Column(length = 8)
+    @Column(name = "telefono")
     private String telefono;
-    @Column(length = 8)
+    @Column(name = "celular")
     private String celular;
-    @Column(length = 15)
+    @Column(name = "DPI")
     private String dpi;
     @Basic(optional = false)
-    @Column(nullable = false, length = 10)
+    @Column(name = "FechaNac")
     private String fechaNac;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "genero")
     private boolean genero;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "estado")
     private boolean estado;
     @Basic(optional = false)
-    @Column(name = "TipoSangre_id", nullable = false)
+    @Column(name = "TipoSangre_id")
     private int tipoSangreid;
-    @Basic(optional = false)
-    @Column(name = "TUsuarios_id", nullable = false)
-    private int tUsuariosid;
 
     public Tpersona() {
     }
@@ -87,7 +83,7 @@ public class Tpersona implements Serializable {
         this.id = id;
     }
 
-    public Tpersona(Integer id, String carne, String nombre, String apellido, String direccion, String fechaNac, boolean genero, boolean estado, int tipoSangreid, int tUsuariosid) {
+    public Tpersona(Integer id, String carne, String nombre, String apellido, String direccion, String fechaNac, boolean genero, boolean estado, int tipoSangreid) {
         this.id = id;
         this.carne = carne;
         this.nombre = nombre;
@@ -97,7 +93,6 @@ public class Tpersona implements Serializable {
         this.genero = genero;
         this.estado = estado;
         this.tipoSangreid = tipoSangreid;
-        this.tUsuariosid = tUsuariosid;
     }
 
     public Integer getId() {
@@ -194,14 +189,6 @@ public class Tpersona implements Serializable {
 
     public void setTipoSangreid(int tipoSangreid) {
         this.tipoSangreid = tipoSangreid;
-    }
-
-    public int getTUsuariosid() {
-        return tUsuariosid;
-    }
-
-    public void setTUsuariosid(int tUsuariosid) {
-        this.tUsuariosid = tUsuariosid;
     }
 
     @Override

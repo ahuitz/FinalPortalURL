@@ -22,10 +22,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Rosario
+ * @author Cliente
  */
 @Entity
-@Table(catalog = "permisosus", schema = "")
+@Table(name = "tactividad")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tactividad.findAll", query = "SELECT t FROM Tactividad t"),
@@ -43,34 +43,34 @@ public class Tactividad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
+    @Column(name = "Titulo")
     private String titulo;
     @Basic(optional = false)
-    @Column(nullable = false, length = 255)
+    @Column(name = "Descripcion")
     private String descripcion;
     @Basic(optional = false)
-    @Column(name = "Fecha_Entrega", nullable = false)
+    @Column(name = "Fecha_Entrega")
     @Temporal(TemporalType.DATE)
     private Date fechaEntrega;
     @Basic(optional = false)
-    @Column(name = "Fecha_Publicacion", nullable = false)
+    @Column(name = "Fecha_Publicacion")
     @Temporal(TemporalType.DATE)
     private Date fechaPublicacion;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "Valor")
     private double valor;
     @Basic(optional = false)
-    @Column(name = "Tiempo_extra", nullable = false)
+    @Column(name = "Tiempo_extra")
     @Temporal(TemporalType.DATE)
     private Date tiempoextra;
     @Basic(optional = false)
-    @Column(name = "TSeccion_Cursos_id", nullable = false)
+    @Column(name = "TSeccion_Cursos_id")
     private int tSeccionCursosid;
     @Basic(optional = false)
-    @Column(name = "No_id", nullable = false)
+    @Column(name = "No_id")
     private int noid;
 
     public Tactividad() {

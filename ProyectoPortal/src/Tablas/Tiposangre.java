@@ -19,10 +19,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Rosario
+ * @author Cliente
  */
 @Entity
-@Table(catalog = "permisosus", schema = "")
+@Table(name = "tiposangre")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tiposangre.findAll", query = "SELECT t FROM Tiposangre t"),
@@ -33,10 +33,10 @@ public class Tiposangre implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 3)
+    @Column(name = "tipo")
     private String tipo;
 
     public Tiposangre() {
