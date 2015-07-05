@@ -1,15 +1,27 @@
-public class R_Estudiante {
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Cursos;
 
-  public Object controladorR;
+import Controladores.TrecursoJpaController;
+import Tablas.Trecurso;
+import java.util.ArrayList;
 
-  public ArrayList<TRecurso> recursos;
+/**
+ *
+ * @author Pablo López
+ */
+public class R_Estudiante extends Recurso {
 
-  
-  public R_Estudiante(Object controladorR) {
-  return null;
-  }
+    public R_Estudiante(TrecursoJpaController controladorR) {
+        this.controladorR = controladorR;
+        this.recursos = (ArrayList<Trecurso>) controladorR.findTrecursoEntities();
+    }
 
-  public void visualizar() {
-  }
+    @Override
+    public void visualizar() {
+    }
 
 }
