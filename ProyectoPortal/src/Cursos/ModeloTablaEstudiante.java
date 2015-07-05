@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModeloTablaEstudiante extends AbstractTableModel {
     private ArrayList<Tpersona> estudiantes;
-    private String columnas[] = {"Nombre", "Apellido", "Edad"};
+    private String columnas[] = {"Carne","Nombre", "Apellido", "Estado"};
 
     public ModeloTablaEstudiante(ArrayList<Tpersona> estudiantes) {
         this.estudiantes=estudiantes;
