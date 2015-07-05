@@ -23,11 +23,9 @@ public class ModificarSeccion implements Consulta {
     int cupo;
     int seccioncursoid;
     
-     public ModificarSeccion(Object seccion, String aula, int idcurso, int cupo) {
+     public ModificarSeccion(Object seccion) {
         this.seccion = (Tseccion) seccion;
-        this.aula = aula;
-        this.idcurso = idcurso;
-        this.cupo = cupo;
+        
     }
 
     @Override

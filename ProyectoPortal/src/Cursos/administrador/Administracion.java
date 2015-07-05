@@ -43,12 +43,11 @@ public class Administracion {
         cs.instruccion(emf);
     }
     
-    public void buscarSeccion(){
-    
-    }
-    
-      
-    public void modificarSeccion(){
+ 
+    public void modificarSeccion(Object seccion){
+        ModificarSeccion ms = new ModificarSeccion(seccion);
+        ms.instruccion(emf);
+        
     
     }
     
@@ -58,7 +57,11 @@ public class Administracion {
         CrearCiclo crearciclo = new CrearCiclo(ciclo);
         crearciclo.instruccion(emf);
     }
-    public void modificarCiclo(){
-        ModificarCiclo mc = new ModificarCiclo();
+    public void modificarCiclo(Object ciclo){
+        ModificarCiclo mci= new ModificarCiclo(ciclo);
+        mci.instruccion(emf);
+        
+        
+        
     }
 }
