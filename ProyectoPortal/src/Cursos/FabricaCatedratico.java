@@ -1,23 +1,33 @@
-import java.util.Vector;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Cursos;
 
-public class FabricaCatedratico implements FabricaTipoUsuario, FabricaTipoUsuario {
+import Controladores.TrecursoJpaController;
+import javax.persistence.EntityManagerFactory;
 
-    public Vector  myTareaRecursoEstudiante;
-    public Vector  myTareaRecursoEstudiante;
-    public Vector  myRecursoEstudiante;
-    public Vector  myR_Catedratico;
-    public Vector  myA_Catedratico;
+/**
+ *
+ * @author Pablo López
+ */
+public class FabricaCatedratico implements FabricaTipoUsuario {
 
   public FabricaCatedratico() {
-  return null;
   }
 
   public Actividad crearActividad(Object emf) {
-  return null;
+      return null;
   }
 
-  public Recurso crearRecurso(Object emf) {
-  return null;
+  public Recurso crearRecurso(EntityManagerFactory emf) {
+      return new R_Catedratico(new TrecursoJpaController(emf));
   }
+
+    @Override
+    public Actividad crearActividad(EntityManagerFactory emf) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

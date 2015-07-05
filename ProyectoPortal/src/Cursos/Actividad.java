@@ -1,12 +1,46 @@
-public abstract class Actividad extends A_Estudiante, A_Catedratico {
+package Cursos;
 
-  public ArrayList<TActividad> actividades;
+import Controladores.TactividadJpaController;
+import Controladores.TentregaJpaController;
+import Tablas.Tactividad;
+import java.util.ArrayList;
 
-  public Object controladorA;
+public abstract class Actividad  {
 
-  public Object controladorE;
+  protected ArrayList<Tactividad> actividades;
 
-  public void visualizarActividad() {
-  }
+  protected Controladores.TactividadJpaController controladorA;
 
+  protected Controladores.TentregaJpaController controladorE;
+
+    /**
+     *
+     */
+    public abstract void visualizarActividad(); 
+  
+
+    public ArrayList<Tactividad> getActividades() {
+        return actividades;
+    }
+
+    public void setActividades(ArrayList<Tactividad> actividades) {
+        this.actividades = actividades;
+    }
+
+    public TactividadJpaController getControladorA() {
+        return controladorA;
+    }
+
+    public void setControladorA(TactividadJpaController controladorA) {
+        this.controladorA = controladorA;
+    }
+
+    public TentregaJpaController getControladorE() {
+        return controladorE;
+    }
+
+    public void setControladorE(TentregaJpaController controladorE) {
+        this.controladorE = controladorE;
+    }
+  
 }

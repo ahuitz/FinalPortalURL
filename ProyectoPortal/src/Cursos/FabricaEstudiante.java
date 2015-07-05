@@ -1,23 +1,28 @@
+package Cursos;
+import Cursos.Actividad;
 import java.util.Vector;
+import Controladores.TactividadJpaController;
+import Controladores.TentregaJpaController;
+import javax.persistence.EntityManagerFactory;
 
-public class FabricaEstudiante implements FabricaTipoUsuario, FabricaTipoUsuario, FabricaTipoUsuario {
-
-    public Vector  myTareaCatedratico;
-    public Vector  myTareaRecursoEstudiante;
-    public Vector  myTareaRecursoCatedratico;
-    public Vector  myA_Estudiante;
-    public Vector  myR_Estudiante;
+public class FabricaEstudiante implements FabricaTipoUsuario {
 
   public FabricaEstudiante() {
-  return null;
+  
   }
 
-  public Actividad crearActividad(Object emf) {
-  return null;
+  public Actividad crearActividad(EntityManagerFactory emf) {
+  Actividad actividad = new A_Estudiante( new TactividadJpaController(emf),new TentregaJpaController(emf) );
+  return actividad;       
   }
 
   public Recurso crearRecurso(Object emf) {
   return null;
   }
+
+    @Override
+    public Recurso crearRecurso(EntityManagerFactory emf) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

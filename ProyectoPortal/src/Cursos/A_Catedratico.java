@@ -6,35 +6,32 @@ import Tablas.Tentrega;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class A_Catedratico extends Entrega {
+public class A_Catedratico extends Actividad {
 
-  public ArrayList<Tactividad> actividades;
+    public ArrayList<Tactividad> actividades;
+    public Controladores.TactividadJpaController controladorA;
+    public Controladores.TdetalleEntregaJpaController controladorE;
+    public ArrayList<Entrega> entregas;
 
-  public Object controladorA;
+    public A_Catedratico(Controladores.TactividadJpaController controladorA, Controladores.TdetalleEntregaJpaController controladorE) {
+        this.controladorA = controladorA;
+        this.controladorE = controladorE;
+    }
 
-  public Object controladorE;
+    public void agregarEntrega(int idActividad, Object controladorE) {
+    }
 
-  public ArrayList<Entrega> entregas;
+    public void calificarEntrega(Tentrega entrega, Double calificacion) {
+    }
 
-      public Vector  myEntrega;
+    public void modificarActividad(Tactividad actividad) {
+    }
 
-  public A_Catedratico(Object controladorA, Object controladorE) {
-;
-  }
+    public void publicarActividad(Tactividad actividad) {
+    }
 
-  public void agregarEntrega(int idActividad, Object controladorE) {
-  }
-
-  public void calificarEntrega(Tentrega entrega, Double calificacion) {
-  }
-
-  public void modificarActividad(Tactividad actividad) {
-  }
-
-  public void publicarActividad(Tactividad actividad) {
-  }
-
-  public void visualizarActividad() {
-  }
+    @Override
+    public void visualizarActividad() {
+    }
 
 }
