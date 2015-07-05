@@ -40,6 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Tpersona.findByTipoSangreid", query = "SELECT t FROM Tpersona t WHERE t.tipoSangreid = :tipoSangreid"),
     @NamedQuery(name = "Tpersona.findByTUsuariosid", query = "SELECT t FROM Tpersona t WHERE t.tUsuariosid = :tUsuariosid")})
 public class Tpersona implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -228,5 +229,5 @@ public class Tpersona implements Serializable {
     public String toString() {
         return "Tablas.Tpersona[ id=" + id + " ]";
     }
-    
+
 }
