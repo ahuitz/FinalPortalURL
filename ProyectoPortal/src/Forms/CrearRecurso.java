@@ -181,7 +181,7 @@ public class CrearRecurso extends javax.swing.JFrame {
         Date fecha = new Date();
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
         System.out.println(sdf.format(fecha));
-        Trecurso rec = new Trecurso();
+        Trecurso rec = new Trecurso(idR,titulo,descripcion,sdf.format(fecha),rc.getIdSeccionCurso(),id);
         rc.getControladorR().create(rec);
         
     }//GEN-LAST:event_BotonAceptarActionPerformed
