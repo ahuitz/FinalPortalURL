@@ -61,6 +61,6 @@ public class Administracion {
         crearciclo.instruccion(emf);
     }
     public void modificarCiclo(){
-    
+        ModificarCiclo mc = new ModificarCiclo();
     }
 }
