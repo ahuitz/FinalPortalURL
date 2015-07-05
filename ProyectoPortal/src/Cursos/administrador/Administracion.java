@@ -5,10 +5,23 @@
  */
 package Cursos.administrador;
 
+import javax.persistence.EntityManagerFactory;
+
 /**
  *
  * @author Cristian
  */
 public class Administracion {
+    
+    private EntityManagerFactory emf;
+
+    public Administracion(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+    
+    public void crearCurso(){
+    
+    }
+    
     
 }

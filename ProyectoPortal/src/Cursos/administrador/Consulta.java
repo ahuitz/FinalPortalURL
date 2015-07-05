@@ -5,10 +5,14 @@
  */
 package Cursos.administrador;
 
+import javax.persistence.EntityManagerFactory;
+
 /**
  *
  * @author Cristian
  */
 public interface Consulta {
+    
+    public void instruccion(EntityManagerFactory efm);
     
 }
