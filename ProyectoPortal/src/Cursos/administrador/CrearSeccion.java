@@ -6,8 +6,8 @@
 package Cursos.administrador;
 
 import javax.persistence.EntityManagerFactory;
-import Tablas.Tcurso;
-import Controladores.TcursoJpaController;
+import Tablas.Tseccion;
+import Controladores.TseccionJpaController;
 
 /**
  *
@@ -15,11 +15,22 @@ import Controladores.TcursoJpaController;
  */
 public class CrearSeccion implements Consulta{
     
-    
+    Tseccion seccion;
+    String aula;
+    int idcurso;
+    int cupo;
 
+    public CrearSeccion(Object seccion, String aula, int idcurso, int cupo) {
+        this.seccion = (Tseccion) seccion;
+        this.aula = aula;
+        this.idcurso = idcurso;
+        this.cupo = cupo;
+    }
+    
     @Override
     public void instruccion(EntityManagerFactory efm) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TseccionJpaController controlador_seccion = new TseccionJpaController(efm);
+        controlador_seccion.create(seccion);
     }
     
 }

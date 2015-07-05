@@ -6,8 +6,6 @@
 package Cursos.administrador;
 
 import javax.persistence.EntityManagerFactory;
-import Tablas.Tcurso;
-import Controladores.TcursoJpaController;
 /**
  *
  * @author Cristian
@@ -20,10 +18,13 @@ public class Administracion {
         this.emf = emf;
     }
     
-    public void crearCurso(Tcurso curso){
-        TcursoJpaController controlador = new TcursoJpaController(emf);
-        controlador.create(curso);
+    public void crearCurso(Object curso, Object ciclo, int year){
+        CrearCurso cc = new CrearCurso(curso, ciclo, year);
+        cc.instruccion(emf);
     }
     
-    
+    public void crearSeccion(Object seccion, int idcurso, String aula, int cupo){
+        CrearSeccion cs = new CrearSeccion(seccion, aula, idcurso, cupo);
+        cs.instruccion(emf);
+    }
 }
