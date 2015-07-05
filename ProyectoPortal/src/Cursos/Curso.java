@@ -11,6 +11,8 @@ import java.util.ArrayList;
 /**
  *
  * @author Pablo López
+ * @author Pablo Garzona
+ * @author Miguel Diaz
  */
 public class Curso {
 
