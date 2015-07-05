@@ -56,7 +56,9 @@ public class Administracion {
     
     //////////////// modulo de ciclo //////////////////////////////
     
-    public void crearCiclo(){
+    public void crearCiclo(Object ciclo){
+        CrearCiclo crearciclo = new CrearCiclo(ciclo);
+        crearciclo.instruccion(emf);
     }
     public void modificarCiclo(){
     

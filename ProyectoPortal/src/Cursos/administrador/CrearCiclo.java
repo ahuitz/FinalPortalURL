@@ -6,26 +6,27 @@
 package Cursos.administrador;
 
 import javax.persistence.EntityManagerFactory;
-import Controladores.TcursoJpaController;
+import Tablas.Tciclo;
 import Controladores.TcicloJpaController;
-import Controladores.TseccionJpaController;
-import Controladores.TcursoCicloJpaController;
-import javax.persistence.Query;
 
 /**
  *
  * @author RealG4Life
  */
-public class BuscarCursos implements Consulta{
+public class CrearCiclo implements Consulta{
     
-    Query q;
+    Tciclo ciclo;
+
+    public CrearCiclo(Object ciclo) {
+        this.ciclo = (Tciclo) ciclo;
+    }
+    
+    
 
     @Override
     public void instruccion(EntityManagerFactory efm) {
-        q = efm.createEntityManager().createNamedQuery("SELECT ");
-        TcursoJpaController conCurso = new TcursoJpaController(efm);
-        conCurso.findTcursoEntities();
+        TcicloJpaController conCiclo =  new TcicloJpaController(efm);
+        conCiclo.create(ciclo);
     }
-    
     
 }
