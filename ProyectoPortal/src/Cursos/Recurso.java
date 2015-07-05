@@ -18,7 +18,8 @@ public abstract class Recurso {
 
     protected TrecursoJpaController controladorR;
     protected ArrayList<Trecurso> recursos;
-
+    protected int idSeccionCurso;
+    
     public TrecursoJpaController getControladorR() {
         return controladorR;
     }

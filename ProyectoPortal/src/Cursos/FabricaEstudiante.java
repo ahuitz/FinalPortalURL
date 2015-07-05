@@ -21,13 +21,13 @@ public class FabricaEstudiante implements FabricaTipoUsuario {
     }
 
     @Override
-    public Actividad crearActividad(EntityManagerFactory emf) {
-        return new A_Estudiante(new TactividadJpaController(emf), new TentregaJpaController(emf));
+    public Actividad crearActividad(EntityManagerFactory emf, int idSC) {
+        return new A_Estudiante(new TactividadJpaController(emf), new TentregaJpaController(emf), idSC);
     }
 
     @Override
-    public Recurso crearRecurso(EntityManagerFactory emf) {
-        return new R_Estudiante(new TrecursoJpaController(emf));
+    public Recurso crearRecurso(EntityManagerFactory emf, int idSC) {
+        return new R_Estudiante(emf, idSC);
     }
 
 }

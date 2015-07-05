@@ -8,6 +8,7 @@ package Cursos;
 import Controladores.TrecursoJpaController;
 import Tablas.Trecurso;
 import java.util.ArrayList;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -15,9 +16,10 @@ import java.util.ArrayList;
  */
 public class R_Estudiante extends Recurso {
 
-    public R_Estudiante(TrecursoJpaController controladorR) {
-        this.controladorR = controladorR;
+    public R_Estudiante(EntityManagerFactory emf, int idSC) {
+        this.controladorR = new TrecursoJpaController(emf);
         this.recursos = (ArrayList<Trecurso>) controladorR.findTrecursoEntities();
+        this.idSeccionCurso=idSC;
     }
 
     @Override
