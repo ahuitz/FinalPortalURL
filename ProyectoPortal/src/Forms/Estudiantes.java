@@ -8,6 +8,7 @@ import javax.swing.table.TableModel;
 import Controladores.TpersonaJpaController;
 import Tablas.Tpersona;
 import Curso.ModeloTablaArchivos;
+import cursos.ModeloTablaEstudiante;
 import java.util.ArrayList;
 
 
@@ -26,7 +27,7 @@ public class Estudiantes extends javax.swing.JInternalFrame {
     private Estudiantes(TpersonaJpaController estu) {
         initComponents();
         controladorE=estu;
-        jTable1.setModel(new ModeloTablaArchivos((ArrayList<Tpersona>) controladorE.findTpersonaEntities()));
+        jTable1.setModel(new ModeloTablaEstudiante((ArrayList<Tpersona>) controladorE.findTpersonaEntities()));
     }
 
     public static Estudiantes getEst(TpersonaJpaController estu) {
@@ -37,7 +38,7 @@ public class Estudiantes extends javax.swing.JInternalFrame {
     }
     
     public void actualizarLista(){
-        jTable1.setModel(new ModeloTablaArchivos((ArrayList<Tpersona>) controladorE.findTpersonaEntities()));
+        jTable1.setModel(new ModeloTablaEstudiante((ArrayList<Tpersona>) controladorE.findTpersonaEntities()));
         
     }
    
