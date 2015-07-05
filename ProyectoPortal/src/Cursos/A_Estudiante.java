@@ -1,25 +1,33 @@
-public class A_Estudiante {
+package Cursos;
 
-  public ArrayList<TActividad> actividades;
+import Tablas.Tactividad;
+import Tablas.Tentrega;
+import java.util.ArrayList;
+import Controladores.TactividadJpaController;
+import Controladores.TentregaJpaController;
 
-  public Object controladorA;
+public class A_Estudiante extends Actividad {
 
-  public Object controladorE;
+    public ArrayList<Tactividad> actividades;
 
-  public ArrayList<TEntrega> entregas;
+    public TactividadJpaController controladorA;
 
-  
-  public A_Estudiante(Object controladorA, Object controladorE) {
-  return null;
-  }
+    public TentregaJpaController controladorE;
 
-  public void modificarEntrega(TEntrega entrega) {
-  }
+    public ArrayList<Tentrega> entregas;
 
-  public void realizarEntrega(TEntrega entrega) {
-  }
+    public A_Estudiante(TactividadJpaController controladorA, TentregaJpaController controladorE) {
+        this.controladorA = controladorA;
+        this.controladorE = controladorE;
+    }
 
-  public void visualizarActividad() {
-  }
+    public void modificarEntrega(Tentrega entrega) {
+    }
+
+    public void realizarEntrega(Tentrega entrega) {
+    }
+    @Override
+    public void visualizarActividad() {
+    }
 
 }

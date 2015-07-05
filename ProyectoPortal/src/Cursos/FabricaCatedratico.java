@@ -25,4 +25,9 @@ public class FabricaCatedratico implements FabricaTipoUsuario {
       return new R_Catedratico(new TrecursoJpaController(emf));
   }
 
+    @Override
+    public Actividad crearActividad(EntityManagerFactory emf) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
