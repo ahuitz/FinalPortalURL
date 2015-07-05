@@ -16,11 +16,13 @@ import Controladores.TentregaJpaController;
  */
 public class A_Estudiante extends Actividad {
 
-    public ArrayList<Tentrega> entregas;
+    private ArrayList<Tentrega> entregas;
+    
 
-    public A_Estudiante(TactividadJpaController controladorA, TentregaJpaController controladorE) {
+    public A_Estudiante(TactividadJpaController controladorA, TentregaJpaController controladorE,int ISC) {
         this.controladorA = controladorA;
         this.controladorE = controladorE;
+        this.idSeccionCurso= ISC;
     }
 
     public void modificarEntrega(Tentrega entrega) throws Exception {

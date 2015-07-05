@@ -25,12 +25,17 @@ public class Entrega extends javax.swing.JFrame {
      */
     public Entrega() {
         initComponents();
+        Archivos = new ArrayList<>();
+        modelo=new ModeloTablaArchivos(Archivos);
     }
-    ArrayList<Tarchivos> archivos;
+  
 
     public Entrega(GraphicsConfiguration gc) {
         super(gc);
     }
+    ArrayList<Tarchivos> Archivos;
+    ModeloTablaArchivos modelo;
+    
     private Tarchivos abrirArchivo() {
         String aux = "";
         Tarchivos archivo= new Tarchivos();
@@ -73,12 +78,12 @@ public class Entrega extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Tabla1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -89,7 +94,7 @@ public class Entrega extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Tabla1);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Entrega");
@@ -142,16 +147,18 @@ public class Entrega extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        abrirArchivo();
+        Archivos.add(abrirArchivo());
+        modelo= new ModeloTablaArchivos(Archivos);
+        Tabla1.setModel(modelo);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Tabla1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

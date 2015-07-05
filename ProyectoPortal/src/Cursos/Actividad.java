@@ -19,8 +19,10 @@ public abstract class Actividad {
     protected ArrayList<Tactividad> actividades;
     protected TactividadJpaController controladorA;
     protected TentregaJpaController controladorE;
-
+    protected int idSeccionCurso;
+    
     public abstract void visualizarActividad();
+    
 
     public ArrayList<Tactividad> getActividades() {
         return actividades;

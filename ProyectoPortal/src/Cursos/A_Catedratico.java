@@ -17,11 +17,11 @@ import java.util.ArrayList;
 public class A_Catedratico extends Actividad {
    
 
-    public A_Catedratico(Controladores.TactividadJpaController controladorA, Controladores.TentregaJpaController controladorE) {
+    public A_Catedratico(Controladores.TactividadJpaController controladorA, Controladores.TentregaJpaController controladorE,int ISC) {
         this.controladorA = controladorA;
         this.controladorE= controladorE;
+        this.idSeccionCurso=ISC;
     }
-
     public void calificarEntrega(Tentrega entrega, Double calificacion) {
     }
 
