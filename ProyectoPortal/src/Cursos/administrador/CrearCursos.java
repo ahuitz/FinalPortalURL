@@ -20,24 +20,21 @@ import Controladores.TcursoCicloJpaController;
 public class CrearCursos implements Consulta{
     
     Tcurso curso;
-    Tciclo ciclo;
     int year;
+    int idciclo;
     int idcursociclo;
 
-    public CrearCursos(Object curso, Object ciclo, int year) {
+    public CrearCursos(Object curso, int idciclo, int year) {
         this.curso = (Tcurso) curso;
-        this.ciclo = (Tciclo) ciclo;
         this.year = year;
     }
     
     @Override
     public void instruccion(EntityManagerFactory efm) {
         TcursoJpaController conCurso = new TcursoJpaController(efm);
-        TcicloJpaController conCiclo = new TcicloJpaController(efm);
         conCurso.create(curso);
-        conCiclo.create(ciclo);
         
-        TcursoCiclo cursociclo = new TcursoCiclo(idcursociclo, ciclo.getId(), curso.getId(), year);
+        TcursoCiclo cursociclo = new TcursoCiclo(idcursociclo, idciclo, curso.getId(), year);
         TcursoCicloJpaController conCursoCiclo = new TcursoCicloJpaController(efm);
         conCursoCiclo.create(cursociclo);
     }

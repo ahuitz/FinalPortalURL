@@ -20,22 +20,18 @@ public class Administracion {
     
     //////////// Modulo curso ///////////////////////////////////////
     
-    public void crearCurso(Object curso, Object ciclo, int year){
-        CrearCursos cc = new CrearCursos(curso, ciclo, year);
+    public void crearCurso(Object curso, int idciclo, int year){
+        CrearCursos cc = new CrearCursos(curso, idciclo, year);
         cc.instruccion(emf);
     }
     
-    public void modificarCurso(int idSeccionCurso, int cupo){
-    
+    public void modificarCurso(Object curso){
+        ModificarCurso mc = new ModificarCurso(curso);
+        mc.instruccion(emf);
     }
     
-    
-    public void buscarCurso(){
+    public void buscarCursos(){
         
-    }
-    
-    public void eliminarCurso(){
-    
     }
     
     ///////////////////////// Modulo SEccion //////////////////
@@ -58,14 +54,11 @@ public class Administracion {
     
     //////////////// modulo de ciclo //////////////////////////////
     
-    public void crearCiclo(){
+    public void crearCiclo(Object ciclo){
+        CrearCiclo crearciclo = new CrearCiclo(ciclo);
+        crearciclo.instruccion(emf);
     }
-    
-    public void buscarCiclo(){
-    
-    }
-    
     public void modificarCiclo(){
-    
+        ModificarCiclo mc = new ModificarCiclo();
     }
 }
