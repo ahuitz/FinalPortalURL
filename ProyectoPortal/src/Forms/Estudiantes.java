@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package Forms;
-import Cursos.R_Estudiante;
-
+import javax.swing.table.TableModel;
+import Controladores.TpersonaJpaController;
+import Tablas.Tpersona;
+import cursos.ModeloTablaEstudiante;
+import java.util.ArrayList;
 
 
 /**
@@ -15,30 +18,30 @@ import Cursos.R_Estudiante;
 public class Estudiantes extends javax.swing.JInternalFrame {
 
     private static Estudiantes est = null;
-    private R_Estudiante estudiante;
+    TpersonaJpaController controladorE;
 
     /**
      * Creates new form Estudiantes
      */
-    private Estudiantes() {
+    private Estudiantes(TpersonaJpaController estu) {
         initComponents();
+        controladorE=estu;
+        jTable1.setModel(new ModeloTablaEstudiante((ArrayList<Tpersona>) controladorE.findTpersonaEntities()));
     }
 
-    public static Estudiantes getEst() {
+    public static Estudiantes getEst(TpersonaJpaController estu) {
         if (est == null) {
-            est = new Estudiantes();
-        }
+            est = new Estudiantes(estu);
+        } 
         return est;
-
     }
     
-    public R_Estudiante getEstudiante(){
-        return estudiante;
+    public void actualizarLista(){
+        jTable1.setModel(new ModeloTablaEstudiante((ArrayList<Tpersona>) controladorE.findTpersonaEntities()));
+        
     }
-    
-    public void setEstudiante (R_Estudiante estudiante){
-        this.estudiante=estudiante;
-    }
+   
+   
     
     
    
@@ -55,6 +58,24 @@ public class Estudiantes extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jLabel1.setText("Listado Estudiantes");
 
@@ -76,27 +97,33 @@ public class Estudiantes extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(224, 224, 224))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        // TODO add your handling code here:
+        est=null;
+        
+    }//GEN-LAST:event_formInternalFrameClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
