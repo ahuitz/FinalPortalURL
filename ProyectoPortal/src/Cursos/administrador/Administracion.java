@@ -51,9 +51,7 @@ public class Administracion {
     
     }
     
-    public void eliminarSeccion(){
-    }
-    
+      
     public void modificarSeccion(){
     
     }
@@ -67,9 +65,6 @@ public class Administracion {
     
     }
     
-    public void eliminarCiclo(){
-    
-    }
     public void modificarCiclo(){
     
     }
