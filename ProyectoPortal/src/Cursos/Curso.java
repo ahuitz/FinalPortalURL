@@ -8,7 +8,6 @@ package Cursos;
 import Tablas.TseccionCursos;
 import Tablas.Tusuarios;
 import java.util.ArrayList;
-
 /**
  *
  * @author Pablo López

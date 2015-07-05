@@ -5,6 +5,8 @@
  */
 package Cursos;
 
+import Controladores.TactividadJpaController;
+import Controladores.TdetalleEntregaJpaController;
 import Controladores.TrecursoJpaController;
 import javax.persistence.EntityManagerFactory;
 
@@ -14,20 +16,17 @@ import javax.persistence.EntityManagerFactory;
  */
 public class FabricaCatedratico implements FabricaTipoUsuario {
 
-  public FabricaCatedratico() {
-  }
-
-  public Actividad crearActividad(Object emf) {
-      return null;
-  }
-
-  public Recurso crearRecurso(EntityManagerFactory emf) {
-      return new R_Catedratico(new TrecursoJpaController(emf));
-  }
+    public FabricaCatedratico() {
+    }
 
     @Override
     public Actividad crearActividad(EntityManagerFactory emf) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new A_Catedratico(new TactividadJpaController(emf), new TdetalleEntregaJpaController(emf));
+    }
+
+    @Override
+    public Recurso crearRecurso(EntityManagerFactory emf) {
+        return new R_Catedratico(new TrecursoJpaController(emf));
     }
 
 }

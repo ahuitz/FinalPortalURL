@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Cursos;
 
 import Controladores.TactividadJpaController;
@@ -5,19 +10,17 @@ import Controladores.TentregaJpaController;
 import Tablas.Tactividad;
 import java.util.ArrayList;
 
-public abstract class Actividad  {
+/**
+ *
+ * @author Miguel Diaz
+ */
+public abstract class Actividad {
 
-  protected ArrayList<Tactividad> actividades;
+    protected ArrayList<Tactividad> actividades;
+    protected Controladores.TactividadJpaController controladorA;
+    protected Controladores.TentregaJpaController controladorE;
 
-  protected Controladores.TactividadJpaController controladorA;
-
-  protected Controladores.TentregaJpaController controladorE;
-
-    /**
-     *
-     */
-    public abstract void visualizarActividad(); 
-  
+    public abstract void visualizarActividad();
 
     public ArrayList<Tactividad> getActividades() {
         return actividades;
@@ -42,5 +45,5 @@ public abstract class Actividad  {
     public void setControladorE(TentregaJpaController controladorE) {
         this.controladorE = controladorE;
     }
-  
+
 }

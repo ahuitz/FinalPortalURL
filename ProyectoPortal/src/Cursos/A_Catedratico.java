@@ -1,21 +1,25 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Cursos;
 
 import Tablas.Tactividad;
 import Tablas.Tentrega;
 import java.util.ArrayList;
-import java.util.Vector;
 
+/**
+ *
+ * @author Miguel Diaz
+ */
 public class A_Catedratico extends Actividad {
-
-    public ArrayList<Tactividad> actividades;
-    public Controladores.TactividadJpaController controladorA;
-    public Controladores.TdetalleEntregaJpaController controladorE;
+    public Controladores.TdetalleEntregaJpaController controladorDE;
     public ArrayList<Entrega> entregas;
 
     public A_Catedratico(Controladores.TactividadJpaController controladorA, Controladores.TdetalleEntregaJpaController controladorE) {
         this.controladorA = controladorA;
-        this.controladorE = controladorE;
+        this.controladorDE = controladorE;
     }
 
     public void agregarEntrega(int idActividad, Object controladorE) {

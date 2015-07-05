@@ -1,18 +1,20 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Cursos;
 
-import Tablas.Tactividad;
 import Tablas.Tentrega;
 import java.util.ArrayList;
 import Controladores.TactividadJpaController;
 import Controladores.TentregaJpaController;
 
+/**
+ *
+ * @author Miguel Diaz
+ */
 public class A_Estudiante extends Actividad {
-
-    public ArrayList<Tactividad> actividades;
-
-    public TactividadJpaController controladorA;
-
-    public TentregaJpaController controladorE;
 
     public ArrayList<Tentrega> entregas;
 
