@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public abstract class Actividad {
 
     protected ArrayList<Tactividad> actividades;
-    protected Controladores.TactividadJpaController controladorA;
-    protected Controladores.TentregaJpaController controladorE;
+    protected TactividadJpaController controladorA;
+    protected TentregaJpaController controladorE;
 
     public abstract void visualizarActividad();
 

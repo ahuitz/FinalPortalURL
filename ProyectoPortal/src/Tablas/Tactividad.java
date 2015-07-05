@@ -186,7 +186,8 @@ public class Tactividad implements Serializable {
 
     @Override
     public String toString() {
-        return "Tablas.Tactividad[ id=" + id + " ]";
+        return "Tactividad{" + "id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", fechaEntrega=" + fechaEntrega + ", fechaPublicacion=" + fechaPublicacion + ", valor=" + valor + ", tiempoextra=" + tiempoextra + ", tSeccionCursosid=" + tSeccionCursosid + ", noid=" + noid + '}';
     }
+
     
 }
