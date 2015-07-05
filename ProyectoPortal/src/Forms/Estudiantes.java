@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package Forms;
+import Cursos.R_Estudiante;
+
 
 /**
  *
@@ -11,12 +13,34 @@ package Forms;
  */
 public class Estudiantes extends javax.swing.JInternalFrame {
 
+    private static Estudiantes est = null;
+    private R_Estudiante estudiante;
+
     /**
      * Creates new form Estudiantes
      */
-    public Estudiantes() {
+    private Estudiantes() {
         initComponents();
     }
+
+    public static Estudiantes getEst() {
+        if (est == null) {
+            est = new Estudiantes();
+        }
+        return est;
+
+    }
+    
+    public R_Estudiante getEstudiante(){
+        return estudiante;
+    }
+    
+    public void setEstudiante (R_Estudiante estudiante){
+        this.estudiante=estudiante;
+    }
+    
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
