@@ -7,6 +7,7 @@ package Cursos;
 
 import Controladores.TactividadJpaController;
 import Controladores.TdetalleEntregaJpaController;
+import Controladores.TentregaJpaController;
 import Controladores.TrecursoJpaController;
 import javax.persistence.EntityManagerFactory;
 
@@ -21,7 +22,7 @@ public class FabricaCatedratico implements FabricaTipoUsuario {
 
     @Override
     public Actividad crearActividad(EntityManagerFactory emf) {
-        return new A_Catedratico(new TactividadJpaController(emf), new TdetalleEntregaJpaController(emf));
+        return new A_Catedratico(new TactividadJpaController(emf), new TentregaJpaController(emf));
     }
 
     @Override

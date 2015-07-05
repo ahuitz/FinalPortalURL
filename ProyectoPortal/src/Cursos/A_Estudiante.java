@@ -23,7 +23,8 @@ public class A_Estudiante extends Actividad {
         this.controladorE = controladorE;
     }
 
-    public void modificarEntrega(Tentrega entrega) {
+    public void modificarEntrega(Tentrega entrega) throws Exception {
+        controladorE.edit(entrega);
     }
 
     public void realizarEntrega(Tentrega entrega) {

@@ -5,6 +5,7 @@
  */
 package Cursos;
 
+import Controladores.TdetalleEntregaJpaController;
 import Tablas.Tactividad;
 import Tablas.Tentrega;
 import java.util.ArrayList;
@@ -14,24 +15,24 @@ import java.util.ArrayList;
  * @author Miguel Diaz
  */
 public class A_Catedratico extends Actividad {
-    public Controladores.TdetalleEntregaJpaController controladorDE;
-    public ArrayList<Entrega> entregas;
+   
 
-    public A_Catedratico(Controladores.TactividadJpaController controladorA, Controladores.TdetalleEntregaJpaController controladorE) {
+    public A_Catedratico(Controladores.TactividadJpaController controladorA, Controladores.TentregaJpaController controladorE) {
         this.controladorA = controladorA;
-        this.controladorDE = controladorE;
-    }
-
-    public void agregarEntrega(int idActividad, Object controladorE) {
+        this.controladorE= controladorE;
     }
 
     public void calificarEntrega(Tentrega entrega, Double calificacion) {
     }
 
-    public void modificarActividad(Tactividad actividad) {
+    public void modificarActividad(Tactividad actividad) throws Exception {
+        controladorA.edit(actividad);
     }
 
     public void publicarActividad(Tactividad actividad) {
+        actividad.setId(controladorA.getTactividadCount());
+        controladorA.create(actividad);
+        
     }
 
     @Override
