@@ -15,8 +15,8 @@ import javax.persistence.EntityManagerFactory;
 
 public interface FabricaTipoUsuario {
 
-    public abstract Actividad crearActividad(EntityManagerFactory emf);
+    public abstract Actividad crearActividad(EntityManagerFactory emf, int idSC);
 
-    public abstract Recurso crearRecurso(EntityManagerFactory emf);
+    public abstract Recurso crearRecurso(EntityManagerFactory emf, int idSC);
 
 }

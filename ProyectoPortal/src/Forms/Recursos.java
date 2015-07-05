@@ -56,6 +56,11 @@ public abstract class Recursos extends javax.swing.JInternalFrame{
         });
 
         botonCrearR.setText("Crear");
+        botonCrearR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearRActionPerformed(evt);
+            }
+        });
 
         botonModificarR.setText("Modificar");
 
@@ -115,6 +120,10 @@ public abstract class Recursos extends javax.swing.JInternalFrame{
         // TODO add your handling code here:
         r=null;
     }//GEN-LAST:event_formInternalFrameClosing
+
+    private void botonCrearRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearRActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonCrearRActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

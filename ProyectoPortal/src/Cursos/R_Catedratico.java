@@ -5,9 +5,11 @@
  */
 package Cursos;
 
+import Controladores.TarchivosJpaController;
 import Controladores.TrecursoJpaController;
 import Tablas.Trecurso;
 import java.util.ArrayList;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -15,9 +17,21 @@ import java.util.ArrayList;
  */
 public class R_Catedratico extends Recurso {
     
-    public R_Catedratico(TrecursoJpaController controladorR) {
-        this.controladorR = controladorR;
+    private TarchivosJpaController controladorA;
+    
+    public R_Catedratico(EntityManagerFactory emf, int idSC) {
+        this.controladorR = new TrecursoJpaController(emf);
+        this.controladorA = new TarchivosJpaController(emf);
         this.recursos = (ArrayList<Trecurso>) controladorR.findTrecursoEntities();
+        this.idSeccionCurso=idSC;
+    }
+
+    public TarchivosJpaController getControladorA() {
+        return controladorA;
+    }
+
+    public void setControladorA(TarchivosJpaController controladorA) {
+        this.controladorA = controladorA;
     }
     
     public void modificarRecurso(Trecurso recurso) throws Exception {

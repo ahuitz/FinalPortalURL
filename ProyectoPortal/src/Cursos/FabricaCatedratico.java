@@ -20,13 +20,13 @@ public class FabricaCatedratico implements FabricaTipoUsuario {
     }
 
     @Override
-    public Actividad crearActividad(EntityManagerFactory emf) {
-        return new A_Catedratico(new TactividadJpaController(emf), new TdetalleEntregaJpaController(emf));
+    public Actividad crearActividad(EntityManagerFactory emf, int idSC) {
+        return new A_Catedratico(new TactividadJpaController(emf), new TdetalleEntregaJpaController(emf), idSC);
     }
 
     @Override
-    public Recurso crearRecurso(EntityManagerFactory emf) {
-        return new R_Catedratico(new TrecursoJpaController(emf));
+    public Recurso crearRecurso(EntityManagerFactory emf, int idSC) {
+        return new R_Catedratico(emf, idSC);
     }
 
 }
