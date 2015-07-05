@@ -8,22 +8,23 @@ package Cursos.administrador;
 import javax.persistence.EntityManagerFactory;
 import Tablas.Tcurso;
 import Controladores.TcursoJpaController;
+
 /**
  *
  * @author Cristian
  */
-public class Administracion {
-    
-    private EntityManagerFactory emf;
+public class CrearCurso implements Consulta{
 
-    public Administracion(EntityManagerFactory emf) {
-        this.emf = emf;
+    Tcurso curso;
+
+    public CrearCurso(Tcurso curso) {
+        this.curso = curso;
     }
-    
-    public void crearCurso(Tcurso curso){
-        TcursoJpaController controlador = new TcursoJpaController(emf);
+          
+    @Override
+    public void instruccion(EntityManagerFactory efm) {
+        TcursoJpaController controlador = new TcursoJpaController(efm);
         controlador.create(curso);
     }
-    
     
 }

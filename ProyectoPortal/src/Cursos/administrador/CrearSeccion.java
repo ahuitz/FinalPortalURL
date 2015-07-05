@@ -8,22 +8,18 @@ package Cursos.administrador;
 import javax.persistence.EntityManagerFactory;
 import Tablas.Tcurso;
 import Controladores.TcursoJpaController;
+
 /**
  *
  * @author Cristian
  */
-public class Administracion {
+public class CrearSeccion implements Consulta{
     
-    private EntityManagerFactory emf;
+    
 
-    public Administracion(EntityManagerFactory emf) {
-        this.emf = emf;
+    @Override
+    public void instruccion(EntityManagerFactory efm) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void crearCurso(Tcurso curso){
-        TcursoJpaController controlador = new TcursoJpaController(emf);
-        controlador.create(curso);
-    }
-    
     
 }
