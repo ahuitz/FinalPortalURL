@@ -148,7 +148,9 @@ public class Tarchivos implements Serializable {
 
     @Override
     public String toString() {
-        return "Tablas.Tarchivos[ id=" + id + " ]";
+        return "Tarchivos{" + "id=" + id + ", nombre=" + nombre + ", extension=" + extension + ", url=" + url + ", tama\u00f1o=" + tamaño + ", fisico=" + fisico + ", virtual=" + virtual + '}';
     }
+
+   
     
 }
