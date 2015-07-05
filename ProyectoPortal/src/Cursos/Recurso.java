@@ -35,6 +35,10 @@ public abstract class Recurso {
     public void setRecursos(ArrayList<Trecurso> recursos) {
         this.recursos = recursos;
     }
+
+    public int getIdSeccionCurso() {
+        return idSeccionCurso;
+    }
     
     public abstract void visualizar();
 }
