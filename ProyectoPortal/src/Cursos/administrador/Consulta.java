@@ -6,7 +6,6 @@
 package Cursos.administrador;
 
 import javax.persistence.EntityManagerFactory;
-
 /**
  *
  * @author Cristian

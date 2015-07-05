@@ -7,7 +7,9 @@ package Cursos.administrador;
 
 import javax.persistence.EntityManagerFactory;
 import Tablas.Tseccion;
+import Tablas.TseccionCursos;
 import Controladores.TseccionJpaController;
+import Controladores.TseccionCursosJpaController;
 
 /**
  *
@@ -19,6 +21,7 @@ public class CrearSeccion implements Consulta{
     String aula;
     int idcurso;
     int cupo;
+    int seccioncursoid;
 
     public CrearSeccion(Object seccion, String aula, int idcurso, int cupo) {
         this.seccion = (Tseccion) seccion;
@@ -29,8 +32,12 @@ public class CrearSeccion implements Consulta{
     
     @Override
     public void instruccion(EntityManagerFactory efm) {
-        TseccionJpaController controlador_seccion = new TseccionJpaController(efm);
-        controlador_seccion.create(seccion);
+        TseccionJpaController conSeccion = new TseccionJpaController(efm);
+        conSeccion.create(seccion);
+        
+        TseccionCursos seccionCursos = new TseccionCursos(seccioncursoid, cupo, seccion.getId(), 0, idcurso);
+        TseccionCursosJpaController conSeccionCurso = new TseccionCursosJpaController(efm);
+        conSeccionCurso.create(seccionCursos);
     }
     
 }

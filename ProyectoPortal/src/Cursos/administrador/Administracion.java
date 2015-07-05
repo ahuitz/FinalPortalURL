@@ -19,12 +19,15 @@ public class Administracion {
     }
     
     public void crearCurso(Object curso, Object ciclo, int year){
-        CrearCurso cc = new CrearCurso(curso, ciclo, year);
+        CrearCursos cc = new CrearCursos(curso, ciclo, year);
         cc.instruccion(emf);
     }
     
     public void crearSeccion(Object seccion, int idcurso, String aula, int cupo){
         CrearSeccion cs = new CrearSeccion(seccion, aula, idcurso, cupo);
         cs.instruccion(emf);
+    }
+    
+    public void ModificarCupo(int idSeccionCurso, int cupo){
     }
 }
