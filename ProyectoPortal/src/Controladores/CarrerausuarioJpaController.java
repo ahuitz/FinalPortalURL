@@ -6,7 +6,7 @@
 package Controladores;
 
 import Controladores.exceptions.NonexistentEntityException;
-import Tablas.Tiposangre;
+import Tablas.Carrerausuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,9 +20,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Rosario
  */
-public class TiposangreJpaController implements Serializable {
+public class CarrerausuarioJpaController implements Serializable {
 
-    public TiposangreJpaController(EntityManagerFactory emf) {
+    public CarrerausuarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,12 +31,12 @@ public class TiposangreJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Tiposangre tiposangre) {
+    public void create(Carrerausuario carrerausuario) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(tiposangre);
+            em.persist(carrerausuario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,19 +45,19 @@ public class TiposangreJpaController implements Serializable {
         }
     }
 
-    public void edit(Tiposangre tiposangre) throws NonexistentEntityException, Exception {
+    public void edit(Carrerausuario carrerausuario) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            tiposangre = em.merge(tiposangre);
+            carrerausuario = em.merge(carrerausuario);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = tiposangre.getId();
-                if (findTiposangre(id) == null) {
-                    throw new NonexistentEntityException("The tiposangre with id " + id + " no longer exists.");
+                Integer id = carrerausuario.getId();
+                if (findCarrerausuario(id) == null) {
+                    throw new NonexistentEntityException("The carrerausuario with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,14 +73,14 @@ public class TiposangreJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Tiposangre tiposangre;
+            Carrerausuario carrerausuario;
             try {
-                tiposangre = em.getReference(Tiposangre.class, id);
-                tiposangre.getId();
+                carrerausuario = em.getReference(Carrerausuario.class, id);
+                carrerausuario.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The tiposangre with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The carrerausuario with id " + id + " no longer exists.", enfe);
             }
-            em.remove(tiposangre);
+            em.remove(carrerausuario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -89,19 +89,19 @@ public class TiposangreJpaController implements Serializable {
         }
     }
 
-    public List<Tiposangre> findTiposangreEntities() {
-        return findTiposangreEntities(true, -1, -1);
+    public List<Carrerausuario> findCarrerausuarioEntities() {
+        return findCarrerausuarioEntities(true, -1, -1);
     }
 
-    public List<Tiposangre> findTiposangreEntities(int maxResults, int firstResult) {
-        return findTiposangreEntities(false, maxResults, firstResult);
+    public List<Carrerausuario> findCarrerausuarioEntities(int maxResults, int firstResult) {
+        return findCarrerausuarioEntities(false, maxResults, firstResult);
     }
 
-    private List<Tiposangre> findTiposangreEntities(boolean all, int maxResults, int firstResult) {
+    private List<Carrerausuario> findCarrerausuarioEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Tiposangre.class));
+            cq.select(cq.from(Carrerausuario.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,20 +113,20 @@ public class TiposangreJpaController implements Serializable {
         }
     }
 
-    public Tiposangre findTiposangre(Integer id) {
+    public Carrerausuario findCarrerausuario(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Tiposangre.class, id);
+            return em.find(Carrerausuario.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getTiposangreCount() {
+    public int getCarrerausuarioCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Tiposangre> rt = cq.from(Tiposangre.class);
+            Root<Carrerausuario> rt = cq.from(Carrerausuario.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

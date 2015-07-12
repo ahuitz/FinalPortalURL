@@ -6,6 +6,7 @@
 package Tablas;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -25,30 +28,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tiposangre.findAll", query = "SELECT t FROM Tiposangre t"),
-    @NamedQuery(name = "Tiposangre.findById", query = "SELECT t FROM Tiposangre t WHERE t.id = :id"),
-    @NamedQuery(name = "Tiposangre.findByTipo", query = "SELECT t FROM Tiposangre t WHERE t.tipo = :tipo")})
-public class Tiposangre implements Serializable {
+    @NamedQuery(name = "Tipoasignacion.findAll", query = "SELECT t FROM Tipoasignacion t"),
+    @NamedQuery(name = "Tipoasignacion.findById", query = "SELECT t FROM Tipoasignacion t WHERE t.id = :id"),
+    @NamedQuery(name = "Tipoasignacion.findByFechaInicial", query = "SELECT t FROM Tipoasignacion t WHERE t.fechaInicial = :fechaInicial"),
+    @NamedQuery(name = "Tipoasignacion.findByFechaFinal", query = "SELECT t FROM Tipoasignacion t WHERE t.fechaFinal = :fechaFinal")})
+public class Tipoasignacion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
-    @Basic(optional = false)
-    @Column(nullable = false, length = 3)
-    private String tipo;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaInicial;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaFinal;
 
-    public Tiposangre() {
+    public Tipoasignacion() {
     }
 
-    public Tiposangre(Integer id) {
+    public Tipoasignacion(Integer id) {
         this.id = id;
-    }
-
-    public Tiposangre(Integer id, String tipo) {
-        this.id = id;
-        this.tipo = tipo;
     }
 
     public Integer getId() {
@@ -59,12 +59,20 @@ public class Tiposangre implements Serializable {
         this.id = id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public Date getFechaInicial() {
+        return fechaInicial;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setFechaInicial(Date fechaInicial) {
+        this.fechaInicial = fechaInicial;
+    }
+
+    public Date getFechaFinal() {
+        return fechaFinal;
+    }
+
+    public void setFechaFinal(Date fechaFinal) {
+        this.fechaFinal = fechaFinal;
     }
 
     @Override
@@ -77,10 +85,10 @@ public class Tiposangre implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tiposangre)) {
+        if (!(object instanceof Tipoasignacion)) {
             return false;
         }
-        Tiposangre other = (Tiposangre) object;
+        Tipoasignacion other = (Tipoasignacion) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -89,7 +97,7 @@ public class Tiposangre implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Tiposangre[ id=" + id + " ]";
+        return "FormUsuario.Tipoasignacion[ id=" + id + " ]";
     }
     
 }

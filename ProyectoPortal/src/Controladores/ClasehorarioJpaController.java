@@ -6,7 +6,7 @@
 package Controladores;
 
 import Controladores.exceptions.NonexistentEntityException;
-import Tablas.Tiposangre;
+import Tablas.Clasehorario;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,9 +20,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Rosario
  */
-public class TiposangreJpaController implements Serializable {
+public class ClasehorarioJpaController implements Serializable {
 
-    public TiposangreJpaController(EntityManagerFactory emf) {
+    public ClasehorarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,12 +31,12 @@ public class TiposangreJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Tiposangre tiposangre) {
+    public void create(Clasehorario clasehorario) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(tiposangre);
+            em.persist(clasehorario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,19 +45,19 @@ public class TiposangreJpaController implements Serializable {
         }
     }
 
-    public void edit(Tiposangre tiposangre) throws NonexistentEntityException, Exception {
+    public void edit(Clasehorario clasehorario) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            tiposangre = em.merge(tiposangre);
+            clasehorario = em.merge(clasehorario);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = tiposangre.getId();
-                if (findTiposangre(id) == null) {
-                    throw new NonexistentEntityException("The tiposangre with id " + id + " no longer exists.");
+                Integer id = clasehorario.getId();
+                if (findClasehorario(id) == null) {
+                    throw new NonexistentEntityException("The clasehorario with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,14 +73,14 @@ public class TiposangreJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Tiposangre tiposangre;
+            Clasehorario clasehorario;
             try {
-                tiposangre = em.getReference(Tiposangre.class, id);
-                tiposangre.getId();
+                clasehorario = em.getReference(Clasehorario.class, id);
+                clasehorario.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The tiposangre with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The clasehorario with id " + id + " no longer exists.", enfe);
             }
-            em.remove(tiposangre);
+            em.remove(clasehorario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -89,19 +89,19 @@ public class TiposangreJpaController implements Serializable {
         }
     }
 
-    public List<Tiposangre> findTiposangreEntities() {
-        return findTiposangreEntities(true, -1, -1);
+    public List<Clasehorario> findClasehorarioEntities() {
+        return findClasehorarioEntities(true, -1, -1);
     }
 
-    public List<Tiposangre> findTiposangreEntities(int maxResults, int firstResult) {
-        return findTiposangreEntities(false, maxResults, firstResult);
+    public List<Clasehorario> findClasehorarioEntities(int maxResults, int firstResult) {
+        return findClasehorarioEntities(false, maxResults, firstResult);
     }
 
-    private List<Tiposangre> findTiposangreEntities(boolean all, int maxResults, int firstResult) {
+    private List<Clasehorario> findClasehorarioEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Tiposangre.class));
+            cq.select(cq.from(Clasehorario.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,20 +113,20 @@ public class TiposangreJpaController implements Serializable {
         }
     }
 
-    public Tiposangre findTiposangre(Integer id) {
+    public Clasehorario findClasehorario(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Tiposangre.class, id);
+            return em.find(Clasehorario.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getTiposangreCount() {
+    public int getClasehorarioCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Tiposangre> rt = cq.from(Tiposangre.class);
+            Root<Clasehorario> rt = cq.from(Clasehorario.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

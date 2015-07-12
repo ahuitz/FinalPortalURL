@@ -25,30 +25,51 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tiposangre.findAll", query = "SELECT t FROM Tiposangre t"),
-    @NamedQuery(name = "Tiposangre.findById", query = "SELECT t FROM Tiposangre t WHERE t.id = :id"),
-    @NamedQuery(name = "Tiposangre.findByTipo", query = "SELECT t FROM Tiposangre t WHERE t.tipo = :tipo")})
-public class Tiposangre implements Serializable {
+    @NamedQuery(name = "Clasehorario.findAll", query = "SELECT c FROM Clasehorario c"),
+    @NamedQuery(name = "Clasehorario.findByClaseid", query = "SELECT c FROM Clasehorario c WHERE c.claseid = :claseid"),
+    @NamedQuery(name = "Clasehorario.findByHorarioid", query = "SELECT c FROM Clasehorario c WHERE c.horarioid = :horarioid"),
+    @NamedQuery(name = "Clasehorario.findById", query = "SELECT c FROM Clasehorario c WHERE c.id = :id")})
+public class Clasehorario implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @Column(name = "Clase_id", nullable = false)
+    private int claseid;
+    @Basic(optional = false)
+    @Column(name = "Horario_id", nullable = false)
+    private int horarioid;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
-    @Basic(optional = false)
-    @Column(nullable = false, length = 3)
-    private String tipo;
 
-    public Tiposangre() {
+    public Clasehorario() {
     }
 
-    public Tiposangre(Integer id) {
+    public Clasehorario(Integer id) {
         this.id = id;
     }
 
-    public Tiposangre(Integer id, String tipo) {
+    public Clasehorario(Integer id, int claseid, int horarioid) {
         this.id = id;
-        this.tipo = tipo;
+        this.claseid = claseid;
+        this.horarioid = horarioid;
+    }
+
+    public int getClaseid() {
+        return claseid;
+    }
+
+    public void setClaseid(int claseid) {
+        this.claseid = claseid;
+    }
+
+    public int getHorarioid() {
+        return horarioid;
+    }
+
+    public void setHorarioid(int horarioid) {
+        this.horarioid = horarioid;
     }
 
     public Integer getId() {
@@ -57,14 +78,6 @@ public class Tiposangre implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     @Override
@@ -77,10 +90,10 @@ public class Tiposangre implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tiposangre)) {
+        if (!(object instanceof Clasehorario)) {
             return false;
         }
-        Tiposangre other = (Tiposangre) object;
+        Clasehorario other = (Clasehorario) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -89,7 +102,7 @@ public class Tiposangre implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Tiposangre[ id=" + id + " ]";
+        return "FormUsuario.Clasehorario[ id=" + id + " ]";
     }
     
 }

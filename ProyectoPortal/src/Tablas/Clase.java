@@ -25,10 +25,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tiposangre.findAll", query = "SELECT t FROM Tiposangre t"),
-    @NamedQuery(name = "Tiposangre.findById", query = "SELECT t FROM Tiposangre t WHERE t.id = :id"),
-    @NamedQuery(name = "Tiposangre.findByTipo", query = "SELECT t FROM Tiposangre t WHERE t.tipo = :tipo")})
-public class Tiposangre implements Serializable {
+    @NamedQuery(name = "Clase.findAll", query = "SELECT c FROM Clase c"),
+    @NamedQuery(name = "Clase.findById", query = "SELECT c FROM Clase c WHERE c.id = :id"),
+    @NamedQuery(name = "Clase.findByNumero", query = "SELECT c FROM Clase c WHERE c.numero = :numero"),
+    @NamedQuery(name = "Clase.findByCupo", query = "SELECT c FROM Clase c WHERE c.cupo = :cupo"),
+    @NamedQuery(name = "Clase.findByDisponibilidad", query = "SELECT c FROM Clase c WHERE c.disponibilidad = :disponibilidad")})
+public class Clase implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,19 +38,27 @@ public class Tiposangre implements Serializable {
     @Column(nullable = false)
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 3)
-    private String tipo;
+    @Column(nullable = false, length = 45)
+    private String numero;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private int cupo;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private boolean disponibilidad;
 
-    public Tiposangre() {
+    public Clase() {
     }
 
-    public Tiposangre(Integer id) {
+    public Clase(Integer id) {
         this.id = id;
     }
 
-    public Tiposangre(Integer id, String tipo) {
+    public Clase(Integer id, String numero, int cupo, boolean disponibilidad) {
         this.id = id;
-        this.tipo = tipo;
+        this.numero = numero;
+        this.cupo = cupo;
+        this.disponibilidad = disponibilidad;
     }
 
     public Integer getId() {
@@ -59,12 +69,28 @@ public class Tiposangre implements Serializable {
         this.id = id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public int getCupo() {
+        return cupo;
+    }
+
+    public void setCupo(int cupo) {
+        this.cupo = cupo;
+    }
+
+    public boolean getDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
 
     @Override
@@ -77,10 +103,10 @@ public class Tiposangre implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tiposangre)) {
+        if (!(object instanceof Clase)) {
             return false;
         }
-        Tiposangre other = (Tiposangre) object;
+        Clase other = (Clase) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -89,7 +115,7 @@ public class Tiposangre implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Tiposangre[ id=" + id + " ]";
+        return "FormUsuario.Clase[ id=" + id + " ]";
     }
     
 }

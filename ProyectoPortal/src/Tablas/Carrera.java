@@ -25,10 +25,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tiposangre.findAll", query = "SELECT t FROM Tiposangre t"),
-    @NamedQuery(name = "Tiposangre.findById", query = "SELECT t FROM Tiposangre t WHERE t.id = :id"),
-    @NamedQuery(name = "Tiposangre.findByTipo", query = "SELECT t FROM Tiposangre t WHERE t.tipo = :tipo")})
-public class Tiposangre implements Serializable {
+    @NamedQuery(name = "Carrera.findAll", query = "SELECT c FROM Carrera c"),
+    @NamedQuery(name = "Carrera.findById", query = "SELECT c FROM Carrera c WHERE c.id = :id"),
+    @NamedQuery(name = "Carrera.findByFacultadid", query = "SELECT c FROM Carrera c WHERE c.facultadid = :facultadid"),
+    @NamedQuery(name = "Carrera.findByCarrera", query = "SELECT c FROM Carrera c WHERE c.carrera = :carrera")})
+public class Carrera implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,19 +37,23 @@ public class Tiposangre implements Serializable {
     @Column(nullable = false)
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 3)
-    private String tipo;
+    @Column(name = "Facultad_id", nullable = false)
+    private int facultadid;
+    @Basic(optional = false)
+    @Column(nullable = false, length = 45)
+    private String carrera;
 
-    public Tiposangre() {
+    public Carrera() {
     }
 
-    public Tiposangre(Integer id) {
+    public Carrera(Integer id) {
         this.id = id;
     }
 
-    public Tiposangre(Integer id, String tipo) {
+    public Carrera(Integer id, int facultadid, String carrera) {
         this.id = id;
-        this.tipo = tipo;
+        this.facultadid = facultadid;
+        this.carrera = carrera;
     }
 
     public Integer getId() {
@@ -59,12 +64,20 @@ public class Tiposangre implements Serializable {
         this.id = id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public int getFacultadid() {
+        return facultadid;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setFacultadid(int facultadid) {
+        this.facultadid = facultadid;
+    }
+
+    public String getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
     }
 
     @Override
@@ -77,10 +90,10 @@ public class Tiposangre implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tiposangre)) {
+        if (!(object instanceof Carrera)) {
             return false;
         }
-        Tiposangre other = (Tiposangre) object;
+        Carrera other = (Carrera) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -89,7 +102,7 @@ public class Tiposangre implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Tiposangre[ id=" + id + " ]";
+        return "FormUsuario.Carrera[ id=" + id + " ]";
     }
     
 }
