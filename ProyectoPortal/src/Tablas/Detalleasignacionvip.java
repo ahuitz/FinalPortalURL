@@ -25,10 +25,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tiposangre.findAll", query = "SELECT t FROM Tiposangre t"),
-    @NamedQuery(name = "Tiposangre.findById", query = "SELECT t FROM Tiposangre t WHERE t.id = :id"),
-    @NamedQuery(name = "Tiposangre.findByTipo", query = "SELECT t FROM Tiposangre t WHERE t.tipo = :tipo")})
-public class Tiposangre implements Serializable {
+    @NamedQuery(name = "Detalleasignacionvip.findAll", query = "SELECT d FROM Detalleasignacionvip d"),
+    @NamedQuery(name = "Detalleasignacionvip.findById", query = "SELECT d FROM Detalleasignacionvip d WHERE d.id = :id"),
+    @NamedQuery(name = "Detalleasignacionvip.findByTipoAsignacionid", query = "SELECT d FROM Detalleasignacionvip d WHERE d.tipoAsignacionid = :tipoAsignacionid"),
+    @NamedQuery(name = "Detalleasignacionvip.findByUsuarioid", query = "SELECT d FROM Detalleasignacionvip d WHERE d.usuarioid = :usuarioid")})
+public class Detalleasignacionvip implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,19 +37,23 @@ public class Tiposangre implements Serializable {
     @Column(nullable = false)
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 3)
-    private String tipo;
+    @Column(name = "TipoAsignacion_id", nullable = false)
+    private int tipoAsignacionid;
+    @Basic(optional = false)
+    @Column(name = "Usuario_id", nullable = false)
+    private int usuarioid;
 
-    public Tiposangre() {
+    public Detalleasignacionvip() {
     }
 
-    public Tiposangre(Integer id) {
+    public Detalleasignacionvip(Integer id) {
         this.id = id;
     }
 
-    public Tiposangre(Integer id, String tipo) {
+    public Detalleasignacionvip(Integer id, int tipoAsignacionid, int usuarioid) {
         this.id = id;
-        this.tipo = tipo;
+        this.tipoAsignacionid = tipoAsignacionid;
+        this.usuarioid = usuarioid;
     }
 
     public Integer getId() {
@@ -59,12 +64,20 @@ public class Tiposangre implements Serializable {
         this.id = id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public int getTipoAsignacionid() {
+        return tipoAsignacionid;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipoAsignacionid(int tipoAsignacionid) {
+        this.tipoAsignacionid = tipoAsignacionid;
+    }
+
+    public int getUsuarioid() {
+        return usuarioid;
+    }
+
+    public void setUsuarioid(int usuarioid) {
+        this.usuarioid = usuarioid;
     }
 
     @Override
@@ -77,10 +90,10 @@ public class Tiposangre implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tiposangre)) {
+        if (!(object instanceof Detalleasignacionvip)) {
             return false;
         }
-        Tiposangre other = (Tiposangre) object;
+        Detalleasignacionvip other = (Detalleasignacionvip) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -89,7 +102,7 @@ public class Tiposangre implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Tiposangre[ id=" + id + " ]";
+        return "FormUsuario.Detalleasignacionvip[ id=" + id + " ]";
     }
     
 }

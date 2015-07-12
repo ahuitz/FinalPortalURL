@@ -1,0 +1,134 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Tablas;
+
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ *
+ * @author Rosario
+ */
+@Entity
+@Table(catalog = "permisosus", schema = "")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Detalleentrega.findAll", query = "SELECT d FROM Detalleentrega d"),
+    @NamedQuery(name = "Detalleentrega.findById", query = "SELECT d FROM Detalleentrega d WHERE d.id = :id"),
+    @NamedQuery(name = "Detalleentrega.findByArchivoid", query = "SELECT d FROM Detalleentrega d WHERE d.archivoid = :archivoid"),
+    @NamedQuery(name = "Detalleentrega.findByEntregaid", query = "SELECT d FROM Detalleentrega d WHERE d.entregaid = :entregaid"),
+    @NamedQuery(name = "Detalleentrega.findByEntregada", query = "SELECT d FROM Detalleentrega d WHERE d.entregada = :entregada"),
+    @NamedQuery(name = "Detalleentrega.findByNoEntregada", query = "SELECT d FROM Detalleentrega d WHERE d.noEntregada = :noEntregada")})
+public class Detalleentrega implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private Integer id;
+    @Basic(optional = false)
+    @Column(name = "Archivo_id", nullable = false)
+    private int archivoid;
+    @Basic(optional = false)
+    @Column(name = "Entrega_id", nullable = false)
+    private int entregaid;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private boolean entregada;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private boolean noEntregada;
+
+    public Detalleentrega() {
+    }
+
+    public Detalleentrega(Integer id) {
+        this.id = id;
+    }
+
+    public Detalleentrega(Integer id, int archivoid, int entregaid, boolean entregada, boolean noEntregada) {
+        this.id = id;
+        this.archivoid = archivoid;
+        this.entregaid = entregaid;
+        this.entregada = entregada;
+        this.noEntregada = noEntregada;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public int getArchivoid() {
+        return archivoid;
+    }
+
+    public void setArchivoid(int archivoid) {
+        this.archivoid = archivoid;
+    }
+
+    public int getEntregaid() {
+        return entregaid;
+    }
+
+    public void setEntregaid(int entregaid) {
+        this.entregaid = entregaid;
+    }
+
+    public boolean getEntregada() {
+        return entregada;
+    }
+
+    public void setEntregada(boolean entregada) {
+        this.entregada = entregada;
+    }
+
+    public boolean getNoEntregada() {
+        return noEntregada;
+    }
+
+    public void setNoEntregada(boolean noEntregada) {
+        this.noEntregada = noEntregada;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Detalleentrega)) {
+            return false;
+        }
+        Detalleentrega other = (Detalleentrega) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "FormUsuario.Detalleentrega[ id=" + id + " ]";
+    }
+    
+}

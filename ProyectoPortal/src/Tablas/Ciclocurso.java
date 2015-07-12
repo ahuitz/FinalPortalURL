@@ -25,10 +25,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tiposangre.findAll", query = "SELECT t FROM Tiposangre t"),
-    @NamedQuery(name = "Tiposangre.findById", query = "SELECT t FROM Tiposangre t WHERE t.id = :id"),
-    @NamedQuery(name = "Tiposangre.findByTipo", query = "SELECT t FROM Tiposangre t WHERE t.tipo = :tipo")})
-public class Tiposangre implements Serializable {
+    @NamedQuery(name = "Ciclocurso.findAll", query = "SELECT c FROM Ciclocurso c"),
+    @NamedQuery(name = "Ciclocurso.findById", query = "SELECT c FROM Ciclocurso c WHERE c.id = :id"),
+    @NamedQuery(name = "Ciclocurso.findByAnio", query = "SELECT c FROM Ciclocurso c WHERE c.anio = :anio"),
+    @NamedQuery(name = "Ciclocurso.findByCicloid", query = "SELECT c FROM Ciclocurso c WHERE c.cicloid = :cicloid"),
+    @NamedQuery(name = "Ciclocurso.findByCursoid", query = "SELECT c FROM Ciclocurso c WHERE c.cursoid = :cursoid")})
+public class Ciclocurso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,19 +38,27 @@ public class Tiposangre implements Serializable {
     @Column(nullable = false)
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 3)
-    private String tipo;
+    @Column(nullable = false)
+    private int anio;
+    @Basic(optional = false)
+    @Column(name = "Ciclo_id", nullable = false)
+    private int cicloid;
+    @Basic(optional = false)
+    @Column(name = "Curso_id", nullable = false)
+    private int cursoid;
 
-    public Tiposangre() {
+    public Ciclocurso() {
     }
 
-    public Tiposangre(Integer id) {
+    public Ciclocurso(Integer id) {
         this.id = id;
     }
 
-    public Tiposangre(Integer id, String tipo) {
+    public Ciclocurso(Integer id, int anio, int cicloid, int cursoid) {
         this.id = id;
-        this.tipo = tipo;
+        this.anio = anio;
+        this.cicloid = cicloid;
+        this.cursoid = cursoid;
     }
 
     public Integer getId() {
@@ -59,12 +69,28 @@ public class Tiposangre implements Serializable {
         this.id = id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public int getAnio() {
+        return anio;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+
+    public int getCicloid() {
+        return cicloid;
+    }
+
+    public void setCicloid(int cicloid) {
+        this.cicloid = cicloid;
+    }
+
+    public int getCursoid() {
+        return cursoid;
+    }
+
+    public void setCursoid(int cursoid) {
+        this.cursoid = cursoid;
     }
 
     @Override
@@ -77,10 +103,10 @@ public class Tiposangre implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tiposangre)) {
+        if (!(object instanceof Ciclocurso)) {
             return false;
         }
-        Tiposangre other = (Tiposangre) object;
+        Ciclocurso other = (Ciclocurso) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -89,7 +115,7 @@ public class Tiposangre implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Tiposangre[ id=" + id + " ]";
+        return "FormUsuario.Ciclocurso[ id=" + id + " ]";
     }
     
 }

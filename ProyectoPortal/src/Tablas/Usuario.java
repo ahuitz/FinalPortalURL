@@ -25,10 +25,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tiposangre.findAll", query = "SELECT t FROM Tiposangre t"),
-    @NamedQuery(name = "Tiposangre.findById", query = "SELECT t FROM Tiposangre t WHERE t.id = :id"),
-    @NamedQuery(name = "Tiposangre.findByTipo", query = "SELECT t FROM Tiposangre t WHERE t.tipo = :tipo")})
-public class Tiposangre implements Serializable {
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+    @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
+    @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT u FROM Usuario u WHERE u.usuario = :usuario"),
+    @NamedQuery(name = "Usuario.findByRolUsuarioid", query = "SELECT u FROM Usuario u WHERE u.rolUsuarioid = :rolUsuarioid"),
+    @NamedQuery(name = "Usuario.findByPersonaid", query = "SELECT u FROM Usuario u WHERE u.personaid = :personaid")})
+public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,19 +38,27 @@ public class Tiposangre implements Serializable {
     @Column(nullable = false)
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 3)
-    private String tipo;
+    @Column(nullable = false, length = 12)
+    private String usuario;
+    @Basic(optional = false)
+    @Column(name = "RolUsuario_id", nullable = false)
+    private int rolUsuarioid;
+    @Basic(optional = false)
+    @Column(name = "Persona_id", nullable = false)
+    private int personaid;
 
-    public Tiposangre() {
+    public Usuario() {
     }
 
-    public Tiposangre(Integer id) {
+    public Usuario(Integer id) {
         this.id = id;
     }
 
-    public Tiposangre(Integer id, String tipo) {
+    public Usuario(Integer id, String usuario, int rolUsuarioid, int personaid) {
         this.id = id;
-        this.tipo = tipo;
+        this.usuario = usuario;
+        this.rolUsuarioid = rolUsuarioid;
+        this.personaid = personaid;
     }
 
     public Integer getId() {
@@ -59,12 +69,28 @@ public class Tiposangre implements Serializable {
         this.id = id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public int getRolUsuarioid() {
+        return rolUsuarioid;
+    }
+
+    public void setRolUsuarioid(int rolUsuarioid) {
+        this.rolUsuarioid = rolUsuarioid;
+    }
+
+    public int getPersonaid() {
+        return personaid;
+    }
+
+    public void setPersonaid(int personaid) {
+        this.personaid = personaid;
     }
 
     @Override
@@ -77,10 +103,10 @@ public class Tiposangre implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tiposangre)) {
+        if (!(object instanceof Usuario)) {
             return false;
         }
-        Tiposangre other = (Tiposangre) object;
+        Usuario other = (Usuario) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -89,7 +115,7 @@ public class Tiposangre implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Tiposangre[ id=" + id + " ]";
+        return "FormUsuario.Usuario[ id=" + id + " ]";
     }
     
 }
