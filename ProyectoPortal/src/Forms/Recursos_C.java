@@ -7,7 +7,7 @@ package Forms;
 
 import Cursos.ModeloTablaRecursos;
 import Cursos.R_Catedratico;
-import Tablas.Trecurso;
+import Tablas.Recurso;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +35,7 @@ public class Recursos_C extends Recursos {
     }   
     
     public void actualizarLista(){
-        r.setRecursos((ArrayList<Trecurso>) r.getControladorR().findTrecursoEntities());
+        r.setRecursos((ArrayList<Recurso>) r.getControladorR().findRecursoEntities());
         this.TablaRecursos.setModel( new ModeloTablaRecursos(r.getRecursos()));        
     }
     

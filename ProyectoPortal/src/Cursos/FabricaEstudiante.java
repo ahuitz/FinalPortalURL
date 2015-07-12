@@ -5,9 +5,9 @@
  */
 package Cursos;
 
-import Controladores.TactividadJpaController;
-import Controladores.TentregaJpaController;
-import Controladores.TrecursoJpaController;
+import Controladores.ActividadJpaController;
+import Controladores.EntregaJpaController;
+import Controladores.RecursoJpaController;
 import javax.persistence.EntityManagerFactory;
 
 /**
@@ -26,7 +26,7 @@ public class FabricaEstudiante implements FabricaTipoUsuario {
     }
 
     @Override
-    public Recurso crearRecurso(EntityManagerFactory emf, int idSC) {
+    public CRecurso crearRecurso(EntityManagerFactory emf, int idSC) {
         return new R_Estudiante(emf, idSC);
     }
 

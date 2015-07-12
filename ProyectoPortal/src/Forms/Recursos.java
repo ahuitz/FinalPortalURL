@@ -5,7 +5,7 @@
  */
 package Forms;
 
-import Cursos.Recurso;
+import Cursos.CRecurso;
 
 /**
  *
@@ -13,7 +13,7 @@ import Cursos.Recurso;
  */
 public abstract class Recursos extends javax.swing.JInternalFrame{
 
-    public Recurso r;
+    public CRecurso r;
     /**
      * Creates new form Recursos
      */

@@ -6,7 +6,8 @@
 package Cursos;
 
 import javax.swing.table.AbstractTableModel;
-import Tablas.Trecurso;
+import Tablas.Recurso;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -14,10 +15,10 @@ import java.util.List;
  * @author Pablo López
  */
 public class ModeloTablaRecursos extends AbstractTableModel {
-    private final List<Trecurso> recursos;
+    private final List<Recurso> recursos;
     private final String columnas[] = {"Fecha publicación", "Titulo"};
 
-    public ModeloTablaRecursos(List<Trecurso> recursos) {
+    public ModeloTablaRecursos(List<Recurso> recursos) {
         this.recursos = recursos;
     }
     
@@ -34,7 +35,7 @@ public class ModeloTablaRecursos extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Trecurso rcs = this.recursos.get(rowIndex);
+        Recurso rcs = this.recursos.get(rowIndex);
         switch(columnIndex){
             case 0: return rcs.getFechaPublicacion();
             case 1: return rcs.getTitulo();
@@ -55,7 +56,7 @@ public class ModeloTablaRecursos extends AbstractTableModel {
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         switch(columnIndex){
-            case 0: recursos.get(rowIndex).setFechaPublicacion((String)aValue);
+            case 0: recursos.get(rowIndex).setFechaPublicacion((Date)aValue);
                 break;
             case 1: 
                 recursos.get(rowIndex).setTitulo((String)aValue);

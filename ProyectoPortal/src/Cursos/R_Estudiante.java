@@ -5,8 +5,8 @@
  */
 package Cursos;
 
-import Controladores.TrecursoJpaController;
-import Tablas.Trecurso;
+import Controladores.RecursoJpaController;
+import Tablas.Recurso;
 import java.util.ArrayList;
 import javax.persistence.EntityManagerFactory;
 
@@ -14,11 +14,11 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author Pablo López
  */
-public class R_Estudiante extends Recurso {
+public class R_Estudiante extends CRecurso {
 
     public R_Estudiante(EntityManagerFactory emf, int idSC) {
-        this.controladorR = new TrecursoJpaController(emf);
-        this.recursos = (ArrayList<Trecurso>) controladorR.findTrecursoEntities();
+        this.controladorR = new RecursoJpaController(emf);
+        this.recursos = (ArrayList<Recurso>) controladorR.findRecursoEntities();
         this.idSeccionCurso=idSC;
     }
 

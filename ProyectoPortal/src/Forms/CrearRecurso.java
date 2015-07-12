@@ -6,8 +6,8 @@
 package Forms;
 
 import Cursos.R_Catedratico;
-import Tablas.Tarchivos;
-import Tablas.Trecurso;
+import Tablas.Archivo;
+import Tablas.Recurso;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -106,7 +106,7 @@ public class CrearRecurso extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                             .addComponent(jTextField2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BotonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                        .addComponent(BotonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(BotonAceptar)

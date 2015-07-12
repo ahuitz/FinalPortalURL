@@ -5,8 +5,8 @@
  */
 package Cursos;
 
-import Controladores.TrecursoJpaController;
-import Tablas.Trecurso;
+import Controladores.RecursoJpaController;
+import Tablas.Recurso;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,17 +14,17 @@ import java.util.List;
  *
  * @author Pablo López
  */
-public abstract class Recurso {
+public abstract class CRecurso {
 
-    protected TrecursoJpaController controladorR;
-    protected ArrayList<Trecurso> recursos;
+    protected RecursoJpaController controladorR;
+    protected ArrayList<Recurso> recursos;
     protected int idSeccionCurso;
     
-    public TrecursoJpaController getControladorR() {
+    public RecursoJpaController getControladorR() {
         return controladorR;
     }
 
-    public void setControladorR(TrecursoJpaController controladorR) {
+    public void setControladorR(RecursoJpaController controladorR) {
         this.controladorR = controladorR;
     }
 
@@ -32,7 +32,7 @@ public abstract class Recurso {
         return recursos;
     }
 
-    public void setRecursos(ArrayList<Trecurso> recursos) {
+    public void setRecursos(ArrayList<Recurso> recursos) {
         this.recursos = recursos;
     }
 

@@ -5,8 +5,8 @@
  */
 package Cursos;
 
-import Tablas.TseccionCursos;
-import Tablas.Tusuarios;
+import Tablas.Seccioncurso;
+import Tablas.Usuario;
 import java.util.ArrayList;
 /**
  *
@@ -17,15 +17,15 @@ import java.util.ArrayList;
 public class Curso {
 
     public Actividad actividad;
-    public ArrayList<Tusuarios> estudiantes;
+    public ArrayList<Usuario> estudiantes;
     public FabricaTipoUsuario fabrica;
-    public Recurso recurso;
-    public TseccionCursos seccion_Curso;
+    public CRecurso recurso;
+    public Seccioncurso seccion_Curso;
     public Object conexion;
-    public Tusuarios usuario;
+    public Usuario usuario;
     
 
-    public Curso(Tusuarios Usuario, TseccionCursos seccion_curso) {
+    public Curso(Usuario Usuario, Seccioncurso seccion_curso) {
     }
 
 }

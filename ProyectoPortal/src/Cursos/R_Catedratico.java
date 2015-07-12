@@ -5,9 +5,9 @@
  */
 package Cursos;
 
-import Controladores.TarchivosJpaController;
-import Controladores.TrecursoJpaController;
-import Tablas.Trecurso;
+import Controladores.ArchivoJpaController;
+import Controladores.RecursoJpaController;
+import Tablas.Recurso;
 import java.util.ArrayList;
 import javax.persistence.EntityManagerFactory;
 
@@ -15,30 +15,30 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author Pablo López
  */
-public class R_Catedratico extends Recurso {
+public class R_Catedratico extends CRecurso {
     
-    private TarchivosJpaController controladorA;
+    private ArchivoJpaController controladorA;
     
     public R_Catedratico(EntityManagerFactory emf, int idSC) {
-        this.controladorR = new TrecursoJpaController(emf);
-        this.controladorA = new TarchivosJpaController(emf);
-        this.recursos = (ArrayList<Trecurso>) controladorR.findTrecursoEntities();
+        this.controladorR = new RecursoJpaController(emf);
+        this.controladorA = new ArchivoJpaController(emf);
+        this.recursos = (ArrayList<Recurso>) controladorR.findRecursoEntities();
         this.idSeccionCurso=idSC;
     }
 
-    public TarchivosJpaController getControladorA() {
+    public ArchivoJpaController getControladorA() {
         return controladorA;
     }
 
-    public void setControladorA(TarchivosJpaController controladorA) {
+    public void setControladorA(ArchivoJpaController controladorA) {
         this.controladorA = controladorA;
     }
     
-    public void modificarRecurso(Trecurso recurso) throws Exception {
+    public void modificarRecurso(Recurso recurso) throws Exception {
         controladorR.edit(recurso);
     }
     
-    public void publicarRecurso(Trecurso recurso) {
+    public void publicarRecurso(Recurso recurso) {
         controladorR.create(recurso);
     }
     
