@@ -59,8 +59,7 @@ public class Entrega extends javax.swing.JFrame {
                 archivo.setTamanio(abre.length());
                 archivo.setNombre(nombre[0]);
                 archivo.setUrl(abre.getPath());
-                archivo.setFisico(false);
-                archivo.setVirtual(true);
+                
                 
                 System.out.println(archivo);
             }

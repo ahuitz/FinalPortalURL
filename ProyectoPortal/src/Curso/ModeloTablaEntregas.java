@@ -39,8 +39,7 @@ public class ModeloTablaEntregas extends AbstractTableModel{
         
         switch(columnIndex){
             case 0: return arch.getCalificacion();
-            case 1: return arch.getEstado();
-            case 2: return arch.getEstado();
+            
             
             default: return null;
         }
