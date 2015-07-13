@@ -89,7 +89,7 @@ public class Facultad implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Facultad[ id=" + id + " ]";
+        return "Tablas.Facultad[ id=" + id + " ]";
     }
     
 }

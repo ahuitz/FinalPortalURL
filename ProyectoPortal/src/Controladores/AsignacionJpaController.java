@@ -6,7 +6,7 @@
 package Controladores;
 
 import Controladores.exceptions.NonexistentEntityException;
-import Tablas.Horario;
+import Tablas.Asignacion;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,9 +20,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Rosario
  */
-public class HorarioJpaController implements Serializable {
+public class AsignacionJpaController implements Serializable {
 
-    public HorarioJpaController(EntityManagerFactory emf) {
+    public AsignacionJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,12 +31,12 @@ public class HorarioJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Horario horario) {
+    public void create(Asignacion asignacion) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(horario);
+            em.persist(asignacion);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,19 +45,19 @@ public class HorarioJpaController implements Serializable {
         }
     }
 
-    public void edit(Horario horario) throws NonexistentEntityException, Exception {
+    public void edit(Asignacion asignacion) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            horario = em.merge(horario);
+            asignacion = em.merge(asignacion);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = horario.getId();
-                if (findHorario(id) == null) {
-                    throw new NonexistentEntityException("The horario with id " + id + " no longer exists.");
+                Integer id = asignacion.getId();
+                if (findAsignacion(id) == null) {
+                    throw new NonexistentEntityException("The asignacion with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,14 +73,14 @@ public class HorarioJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Horario horario;
+            Asignacion asignacion;
             try {
-                horario = em.getReference(Horario.class, id);
-                horario.getId();
+                asignacion = em.getReference(Asignacion.class, id);
+                asignacion.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The horario with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The asignacion with id " + id + " no longer exists.", enfe);
             }
-            em.remove(horario);
+            em.remove(asignacion);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -89,19 +89,19 @@ public class HorarioJpaController implements Serializable {
         }
     }
 
-    public List<Horario> findHorarioEntities() {
-        return findHorarioEntities(true, -1, -1);
+    public List<Asignacion> findAsignacionEntities() {
+        return findAsignacionEntities(true, -1, -1);
     }
 
-    public List<Horario> findHorarioEntities(int maxResults, int firstResult) {
-        return findHorarioEntities(false, maxResults, firstResult);
+    public List<Asignacion> findAsignacionEntities(int maxResults, int firstResult) {
+        return findAsignacionEntities(false, maxResults, firstResult);
     }
 
-    private List<Horario> findHorarioEntities(boolean all, int maxResults, int firstResult) {
+    private List<Asignacion> findAsignacionEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Horario.class));
+            cq.select(cq.from(Asignacion.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,20 +113,20 @@ public class HorarioJpaController implements Serializable {
         }
     }
 
-    public Horario findHorario(Integer id) {
+    public Asignacion findAsignacion(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Horario.class, id);
+            return em.find(Asignacion.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getHorarioCount() {
+    public int getAsignacionCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Horario> rt = cq.from(Horario.class);
+            Root<Asignacion> rt = cq.from(Asignacion.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

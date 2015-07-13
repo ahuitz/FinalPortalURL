@@ -102,7 +102,7 @@ public class Carrerausuario implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Carrerausuario[ id=" + id + " ]";
+        return "Tablas.Carrerausuario[ id=" + id + " ]";
     }
     
 }

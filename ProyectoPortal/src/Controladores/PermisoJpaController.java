@@ -6,7 +6,7 @@
 package Controladores;
 
 import Controladores.exceptions.NonexistentEntityException;
-import Tablas.Clasehorario;
+import Tablas.Permiso;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,9 +20,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Rosario
  */
-public class ClasehorarioJpaController implements Serializable {
+public class PermisoJpaController implements Serializable {
 
-    public ClasehorarioJpaController(EntityManagerFactory emf) {
+    public PermisoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,12 +31,12 @@ public class ClasehorarioJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Clasehorario clasehorario) {
+    public void create(Permiso permiso) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(clasehorario);
+            em.persist(permiso);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,19 +45,19 @@ public class ClasehorarioJpaController implements Serializable {
         }
     }
 
-    public void edit(Clasehorario clasehorario) throws NonexistentEntityException, Exception {
+    public void edit(Permiso permiso) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            clasehorario = em.merge(clasehorario);
+            permiso = em.merge(permiso);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = clasehorario.getId();
-                if (findClasehorario(id) == null) {
-                    throw new NonexistentEntityException("The clasehorario with id " + id + " no longer exists.");
+                Integer id = permiso.getId();
+                if (findPermiso(id) == null) {
+                    throw new NonexistentEntityException("The permiso with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,14 +73,14 @@ public class ClasehorarioJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Clasehorario clasehorario;
+            Permiso permiso;
             try {
-                clasehorario = em.getReference(Clasehorario.class, id);
-                clasehorario.getId();
+                permiso = em.getReference(Permiso.class, id);
+                permiso.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The clasehorario with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The permiso with id " + id + " no longer exists.", enfe);
             }
-            em.remove(clasehorario);
+            em.remove(permiso);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -89,19 +89,19 @@ public class ClasehorarioJpaController implements Serializable {
         }
     }
 
-    public List<Clasehorario> findClasehorarioEntities() {
-        return findClasehorarioEntities(true, -1, -1);
+    public List<Permiso> findPermisoEntities() {
+        return findPermisoEntities(true, -1, -1);
     }
 
-    public List<Clasehorario> findClasehorarioEntities(int maxResults, int firstResult) {
-        return findClasehorarioEntities(false, maxResults, firstResult);
+    public List<Permiso> findPermisoEntities(int maxResults, int firstResult) {
+        return findPermisoEntities(false, maxResults, firstResult);
     }
 
-    private List<Clasehorario> findClasehorarioEntities(boolean all, int maxResults, int firstResult) {
+    private List<Permiso> findPermisoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Clasehorario.class));
+            cq.select(cq.from(Permiso.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,20 +113,20 @@ public class ClasehorarioJpaController implements Serializable {
         }
     }
 
-    public Clasehorario findClasehorario(Integer id) {
+    public Permiso findPermiso(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Clasehorario.class, id);
+            return em.find(Permiso.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getClasehorarioCount() {
+    public int getPermisoCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Clasehorario> rt = cq.from(Clasehorario.class);
+            Root<Permiso> rt = cq.from(Permiso.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

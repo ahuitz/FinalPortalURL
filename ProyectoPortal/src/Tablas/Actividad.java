@@ -34,8 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Actividad.findByDescripcion", query = "SELECT a FROM Actividad a WHERE a.descripcion = :descripcion"),
     @NamedQuery(name = "Actividad.findByFechaEntrega", query = "SELECT a FROM Actividad a WHERE a.fechaEntrega = :fechaEntrega"),
     @NamedQuery(name = "Actividad.findByFechaPublicacion", query = "SELECT a FROM Actividad a WHERE a.fechaPublicacion = :fechaPublicacion"),
-    @NamedQuery(name = "Actividad.findByValor", query = "SELECT a FROM Actividad a WHERE a.valor = :valor"),
+    @NamedQuery(name = "Actividad.findByPunteo", query = "SELECT a FROM Actividad a WHERE a.punteo = :punteo"),
     @NamedQuery(name = "Actividad.findByTiempoextra", query = "SELECT a FROM Actividad a WHERE a.tiempoextra = :tiempoextra"),
+    @NamedQuery(name = "Actividad.findByFisica", query = "SELECT a FROM Actividad a WHERE a.fisica = :fisica"),
+    @NamedQuery(name = "Actividad.findByVirtual", query = "SELECT a FROM Actividad a WHERE a.virtual = :virtual"),
     @NamedQuery(name = "Actividad.findBySeccionCursoid", query = "SELECT a FROM Actividad a WHERE a.seccionCursoid = :seccionCursoid"),
     @NamedQuery(name = "Actividad.findByTipoActividadid", query = "SELECT a FROM Actividad a WHERE a.tipoActividadid = :tipoActividadid")})
 public class Actividad implements Serializable {
@@ -52,20 +54,26 @@ public class Actividad implements Serializable {
     @Column(nullable = false, length = 255)
     private String descripcion;
     @Basic(optional = false)
-    @Column(name = "Fecha_Entrega", nullable = false)
+    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEntrega;
     @Basic(optional = false)
-    @Column(name = "Fecha_Publicacion", nullable = false)
+    @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPublicacion;
     @Basic(optional = false)
     @Column(nullable = false)
-    private double valor;
+    private double punteo;
     @Basic(optional = false)
     @Column(name = "Tiempo_extra", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date tiempoextra;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private boolean fisica;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private boolean virtual;
     @Basic(optional = false)
     @Column(name = "SeccionCurso_id", nullable = false)
     private int seccionCursoid;
@@ -80,14 +88,16 @@ public class Actividad implements Serializable {
         this.id = id;
     }
 
-    public Actividad(Integer id, String titulo, String descripcion, Date fechaEntrega, Date fechaPublicacion, double valor, Date tiempoextra, int seccionCursoid, int tipoActividadid) {
+    public Actividad(Integer id, String titulo, String descripcion, Date fechaEntrega, Date fechaPublicacion, double punteo, Date tiempoextra, boolean fisica, boolean virtual, int seccionCursoid, int tipoActividadid) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaEntrega = fechaEntrega;
         this.fechaPublicacion = fechaPublicacion;
-        this.valor = valor;
+        this.punteo = punteo;
         this.tiempoextra = tiempoextra;
+        this.fisica = fisica;
+        this.virtual = virtual;
         this.seccionCursoid = seccionCursoid;
         this.tipoActividadid = tipoActividadid;
     }
@@ -132,12 +142,12 @@ public class Actividad implements Serializable {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public double getValor() {
-        return valor;
+    public double getPunteo() {
+        return punteo;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setPunteo(double punteo) {
+        this.punteo = punteo;
     }
 
     public Date getTiempoextra() {
@@ -146,6 +156,22 @@ public class Actividad implements Serializable {
 
     public void setTiempoextra(Date tiempoextra) {
         this.tiempoextra = tiempoextra;
+    }
+
+    public boolean getFisica() {
+        return fisica;
+    }
+
+    public void setFisica(boolean fisica) {
+        this.fisica = fisica;
+    }
+
+    public boolean getVirtual() {
+        return virtual;
+    }
+
+    public void setVirtual(boolean virtual) {
+        this.virtual = virtual;
     }
 
     public int getSeccionCursoid() {
@@ -186,7 +212,7 @@ public class Actividad implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Actividad[ id=" + id + " ]";
+        return "Tablas.Actividad[ id=" + id + " ]";
     }
     
 }

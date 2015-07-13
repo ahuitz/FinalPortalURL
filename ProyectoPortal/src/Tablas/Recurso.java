@@ -145,7 +145,7 @@ public class Recurso implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Recurso[ id=" + id + " ]";
+        return "Tablas.Recurso[ id=" + id + " ]";
     }
     
 }

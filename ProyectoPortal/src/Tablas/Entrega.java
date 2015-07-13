@@ -6,7 +6,6 @@
 package Tablas;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -30,9 +27,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Entrega.findAll", query = "SELECT e FROM Entrega e"),
     @NamedQuery(name = "Entrega.findById", query = "SELECT e FROM Entrega e WHERE e.id = :id"),
-    @NamedQuery(name = "Entrega.findByFechaEntrega", query = "SELECT e FROM Entrega e WHERE e.fechaEntrega = :fechaEntrega"),
     @NamedQuery(name = "Entrega.findByCalificacion", query = "SELECT e FROM Entrega e WHERE e.calificacion = :calificacion"),
-    @NamedQuery(name = "Entrega.findByEstado", query = "SELECT e FROM Entrega e WHERE e.estado = :estado"),
+    @NamedQuery(name = "Entrega.findByRealizada", query = "SELECT e FROM Entrega e WHERE e.realizada = :realizada"),
+    @NamedQuery(name = "Entrega.findByNoRealizada", query = "SELECT e FROM Entrega e WHERE e.noRealizada = :noRealizada"),
     @NamedQuery(name = "Entrega.findByActividadid", query = "SELECT e FROM Entrega e WHERE e.actividadid = :actividadid"),
     @NamedQuery(name = "Entrega.findByUsuarioid", query = "SELECT e FROM Entrega e WHERE e.usuarioid = :usuarioid")})
 public class Entrega implements Serializable {
@@ -43,15 +40,14 @@ public class Entrega implements Serializable {
     @Column(nullable = false)
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "Fecha_Entrega", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaEntrega;
-    @Basic(optional = false)
     @Column(nullable = false)
     private double calificacion;
     @Basic(optional = false)
     @Column(nullable = false)
-    private boolean estado;
+    private boolean realizada;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private boolean noRealizada;
     @Basic(optional = false)
     @Column(name = "Actividad_id", nullable = false)
     private int actividadid;
@@ -66,11 +62,11 @@ public class Entrega implements Serializable {
         this.id = id;
     }
 
-    public Entrega(Integer id, Date fechaEntrega, double calificacion, boolean estado, int actividadid, int usuarioid) {
+    public Entrega(Integer id, double calificacion, boolean realizada, boolean noRealizada, int actividadid, int usuarioid) {
         this.id = id;
-        this.fechaEntrega = fechaEntrega;
         this.calificacion = calificacion;
-        this.estado = estado;
+        this.realizada = realizada;
+        this.noRealizada = noRealizada;
         this.actividadid = actividadid;
         this.usuarioid = usuarioid;
     }
@@ -83,14 +79,6 @@ public class Entrega implements Serializable {
         this.id = id;
     }
 
-    public Date getFechaEntrega() {
-        return fechaEntrega;
-    }
-
-    public void setFechaEntrega(Date fechaEntrega) {
-        this.fechaEntrega = fechaEntrega;
-    }
-
     public double getCalificacion() {
         return calificacion;
     }
@@ -99,12 +87,20 @@ public class Entrega implements Serializable {
         this.calificacion = calificacion;
     }
 
-    public boolean getEstado() {
-        return estado;
+    public boolean getRealizada() {
+        return realizada;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setRealizada(boolean realizada) {
+        this.realizada = realizada;
+    }
+
+    public boolean getNoRealizada() {
+        return noRealizada;
+    }
+
+    public void setNoRealizada(boolean noRealizada) {
+        this.noRealizada = noRealizada;
     }
 
     public int getActividadid() {
@@ -145,7 +141,7 @@ public class Entrega implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Entrega[ id=" + id + " ]";
+        return "Tablas.Entrega[ id=" + id + " ]";
     }
     
 }

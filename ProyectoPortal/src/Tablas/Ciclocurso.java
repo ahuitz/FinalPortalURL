@@ -115,7 +115,7 @@ public class Ciclocurso implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Ciclocurso[ id=" + id + " ]";
+        return "Tablas.Ciclocurso[ id=" + id + " ]";
     }
     
 }

@@ -115,7 +115,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Usuario[ id=" + id + " ]";
+        return "Tablas.Usuario[ id=" + id + " ]";
     }
     
 }

@@ -213,7 +213,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Persona[ id=" + id + " ]";
+        return "Tablas.Persona[ id=" + id + " ]";
     }
     
 }

@@ -1,35 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="ProyectoPortalPU" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="PortalJPA" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>Tablas.Modulo</class>
     <class>Tablas.Persona</class>
-    <class>Tablas.Cursohorario</class>
-    <class>Tablas.Rolusuario</class>
-    <class>Tablas.Clase</class>
-    <class>Tablas.Ciclo</class>
-    <class>Tablas.Usuario</class>
-    <class>Tablas.Entrega</class>
-    <class>Tablas.Detalleasignacionvip</class>
-    <class>Tablas.Carreraasignacion</class>
-    <class>Tablas.Asignado</class>
-    <class>Tablas.Clasehorario</class>
-    <class>Tablas.Recurso</class>
-    <class>Tablas.Tipoactividad</class>
-    <class>Tablas.Archivo</class>
-    <class>Tablas.Facultad</class>
     <class>Tablas.Curso</class>
-    <class>Tablas.Carrerausuario</class>
-    <class>Tablas.Actividad</class>
-    <class>Tablas.Tipoasignacion</class>
-    <class>Tablas.Ciclocurso</class>
-    <class>Tablas.Horario</class>
-    <class>Tablas.Tiposangre</class>
-    <class>Tablas.Cursocarrera</class>
-    <class>Tablas.Detalleentrega</class>
-    <class>Tablas.Carrera</class>
+    <class>Tablas.Archivo</class>
+    <class>Tablas.Estudianteseccion</class>
     <class>Tablas.Seccion</class>
+    <class>Tablas.Tipoactividad</class>
+    <class>Tablas.Entrega</class>
+    <class>Tablas.Usuario</class>
+    <class>Tablas.Rolusuario</class>
+    <class>Tablas.Tipoasignacion</class>
+    <class>Tablas.Detalleasignacionvip</class>
+    <class>Tablas.Facultad</class>
+    <class>Tablas.Ciclocurso</class>
+    <class>Tablas.Ciclo</class>
+    <class>Tablas.Carrerausuario</class>
+    <class>Tablas.ModuloHasRolusuario</class>
     <class>Tablas.Seccioncurso</class>
-    <class>Tablas.CursoHasCiclo</class>
+    <class>Tablas.Recurso</class>
+    <class>Tablas.Cursocarrera</class>
+    <class>Tablas.Carrera</class>
+    <class>Tablas.Submodulo</class>
+    <class>Tablas.Actividad</class>
+    <class>Tablas.Detalleentrega</class>
+    <class>Tablas.Asignacion</class>
+    <class>Tablas.Permiso</class>
+    <class>Tablas.Tiposangre</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/permisosus?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

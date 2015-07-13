@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c"),
     @NamedQuery(name = "Curso.findById", query = "SELECT c FROM Curso c WHERE c.id = :id"),
-    @NamedQuery(name = "Curso.findByCurso", query = "SELECT c FROM Curso c WHERE c.curso = :curso")})
+    @NamedQuery(name = "Curso.findByNombre", query = "SELECT c FROM Curso c WHERE c.nombre = :nombre")})
 public class Curso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,7 +37,7 @@ public class Curso implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @Column(nullable = false, length = 45)
-    private String curso;
+    private String nombre;
 
     public Curso() {
     }
@@ -46,9 +46,9 @@ public class Curso implements Serializable {
         this.id = id;
     }
 
-    public Curso(Integer id, String curso) {
+    public Curso(Integer id, String nombre) {
         this.id = id;
-        this.curso = curso;
+        this.nombre = nombre;
     }
 
     public Integer getId() {
@@ -59,12 +59,12 @@ public class Curso implements Serializable {
         this.id = id;
     }
 
-    public String getCurso() {
-        return curso;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCurso(String curso) {
-        this.curso = curso;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class Curso implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Curso[ id=" + id + " ]";
+        return "Tablas.Curso[ id=" + id + " ]";
     }
     
 }

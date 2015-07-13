@@ -102,7 +102,7 @@ public class Detalleasignacionvip implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Detalleasignacionvip[ id=" + id + " ]";
+        return "Tablas.Detalleasignacionvip[ id=" + id + " ]";
     }
     
 }

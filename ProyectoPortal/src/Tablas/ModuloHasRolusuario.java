@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Rosario
  */
 @Entity
-@Table(catalog = "permisosus", schema = "")
+@Table(name = "modulo_has_rolusuario", catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Horario.findAll", query = "SELECT h FROM Horario h"),
-    @NamedQuery(name = "Horario.findById", query = "SELECT h FROM Horario h WHERE h.id = :id"),
-    @NamedQuery(name = "Horario.findByDia", query = "SELECT h FROM Horario h WHERE h.dia = :dia"),
-    @NamedQuery(name = "Horario.findByHora", query = "SELECT h FROM Horario h WHERE h.hora = :hora")})
-public class Horario implements Serializable {
+    @NamedQuery(name = "ModuloHasRolusuario.findAll", query = "SELECT m FROM ModuloHasRolusuario m"),
+    @NamedQuery(name = "ModuloHasRolusuario.findById", query = "SELECT m FROM ModuloHasRolusuario m WHERE m.id = :id"),
+    @NamedQuery(name = "ModuloHasRolusuario.findByRolUsuarioid", query = "SELECT m FROM ModuloHasRolusuario m WHERE m.rolUsuarioid = :rolUsuarioid"),
+    @NamedQuery(name = "ModuloHasRolusuario.findByModuloid", query = "SELECT m FROM ModuloHasRolusuario m WHERE m.moduloid = :moduloid")})
+public class ModuloHasRolusuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,23 +37,23 @@ public class Horario implements Serializable {
     @Column(nullable = false)
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
-    private String dia;
+    @Column(name = "RolUsuario_id", nullable = false)
+    private int rolUsuarioid;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
-    private String hora;
+    @Column(name = "Modulo_id", nullable = false)
+    private int moduloid;
 
-    public Horario() {
+    public ModuloHasRolusuario() {
     }
 
-    public Horario(Integer id) {
+    public ModuloHasRolusuario(Integer id) {
         this.id = id;
     }
 
-    public Horario(Integer id, String dia, String hora) {
+    public ModuloHasRolusuario(Integer id, int rolUsuarioid, int moduloid) {
         this.id = id;
-        this.dia = dia;
-        this.hora = hora;
+        this.rolUsuarioid = rolUsuarioid;
+        this.moduloid = moduloid;
     }
 
     public Integer getId() {
@@ -64,20 +64,20 @@ public class Horario implements Serializable {
         this.id = id;
     }
 
-    public String getDia() {
-        return dia;
+    public int getRolUsuarioid() {
+        return rolUsuarioid;
     }
 
-    public void setDia(String dia) {
-        this.dia = dia;
+    public void setRolUsuarioid(int rolUsuarioid) {
+        this.rolUsuarioid = rolUsuarioid;
     }
 
-    public String getHora() {
-        return hora;
+    public int getModuloid() {
+        return moduloid;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setModuloid(int moduloid) {
+        this.moduloid = moduloid;
     }
 
     @Override
@@ -90,10 +90,10 @@ public class Horario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Horario)) {
+        if (!(object instanceof ModuloHasRolusuario)) {
             return false;
         }
-        Horario other = (Horario) object;
+        ModuloHasRolusuario other = (ModuloHasRolusuario) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -102,7 +102,7 @@ public class Horario implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Horario[ id=" + id + " ]";
+        return "Tablas.ModuloHasRolusuario[ id=" + id + " ]";
     }
     
 }

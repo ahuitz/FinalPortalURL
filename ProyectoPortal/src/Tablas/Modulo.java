@@ -25,51 +25,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Clasehorario.findAll", query = "SELECT c FROM Clasehorario c"),
-    @NamedQuery(name = "Clasehorario.findByClaseid", query = "SELECT c FROM Clasehorario c WHERE c.claseid = :claseid"),
-    @NamedQuery(name = "Clasehorario.findByHorarioid", query = "SELECT c FROM Clasehorario c WHERE c.horarioid = :horarioid"),
-    @NamedQuery(name = "Clasehorario.findById", query = "SELECT c FROM Clasehorario c WHERE c.id = :id")})
-public class Clasehorario implements Serializable {
+    @NamedQuery(name = "Modulo.findAll", query = "SELECT m FROM Modulo m"),
+    @NamedQuery(name = "Modulo.findById", query = "SELECT m FROM Modulo m WHERE m.id = :id"),
+    @NamedQuery(name = "Modulo.findByNombreModulo", query = "SELECT m FROM Modulo m WHERE m.nombreModulo = :nombreModulo")})
+public class Modulo implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Basic(optional = false)
-    @Column(name = "Clase_id", nullable = false)
-    private int claseid;
-    @Basic(optional = false)
-    @Column(name = "Horario_id", nullable = false)
-    private int horarioid;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
+    @Basic(optional = false)
+    @Column(nullable = false, length = 45)
+    private String nombreModulo;
 
-    public Clasehorario() {
+    public Modulo() {
     }
 
-    public Clasehorario(Integer id) {
+    public Modulo(Integer id) {
         this.id = id;
     }
 
-    public Clasehorario(Integer id, int claseid, int horarioid) {
+    public Modulo(Integer id, String nombreModulo) {
         this.id = id;
-        this.claseid = claseid;
-        this.horarioid = horarioid;
-    }
-
-    public int getClaseid() {
-        return claseid;
-    }
-
-    public void setClaseid(int claseid) {
-        this.claseid = claseid;
-    }
-
-    public int getHorarioid() {
-        return horarioid;
-    }
-
-    public void setHorarioid(int horarioid) {
-        this.horarioid = horarioid;
+        this.nombreModulo = nombreModulo;
     }
 
     public Integer getId() {
@@ -78,6 +57,14 @@ public class Clasehorario implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getNombreModulo() {
+        return nombreModulo;
+    }
+
+    public void setNombreModulo(String nombreModulo) {
+        this.nombreModulo = nombreModulo;
     }
 
     @Override
@@ -90,10 +77,10 @@ public class Clasehorario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Clasehorario)) {
+        if (!(object instanceof Modulo)) {
             return false;
         }
-        Clasehorario other = (Clasehorario) object;
+        Modulo other = (Modulo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -102,7 +89,7 @@ public class Clasehorario implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Clasehorario[ id=" + id + " ]";
+        return "Tablas.Modulo[ id=" + id + " ]";
     }
     
 }

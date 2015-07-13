@@ -25,51 +25,35 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cursohorario.findAll", query = "SELECT c FROM Cursohorario c"),
-    @NamedQuery(name = "Cursohorario.findByCursoid", query = "SELECT c FROM Cursohorario c WHERE c.cursoid = :cursoid"),
-    @NamedQuery(name = "Cursohorario.findByHorarioid", query = "SELECT c FROM Cursohorario c WHERE c.horarioid = :horarioid"),
-    @NamedQuery(name = "Cursohorario.findById", query = "SELECT c FROM Cursohorario c WHERE c.id = :id")})
-public class Cursohorario implements Serializable {
+    @NamedQuery(name = "Estudianteseccion.findAll", query = "SELECT e FROM Estudianteseccion e"),
+    @NamedQuery(name = "Estudianteseccion.findById", query = "SELECT e FROM Estudianteseccion e WHERE e.id = :id"),
+    @NamedQuery(name = "Estudianteseccion.findBySeccionCursoid", query = "SELECT e FROM Estudianteseccion e WHERE e.seccionCursoid = :seccionCursoid"),
+    @NamedQuery(name = "Estudianteseccion.findByUsuarioid", query = "SELECT e FROM Estudianteseccion e WHERE e.usuarioid = :usuarioid")})
+public class Estudianteseccion implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Basic(optional = false)
-    @Column(name = "Curso_id", nullable = false)
-    private int cursoid;
-    @Basic(optional = false)
-    @Column(name = "Horario_id", nullable = false)
-    private int horarioid;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
+    @Basic(optional = false)
+    @Column(name = "SeccionCurso_id", nullable = false)
+    private int seccionCursoid;
+    @Basic(optional = false)
+    @Column(name = "Usuario_id", nullable = false)
+    private int usuarioid;
 
-    public Cursohorario() {
+    public Estudianteseccion() {
     }
 
-    public Cursohorario(Integer id) {
+    public Estudianteseccion(Integer id) {
         this.id = id;
     }
 
-    public Cursohorario(Integer id, int cursoid, int horarioid) {
+    public Estudianteseccion(Integer id, int seccionCursoid, int usuarioid) {
         this.id = id;
-        this.cursoid = cursoid;
-        this.horarioid = horarioid;
-    }
-
-    public int getCursoid() {
-        return cursoid;
-    }
-
-    public void setCursoid(int cursoid) {
-        this.cursoid = cursoid;
-    }
-
-    public int getHorarioid() {
-        return horarioid;
-    }
-
-    public void setHorarioid(int horarioid) {
-        this.horarioid = horarioid;
+        this.seccionCursoid = seccionCursoid;
+        this.usuarioid = usuarioid;
     }
 
     public Integer getId() {
@@ -78,6 +62,22 @@ public class Cursohorario implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public int getSeccionCursoid() {
+        return seccionCursoid;
+    }
+
+    public void setSeccionCursoid(int seccionCursoid) {
+        this.seccionCursoid = seccionCursoid;
+    }
+
+    public int getUsuarioid() {
+        return usuarioid;
+    }
+
+    public void setUsuarioid(int usuarioid) {
+        this.usuarioid = usuarioid;
     }
 
     @Override
@@ -90,10 +90,10 @@ public class Cursohorario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cursohorario)) {
+        if (!(object instanceof Estudianteseccion)) {
             return false;
         }
-        Cursohorario other = (Cursohorario) object;
+        Estudianteseccion other = (Estudianteseccion) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -102,7 +102,7 @@ public class Cursohorario implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Cursohorario[ id=" + id + " ]";
+        return "Tablas.Estudianteseccion[ id=" + id + " ]";
     }
     
 }
