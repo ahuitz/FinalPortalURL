@@ -6,6 +6,7 @@
 package Forms;
 
 import Cursos.CRecurso;
+import Cursos.R_Catedratico;
 import Tablas.Archivo;
 import Tablas.Recurso;
 import java.sql.Date;
@@ -18,13 +19,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Pablo López
  */
-public abstract class Recursos extends javax.swing.JInternalFrame{
+public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
 
     public CRecurso r;
     /**
      * Creates new form Recursos
      */
-    public Recursos() {
+    public PrincipalRecurso() {
         initComponents();
     }
 
@@ -114,10 +115,11 @@ public abstract class Recursos extends javax.swing.JInternalFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(botonCrearR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonModificarR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonVer, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(botonCrearR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonModificarR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(botonVer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -126,18 +128,20 @@ public abstract class Recursos extends javax.swing.JInternalFrame{
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(botonCrearR)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
                         .addComponent(botonVer)
                         .addGap(18, 18, 18)
+                        .addComponent(botonCrearR)
+                        .addGap(18, 18, 18)
                         .addComponent(botonModificarR)
-                        .addGap(0, 268, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -158,7 +162,31 @@ public abstract class Recursos extends javax.swing.JInternalFrame{
 
     private void botonModificarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarRActionPerformed
         // TODO add your handling code here:
-        
+        int fila = TablaRecursos.getSelectedRow();
+        if (fila >= 0) {
+            DefaultTableModel modelo = (DefaultTableModel) TablaRecursos.getModel();
+            Date fecha = (Date) modelo.getValueAt(fila, 0);
+            String titulo = (String) modelo.getValueAt(fila, 1);
+            Query q;
+            q = r.getEmf().createEntityManager().createNamedQuery("Recurso.findByFechaPublicacion");
+            q.setParameter("FechaPublicacion", fecha);
+            ArrayList<Recurso> recs = (ArrayList<Recurso>) q.getResultList();
+            Recurso rec = null;
+            for (Recurso rec1 : recs) {
+                if (rec1.getTitulo().compareTo(titulo) == 0) {
+                    rec = rec1;
+                    break;
+                }
+            }
+            q = r.getEmf().createEntityManager().createNamedQuery("Archivo.findById");
+            q.setParameter("id", rec.getArchivoid());
+            Archivo ar = (Archivo) q.getResultList().get(0);
+            ModificarRecurso mr = new ModificarRecurso((R_Catedratico) r,rec, ar);
+            getParent().add(mr);
+            mr.toFront();
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un recurso.", "", JOptionPane.INFORMATION_MESSAGE);
+        }        
     }//GEN-LAST:event_botonModificarRActionPerformed
 
     private void botonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerActionPerformed
