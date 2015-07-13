@@ -5,35 +5,56 @@
  */
 package Forms;
 
+import Controladores.exceptions.NonexistentEntityException;
 import Cursos.R_Catedratico;
 import Tablas.Archivo;
 import Tablas.Recurso;
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Pablo López
  */
-public class CrearRecurso extends javax.swing.JInternalFrame {
-    private R_Catedratico rc;
-    private File archivoA;
-    
+public class ModificarRecurso extends javax.swing.JInternalFrame {
+    R_Catedratico rc;
+    Recurso r;
+    Archivo a;
+    File archivoA;
     /**
-     * Creates new form CrearCurso
+     * Creates new form ModificarRecurso
      * @param rc
+     * @param r
+     * @param a
      */
-    public CrearRecurso(R_Catedratico rc) {
+    public ModificarRecurso(R_Catedratico rc, Recurso r, Archivo a) {
         initComponents();
-        BotonBuscar.setEnabled(Boolean.FALSE);
-        jTextField2.setEnabled(Boolean.FALSE);
         setIconifiable(Boolean.TRUE);
         setVisible(Boolean.TRUE);
         setClosable(Boolean.TRUE);
         //setResizable(Boolean.TRUE);
-        //this.rc=rc;
+        this.rc=rc;
+        this.r=r;
+        this.a=a;
+        archivoA=null;
+        jTitulo.setText(r.getTitulo());
+        jDescripcion.setText(r.getDescripcion());
+        if(a!=null){
+            jCheckBox1.setSelected(Boolean.TRUE);
+            jArchivo.setEnabled(Boolean.TRUE);
+            BotonBuscar.setEnabled(Boolean.TRUE);
+            jArchivo.setText(a.getNombre()+"."+a.getExtension());
+        }
+        else{
+            jCheckBox1.setSelected(Boolean.FALSE);
+            jArchivo.setEnabled(Boolean.FALSE);
+            BotonBuscar.setEnabled(Boolean.FALSE);
+            jArchivo.setText("");
+        }
     }
 
     /**
@@ -45,31 +66,39 @@ public class CrearRecurso extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BotonAceptar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTitulo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jTextField2 = new javax.swing.JTextField();
+        jDescripcion = new javax.swing.JTextArea();
+        jArchivo = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
         BotonBuscar = new javax.swing.JButton();
         BotonCancelar = new javax.swing.JButton();
-        BotonAceptar = new javax.swing.JButton();
+
+        BotonAceptar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        BotonAceptar.setText("Aceptar");
+        BotonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAceptarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("Título");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jTitulo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel2.setText("Descripción");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jDescripcion.setColumns(20);
+        jDescripcion.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jDescripcion.setRows(5);
+        jScrollPane1.setViewportView(jDescripcion);
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jArchivo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jCheckBox1.setText("Archivo");
@@ -96,14 +125,6 @@ public class CrearRecurso extends javax.swing.JInternalFrame {
             }
         });
 
-        BotonAceptar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        BotonAceptar.setText("Aceptar");
-        BotonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonAceptarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,9 +143,9 @@ public class CrearRecurso extends javax.swing.JInternalFrame {
                             .addComponent(jCheckBox1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(BotonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
@@ -134,7 +155,7 @@ public class CrearRecurso extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,7 +163,7 @@ public class CrearRecurso extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1)
                     .addComponent(BotonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
@@ -155,17 +176,76 @@ public class CrearRecurso extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BotonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAceptarActionPerformed
+        // TODO add your handling code here:
+        String titulo = jTitulo.getText();
+        String descripcion = jDescripcion.getText();
+        if (titulo != null && titulo.compareTo("") != 0) {
+            int idA=0;
+            if(jCheckBox1.isSelected()==Boolean.TRUE){
+                if(a!=null||archivoA!=null){
+                    if(a!=null){
+                        idA=a.getId();
+                        if(archivoA!=null){                        
+                            a.setNombre(archivoA.getName().split("\\.")[0]);
+                            a.setExtension(archivoA.getName().split("\\.")[archivoA.getName().split("\\.").length - 1]);
+                            a.setUrl("");
+                            a.setTamanio(archivoA.length());
+                            try {
+                                rc.getControladorA().edit(a);
+                            } catch (Exception ex) {
+                                Logger.getLogger(ModificarRecurso.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                    else{
+                        idA = rc.getControladorA().getArchivoCount() + 1;
+                        String nombre = archivoA.getName().split("\\.")[0];
+                        String extension = archivoA.getName().split("\\.")[archivoA.getName().split("\\.").length - 1];
+                        double tamanyo = archivoA.length();
+                        a = new Archivo(idA, nombre, extension, "", tamanyo);
+                        rc.getControladorA().create(a);                        
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Debe seleccionar un archivo para continuar.</font></html>");
+                }
+            }
+            else{
+                if(a!=null){
+                    try {
+                        rc.getControladorA().destroy(a.getId());
+                    } catch (NonexistentEntityException ex) {
+                        Logger.getLogger(ModificarRecurso.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            r.setArchivoid(idA);
+            r.setTitulo(titulo);
+            r.setDescripcion(descripcion);
+            try {
+                rc.getControladorR().edit(r);
+            } catch (Exception ex) {
+                Logger.getLogger(ModificarRecurso.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Recurso modificado con exito.</font></html>");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Debe ponerle un titulo a este recurso.</font></html>");
+        }
+    }//GEN-LAST:event_BotonAceptarActionPerformed
+
     private void jCheckBox1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox1StateChanged
         // TODO add your handling code here:
         if(jCheckBox1.isSelected()==true){
             BotonBuscar.setEnabled(Boolean.TRUE);
-            jTextField2.setEnabled(Boolean.TRUE);
+            jArchivo.setEnabled(Boolean.TRUE);
         }
         else{
             BotonBuscar.setEnabled(Boolean.FALSE);
-            jTextField2.setEnabled(Boolean.FALSE);
+            jArchivo.setEnabled(Boolean.FALSE);
             archivoA = null;
-            jTextField2.setText("");
+            jArchivo.setText("");
         }
     }//GEN-LAST:event_jCheckBox1StateChanged
 
@@ -175,11 +255,11 @@ public class CrearRecurso extends javax.swing.JInternalFrame {
         int opcion = fc.showOpenDialog(this);
         if(opcion==JFileChooser.APPROVE_OPTION){
             archivoA=fc.getSelectedFile();
-            jTextField2.setText(archivoA.getName());
+            jArchivo.setText(archivoA.getName());
         }
         else{
             archivoA=null;
-            jTextField2.setText("");
+            jArchivo.setText("");
             JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun archivo.");
         }
     }//GEN-LAST:event_BotonBuscarActionPerformed
@@ -189,59 +269,17 @@ public class CrearRecurso extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_BotonCancelarActionPerformed
 
-    private void BotonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAceptarActionPerformed
-        // TODO add your handling code here:
-        String titulo = jTextField1.getText();
-        String descripcion = jTextArea1.getText();
-        if (titulo != null && titulo.compareTo("") != 0) {
-            if (jCheckBox1.isSelected() == Boolean.TRUE) {
-                if (archivoA != null) {
-                    int idA = 0;
-                    if (jCheckBox1.isSelected() == Boolean.TRUE) {
-                        idA = rc.getControladorA().getArchivoCount() + 1;
-                        String nombre = archivoA.getName().split("\\.")[0];
-                        String extension = archivoA.getName().split("\\.")[archivoA.getName().split("\\.").length - 1];
-                        double tamanyo = archivoA.length();
-                        Archivo adjunto = new Archivo(idA, nombre, extension, "", tamanyo);
-                        rc.getControladorA().create(adjunto);
-                    }
-                    int idR = rc.getControladorR().getRecursoCount() + 1;
-                    Date fecha = new Date();
-                    Recurso rec = new Recurso(idR, titulo, descripcion, fecha, rc.getIdSeccionCurso(), idA);
-                    rc.getControladorR().create(rec);
-            JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Recurso creado con exito.</font></html>");
-                    this.dispose();
-                } else {
-            JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Debe seleccionar un archivo para continuar.</font></html>");
-                }
-            } else {
-                int idA = 0;
-                int idR = rc.getControladorR().getRecursoCount() + 1;
-                Date fecha = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                System.out.println(sdf.format(fecha));
-                Recurso rec = new Recurso(idR, titulo, descripcion, fecha, rc.getIdSeccionCurso(), idA);
-                rc.getControladorR().create(rec);
-            JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Recurso creado con exito.</font></html>");
-                this.dispose();
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Debe ponerle un titulo a este recurso.</font></html>");
-        }
-
-    }//GEN-LAST:event_BotonAceptarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonAceptar;
     private javax.swing.JButton BotonBuscar;
     private javax.swing.JButton BotonCancelar;
+    private javax.swing.JTextField jArchivo;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JTextArea jDescripcion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTitulo;
     // End of variables declaration//GEN-END:variables
 }

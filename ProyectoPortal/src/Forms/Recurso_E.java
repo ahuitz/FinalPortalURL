@@ -6,7 +6,7 @@
 package Forms;
 
 import Cursos.ModeloTablaRecurso;
-import Cursos.R_Catedratico;
+import Cursos.R_Estudiante;
 import Tablas.Recurso;
 import java.util.ArrayList;
 
@@ -14,11 +14,17 @@ import java.util.ArrayList;
  *
  * @author Pablo López
  */
-public class Recursos_C extends Recursos {
-    private static Recursos_C rc;
-    
-    private Recursos_C(R_Catedratico recursoC) {
-        this.r=recursoC;
+public class Recurso_E extends PrincipalRecurso {
+    private static Recurso_E re;
+
+    public Recurso_E() {
+        //this.botonCrearR.setVisible(false);
+        //this.botonModificarR.setVisible(false);
+    }
+    private Recurso_E(R_Estudiante recursoE) {
+        this.botonCrearR.setVisible(false);
+        this.botonModificarR.setVisible(false);
+        this.r=recursoE;
         this.TablaRecursos.setModel(new ModeloTablaRecurso(r.getRecursos()));
         for(int i=0;i<TablaRecursos.getModel().getColumnCount();i++){
             for(int j=0;j<TablaRecursos.getModel().getRowCount();j++){
@@ -27,14 +33,15 @@ public class Recursos_C extends Recursos {
         }
     }
     
-    public static Recursos_C getRecursos_C(R_Catedratico recursoC){
-        if(rc==null){
-            rc=new Recursos_C(recursoC);
+    public static Recurso_E getRecursos_E(R_Estudiante recursoE){
+        if(re==null){
+            re=new Recurso_E(recursoE);
         }
-        return rc;
+        return re;
     }   
     
-    public void actualizarLista(){
+    private void actualizarLista(R_Estudiante recursoE){
+        r=recursoE;
         r.setRecursos((ArrayList<Recurso>) r.getControladorR().findRecursoEntities());
         this.TablaRecursos.setModel(new ModeloTablaRecurso(r.getRecursos()));        
     }
