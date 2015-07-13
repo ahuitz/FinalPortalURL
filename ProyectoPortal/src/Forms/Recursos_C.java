@@ -5,7 +5,7 @@
  */
 package Forms;
 
-import Cursos.ModeloTablaRecursos;
+import Cursos.ModeloTablaRecurso;
 import Cursos.R_Catedratico;
 import Tablas.Recurso;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class Recursos_C extends Recursos {
     
     private Recursos_C(R_Catedratico recursoC) {
         this.r=recursoC;
-        this.TablaRecursos.setModel(new ModeloTablaRecursos(r.getRecursos()));
+        this.TablaRecursos.setModel(new ModeloTablaRecurso(r.getRecursos()));
         for(int i=0;i<TablaRecursos.getModel().getColumnCount();i++){
             for(int j=0;j<TablaRecursos.getModel().getRowCount();j++){
                 TablaRecursos.getModel().isCellEditable(i, j);                
@@ -36,7 +36,7 @@ public class Recursos_C extends Recursos {
     
     public void actualizarLista(){
         r.setRecursos((ArrayList<Recurso>) r.getControladorR().findRecursoEntities());
-        this.TablaRecursos.setModel( new ModeloTablaRecursos(r.getRecursos()));        
+        this.TablaRecursos.setModel(new ModeloTablaRecurso(r.getRecursos()));        
     }
     
 }

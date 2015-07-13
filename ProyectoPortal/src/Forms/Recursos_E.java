@@ -5,7 +5,7 @@
  */
 package Forms;
 
-import Cursos.ModeloTablaRecursos;
+import Cursos.ModeloTablaRecurso;
 import Cursos.R_Estudiante;
 import Tablas.Recurso;
 import java.util.ArrayList;
@@ -17,11 +17,15 @@ import java.util.ArrayList;
 public class Recursos_E extends Recursos {
     private static Recursos_E re;
 
+    public Recursos_E() {
+        //this.botonCrearR.setVisible(false);
+        //this.botonModificarR.setVisible(false);
+    }
     private Recursos_E(R_Estudiante recursoE) {
         this.botonCrearR.setVisible(false);
         this.botonModificarR.setVisible(false);
         this.r=recursoE;
-        this.TablaRecursos.setModel(new ModeloTablaRecursos(r.getRecursos()));
+        this.TablaRecursos.setModel(new ModeloTablaRecurso(r.getRecursos()));
         for(int i=0;i<TablaRecursos.getModel().getColumnCount();i++){
             for(int j=0;j<TablaRecursos.getModel().getRowCount();j++){
                 TablaRecursos.getModel().isCellEditable(i, j);                
@@ -36,9 +40,10 @@ public class Recursos_E extends Recursos {
         return re;
     }   
     
-    public void actualizarLista(){
+    private void actualizarLista(R_Estudiante recursoE){
+        r=recursoE;
         r.setRecursos((ArrayList<Recurso>) r.getControladorR().findRecursoEntities());
-        this.TablaRecursos.setModel( new ModeloTablaRecursos(r.getRecursos()));        
+        this.TablaRecursos.setModel(new ModeloTablaRecurso(r.getRecursos()));        
     }
     
 }

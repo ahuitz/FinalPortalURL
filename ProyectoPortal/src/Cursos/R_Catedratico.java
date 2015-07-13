@@ -20,8 +20,9 @@ public class R_Catedratico extends CRecurso {
     private ArchivoJpaController controladorA;
     
     public R_Catedratico(EntityManagerFactory emf, int idSC) {
-        this.controladorR = new RecursoJpaController(emf);
-        this.controladorA = new ArchivoJpaController(emf);
+        this.emf=emf;
+        this.controladorR = new RecursoJpaController(this.emf);
+        this.controladorA = new ArchivoJpaController(this.emf);
         this.recursos = (ArrayList<Recurso>) controladorR.findRecursoEntities();
         this.idSeccionCurso=idSC;
     }
@@ -43,8 +44,8 @@ public class R_Catedratico extends CRecurso {
     }
     
     @Override
-    public void visualizar() {
-        
+    public ArrayList<Recurso> visualizar() {
+        return recursos;
     }
     
 }

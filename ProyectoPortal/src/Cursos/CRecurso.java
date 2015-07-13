@@ -9,13 +9,14 @@ import Controladores.RecursoJpaController;
 import Tablas.Recurso;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
  * @author Pablo López
  */
 public abstract class CRecurso {
-
+    protected EntityManagerFactory emf;
     protected RecursoJpaController controladorR;
     protected ArrayList<Recurso> recursos;
     protected int idSeccionCurso;
@@ -39,6 +40,14 @@ public abstract class CRecurso {
     public int getIdSeccionCurso() {
         return idSeccionCurso;
     }
+
+    public EntityManagerFactory getEmf() {
+        return emf;
+    }
+
+    public void setEmf(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
     
-    public abstract void visualizar();
+    public abstract ArrayList<Recurso> visualizar();
 }

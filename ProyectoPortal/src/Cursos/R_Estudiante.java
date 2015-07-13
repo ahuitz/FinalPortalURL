@@ -17,13 +17,15 @@ import javax.persistence.EntityManagerFactory;
 public class R_Estudiante extends CRecurso {
 
     public R_Estudiante(EntityManagerFactory emf, int idSC) {
-        this.controladorR = new RecursoJpaController(emf);
+        this.emf=emf;
+        this.controladorR = new RecursoJpaController(this.emf);
         this.recursos = (ArrayList<Recurso>) controladorR.findRecursoEntities();
         this.idSeccionCurso=idSC;
     }
 
     @Override
-    public void visualizar() {
+    public ArrayList<Recurso> visualizar() {
+        return recursos;
     }
 
 }

@@ -12,11 +12,12 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Pablo López
  */
-public class CrearRecurso extends javax.swing.JFrame {
+public class CrearRecurso extends javax.swing.JInternalFrame {
     private R_Catedratico rc;
     private File archivoA;
     
@@ -26,8 +27,12 @@ public class CrearRecurso extends javax.swing.JFrame {
      */
     public CrearRecurso(R_Catedratico rc) {
         initComponents();
-        BotonBuscar.setVisible(false);
-        jTextField2.setVisible(false);
+        BotonBuscar.setEnabled(Boolean.FALSE);
+        jTextField2.setEnabled(Boolean.FALSE);
+        setIconifiable(Boolean.TRUE);
+        setVisible(Boolean.TRUE);
+        setClosable(Boolean.TRUE);
+        //setResizable(Boolean.TRUE);
         //this.rc=rc;
     }
 
@@ -51,14 +56,22 @@ public class CrearRecurso extends javax.swing.JFrame {
         BotonCancelar = new javax.swing.JButton();
         BotonAceptar = new javax.swing.JButton();
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("Título:");
 
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel2.setText("Descripcion:");
 
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jCheckBox1.setText("Archivo:");
         jCheckBox1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -66,6 +79,7 @@ public class CrearRecurso extends javax.swing.JFrame {
             }
         });
 
+        BotonBuscar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         BotonBuscar.setText("Buscar archivo");
         BotonBuscar.setPreferredSize(new java.awt.Dimension(100, 23));
         BotonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -74,6 +88,7 @@ public class CrearRecurso extends javax.swing.JFrame {
             }
         });
 
+        BotonCancelar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         BotonCancelar.setText("Cancelar");
         BotonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +96,7 @@ public class CrearRecurso extends javax.swing.JFrame {
             }
         });
 
+        BotonAceptar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         BotonAceptar.setText("Aceptar");
         BotonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,46 +110,45 @@ public class CrearRecurso extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                        .addComponent(BotonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
+                            .addComponent(jLabel2)
                             .addComponent(jCheckBox1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(jTextField2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BotonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BotonAceptar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BotonCancelar)))
-                .addContainerGap())
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(BotonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                    .addComponent(BotonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotonCancelar)
-                    .addComponent(BotonAceptar))
+                    .addComponent(BotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -143,22 +158,30 @@ public class CrearRecurso extends javax.swing.JFrame {
     private void jCheckBox1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox1StateChanged
         // TODO add your handling code here:
         if(jCheckBox1.isSelected()==true){
-            BotonBuscar.setVisible(true);
-            jTextField2.setVisible(true);
+            BotonBuscar.setEnabled(Boolean.TRUE);
+            jTextField2.setEnabled(Boolean.TRUE);
         }
         else{
-            BotonBuscar.setVisible(false);
-            jTextField2.setVisible(false);
+            BotonBuscar.setEnabled(Boolean.FALSE);
+            jTextField2.setEnabled(Boolean.FALSE);
             archivoA = null;
+            jTextField2.setText("");
         }
     }//GEN-LAST:event_jCheckBox1StateChanged
 
     private void BotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
         // TODO add your handling code here:
         JFileChooser fc = new JFileChooser();
-        fc.showOpenDialog(this);
-        archivoA=fc.getSelectedFile();
-        jTextField2.setText(archivoA.getName());
+        int opcion = fc.showOpenDialog(this);
+        if(opcion==JFileChooser.APPROVE_OPTION){
+            archivoA=fc.getSelectedFile();
+            jTextField2.setText(archivoA.getName());
+        }
+        else{
+            archivoA=null;
+            jTextField2.setText("");
+            JOptionPane.showMessageDialog(this, "No se ha seleccionado ningun archivo.");
+        }
     }//GEN-LAST:event_BotonBuscarActionPerformed
 
     private void BotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelarActionPerformed
@@ -168,22 +191,46 @@ public class CrearRecurso extends javax.swing.JFrame {
 
     private void BotonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAceptarActionPerformed
         // TODO add your handling code here:
-        int id=rc.getControladorA().getTarchivosCount()+1;
-        String nombre = archivoA.getName().split("\\.")[0];
-        String extension = archivoA.getName().split("\\.")[archivoA.getName().split("\\.").length-1];
-        double tamanyo = archivoA.length();
-        Tarchivos adjunto= new Tarchivos(id, nombre, extension, "",tamanyo);
-        rc.getControladorA().create(adjunto);
-        
-        int idR=rc.getControladorR().getTrecursoCount()+1;
         String titulo = jTextField1.getText();
         String descripcion = jTextArea1.getText();
-        Date fecha = new Date();
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
-        System.out.println(sdf.format(fecha));
-        Trecurso rec = new Trecurso(idR,titulo,descripcion,sdf.format(fecha),rc.getIdSeccionCurso(),id);
-        rc.getControladorR().create(rec);
-        
+        if (titulo != null && titulo.compareTo("") != 0) {
+            if (jCheckBox1.isSelected() == Boolean.TRUE) {
+                if (archivoA != null) {
+                    int idA = 0;
+                    if (jCheckBox1.isSelected() == Boolean.TRUE) {
+                        idA = rc.getControladorA().getArchivoCount() + 1;
+                        String nombre = archivoA.getName().split("\\.")[0];
+                        String extension = archivoA.getName().split("\\.")[archivoA.getName().split("\\.").length - 1];
+                        double tamanyo = archivoA.length();
+                        Archivo adjunto = new Archivo(idA, nombre, extension, "", tamanyo);
+                        rc.getControladorA().create(adjunto);
+                    }
+                    int idR = rc.getControladorR().getRecursoCount() + 1;
+                    Date fecha = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    System.out.println(sdf.format(fecha));
+                    Recurso rec = new Recurso(idR, titulo, descripcion, fecha, rc.getIdSeccionCurso(), idA);
+                    rc.getControladorR().create(rec);
+            JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Recurso creado con exito.</font></html>");
+                    this.dispose();
+                } else {
+            JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Debe seleccionar un archivo para continuar.</font></html>");
+                }
+            } else {
+                int idA = 0;
+                int idR = rc.getControladorR().getRecursoCount() + 1;
+                Date fecha = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                System.out.println(sdf.format(fecha));
+                Recurso rec = new Recurso(idR, titulo, descripcion, fecha, rc.getIdSeccionCurso(), idA);
+                rc.getControladorR().create(rec);
+            JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Recurso creado con exito.</font></html>");
+                this.dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Debe ponerle un titulo a este recurso.</font></html>");
+        }
+
     }//GEN-LAST:event_BotonAceptarActionPerformed
 
 

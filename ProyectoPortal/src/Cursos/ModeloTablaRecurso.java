@@ -14,11 +14,11 @@ import java.util.List;
  *
  * @author Pablo López
  */
-public class ModeloTablaRecursos extends AbstractTableModel {
+public class ModeloTablaRecurso extends AbstractTableModel {
     private final List<Recurso> recursos;
     private final String columnas[] = {"Fecha publicación", "Titulo"};
 
-    public ModeloTablaRecursos(List<Recurso> recursos) {
+    public ModeloTablaRecurso(List<Recurso> recursos) {
         this.recursos = recursos;
     }
     
