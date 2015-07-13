@@ -135,4 +135,16 @@ public class CursocarreraJpaController implements Serializable {
         }
     }
     
+    public int getMaxId(){
+        EntityManager em = getEntityManager();
+        int id = 0;
+        try{
+            Query q = em.createQuery("SELECT MAX(c.id) FROM Cursocarrera c");
+            id = (int) q.getSingleResult();
+            return id;
+        }finally{
+            em.close();
+        }
+    }
+    
 }
