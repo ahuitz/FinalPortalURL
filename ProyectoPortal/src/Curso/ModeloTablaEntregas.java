@@ -5,28 +5,27 @@
  */
 package Curso;
 
-
-import Tablas.Archivo;
+import Tablas.Entrega;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author EST1629311
+ * @author Diaz
  */
-public class ModeloTablaArchivos extends AbstractTableModel {
-    private ArrayList<Archivo> archivos;
+public class ModeloTablaEntregas extends AbstractTableModel{
+    private ArrayList<Entrega> entregas;
     private String columnas[] = {"Nombre","Extension", "Tamano"};
 
-    public ModeloTablaArchivos(ArrayList<Archivo> archivos) {
-      this.archivos= archivos; 
+    public ModeloTablaEntregas(ArrayList<Entrega> Entregas) {
+      this.entregas= Entregas; 
       
     }
     
     
     @Override
     public int getRowCount() {
-        return archivos.size();
+        return entregas.size();
     }
 
     @Override
@@ -36,12 +35,12 @@ public class ModeloTablaArchivos extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Archivo arch= this.archivos.get(rowIndex);
+        Entrega arch= this.entregas.get(rowIndex);
         
         switch(columnIndex){
-            case 0: return arch.getNombre();
-            case 1: return arch.getExtension();
-            case 2: return arch.getTamanio();
+            case 0: return arch.getCalificacion();
+            case 1: return arch.getEstado();
+            case 2: return arch.getEstado();
             
             default: return null;
         }
@@ -60,23 +59,12 @@ public class ModeloTablaArchivos extends AbstractTableModel {
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         switch(columnIndex){
-            case 0: archivos.get(rowIndex).setNombre((String)aValue);
-                break;
-            case 1: 
-                archivos.get(rowIndex).setExtension((String)aValue);
-                break;
-            case 2: 
-                archivos.get(rowIndex).setTamanio((double)aValue);
-                break;
-             
-                
-                
-            default:
-                
-                break;
+            
                 
                 
         }
     }
     
 }
+
+

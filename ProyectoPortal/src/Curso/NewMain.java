@@ -16,7 +16,7 @@ public class NewMain {
      */
     public static void main(String[] args) {
         // TODO code application logic hereE
-        Entrega NUEVA = new Entrega();
+        NuevaActividad NUEVA = new NuevaActividad();
         NUEVA.show();
     }
     

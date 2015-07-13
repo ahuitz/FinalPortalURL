@@ -5,19 +5,34 @@
  */
 package Curso;
 
+import Controladores.ActividadJpaController;
+import Cursos.Curso;
+
 /**
  *
  * @author Diaz
  */
-public class VerActividad extends javax.swing.JInternalFrame {
+public abstract class VerActividad extends javax.swing.JInternalFrame {
 
+    
+    
+    Curso curso;
+    ActividadJpaController controladorActividad;
+    int idActividad;
+    
     /**
      * Creates new form VerActividad
      */
     public VerActividad() {
         initComponents();
     }
-
+    
+    public abstract void iniciarComponentes();
+    public abstract void modificarActividad();
+    public abstract void modificarEntrega();
+    public abstract boolean verDisponiblidad();
+    public abstract void agregarEntrega();
+    public abstract void calificar();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,9 +62,9 @@ public class VerActividad extends javax.swing.JInternalFrame {
         jSeparator11 = new javax.swing.JSeparator();
         Etiqueta6 = new javax.swing.JLabel();
         jSeparator12 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Boton1 = new javax.swing.JButton();
+        Boton2 = new javax.swing.JButton();
+        Boton3 = new javax.swing.JButton();
 
         Etiqueta1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Etiqueta1.setText("Titulo");
@@ -81,16 +96,26 @@ public class VerActividad extends javax.swing.JInternalFrame {
         Etiqueta6.setFont(new java.awt.Font("Trebuchet MS", 1, 10)); // NOI18N
         Etiqueta6.setText("Fecha de Entrega");
 
-        jButton1.setText("Entregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Boton1.setText("Entregar");
+        Boton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Boton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Modificar");
+        Boton2.setText("Modificar");
+        Boton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Modificar Entrega");
+        Boton3.setText("Modificar Actividad");
+        Boton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,9 +167,9 @@ public class VerActividad extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1)
+                                        .addComponent(Boton1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2))
+                                        .addComponent(Boton2))
                                     .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(220, 220, 220)
@@ -152,7 +177,7 @@ public class VerActividad extends javax.swing.JInternalFrame {
                 .addContainerGap(111, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton3))
+                .addComponent(Boton3))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,33 +222,49 @@ public class VerActividad extends javax.swing.JInternalFrame {
                     .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(Boton1)
+                    .addComponent(Boton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jButton3))
+                .addComponent(Boton3))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton1ActionPerformed
         // TODO add your handling code here:
-        Entrega entrega = new Entrega();
-        entrega.show();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        
+        if(verDisponiblidad()){
+         agregarEntrega();
+        }
+        
+    }//GEN-LAST:event_Boton1ActionPerformed
+    
+    private void Boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton3ActionPerformed
+        // TODO add your handling code here:
+        modificarActividad();
+    }//GEN-LAST:event_Boton3ActionPerformed
+
+    private void Boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton2ActionPerformed
+        // TODO add your handling code here:
+        if(verDisponiblidad()){
+         modificarEntrega();
+        }
+    }//GEN-LAST:event_Boton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea AreaTexto;
+    protected javax.swing.JButton Boton1;
+    protected javax.swing.JButton Boton2;
+    protected javax.swing.JButton Boton3;
     private javax.swing.JLabel Etiqueta1;
     private javax.swing.JLabel Etiqueta2;
     private javax.swing.JLabel Etiqueta3;
     private javax.swing.JLabel Etiqueta4;
     private javax.swing.JLabel Etiqueta5;
     private javax.swing.JLabel Etiqueta6;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;

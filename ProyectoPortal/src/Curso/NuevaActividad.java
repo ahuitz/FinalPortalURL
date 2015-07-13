@@ -5,7 +5,7 @@
  */
 package Curso;
 
-import Tablas.Tactividad;
+import Tablas.Actividad;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -20,6 +20,10 @@ public class NuevaActividad extends javax.swing.JFrame {
      * Creates new form Entrega
      */
     public NuevaActividad() {
+        initComponents();
+        LlenarCombos();
+    }
+    public NuevaActividad(Tablas.Actividad actividad) {
         initComponents();
         LlenarCombos();
     }
@@ -80,6 +84,9 @@ public class NuevaActividad extends javax.swing.JFrame {
         Boton3 = new javax.swing.JButton();
         Boton4 = new javax.swing.JButton();
         Boton5 = new javax.swing.JButton();
+        radioBoton1 = new javax.swing.JRadioButton();
+        radioBoton2 = new javax.swing.JRadioButton();
+        Etiqueta8 = new javax.swing.JLabel();
 
         jDialog2.setMinimumSize(new java.awt.Dimension(446, 310));
 
@@ -178,6 +185,23 @@ public class NuevaActividad extends javax.swing.JFrame {
             }
         });
 
+        radioBoton1.setSelected(true);
+        radioBoton1.setText("Virtual");
+        radioBoton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBoton1ActionPerformed(evt);
+            }
+        });
+
+        radioBoton2.setText(" Fisica");
+        radioBoton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBoton2ActionPerformed(evt);
+            }
+        });
+
+        Etiqueta8.setText("Tipo Entrega");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,8 +255,16 @@ public class NuevaActividad extends javax.swing.JFrame {
                                         .addComponent(Combo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Texto4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(79, 79, 79)
+                                .addComponent(radioBoton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(radioBoton2)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(259, 259, 259)
+                .addComponent(Etiqueta8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,11 +297,15 @@ public class NuevaActividad extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Combo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Etiqueta4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Etiqueta8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Etiqueta7)
-                    .addComponent(Texto4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                    .addComponent(Texto4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radioBoton1)
+                    .addComponent(radioBoton2))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Boton3)
                     .addComponent(Boton4)
@@ -306,7 +342,7 @@ public class NuevaActividad extends javax.swing.JFrame {
 
     private void Boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton3ActionPerformed
         // TODO add your handling code here:
-        Tactividad actividad= new Tactividad();
+        Actividad actividad= new Actividad();
         actividad.setTitulo(Texto1.getText());
         actividad.setDescripcion(AreaText1.getText());
         Date nuevo = new Date( anioE,mesE, diaE, (int)Combo1.getSelectedItem(), (int)Combo2.getSelectedItem());
@@ -325,6 +361,26 @@ public class NuevaActividad extends javax.swing.JFrame {
     private void Boton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Boton5ActionPerformed
+
+    private void radioBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBoton1ActionPerformed
+        // TODO add your handling code here:
+        if(radioBoton1.isSelected()){
+            radioBoton2.setSelected(false);
+        }
+        if(!radioBoton2.isSelected()){
+            radioBoton1.setSelected(true);
+        }
+    }//GEN-LAST:event_radioBoton1ActionPerformed
+
+    private void radioBoton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBoton2ActionPerformed
+        // TODO add your handling code here:
+         if(radioBoton2.isSelected()){
+            radioBoton1.setSelected(false);
+        }
+         if(!radioBoton1.isSelected()){
+            radioBoton2.setSelected(true);
+        }
+    }//GEN-LAST:event_radioBoton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -345,6 +401,7 @@ public class NuevaActividad extends javax.swing.JFrame {
     private javax.swing.JLabel Etiqueta5;
     private javax.swing.JLabel Etiqueta6;
     private javax.swing.JLabel Etiqueta7;
+    private javax.swing.JLabel Etiqueta8;
     private javax.swing.JTextField Texto1;
     private javax.swing.JTextField Texto2;
     private javax.swing.JTextField Texto3;
@@ -353,5 +410,7 @@ public class NuevaActividad extends javax.swing.JFrame {
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton radioBoton1;
+    private javax.swing.JRadioButton radioBoton2;
     // End of variables declaration//GEN-END:variables
 }

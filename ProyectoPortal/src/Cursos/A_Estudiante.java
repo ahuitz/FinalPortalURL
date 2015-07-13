@@ -5,10 +5,10 @@
  */
 package Cursos;
 
-import Tablas.Tentrega;
+import Controladores.ActividadJpaController;
+import Controladores.EntregaJpaController;
 import java.util.ArrayList;
-import Controladores.TactividadJpaController;
-import Controladores.TentregaJpaController;
+import Tablas.Entrega;
 
 /**
  *
@@ -16,20 +16,20 @@ import Controladores.TentregaJpaController;
  */
 public class A_Estudiante extends Actividad {
 
-    private ArrayList<Tentrega> entregas;
+    private ArrayList<Entrega> entregas;
     
 
-    public A_Estudiante(TactividadJpaController controladorA, TentregaJpaController controladorE,int ISC) {
+    public A_Estudiante(ActividadJpaController controladorA, EntregaJpaController controladorE,int ISC) {
         this.controladorA = controladorA;
         this.controladorE = controladorE;
         this.idSeccionCurso= ISC;
     }
 
-    public void modificarEntrega(Tentrega entrega) throws Exception {
+    public void modificarEntrega(Entrega entrega) throws Exception {
         controladorE.edit(entrega);
     }
 
-    public void realizarEntrega(Tentrega entrega) {
+    public void realizarEntrega(Entrega entrega) {
     }
     @Override
     public void visualizarActividad() {

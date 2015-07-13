@@ -5,22 +5,22 @@
  */
 package Cursos;
 
-import Controladores.TentregaJpaController;
-import Tablas.Tentrega;
+import Controladores.EntregaJpaController;
+import Tablas.Entrega;
 import java.util.ArrayList;
 
 /**
  *
  * @author Miguel Diaz
  */
-public class Entrega {
+public class Entregas {
 
   public int idActividad;
-  public ArrayList<Tentrega> entregas;
+  public ArrayList<Entrega> entregas;
   
-  public Entrega(int idActividad, TentregaJpaController controladorE) {
+  public Entregas(int idActividad, EntregaJpaController controladorE) {
       this.idActividad=idActividad;
-      entregas=(ArrayList<Tentrega>) controladorE.findTentregaEntities();
+      entregas=(ArrayList<Entrega>)controladorE.findEntregaEntities();
       
   }
 

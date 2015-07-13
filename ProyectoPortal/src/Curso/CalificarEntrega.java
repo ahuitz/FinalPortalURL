@@ -5,6 +5,8 @@
  */
 package Curso;
 
+import Cursos.Curso;
+
 /**
  *
  * @author Diaz
@@ -17,6 +19,11 @@ public class CalificarEntrega extends javax.swing.JInternalFrame {
     public CalificarEntrega() {
         initComponents();
     }
+    public CalificarEntrega(Curso curso, int idActividad) {
+        initComponents();
+    }
+    Curso curso;
+    int idActividad;
 
     /**
      * This method is called from within the constructor to initialize the form.

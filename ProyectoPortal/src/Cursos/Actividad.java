@@ -5,9 +5,9 @@
  */
 package Cursos;
 
-import Controladores.TactividadJpaController;
-import Controladores.TentregaJpaController;
-import Tablas.Tactividad;
+import Controladores.ActividadJpaController;
+import Controladores.EntregaJpaController;
+
 import java.util.ArrayList;
 
 /**
@@ -16,35 +16,45 @@ import java.util.ArrayList;
  */
 public abstract class Actividad {
 
-    protected ArrayList<Tactividad> actividades;
-    protected TactividadJpaController controladorA;
-    protected TentregaJpaController controladorE;
+    protected ArrayList<Tablas.Actividad> actividades;
+    
+   
+    protected ActividadJpaController controladorA;
+    protected EntregaJpaController controladorE;
     protected int idSeccionCurso;
     
     public abstract void visualizarActividad();
     
-
-    public ArrayList<Tactividad> getActividades() {
+    public Tablas.Actividad obtenerActividad(int i ){
+        for(Tablas.Actividad a:actividades){
+            if(a.getId()==i){
+                return a;
+            }
+            
+        }
+        return null;
+    }    
+    public ArrayList<Tablas.Actividad> getActividades() {
         return actividades;
     }
 
-    public void setActividades(ArrayList<Tactividad> actividades) {
+    public void setActividades(ArrayList<Tablas.Actividad> actividades) {
         this.actividades = actividades;
     }
 
-    public TactividadJpaController getControladorA() {
+    public ActividadJpaController getControladorA() {
         return controladorA;
     }
 
-    public void setControladorA(TactividadJpaController controladorA) {
+    public void setControladorA(ActividadJpaController controladorA) {
         this.controladorA = controladorA;
     }
 
-    public TentregaJpaController getControladorE() {
+    public EntregaJpaController getControladorE() {
         return controladorE;
     }
 
-    public void setControladorE(TentregaJpaController controladorE) {
+    public void setControladorE(EntregaJpaController controladorE) {
         this.controladorE = controladorE;
     }
 

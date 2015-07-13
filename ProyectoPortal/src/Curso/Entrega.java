@@ -5,7 +5,7 @@
  */
 package Curso;
 
-import Tablas.Tarchivos;
+import Tablas.Archivo;
 import java.awt.GraphicsConfiguration;
 import java.io.File;
 import java.io.FileReader;
@@ -25,7 +25,7 @@ public class Entrega extends javax.swing.JFrame {
      */
     public Entrega() {
         initComponents();
-        Archivos = new ArrayList<>();
+        Archivos = new ArrayList<Archivo>();
         modelo=new ModeloTablaArchivos(Archivos);
     }
   
@@ -33,12 +33,12 @@ public class Entrega extends javax.swing.JFrame {
     public Entrega(GraphicsConfiguration gc) {
         super(gc);
     }
-    ArrayList<Tarchivos> Archivos;
+    ArrayList<Archivo> Archivos;
     ModeloTablaArchivos modelo;
     
-    private Tarchivos abrirArchivo() {
+    private Archivo abrirArchivo() {
         String aux = "";
-        Tarchivos archivo= new Tarchivos();
+        Archivo archivo= new Archivo();
              /**
              * llamamos el metodo que permite cargar la ventana
              */
@@ -56,7 +56,7 @@ public class Entrega extends javax.swing.JFrame {
                 abre.getAbsolutePath();
                 String[] nombre=abre.getName().split("\\.");
                 archivo.setExtension(nombre[1]);
-                archivo.setTamaño(abre.length());
+                archivo.setTamanio(abre.length());
                 archivo.setNombre(nombre[0]);
                 archivo.setUrl(abre.getPath());
                 archivo.setFisico(false);
