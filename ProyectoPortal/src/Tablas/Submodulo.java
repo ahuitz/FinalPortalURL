@@ -25,10 +25,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Carreraasignacion.findAll", query = "SELECT c FROM Carreraasignacion c"),
-    @NamedQuery(name = "Carreraasignacion.findById", query = "SELECT c FROM Carreraasignacion c WHERE c.id = :id"),
-    @NamedQuery(name = "Carreraasignacion.findByCarreraid", query = "SELECT c FROM Carreraasignacion c WHERE c.carreraid = :carreraid")})
-public class Carreraasignacion implements Serializable {
+    @NamedQuery(name = "Submodulo.findAll", query = "SELECT s FROM Submodulo s"),
+    @NamedQuery(name = "Submodulo.findById", query = "SELECT s FROM Submodulo s WHERE s.id = :id"),
+    @NamedQuery(name = "Submodulo.findBySubModulo", query = "SELECT s FROM Submodulo s WHERE s.subModulo = :subModulo"),
+    @NamedQuery(name = "Submodulo.findByModuloid", query = "SELECT s FROM Submodulo s WHERE s.moduloid = :moduloid"),
+    @NamedQuery(name = "Submodulo.findByPermisoid", query = "SELECT s FROM Submodulo s WHERE s.permisoid = :permisoid")})
+public class Submodulo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,19 +38,27 @@ public class Carreraasignacion implements Serializable {
     @Column(nullable = false)
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "Carrera_id", nullable = false)
-    private int carreraid;
+    @Column(nullable = false, length = 60)
+    private String subModulo;
+    @Basic(optional = false)
+    @Column(name = "Modulo_id", nullable = false)
+    private int moduloid;
+    @Basic(optional = false)
+    @Column(name = "Permiso_id", nullable = false)
+    private int permisoid;
 
-    public Carreraasignacion() {
+    public Submodulo() {
     }
 
-    public Carreraasignacion(Integer id) {
+    public Submodulo(Integer id) {
         this.id = id;
     }
 
-    public Carreraasignacion(Integer id, int carreraid) {
+    public Submodulo(Integer id, String subModulo, int moduloid, int permisoid) {
         this.id = id;
-        this.carreraid = carreraid;
+        this.subModulo = subModulo;
+        this.moduloid = moduloid;
+        this.permisoid = permisoid;
     }
 
     public Integer getId() {
@@ -59,12 +69,28 @@ public class Carreraasignacion implements Serializable {
         this.id = id;
     }
 
-    public int getCarreraid() {
-        return carreraid;
+    public String getSubModulo() {
+        return subModulo;
     }
 
-    public void setCarreraid(int carreraid) {
-        this.carreraid = carreraid;
+    public void setSubModulo(String subModulo) {
+        this.subModulo = subModulo;
+    }
+
+    public int getModuloid() {
+        return moduloid;
+    }
+
+    public void setModuloid(int moduloid) {
+        this.moduloid = moduloid;
+    }
+
+    public int getPermisoid() {
+        return permisoid;
+    }
+
+    public void setPermisoid(int permisoid) {
+        this.permisoid = permisoid;
     }
 
     @Override
@@ -77,10 +103,10 @@ public class Carreraasignacion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Carreraasignacion)) {
+        if (!(object instanceof Submodulo)) {
             return false;
         }
-        Carreraasignacion other = (Carreraasignacion) object;
+        Submodulo other = (Submodulo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -89,7 +115,7 @@ public class Carreraasignacion implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Carreraasignacion[ id=" + id + " ]";
+        return "Tablas.Submodulo[ id=" + id + " ]";
     }
     
 }

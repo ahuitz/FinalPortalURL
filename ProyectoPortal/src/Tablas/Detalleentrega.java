@@ -6,6 +6,7 @@
 package Tablas;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,10 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Detalleentrega.findAll", query = "SELECT d FROM Detalleentrega d"),
     @NamedQuery(name = "Detalleentrega.findById", query = "SELECT d FROM Detalleentrega d WHERE d.id = :id"),
+    @NamedQuery(name = "Detalleentrega.findByFechaModificacion", query = "SELECT d FROM Detalleentrega d WHERE d.fechaModificacion = :fechaModificacion"),
     @NamedQuery(name = "Detalleentrega.findByArchivoid", query = "SELECT d FROM Detalleentrega d WHERE d.archivoid = :archivoid"),
-    @NamedQuery(name = "Detalleentrega.findByEntregaid", query = "SELECT d FROM Detalleentrega d WHERE d.entregaid = :entregaid"),
-    @NamedQuery(name = "Detalleentrega.findByEntregada", query = "SELECT d FROM Detalleentrega d WHERE d.entregada = :entregada"),
-    @NamedQuery(name = "Detalleentrega.findByNoEntregada", query = "SELECT d FROM Detalleentrega d WHERE d.noEntregada = :noEntregada")})
+    @NamedQuery(name = "Detalleentrega.findByEntregaid", query = "SELECT d FROM Detalleentrega d WHERE d.entregaid = :entregaid")})
 public class Detalleentrega implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,17 +41,15 @@ public class Detalleentrega implements Serializable {
     @Column(nullable = false)
     private Integer id;
     @Basic(optional = false)
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaModificacion;
+    @Basic(optional = false)
     @Column(name = "Archivo_id", nullable = false)
     private int archivoid;
     @Basic(optional = false)
     @Column(name = "Entrega_id", nullable = false)
     private int entregaid;
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private boolean entregada;
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private boolean noEntregada;
 
     public Detalleentrega() {
     }
@@ -58,12 +58,11 @@ public class Detalleentrega implements Serializable {
         this.id = id;
     }
 
-    public Detalleentrega(Integer id, int archivoid, int entregaid, boolean entregada, boolean noEntregada) {
+    public Detalleentrega(Integer id, Date fechaModificacion, int archivoid, int entregaid) {
         this.id = id;
+        this.fechaModificacion = fechaModificacion;
         this.archivoid = archivoid;
         this.entregaid = entregaid;
-        this.entregada = entregada;
-        this.noEntregada = noEntregada;
     }
 
     public Integer getId() {
@@ -72,6 +71,14 @@ public class Detalleentrega implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Date getFechaModificacion() {
+        return fechaModificacion;
+    }
+
+    public void setFechaModificacion(Date fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
     }
 
     public int getArchivoid() {
@@ -88,22 +95,6 @@ public class Detalleentrega implements Serializable {
 
     public void setEntregaid(int entregaid) {
         this.entregaid = entregaid;
-    }
-
-    public boolean getEntregada() {
-        return entregada;
-    }
-
-    public void setEntregada(boolean entregada) {
-        this.entregada = entregada;
-    }
-
-    public boolean getNoEntregada() {
-        return noEntregada;
-    }
-
-    public void setNoEntregada(boolean noEntregada) {
-        this.noEntregada = noEntregada;
     }
 
     @Override
@@ -128,7 +119,7 @@ public class Detalleentrega implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Detalleentrega[ id=" + id + " ]";
+        return "Tablas.Detalleentrega[ id=" + id + " ]";
     }
     
 }

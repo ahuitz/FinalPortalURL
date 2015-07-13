@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Ciclo.findAll", query = "SELECT c FROM Ciclo c"),
     @NamedQuery(name = "Ciclo.findById", query = "SELECT c FROM Ciclo c WHERE c.id = :id"),
-    @NamedQuery(name = "Ciclo.findByDescripcion", query = "SELECT c FROM Ciclo c WHERE c.descripcion = :descripcion")})
+    @NamedQuery(name = "Ciclo.findByCiclo", query = "SELECT c FROM Ciclo c WHERE c.ciclo = :ciclo")})
 public class Ciclo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,8 +36,8 @@ public class Ciclo implements Serializable {
     @Column(nullable = false)
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 45)
-    private String descripcion;
+    @Column(nullable = false, length = 15)
+    private String ciclo;
 
     public Ciclo() {
     }
@@ -46,9 +46,9 @@ public class Ciclo implements Serializable {
         this.id = id;
     }
 
-    public Ciclo(Integer id, String descripcion) {
+    public Ciclo(Integer id, String ciclo) {
         this.id = id;
-        this.descripcion = descripcion;
+        this.ciclo = ciclo;
     }
 
     public Integer getId() {
@@ -59,12 +59,12 @@ public class Ciclo implements Serializable {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getCiclo() {
+        return ciclo;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setCiclo(String ciclo) {
+        this.ciclo = ciclo;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class Ciclo implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Ciclo[ id=" + id + " ]";
+        return "Tablas.Ciclo[ id=" + id + " ]";
     }
     
 }

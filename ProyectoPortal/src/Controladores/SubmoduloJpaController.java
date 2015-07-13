@@ -6,7 +6,7 @@
 package Controladores;
 
 import Controladores.exceptions.NonexistentEntityException;
-import Tablas.CursoHasCiclo;
+import Tablas.Submodulo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,9 +20,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Rosario
  */
-public class CursoHasCicloJpaController implements Serializable {
+public class SubmoduloJpaController implements Serializable {
 
-    public CursoHasCicloJpaController(EntityManagerFactory emf) {
+    public SubmoduloJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,12 +31,12 @@ public class CursoHasCicloJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(CursoHasCiclo cursoHasCiclo) {
+    public void create(Submodulo submodulo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(cursoHasCiclo);
+            em.persist(submodulo);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,19 +45,19 @@ public class CursoHasCicloJpaController implements Serializable {
         }
     }
 
-    public void edit(CursoHasCiclo cursoHasCiclo) throws NonexistentEntityException, Exception {
+    public void edit(Submodulo submodulo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            cursoHasCiclo = em.merge(cursoHasCiclo);
+            submodulo = em.merge(submodulo);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = cursoHasCiclo.getId();
-                if (findCursoHasCiclo(id) == null) {
-                    throw new NonexistentEntityException("The cursoHasCiclo with id " + id + " no longer exists.");
+                Integer id = submodulo.getId();
+                if (findSubmodulo(id) == null) {
+                    throw new NonexistentEntityException("The submodulo with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,14 +73,14 @@ public class CursoHasCicloJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            CursoHasCiclo cursoHasCiclo;
+            Submodulo submodulo;
             try {
-                cursoHasCiclo = em.getReference(CursoHasCiclo.class, id);
-                cursoHasCiclo.getId();
+                submodulo = em.getReference(Submodulo.class, id);
+                submodulo.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The cursoHasCiclo with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The submodulo with id " + id + " no longer exists.", enfe);
             }
-            em.remove(cursoHasCiclo);
+            em.remove(submodulo);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -89,19 +89,19 @@ public class CursoHasCicloJpaController implements Serializable {
         }
     }
 
-    public List<CursoHasCiclo> findCursoHasCicloEntities() {
-        return findCursoHasCicloEntities(true, -1, -1);
+    public List<Submodulo> findSubmoduloEntities() {
+        return findSubmoduloEntities(true, -1, -1);
     }
 
-    public List<CursoHasCiclo> findCursoHasCicloEntities(int maxResults, int firstResult) {
-        return findCursoHasCicloEntities(false, maxResults, firstResult);
+    public List<Submodulo> findSubmoduloEntities(int maxResults, int firstResult) {
+        return findSubmoduloEntities(false, maxResults, firstResult);
     }
 
-    private List<CursoHasCiclo> findCursoHasCicloEntities(boolean all, int maxResults, int firstResult) {
+    private List<Submodulo> findSubmoduloEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(CursoHasCiclo.class));
+            cq.select(cq.from(Submodulo.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,20 +113,20 @@ public class CursoHasCicloJpaController implements Serializable {
         }
     }
 
-    public CursoHasCiclo findCursoHasCiclo(Integer id) {
+    public Submodulo findSubmodulo(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(CursoHasCiclo.class, id);
+            return em.find(Submodulo.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getCursoHasCicloCount() {
+    public int getSubmoduloCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<CursoHasCiclo> rt = cq.from(CursoHasCiclo.class);
+            Root<Submodulo> rt = cq.from(Submodulo.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

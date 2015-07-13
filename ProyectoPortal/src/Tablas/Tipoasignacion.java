@@ -97,7 +97,7 @@ public class Tipoasignacion implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Tipoasignacion[ id=" + id + " ]";
+        return "Tablas.Tipoasignacion[ id=" + id + " ]";
     }
     
 }

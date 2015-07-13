@@ -28,9 +28,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Seccioncurso.findAll", query = "SELECT s FROM Seccioncurso s"),
     @NamedQuery(name = "Seccioncurso.findById", query = "SELECT s FROM Seccioncurso s WHERE s.id = :id"),
     @NamedQuery(name = "Seccioncurso.findByCupo", query = "SELECT s FROM Seccioncurso s WHERE s.cupo = :cupo"),
-    @NamedQuery(name = "Seccioncurso.findByAula", query = "SELECT s FROM Seccioncurso s WHERE s.aula = :aula"),
+    @NamedQuery(name = "Seccioncurso.findByDisponibles", query = "SELECT s FROM Seccioncurso s WHERE s.disponibles = :disponibles"),
     @NamedQuery(name = "Seccioncurso.findBySeccionid", query = "SELECT s FROM Seccioncurso s WHERE s.seccionid = :seccionid"),
-    @NamedQuery(name = "Seccioncurso.findByCursoCarreraid", query = "SELECT s FROM Seccioncurso s WHERE s.cursoCarreraid = :cursoCarreraid")})
+    @NamedQuery(name = "Seccioncurso.findByCursoCarreraid", query = "SELECT s FROM Seccioncurso s WHERE s.cursoCarreraid = :cursoCarreraid"),
+    @NamedQuery(name = "Seccioncurso.findByUsuarioCatedraticoid", query = "SELECT s FROM Seccioncurso s WHERE s.usuarioCatedraticoid = :usuarioCatedraticoid")})
 public class Seccioncurso implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,14 +42,18 @@ public class Seccioncurso implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false)
     private int cupo;
-    @Column(length = 45)
-    private String aula;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private int disponibles;
     @Basic(optional = false)
     @Column(name = "Seccion_id", nullable = false)
     private int seccionid;
     @Basic(optional = false)
     @Column(name = "CursoCarrera_id", nullable = false)
     private int cursoCarreraid;
+    @Basic(optional = false)
+    @Column(name = "UsuarioCatedratico_id", nullable = false)
+    private int usuarioCatedraticoid;
 
     public Seccioncurso() {
     }
@@ -57,11 +62,13 @@ public class Seccioncurso implements Serializable {
         this.id = id;
     }
 
-    public Seccioncurso(Integer id, int cupo, int seccionid, int cursoCarreraid) {
+    public Seccioncurso(Integer id, int cupo, int disponibles, int seccionid, int cursoCarreraid, int usuarioCatedraticoid) {
         this.id = id;
         this.cupo = cupo;
+        this.disponibles = disponibles;
         this.seccionid = seccionid;
         this.cursoCarreraid = cursoCarreraid;
+        this.usuarioCatedraticoid = usuarioCatedraticoid;
     }
 
     public Integer getId() {
@@ -80,12 +87,12 @@ public class Seccioncurso implements Serializable {
         this.cupo = cupo;
     }
 
-    public String getAula() {
-        return aula;
+    public int getDisponibles() {
+        return disponibles;
     }
 
-    public void setAula(String aula) {
-        this.aula = aula;
+    public void setDisponibles(int disponibles) {
+        this.disponibles = disponibles;
     }
 
     public int getSeccionid() {
@@ -102,6 +109,14 @@ public class Seccioncurso implements Serializable {
 
     public void setCursoCarreraid(int cursoCarreraid) {
         this.cursoCarreraid = cursoCarreraid;
+    }
+
+    public int getUsuarioCatedraticoid() {
+        return usuarioCatedraticoid;
+    }
+
+    public void setUsuarioCatedraticoid(int usuarioCatedraticoid) {
+        this.usuarioCatedraticoid = usuarioCatedraticoid;
     }
 
     @Override
@@ -126,7 +141,7 @@ public class Seccioncurso implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Seccioncurso[ id=" + id + " ]";
+        return "Tablas.Seccioncurso[ id=" + id + " ]";
     }
     
 }

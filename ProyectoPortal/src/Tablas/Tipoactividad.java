@@ -89,7 +89,7 @@ public class Tipoactividad implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Tipoactividad[ id=" + id + " ]";
+        return "Tablas.Tipoactividad[ id=" + id + " ]";
     }
     
 }

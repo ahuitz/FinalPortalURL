@@ -6,7 +6,6 @@
 package Tablas;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -28,12 +25,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Asignado.findAll", query = "SELECT a FROM Asignado a"),
-    @NamedQuery(name = "Asignado.findById", query = "SELECT a FROM Asignado a WHERE a.id = :id"),
-    @NamedQuery(name = "Asignado.findBySeccionCursoid", query = "SELECT a FROM Asignado a WHERE a.seccionCursoid = :seccionCursoid"),
-    @NamedQuery(name = "Asignado.findByUsuarioid", query = "SELECT a FROM Asignado a WHERE a.usuarioid = :usuarioid"),
-    @NamedQuery(name = "Asignado.findByFechaAsignacion", query = "SELECT a FROM Asignado a WHERE a.fechaAsignacion = :fechaAsignacion")})
-public class Asignado implements Serializable {
+    @NamedQuery(name = "Asignacion.findAll", query = "SELECT a FROM Asignacion a"),
+    @NamedQuery(name = "Asignacion.findById", query = "SELECT a FROM Asignacion a WHERE a.id = :id"),
+    @NamedQuery(name = "Asignacion.findBySeccionCursoid", query = "SELECT a FROM Asignacion a WHERE a.seccionCursoid = :seccionCursoid"),
+    @NamedQuery(name = "Asignacion.findByEstudianteSeccionid", query = "SELECT a FROM Asignacion a WHERE a.estudianteSeccionid = :estudianteSeccionid"),
+    @NamedQuery(name = "Asignacion.findByDescripcion", query = "SELECT a FROM Asignacion a WHERE a.descripcion = :descripcion")})
+public class Asignacion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,25 +41,24 @@ public class Asignado implements Serializable {
     @Column(name = "SeccionCurso_id", nullable = false)
     private int seccionCursoid;
     @Basic(optional = false)
-    @Column(name = "Usuario_id", nullable = false)
-    private int usuarioid;
+    @Column(name = "EstudianteSeccion_id", nullable = false)
+    private int estudianteSeccionid;
     @Basic(optional = false)
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaAsignacion;
+    @Column(nullable = false, length = 45)
+    private String descripcion;
 
-    public Asignado() {
+    public Asignacion() {
     }
 
-    public Asignado(Integer id) {
+    public Asignacion(Integer id) {
         this.id = id;
     }
 
-    public Asignado(Integer id, int seccionCursoid, int usuarioid, Date fechaAsignacion) {
+    public Asignacion(Integer id, int seccionCursoid, int estudianteSeccionid, String descripcion) {
         this.id = id;
         this.seccionCursoid = seccionCursoid;
-        this.usuarioid = usuarioid;
-        this.fechaAsignacion = fechaAsignacion;
+        this.estudianteSeccionid = estudianteSeccionid;
+        this.descripcion = descripcion;
     }
 
     public Integer getId() {
@@ -81,20 +77,20 @@ public class Asignado implements Serializable {
         this.seccionCursoid = seccionCursoid;
     }
 
-    public int getUsuarioid() {
-        return usuarioid;
+    public int getEstudianteSeccionid() {
+        return estudianteSeccionid;
     }
 
-    public void setUsuarioid(int usuarioid) {
-        this.usuarioid = usuarioid;
+    public void setEstudianteSeccionid(int estudianteSeccionid) {
+        this.estudianteSeccionid = estudianteSeccionid;
     }
 
-    public Date getFechaAsignacion() {
-        return fechaAsignacion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setFechaAsignacion(Date fechaAsignacion) {
-        this.fechaAsignacion = fechaAsignacion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     @Override
@@ -107,10 +103,10 @@ public class Asignado implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Asignado)) {
+        if (!(object instanceof Asignacion)) {
             return false;
         }
-        Asignado other = (Asignado) object;
+        Asignacion other = (Asignacion) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -119,7 +115,7 @@ public class Asignado implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Asignado[ id=" + id + " ]";
+        return "Tablas.Asignacion[ id=" + id + " ]";
     }
     
 }

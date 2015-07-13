@@ -89,7 +89,7 @@ public class Tiposangre implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Tiposangre[ id=" + id + " ]";
+        return "Tablas.Tiposangre[ id=" + id + " ]";
     }
     
 }

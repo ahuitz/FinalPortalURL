@@ -6,7 +6,7 @@
 package Controladores;
 
 import Controladores.exceptions.NonexistentEntityException;
-import Tablas.Carreraasignacion;
+import Tablas.Modulo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,9 +20,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Rosario
  */
-public class CarreraasignacionJpaController implements Serializable {
+public class ModuloJpaController implements Serializable {
 
-    public CarreraasignacionJpaController(EntityManagerFactory emf) {
+    public ModuloJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,12 +31,12 @@ public class CarreraasignacionJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Carreraasignacion carreraasignacion) {
+    public void create(Modulo modulo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(carreraasignacion);
+            em.persist(modulo);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,19 +45,19 @@ public class CarreraasignacionJpaController implements Serializable {
         }
     }
 
-    public void edit(Carreraasignacion carreraasignacion) throws NonexistentEntityException, Exception {
+    public void edit(Modulo modulo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            carreraasignacion = em.merge(carreraasignacion);
+            modulo = em.merge(modulo);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = carreraasignacion.getId();
-                if (findCarreraasignacion(id) == null) {
-                    throw new NonexistentEntityException("The carreraasignacion with id " + id + " no longer exists.");
+                Integer id = modulo.getId();
+                if (findModulo(id) == null) {
+                    throw new NonexistentEntityException("The modulo with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,14 +73,14 @@ public class CarreraasignacionJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Carreraasignacion carreraasignacion;
+            Modulo modulo;
             try {
-                carreraasignacion = em.getReference(Carreraasignacion.class, id);
-                carreraasignacion.getId();
+                modulo = em.getReference(Modulo.class, id);
+                modulo.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The carreraasignacion with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The modulo with id " + id + " no longer exists.", enfe);
             }
-            em.remove(carreraasignacion);
+            em.remove(modulo);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -89,19 +89,19 @@ public class CarreraasignacionJpaController implements Serializable {
         }
     }
 
-    public List<Carreraasignacion> findCarreraasignacionEntities() {
-        return findCarreraasignacionEntities(true, -1, -1);
+    public List<Modulo> findModuloEntities() {
+        return findModuloEntities(true, -1, -1);
     }
 
-    public List<Carreraasignacion> findCarreraasignacionEntities(int maxResults, int firstResult) {
-        return findCarreraasignacionEntities(false, maxResults, firstResult);
+    public List<Modulo> findModuloEntities(int maxResults, int firstResult) {
+        return findModuloEntities(false, maxResults, firstResult);
     }
 
-    private List<Carreraasignacion> findCarreraasignacionEntities(boolean all, int maxResults, int firstResult) {
+    private List<Modulo> findModuloEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Carreraasignacion.class));
+            cq.select(cq.from(Modulo.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,20 +113,20 @@ public class CarreraasignacionJpaController implements Serializable {
         }
     }
 
-    public Carreraasignacion findCarreraasignacion(Integer id) {
+    public Modulo findModulo(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Carreraasignacion.class, id);
+            return em.find(Modulo.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getCarreraasignacionCount() {
+    public int getModuloCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Carreraasignacion> rt = cq.from(Carreraasignacion.class);
+            Root<Modulo> rt = cq.from(Modulo.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

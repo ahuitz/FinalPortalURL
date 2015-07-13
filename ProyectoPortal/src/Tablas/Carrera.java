@@ -27,8 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Carrera.findAll", query = "SELECT c FROM Carrera c"),
     @NamedQuery(name = "Carrera.findById", query = "SELECT c FROM Carrera c WHERE c.id = :id"),
-    @NamedQuery(name = "Carrera.findByFacultadid", query = "SELECT c FROM Carrera c WHERE c.facultadid = :facultadid"),
-    @NamedQuery(name = "Carrera.findByCarrera", query = "SELECT c FROM Carrera c WHERE c.carrera = :carrera")})
+    @NamedQuery(name = "Carrera.findByCarrera", query = "SELECT c FROM Carrera c WHERE c.carrera = :carrera"),
+    @NamedQuery(name = "Carrera.findByFacultadid", query = "SELECT c FROM Carrera c WHERE c.facultadid = :facultadid")})
 public class Carrera implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,11 +37,11 @@ public class Carrera implements Serializable {
     @Column(nullable = false)
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "Facultad_id", nullable = false)
-    private int facultadid;
-    @Basic(optional = false)
     @Column(nullable = false, length = 45)
     private String carrera;
+    @Basic(optional = false)
+    @Column(name = "Facultad_id", nullable = false)
+    private int facultadid;
 
     public Carrera() {
     }
@@ -50,10 +50,10 @@ public class Carrera implements Serializable {
         this.id = id;
     }
 
-    public Carrera(Integer id, int facultadid, String carrera) {
+    public Carrera(Integer id, String carrera, int facultadid) {
         this.id = id;
-        this.facultadid = facultadid;
         this.carrera = carrera;
+        this.facultadid = facultadid;
     }
 
     public Integer getId() {
@@ -64,20 +64,20 @@ public class Carrera implements Serializable {
         this.id = id;
     }
 
-    public int getFacultadid() {
-        return facultadid;
-    }
-
-    public void setFacultadid(int facultadid) {
-        this.facultadid = facultadid;
-    }
-
     public String getCarrera() {
         return carrera;
     }
 
     public void setCarrera(String carrera) {
         this.carrera = carrera;
+    }
+
+    public int getFacultadid() {
+        return facultadid;
+    }
+
+    public void setFacultadid(int facultadid) {
+        this.facultadid = facultadid;
     }
 
     @Override
@@ -102,7 +102,7 @@ public class Carrera implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Carrera[ id=" + id + " ]";
+        return "Tablas.Carrera[ id=" + id + " ]";
     }
     
 }

@@ -102,7 +102,7 @@ public class Rolusuario implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Rolusuario[ id=" + id + " ]";
+        return "Tablas.Rolusuario[ id=" + id + " ]";
     }
     
 }

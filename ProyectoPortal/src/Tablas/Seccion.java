@@ -27,8 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Seccion.findAll", query = "SELECT s FROM Seccion s"),
     @NamedQuery(name = "Seccion.findById", query = "SELECT s FROM Seccion s WHERE s.id = :id"),
-    @NamedQuery(name = "Seccion.findByCursoid", query = "SELECT s FROM Seccion s WHERE s.cursoid = :cursoid"),
-    @NamedQuery(name = "Seccion.findBySeccion", query = "SELECT s FROM Seccion s WHERE s.seccion = :seccion")})
+    @NamedQuery(name = "Seccion.findByDescripcion", query = "SELECT s FROM Seccion s WHERE s.descripcion = :descripcion")})
 public class Seccion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,11 +36,8 @@ public class Seccion implements Serializable {
     @Column(nullable = false)
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "Curso_id", nullable = false)
-    private int cursoid;
-    @Basic(optional = false)
-    @Column(nullable = false, length = 45)
-    private String seccion;
+    @Column(nullable = false, length = 15)
+    private String descripcion;
 
     public Seccion() {
     }
@@ -50,10 +46,9 @@ public class Seccion implements Serializable {
         this.id = id;
     }
 
-    public Seccion(Integer id, int cursoid, String seccion) {
+    public Seccion(Integer id, String descripcion) {
         this.id = id;
-        this.cursoid = cursoid;
-        this.seccion = seccion;
+        this.descripcion = descripcion;
     }
 
     public Integer getId() {
@@ -64,20 +59,12 @@ public class Seccion implements Serializable {
         this.id = id;
     }
 
-    public int getCursoid() {
-        return cursoid;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setCursoid(int cursoid) {
-        this.cursoid = cursoid;
-    }
-
-    public String getSeccion() {
-        return seccion;
-    }
-
-    public void setSeccion(String seccion) {
-        this.seccion = seccion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     @Override
@@ -102,7 +89,7 @@ public class Seccion implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Seccion[ id=" + id + " ]";
+        return "Tablas.Seccion[ id=" + id + " ]";
     }
     
 }

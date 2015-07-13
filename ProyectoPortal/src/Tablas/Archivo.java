@@ -30,9 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Archivo.findByNombre", query = "SELECT a FROM Archivo a WHERE a.nombre = :nombre"),
     @NamedQuery(name = "Archivo.findByExtension", query = "SELECT a FROM Archivo a WHERE a.extension = :extension"),
     @NamedQuery(name = "Archivo.findByUrl", query = "SELECT a FROM Archivo a WHERE a.url = :url"),
-    @NamedQuery(name = "Archivo.findByTamanio", query = "SELECT a FROM Archivo a WHERE a.tamanio = :tamanio"),
-    @NamedQuery(name = "Archivo.findByFisico", query = "SELECT a FROM Archivo a WHERE a.fisico = :fisico"),
-    @NamedQuery(name = "Archivo.findByVirtual", query = "SELECT a FROM Archivo a WHERE a.virtual = :virtual")})
+    @NamedQuery(name = "Archivo.findByTamanio", query = "SELECT a FROM Archivo a WHERE a.tamanio = :tamanio")})
 public class Archivo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,8 +50,6 @@ public class Archivo implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false)
     private double tamanio;
-    private Boolean fisico;
-    private Boolean virtual;
 
     public Archivo() {
     }
@@ -110,22 +106,6 @@ public class Archivo implements Serializable {
         this.tamanio = tamanio;
     }
 
-    public Boolean getFisico() {
-        return fisico;
-    }
-
-    public void setFisico(Boolean fisico) {
-        this.fisico = fisico;
-    }
-
-    public Boolean getVirtual() {
-        return virtual;
-    }
-
-    public void setVirtual(Boolean virtual) {
-        this.virtual = virtual;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -148,7 +128,7 @@ public class Archivo implements Serializable {
 
     @Override
     public String toString() {
-        return "FormUsuario.Archivo[ id=" + id + " ]";
+        return "Tablas.Archivo[ id=" + id + " ]";
     }
     
 }
