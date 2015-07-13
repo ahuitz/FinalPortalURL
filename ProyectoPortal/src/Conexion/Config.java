@@ -39,7 +39,9 @@ public class Config implements ConexionBasica {
     
     @Override
     public void Close() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.Pass=null;
+        this.User=null;
+        this.instancia=null;
     }
     
 }
