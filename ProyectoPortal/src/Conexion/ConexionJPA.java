@@ -51,7 +51,10 @@ public class ConexionJPA implements ConexionBasica{
     
     @Override
     public void Close() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.em=null;
+        this.emf=null;
+        this.prop= null;
+        this.instancia=null;
     }
     
 }
