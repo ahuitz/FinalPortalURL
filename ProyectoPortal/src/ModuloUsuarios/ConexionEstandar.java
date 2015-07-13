@@ -22,7 +22,7 @@ public class ConexionEstandar implements ConexionBasica{
     private static ConexionEstandar instancia;
     
     private ConexionEstandar(String user,String pass) {
-        String servidor = "jdbc:mysql://localhost/pruebaspro";  
+        String servidor = "jdbc:mysql://localhost/permisosus";  
         try {
             BDconexion= DriverManager.getConnection(servidor,user,pass);
             System.out.println("conexion realizada");
