@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cursos.administrador;
+package Administracion.cursos;
 
-import javax.persistence.EntityManagerFactory;
 /**
  *
  * @author Cristian
  */
-public interface Consulta {
+public class Administracion {
     
-    public void instruccion(EntityManagerFactory efm);
     
 }
