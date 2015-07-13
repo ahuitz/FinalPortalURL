@@ -47,7 +47,9 @@ public class ConexionEstandar implements ConexionBasica{
     
     @Override
     public void Close() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.BDconexion=null;
+        this.instancia=null;
+                
     }
     
   
