@@ -9,8 +9,13 @@ import Conexion.Config;
 import Controladores.PersonaJpaController;
 import Controladores.UsuarioJpaController;
 import Tablas.Persona;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 /**
  *
@@ -38,7 +43,30 @@ public class DualController implements Controlador{
     
     @Override
     public void Create(Persona persona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+     
+        Query id= em.createNativeQuery("Select (Max(id)+1) from persona;");
+        System.out.println(id.getSingleResult().toString());
+        String num=id.getSingleResult().toString();
+        
+      
+      
+        try {
+            com.mysql.jdbc.Statement statement;
+            statement = (com.mysql.jdbc.Statement) mysql.getBDconexion().createStatement();
+            statement.execute("create user '"+num+"15'@'localhost' identified by '2015';"); 
+            statement.execute("GRANT ALL PRIVILEGES ON * . * TO '"+num+"15'@'localhost';");
+            System.out.println("Datos ingresados correctamente");          
+            statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DualController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+        //persona.setCarne(""+Siglas+""+num+"15");
+        controladorpersona.create(persona);
+       
     }
+    
+    
     
 }
