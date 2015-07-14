@@ -11,4 +11,8 @@ package ModuloUsuarios;
  */
 public class CreadorPersona {
     private TipoPersona persona;
+    
+    public void crearpersona(){
+        this.persona.crear();
+    }
 }
