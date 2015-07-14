@@ -165,7 +165,7 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
                 if(conexion!=null){
                     Persona info = new Persona();
                     Query obtener= conexion.getEm().createNamedQuery("Persona.findByCarne");
-                    obtener.setParameter("carne",configuracion.getUser());
+                    obtener.setParameter("carne",configuracion.getCarne());
                     info=(Persona)obtener.getSingleResult();
                     txNombre.setText(info.getNombre());
                     txApellido.setText(info.getApellido());
