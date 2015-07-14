@@ -29,14 +29,15 @@ public class DualController implements Controlador{
     private EntityManagerFactory emf;
     private Config configuracion;
     private ConexionEstandar mysql;
-
-    public DualController(EntityManagerFactory emf, Config configuracion) {
+    private String TipoEst;
+    public DualController(EntityManagerFactory emf, Config configuracion,String TipoEst) {
         this.emf = emf;
         this.configuracion = configuracion;
         this.mysql = ConexionEstandar.getInstace(configuracion.getUser(), configuracion.getPass());
         this.em=emf.createEntityManager();
         this.controladorpersona=new PersonaJpaController(emf);
         this.controladorusuario= new UsuarioJpaController(emf);
+        this.TipoEst=TipoEst;
     }
     
     
@@ -54,7 +55,7 @@ public class DualController implements Controlador{
         try {
             com.mysql.jdbc.Statement statement;
             statement = (com.mysql.jdbc.Statement) mysql.getBDconexion().createStatement();
-            statement.execute("create user '"+num+"15'@'localhost' identified by '2015';"); 
+            statement.execute("create user '"+TipoEst+num+"15'@'localhost' identified by 'a.2015';"); 
             statement.execute("GRANT ALL PRIVILEGES ON * . * TO '"+num+"15'@'localhost';");
             System.out.println("Datos ingresados correctamente");          
             statement.close();
@@ -62,7 +63,7 @@ public class DualController implements Controlador{
             Logger.getLogger(DualController.class.getName()).log(Level.SEVERE, null, ex);
         }
           
-        //persona.setCarne(""+Siglas+""+num+"15");
+        persona.setCarne(num+"15");
         controladorpersona.create(persona);
        
     }
