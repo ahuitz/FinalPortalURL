@@ -5,6 +5,8 @@
  */
 package Curso;
 
+import Forms.Curso.NuevaActividad;
+
 /**
  *
  * @author Diaz
