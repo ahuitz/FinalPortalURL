@@ -144,8 +144,8 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    ConexionJPA conexion;
-    Config configuracion;
+    public ConexionJPA conexion;
+    public Config configuracion;
     private String Usuario ;
     private String Contraseña;
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
