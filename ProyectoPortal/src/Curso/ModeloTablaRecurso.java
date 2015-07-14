@@ -7,7 +7,7 @@ package Curso;
 
 import javax.swing.table.AbstractTableModel;
 import Tablas.Recurso;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 /**

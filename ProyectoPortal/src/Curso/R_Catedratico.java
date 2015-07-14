@@ -8,7 +8,7 @@ package Curso;
 import Controladores.ArchivoJpaController;
 import Controladores.RecursoJpaController;
 import Tablas.Recurso;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 
 /**
@@ -23,7 +23,7 @@ public class R_Catedratico extends CRecurso {
         this.emf=emf;
         this.controladorR = new RecursoJpaController(this.emf);
         this.controladorA = new ArchivoJpaController(this.emf);
-        this.recursos = (ArrayList<Recurso>) controladorR.findRecursoEntities();
+        this.recursos = controladorR.findRecursoEntities();
         this.idSeccionCurso=idSC;
     }
 
@@ -44,7 +44,7 @@ public class R_Catedratico extends CRecurso {
     }
     
     @Override
-    public ArrayList<Recurso> visualizar() {
+    public List<Recurso> visualizar() {
         return recursos;
     }
     

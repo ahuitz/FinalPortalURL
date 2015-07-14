@@ -7,7 +7,7 @@ package Curso;
 
 import Controladores.RecursoJpaController;
 import Tablas.Recurso;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 
 /**
@@ -19,12 +19,12 @@ public class R_Estudiante extends CRecurso {
     public R_Estudiante(EntityManagerFactory emf, int idSC) {
         this.emf=emf;
         this.controladorR = new RecursoJpaController(this.emf);
-        this.recursos = (ArrayList<Recurso>) controladorR.findRecursoEntities();
+        this.recursos = controladorR.findRecursoEntities();
         this.idSeccionCurso=idSC;
     }
 
     @Override
-    public ArrayList<Recurso> visualizar() {
+    public List<Recurso> visualizar() {
         return recursos;
     }
 

@@ -7,7 +7,6 @@ package Curso;
 
 import Controladores.RecursoJpaController;
 import Tablas.Recurso;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 
@@ -18,7 +17,7 @@ import javax.persistence.EntityManagerFactory;
 public abstract class CRecurso {
     protected EntityManagerFactory emf;
     protected RecursoJpaController controladorR;
-    protected ArrayList<Recurso> recursos;
+    protected List<Recurso> recursos;
     protected int idSeccionCurso;
     
     public RecursoJpaController getControladorR() {
@@ -33,7 +32,7 @@ public abstract class CRecurso {
         return recursos;
     }
 
-    public void setRecursos(ArrayList<Recurso> recursos) {
+    public void setRecursos(List<Recurso> recursos) {
         this.recursos = recursos;
     }
 
@@ -49,5 +48,5 @@ public abstract class CRecurso {
         this.emf = emf;
     }
     
-    public abstract ArrayList<Recurso> visualizar();
+    public abstract List<Recurso> visualizar();
 }
