@@ -34,7 +34,7 @@ public class ConexionJPA implements ConexionBasica{
         prop.put("javax.persistence.jdbc.password", pass);
         prop.put("javax.persistence.jdbc.user", user);
         
-       emf= Persistence.createEntityManagerFactory("ModuloUsuarioPU",prop);
+       emf= Persistence.createEntityManagerFactory("PortalJPA",prop);
        em = emf.createEntityManager();
     }
 
