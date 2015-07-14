@@ -10,7 +10,7 @@ package ModuloUsuarios;
  * @author Vader33
  */
 public class ADM  implements TipoPersona{
-
+    private String siglas="ADM";
     @Override
     public void crear() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
