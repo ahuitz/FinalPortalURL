@@ -27,6 +27,7 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
     private void arranque(){
         tableModel();
         cargarTabla();
+        
     }
         private DefaultTableModel model;
     public void tableModel(){
@@ -48,9 +49,25 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
        
         List<Persona> lista = qu.getResultList();
         for(Persona personaList : lista){
-            model.addRow(new Object[]{
-            personaList.getCarne(), personaList.getNombre()+" "+ personaList.getApellido(), personaList.getEstado()});
+            if (personaList.getEstado()!=false) {
+                model.addRow(new Object[]{
+                personaList.getCarne(), personaList.getNombre()+" "+ personaList.getApellido(), personaList.getEstado()});
+            }
+            
         }
+    }
+    public void buscarUs(String nombre){
+        EntityManager em = FormularioUsuarios1.conexion.getEm();
+        String q="Persona.findByNombre";
+        Query qu = em.createNamedQuery(q);
+        qu.setParameter("nombre", nombre);
+       List<Persona> lista = qu.getResultList();
+        for(Persona personaList : lista){
+             model.addRow(new Object[]{
+             personaList.getCarne(), personaList.getNombre()+" "+ personaList.getApellido(), personaList.getEstado()});
+        }
+        
+    
     }
     
     /**
@@ -75,7 +92,6 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
 
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        jButton1.setLabel("");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -134,16 +150,22 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "CARNE", "NOMBRE", "ESTADO"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -171,8 +193,6 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Comfortaa", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 153));
         jLabel1.setText("Visualice la informacion de todas las personas registradas en el sistema . . . ");
-
-        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,6 +247,13 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        tableModel();
+        
+        
+    }//GEN-LAST:event_jTextField1KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
