@@ -5,8 +5,8 @@
  */
 package Forms;
 import javax.swing.table.TableModel;
-import Controladores.TpersonaJpaController;
-import Tablas.Tpersona;
+import Controladores.PersonaJpaController;
+import Tablas.Persona;
 import Curso.ModeloTablaArchivos;
 import cursos.ModeloTablaEstudiante;
 import java.util.ArrayList;
@@ -19,18 +19,18 @@ import java.util.ArrayList;
 public class Estudiantes extends javax.swing.JInternalFrame {
 
     private static Estudiantes est = null;
-    TpersonaJpaController controladorE;
+    PersonaJpaController controladorE;
 
     /**
      * Creates new form Estudiantes
      */
-    private Estudiantes(TpersonaJpaController estu) {
+    private Estudiantes(PersonaJpaController estu) {
         initComponents();
         controladorE=estu;
-        jTable1.setModel(new ModeloTablaEstudiante((ArrayList<Tpersona>) controladorE.findTpersonaEntities()));
+        jTable1.setModel(new ModeloTablaEstudiante((ArrayList<Persona>) controladorE.findPersonaEntities()));
     }
 
-    public static Estudiantes getEst(TpersonaJpaController estu) {
+    public static Estudiantes getEst(PersonaJpaController estu) {
         if (est == null) {
             est = new Estudiantes(estu);
         } 
@@ -38,7 +38,7 @@ public class Estudiantes extends javax.swing.JInternalFrame {
     }
     
     public void actualizarLista(){
-        jTable1.setModel(new ModeloTablaEstudiante((ArrayList<Tpersona>) controladorE.findTpersonaEntities()));
+        jTable1.setModel(new ModeloTablaEstudiante((ArrayList<Persona>) controladorE.findPersonaEntities()));
         
     }
    
