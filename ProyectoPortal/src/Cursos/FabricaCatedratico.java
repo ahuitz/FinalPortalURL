@@ -22,7 +22,7 @@ public class FabricaCatedratico implements FabricaTipoUsuario {
     
     @Override
     public Actividad crearActividad(EntityManagerFactory emf, int idSC) {
-        return new A_Catedratico(new TactividadJpaController(emf), new TentregaJpaController(emf), idSC);
+        return new A_Catedratico(new ActividadJpaController(emf), new EntregaJpaController(emf), idSC);
     }
     
     @Override

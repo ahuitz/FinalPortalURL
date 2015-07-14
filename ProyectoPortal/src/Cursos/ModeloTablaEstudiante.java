@@ -5,7 +5,7 @@
  */
 package cursos;
 
-import Tablas.Tpersona;
+import Tablas.Persona;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -14,10 +14,10 @@ import javax.swing.table.AbstractTableModel;
  * @author EST1629311
  */
 public class ModeloTablaEstudiante extends AbstractTableModel {
-    private ArrayList<Tpersona> estudiantes;
+    private ArrayList<Persona> estudiantes;
     private String columnas[] = {"Carne","Nombre", "Apellido", "Estado"};
 
-    public ModeloTablaEstudiante(ArrayList<Tpersona> estudiantes) {
+    public ModeloTablaEstudiante(ArrayList<Persona> estudiantes) {
         this.estudiantes=estudiantes;
       
     }
@@ -35,7 +35,7 @@ public class ModeloTablaEstudiante extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Tpersona est= this.estudiantes.get(rowIndex);
+        Persona est= this.estudiantes.get(rowIndex);
         
         switch(columnIndex){
             case 0: return est.getCarne();
