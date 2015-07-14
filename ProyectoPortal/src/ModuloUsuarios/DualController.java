@@ -23,6 +23,18 @@ public class DualController implements Controlador{
     private EntityManager em;
     private EntityManagerFactory emf;
     private Config configuracion;
+    private ConexionEstandar mysql;
+
+    public DualController(EntityManagerFactory emf, Config configuracion, ConexionEstandar mysql) {
+        this.emf = emf;
+        this.configuracion = configuracion;
+        this.mysql = mysql;
+        this.em=emf.createEntityManager();
+        this.controladorpersona=new PersonaJpaController(emf);
+        this.controladorusuario= new UsuarioJpaController(emf);
+    }
+    
+    
     
     @Override
     public void Create(Persona persona) {
