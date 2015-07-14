@@ -12,6 +12,7 @@ package Conexion;
 public class Config implements ConexionBasica {
     private String User;
     private String Pass;
+    private String carne;
     private static Config instancia= null;
     
   
@@ -26,6 +27,7 @@ public class Config implements ConexionBasica {
     public Config(String user,String pass) {
         this.User=user;
         this.Pass=pass;
+        this.carne= cortar(user);
     }
 
     public String getUser() {
@@ -36,6 +38,12 @@ public class Config implements ConexionBasica {
         return Pass;
     }
 
+    public String getCarne() {
+        return carne;
+    }
+    
+    
+
     
     @Override
     public void Close() {
@@ -44,4 +52,9 @@ public class Config implements ConexionBasica {
         this.instancia=null;
     }
     
+    private String cortar(String us){
+     String cortado;
+     cortado = us.substring(3);
+     return cortado;
+    }
 }
