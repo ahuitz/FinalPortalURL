@@ -97,6 +97,11 @@ public class FormularioAdministracion extends javax.swing.JFrame {
         jMenu1.add(jMenuItem6);
 
         jMenuItem5.setText("Buscar Curso");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
@@ -159,6 +164,15 @@ public class FormularioAdministracion extends javax.swing.JFrame {
         jDesktopPane1.add(carrera);
         carrera.show();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        BuscarCurso bcurso = new BuscarCurso();
+        bcurso.setClosable(true);
+        jDesktopPane1.add(bcurso);
+        bcurso.show();
+        
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
