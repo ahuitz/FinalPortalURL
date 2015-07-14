@@ -12,12 +12,16 @@ import java.awt.Dimension;
  * @author RealG4Life
  */
 public class FormularioAdministracion extends javax.swing.JFrame {
+    
+    final private int crearFacultad = 1;
+    final private int crearCiclo = 2;
 
     /**
      * Creates new form FormularioAdministracion
      */
     public FormularioAdministracion() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -32,8 +36,11 @@ public class FormularioAdministracion extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -54,6 +61,9 @@ public class FormularioAdministracion extends javax.swing.JFrame {
 
         jMenu1.setText("Archivo");
 
+        jMenuItem2.setText("Nueva Seccion");
+        jMenu1.add(jMenuItem2);
+
         jMenuItem1.setText("Nuevo Curso");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,8 +72,29 @@ public class FormularioAdministracion extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Nueva Seccion");
-        jMenu1.add(jMenuItem2);
+        jMenuItem7.setText("Nuevo Ciclo");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem7);
+
+        jMenuItem8.setText("Nueva Carrera");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem8);
+
+        jMenuItem6.setText("Nueva Facultad");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
 
         jMenuItem5.setText("Buscar Curso");
         jMenu1.add(jMenuItem5);
@@ -104,15 +135,30 @@ public class FormularioAdministracion extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        AgregarCurso ac = new AgregarCurso();
-        ac.setResizable(true);
-        ac.setClosable(true);
-        Dimension dm = new Dimension(0, 0);
-        ac.setMinimumSize(dm);
-        jDesktopPane1.add(ac);
-        ac.show();
+        
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        Crear_Facultad_ciclo facultad = new Crear_Facultad_ciclo(crearFacultad);
+        jDesktopPane1.add(facultad);
+        facultad.show();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        Crear_Facultad_ciclo ciclo = new Crear_Facultad_ciclo(crearCiclo);
+        jDesktopPane1.add(ciclo);
+        ciclo.show();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+        CrearCarrera carrera = new CrearCarrera();
+        jDesktopPane1.add(carrera);
+        carrera.show();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,5 +205,8 @@ public class FormularioAdministracion extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
 }

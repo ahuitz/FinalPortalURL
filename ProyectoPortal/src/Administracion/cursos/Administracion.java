@@ -64,12 +64,14 @@ public class Administracion {
     @param facultad define el id de la faculta a la que pertenecera
     */
     
-    public void crearCarrera(String nombre, int facultad){
+    public void crearCarrera(String nombre, int facultadid){
         CarreraJpaController conCarrera = new CarreraJpaController(emf);
-        Carrera carrera = new Carrera(conCarrera.getMaxId() + 1, nombre, facultad);
+        Carrera carrera = new Carrera(conCarrera.getMaxId() + 1, nombre, facultadid);
         conCarrera.create(carrera);
     }
     
+    /*
+    */
     
     public void crearCurso(String nombre, int anio, int cicloid){
         CursoJpaController conCurso = new CursoJpaController(emf);
@@ -81,11 +83,18 @@ public class Administracion {
         conCiclocurso.create(ciclocurso);
     }
     
+    /*
+    */
+    
     public void agregarCursoCarrera(int ciclocursoid, int carreraid, String descripcion){
         CursocarreraJpaController conCursocarrera = new CursocarreraJpaController(emf);
         Cursocarrera cursocarrera = new Cursocarrera(conCursocarrera.getMaxId() + 1, descripcion, ciclocursoid, carreraid);
         conCursocarrera.create(cursocarrera);
     }
+    
+    /*
+    
+    */
     
     public void crearSeccion(String descripcion, int cupo, int cursocarreraid, int usuariocatedraticoid){
         SeccionJpaController conSeccion = new SeccionJpaController(emf);
