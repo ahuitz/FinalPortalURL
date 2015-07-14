@@ -96,9 +96,6 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Recursos/save.png"/>
-            </Property>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="label" type="java.lang.String" value=""/>
           </Properties>
@@ -108,9 +105,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Recursos/editar.png"/>
-            </Property>
             <Property name="horizontalTextPosition" type="int" value="10"/>
           </Properties>
           <Events>
@@ -119,9 +113,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Recursos/eliminar.png"/>
-            </Property>
             <Property name="horizontalTextPosition" type="int" value="10"/>
           </Properties>
           <Events>
@@ -130,9 +121,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Recursos/nuevo.png"/>
-            </Property>
             <Property name="horizontalTextPosition" type="int" value="10"/>
           </Properties>
           <Events>

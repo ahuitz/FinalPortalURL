@@ -5,6 +5,12 @@
  */
 package Forms;
 
+import Tablas.Persona;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Geek
@@ -16,8 +22,37 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
      */
     public BusquedaUs() {
         initComponents();
+        arranque();
     }
-
+    private void arranque(){
+        tableModel();
+        cargarTabla();
+    }
+        private DefaultTableModel model;
+    public void tableModel(){
+    
+    this.jTable1.getColumnModel().getColumn(0).setPreferredWidth(90);
+    this.jTable1.getColumnModel().getColumn(1).setPreferredWidth(40);
+    this.jTable1.getColumnModel().getColumn(2).setPreferredWidth(30);
+    this.jTable1.getColumnModel().getColumn(3).setPreferredWidth(30);
+    
+    
+    
+    model = (DefaultTableModel)this.jTable1.getModel();
+    model.setNumRows(0);
+}
+    public void cargarTabla(){
+       EntityManager em = FormularioUsuarios1.conexion.getEm();
+       String q = "Persona.findAll";
+       Query qu = em.createNamedQuery(q);
+       
+        List<Persona> lista = qu.getResultList();
+        for(Persona personaList : lista){
+            model.addRow(new Object[]{
+            personaList.getCarne(), personaList.getNombre()+" "+ personaList.getApellido(), personaList.getEstado()});
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +74,6 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/save.png"))); // NOI18N
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jButton1.setLabel("");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -48,7 +82,6 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/editar.png"))); // NOI18N
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,7 +89,6 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/eliminar.png"))); // NOI18N
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,7 +96,6 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/nuevo.png"))); // NOI18N
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
