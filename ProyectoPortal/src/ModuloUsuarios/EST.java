@@ -5,15 +5,19 @@
  */
 package ModuloUsuarios;
 
+import Tablas.Persona;
+
 /**
  *
  * @author Vader33
  */
 public class EST implements TipoPersona{
     private String siglas="EST";
+    private DualController controlador;
+    private Persona Persona;
     @Override
     public void crear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        controlador.Create(Persona);
     }
     
 }
