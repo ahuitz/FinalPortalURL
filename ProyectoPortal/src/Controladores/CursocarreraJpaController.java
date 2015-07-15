@@ -147,4 +147,15 @@ public class CursocarreraJpaController implements Serializable {
         }
     }
     
+    public int getId(int carreraid, int ciclocursoid){
+        EntityManager em = getEntityManager();
+        try{
+            Query q = em.createNamedQuery("SELECT c.id FROM Cursocarrera c WHERE c.carreraid = " + carreraid
+            + "AND c.cicloCursoid = " + ciclocursoid);
+            return (int) q.getSingleResult();
+        }finally{
+            em.close();
+        }
+    }
+    
 }
