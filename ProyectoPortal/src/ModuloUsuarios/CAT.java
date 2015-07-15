@@ -5,15 +5,32 @@
  */
 package ModuloUsuarios;
 
+import Conexion.Config;
+import Tablas.Persona;
+import javax.persistence.EntityManagerFactory;
+
 /**
  *
  * @author Vader33
  */
 public class CAT implements TipoPersona{
     private String siglas="CAT";
+    private DualController controlador;
+    private Persona Persona;
+    private EntityManagerFactory emf;
+    private Config configuracion;
+
+    public CAT(Persona Persona, EntityManagerFactory emf, Config configuracion) {
+        this.Persona = Persona;
+        this.emf = emf;
+        this.configuracion = configuracion;
+        this.controlador= new DualController(emf, configuracion, siglas);
+    }
+    
+    
     @Override
     public void crear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        controlador.Create(Persona);
     }
     
 }
