@@ -135,4 +135,15 @@ public class FacultadJpaController implements Serializable {
         }
     }
     
+    public int getMaxId(){
+        EntityManager em = getEntityManager();
+        int id = 0;
+        try{
+            Query q = em.createQuery("SELECT MAX(f.id) FROM Facultad f");
+            id = (int) q.getSingleResult();
+            return id;
+        }finally{
+            em.close();
+        }
+    }
 }

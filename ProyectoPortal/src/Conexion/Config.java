@@ -57,4 +57,5 @@ public class Config implements ConexionBasica {
      cortado = us.substring(3);
      return cortado;
     }
+    
 }

@@ -135,4 +135,28 @@ public class CarreraJpaController implements Serializable {
         }
     }
     
+    public int getMaxId(){
+        EntityManager em = getEntityManager();
+        try{
+            Query q = em.createQuery("SELECT MAX(c.id) FROM Carrera c");
+            Object id = q.getSingleResult();
+            if (id == null)
+                return (int) id;
+            else
+                return 0;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public int getId(String nombre){
+        EntityManager em = getEntityManager();
+        try{
+            Query q = em.createNamedQuery("SELECT c.id FROM Carrera c WHERE c.carrera = " + nombre);
+            return (int) q.getSingleResult();
+        }finally{
+            em.close();
+        }
+    }
+    
 }

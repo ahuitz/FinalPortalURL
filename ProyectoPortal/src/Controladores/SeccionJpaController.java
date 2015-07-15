@@ -135,4 +135,15 @@ public class SeccionJpaController implements Serializable {
         }
     }
     
+    public int getMaxId(){
+        EntityManager em = getEntityManager();
+        int id = 0;
+        try{
+            Query q = em.createQuery("SELECT MAX(s.id) FROM Seccion s");
+            id = (int) q.getSingleResult();
+            return id;
+        }finally{
+            em.close();
+        }
+    }
 }
