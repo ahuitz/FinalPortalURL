@@ -8,6 +8,7 @@ package Forms;
 
 import ModuloUsuarios.AccionesUsuario;
 import Tablas.Persona;
+import Tablas.Tiposangre;
 import javax.persistence.EntityManager;
 
 /**
@@ -22,6 +23,29 @@ public class DatosPersona extends javax.swing.JDialog {
     public DatosPersona() {
        
         initComponents();
+    }
+    public void cargarDatos(String carne){
+        EntityManager em=FormularioUsuarios1.conexion.getEm();
+        AccionesUsuario acc=new AccionesUsuario();
+        Persona prs=acc.buscarUsCarne(carne,em );
+        jTextField1.setText(prs.getCarne());
+        jTextField2.setText(prs.getNombre());
+        jTextField3.setText(prs.getApellido());
+        jTextField4.setText(prs.getDireccion());
+        jTextField5.setText(prs.getTelefono());
+        jTextField6.setText(prs.getCelular());
+        jTextField7.setText(prs.getDpi());
+        jTextField8.setText(prs.getFechaNac());
+        if((prs.getGenero()==true))
+            jComboBox1.setSelectedItem("Femenino");
+        else
+            jComboBox1.setSelectedItem("Masculino");
+        String tipo=acc.buscarSangreId(prs.getTipoSangreid(), em);
+        jComboBox2.setSelectedItem(tipo);
+        if(prs.getEstado()==true)
+            jRadioButton1.setSelected(true);
+        else
+            jRadioButton2.setSelected(true);
     }
 
     /**
@@ -286,9 +310,11 @@ public class DatosPersona extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        EntityManager em=FormularioUsuarios1.conexion.getEm();
-        AccionesUsuario acc=new AccionesUsuario();
-        Persona prs=acc.buscarUsCarne(jTextField1.getText(),em );
+        
+        
+        
+
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
