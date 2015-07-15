@@ -7,11 +7,16 @@
 package Forms;
 
 import Controladores.PersonaJpaController;
+import Controladores.TiposangreJpaController;
 import ModuloUsuarios.AccionesUsuario;
 import Tablas.Persona;
 import Tablas.Tiposangre;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,12 +30,22 @@ public class DatosPersona extends javax.swing.JDialog {
     public DatosPersona() {
        
         initComponents();
+        mostrarTipoSangre();
        
     }
+    public void mostrarTipoSangre(){
+        EntityManagerFactory emf=FormularioUsuarios1.conexion.getEmf();
+        TiposangreJpaController tipo=new TiposangreJpaController(emf);        
+        List<Tiposangre> listSangre=tipo.findTiposangreEntities();
+        for(Tiposangre s:listSangre){
+            jComboBox2.addItem(s.getTipo());
+        }
+    }
+    public Persona prs;
     public void cargarDatos(String carne){
         EntityManager em=FormularioUsuarios1.conexion.getEm();
         AccionesUsuario acc=new AccionesUsuario();
-        Persona prs=acc.buscarUsCarne(carne,em );
+        prs=acc.buscarUsCarne(carne,em );
         jTextField1.setText(prs.getCarne());
         jTextField2.setText(prs.getNombre());
         jTextField3.setText(prs.getApellido());
@@ -125,6 +140,7 @@ public class DatosPersona extends javax.swing.JDialog {
         jComboBox3 = new javax.swing.JComboBox();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -197,7 +213,7 @@ public class DatosPersona extends javax.swing.JDialog {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Femenino", "Masculino" }));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jButton2.setText("Eliminar");
+        jButton2.setText("Buscar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -225,6 +241,13 @@ public class DatosPersona extends javax.swing.JDialog {
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Eliminar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
             }
         });
 
@@ -302,7 +325,9 @@ public class DatosPersona extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
-                .addGap(132, 132, 132))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5)
+                .addGap(53, 53, 53))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,7 +379,9 @@ public class DatosPersona extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton5))
                 .addGap(6, 6, 6))
         );
 
@@ -362,7 +389,7 @@ public class DatosPersona extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -380,10 +407,8 @@ public class DatosPersona extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-
+        String carne=JOptionPane.showInputDialog(null,"Numero de carne");
+        cargarDatos(carne);
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -436,6 +461,25 @@ public class DatosPersona extends javax.swing.JDialog {
         jButton4.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+         try {
+            int elim=JOptionPane.showConfirmDialog(null, "Desea eliminar al usuario");
+            if(elim==JOptionPane.YES_OPTION){
+                prs.setEstado(false);
+                EntityManagerFactory emf=FormularioUsuarios1.conexion.getEmf();
+                PersonaJpaController ctrlPrs=new PersonaJpaController(emf);
+                ctrlPrs.edit(prs);
+                JOptionPane.showMessageDialog(null, "El usuario ha sido ELIMINADO");
+            }else if(elim==JOptionPane.NO_OPTION){
+                JOptionPane.showMessageDialog(null,"El usuario sigue ACTIVO");
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(DatosPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -483,6 +527,7 @@ public class DatosPersona extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
