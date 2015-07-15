@@ -93,13 +93,13 @@ public class ClaseListSecCurso {
                 ////////////
                 ////////////
                 
-                System.out.println( SeccCur1.getId() + " " + SeccCur1.getCursoCarreraid() + " " + SeccCur1.getSeccionid() 
-                    + " " + SeccCur1.getUsuarioCatedraticoid() + " " + miSecc.getDescripcion() //+ " " + miCurCarr.getDescripcion()
-                    + " " + miCicCur.getAnio() + " " + miCiclo.getCiclo() + " " + miCurso.getNombre() + " " + miCarR.getCarrera()
-                    + " " + miCiclo.getId() + " " + miCurso.getId()
-                    + " " + miFacu.getFacultad() + " " + miUsu.getUsuario() + " " + miPer.getNombre() + " " + miPer.getApellido()
-                    + " " + miPer.getId()
-                );
+//                System.out.println( SeccCur1.getId() + " " + SeccCur1.getCursoCarreraid() + " " + SeccCur1.getSeccionid() 
+//                    + " " + SeccCur1.getUsuarioCatedraticoid() + " " + miSecc.getDescripcion() //+ " " + miCurCarr.getDescripcion()
+//                    + " " + miCicCur.getAnio() + " " + miCiclo.getCiclo() + " " + miCurso.getNombre() + " " + miCarR.getCarrera()
+//                    + " " + miCiclo.getId() + " " + miCurso.getId()
+//                    + " " + miFacu.getFacultad() + " " + miUsu.getUsuario() + " " + miPer.getNombre() + " " + miPer.getApellido()
+//                    + " " + miPer.getId()
+//                );
                 
                 ListaSecCurso listSecCurso = new  ListaSecCurso(SeccCur1.getId(), SeccCur1.getCursoCarreraid(), SeccCur1.getSeccionid(), 
                     SeccCur1.getUsuarioCatedraticoid(), miSecc.getDescripcion(),
@@ -115,7 +115,7 @@ public class ClaseListSecCurso {
             
         }
         
-        System.out.println("2");
+//        System.out.println("2");
         Iterator<ListaSecCurso> iteradorListaSecCur = miLisSecCur.iterator();
         while (iteradorListaSecCur.hasNext()) { 
             ListaSecCurso ListaSecCur = iteradorListaSecCur.next();

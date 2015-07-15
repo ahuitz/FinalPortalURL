@@ -27,6 +27,8 @@ public class ClaseListEntregaActiv {
         
         System.out.println("");
         System.out.println("");
+        System.out.println("");
+//        System.out.println("ENTREGA ACTIVIDAD ////////////////////////////////////////////////////////////////");
         Query qEntr = ConexionJPA.getInstance("usuario", "usuario").getEm().createNamedQuery("Entrega.findAll");
         List<Entrega> miListEnt = qEntr.getResultList();
         Iterator<Entrega> iteradorEnt = miListEnt.iterator();
@@ -70,13 +72,13 @@ public class ClaseListEntregaActiv {
             Seccioncurso miSecCur = new Seccioncurso();
             miSecCur = (Seccioncurso) qSecCur.getSingleResult();
             
-            System.out.println(miEnt.getId() + "  " + miEnt.getCalificacion() + "  " + miEnt.getNoRealizada() 
-                    + " " + miEnt.getRealizada() + " " + miActivi.getId() + "  " + miActivi.getPunteo()
-                    + "  " + miActivi.getTitulo() + " " + miTipAct.getId() + " " + miTipAct.getTipoActividad() + " " + miUsu.getId() 
-                    + " " + miUsu.getUsuario() + " " + miPer.getId() + " " + miPer.getNombre() + " " + miPer.getApellido()
-                    + " " + miSecCur.getId() + " " + miActivi.getFechaEntrega() + " " + miActivi.getFechaPublicacion()
-                    + " " + miActivi.getFisica() + " " + miActivi.getVirtual()
-            );
+//            System.out.println(miEnt.getId() + "  " + miEnt.getCalificacion() + "  " + miEnt.getNoRealizada() 
+//                    + " " + miEnt.getRealizada() + " " + miActivi.getId() + "  " + miActivi.getPunteo()
+//                    + "  " + miActivi.getTitulo() + " " + miTipAct.getId() + " " + miTipAct.getTipoActividad() + " " + miUsu.getId() 
+//                    + " " + miUsu.getUsuario() + " " + miPer.getId() + " " + miPer.getNombre() + " " + miPer.getApellido()
+//                    + " " + miSecCur.getId() + " " + miActivi.getFechaEntrega() + " " + miActivi.getFechaPublicacion()
+//                    + " " + miActivi.getFisica() + " " + miActivi.getVirtual()
+//            );
             
             ListaEntregaActiv miListEntActiv = new ListaEntregaActiv(miEnt.getId(), miEnt.getCalificacion(), miEnt.getNoRealizada() 
                     ,miEnt.getRealizada(), miActivi.getId(), miActivi.getPunteo()
@@ -89,7 +91,7 @@ public class ClaseListEntregaActiv {
 
         }
         
-        System.out.println("4");
+//        System.out.println("4");
         Iterator<ListaEntregaActiv> iteradorListaEntActiv = miLisEntActiv.iterator();
         while (iteradorListaEntActiv.hasNext()) { 
             ListaEntregaActiv ListaEntAct = iteradorListaEntActiv.next();

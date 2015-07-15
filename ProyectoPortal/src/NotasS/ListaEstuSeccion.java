@@ -5,11 +5,13 @@
  */
 package NotasS;
 
+import java.util.List;
+
 /**
  *
  * @author Saul
  */
-public class ListaEstuSeccion {
+public class ListaEstuSeccion implements Listas{
     
     public int EstudianteSeccionId;
     public int SeccionCursoId;
@@ -88,6 +90,11 @@ public class ListaEstuSeccion {
     @Override
     public String toString() {
         return "ListaEstuSeccion{" + "EstudianteSeccionId=" + EstudianteSeccionId + ", SeccionCursoId=" + SeccionCursoId + ", UsuarioEstId=" + UsuarioEstId + ", UsuarioEst=" + UsuarioEst + ", NombreEst=" + NombreEst + ", ApellidoEst=" + ApellidoEst + ", PersonaEstId=" + PersonaEstId + '}';
+    }
+
+    @Override
+    public List<Object> cargarDatosLista() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

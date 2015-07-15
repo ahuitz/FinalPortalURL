@@ -6,13 +6,14 @@
 package NotasS;
 
 import java.util.Date;
+import java.util.List;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
  *
  * @author Saul
  */
-public class ListaEntregaActiv {
+public class ListaEntregaActiv implements Listas{
     
     public int EntregaId;
     public Double EntregaCalificacion;
@@ -211,6 +212,11 @@ public class ListaEntregaActiv {
     @Override
     public String toString() {
         return "ListaEntregaActiv{" + "EntregaId=" + EntregaId + ", EntregaCalificacion=" + EntregaCalificacion + ", EntregaNoRealizada=" + EntregaNoRealizada + ", EntregaRealizada=" + EntregaRealizada + ", ActividadId=" + ActividadId + ", ActividadPunteo=" + ActividadPunteo + ", ActividadTitulo=" + ActividadTitulo + ", TipoActividadId=" + TipoActividadId + ", TipoActividadDescripcion=" + TipoActividadDescripcion + ", UsuarioEstId=" + UsuarioEstId + ", UsuarioEst=" + UsuarioEst + ", PersonaEstId=" + PersonaEstId + ", NombreEst=" + NombreEst + ", ApellidoEst=" + ApellidoEst + ", SeccionCursoId=" + SeccionCursoId + ", ActividadFechaEntrega=" + ActividadFechaEntrega + ", ActividadFechaPublicacion=" + ActividadFechaPublicacion + ", ActividadFisica=" + ActividadFisica + ", ActividadVirtual=" + ActividadVirtual + '}';
+    }
+
+    @Override
+    public List<Object> cargarDatosLista() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

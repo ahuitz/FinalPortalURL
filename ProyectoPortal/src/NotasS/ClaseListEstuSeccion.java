@@ -25,6 +25,8 @@ public class ClaseListEstuSeccion {
         
         System.out.println("");
         System.out.println("");
+        System.out.println("");
+        System.out.println("ESTUDIANE SECCION ////////////////////////////////////////////////////////////////");
         Query EstSecc = ConexionJPA.getInstance("usuario", "usuario").getEm().createNamedQuery("Estudianteseccion.findAll");
         List<Estudianteseccion> miEstSecc = EstSecc.getResultList();
         Iterator<Estudianteseccion> iteradorEstSecc = miEstSecc.iterator();
@@ -52,10 +54,10 @@ public class ClaseListEstuSeccion {
             Seccioncurso miSecCur = new Seccioncurso();
             miSecCur = (Seccioncurso) qSecCur.getSingleResult();
             
-            System.out.println(EstSecc1.getId() + " " + EstSecc1.getSeccionCursoid() + " " + EstSecc1.getUsuarioid()
-                    + " " + miUsu.getUsuario() + " " + miPer.getNombre() + " " + miPer.getApellido()
-                    + " " + miPer.getId()
-            );
+//            System.out.println(EstSecc1.getId() + " " + EstSecc1.getSeccionCursoid() + " " + EstSecc1.getUsuarioid()
+//                    + " " + miUsu.getUsuario() + " " + miPer.getNombre() + " " + miPer.getApellido()
+//                    + " " + miPer.getId()
+//            );
             
             ListaEstuSeccion miListEstuSecc = new ListaEstuSeccion(EstSecc1.getId(), EstSecc1.getSeccionCursoid(), EstSecc1.getUsuarioid(),
                     miUsu.getUsuario(), miPer.getNombre(), miPer.getApellido(),
@@ -64,7 +66,7 @@ public class ClaseListEstuSeccion {
             
         }
         
-        System.out.println("3");
+//        System.out.println("3");
         Iterator<ListaEstuSeccion> iteradorListaEstSecc = miLisEstSecc.iterator();
         while (iteradorListaEstSecc.hasNext()) { 
             ListaEstuSeccion ListaEstSecc = iteradorListaEstSecc.next();

@@ -28,15 +28,22 @@ public class Prueba {
         // TODO code application logic here
 
         int UsuaCatId = 4;
-        int Cursoid = 2;
+        int Cursoid = 5;
+        int SeccionId = 2;
         ClaseListSecCurso miClaseLisSecCurso = new ClaseListSecCurso();
         List<ListaSecCurso> miListaSecCurso = miClaseLisSecCurso.cargarDatosListSeccionCurso(UsuaCatId);
         ClaseListaPorCurso miListaPorCurso = new ClaseListaPorCurso();
-        miListaPorCurso.encontraPorCurso(miListaSecCurso, Cursoid);
+        miListaSecCurso = miListaPorCurso.encontraPorCurso(miListaSecCurso, Cursoid, SeccionId);
         
         
         ClaseListEstuSeccion miClaseLisEstuSecc = new ClaseListEstuSeccion();
-        miClaseLisEstuSecc.cargarListaEstudianteSeccion();
+        List<ListaEstuSeccion> miListaEstuSecc = miClaseLisEstuSecc.cargarListaEstudianteSeccion();
+        ClasePorSeccCurso_EstuSecc miClasPorSecCur = new ClasePorSeccCurso_EstuSecc();
+        miClasPorSecCur.setMiListSeccionCurso(miListaSecCurso);
+        miClasPorSecCur.setMiListEstuSeccion(miListaEstuSecc);
+        List<ListaSecCurso_EstuSec> miListaSecCurso_EstuSec = miClasPorSecCur.cargarDatosListasSecCurso_EstuSecc();
+        
+        
         
         
         ClaseListEntregaActiv miClaseLisEntActiv = new ClaseListEntregaActiv();
@@ -44,7 +51,13 @@ public class Prueba {
         
         
         
-        
+//        System.out.println("");
+//        System.out.println("OTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+//        Iterator<ListaSecCurso_EstuSec> iteradorLisSecCur_EstuSec = miListaSecCurso_EstuSec.iterator();
+//        while (iteradorLisSecCur_EstuSec.hasNext()) { 
+//            ListaSecCurso_EstuSec ListaSecCur_EstSec = iteradorLisSecCur_EstuSec.next();
+//            System.out.println(ListaSecCur_EstSec );
+//        }
     }
     
 }

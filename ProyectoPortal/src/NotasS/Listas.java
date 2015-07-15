@@ -14,6 +14,6 @@ import Tablas.*;
  */
 public interface Listas {
     
-   public List<Object> devolverLista();
+   public List<Object> cargarDatosLista();
     
 }
