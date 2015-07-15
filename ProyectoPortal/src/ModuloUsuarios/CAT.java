@@ -30,7 +30,7 @@ public class CAT implements TipoPersona{
     
     @Override
     public void crear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        controlador.Create(Persona);
     }
     
 }
