@@ -5,7 +5,9 @@
  */
 package ModuloUsuarios;
 
+import Conexion.Config;
 import Tablas.Persona;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -15,6 +17,17 @@ public class EST implements TipoPersona{
     private String siglas="EST";
     private DualController controlador;
     private Persona Persona;
+    private EntityManagerFactory emf;
+    private Config configuracion;
+
+    public EST(Persona Persona, EntityManagerFactory emf, Config configuracion) {
+        this.Persona = Persona;
+        this.emf = emf;
+        this.configuracion = configuracion;
+        this.controlador= new DualController(emf, configuracion, siglas);
+    }
+    
+    
     @Override
     public void crear() {
         controlador.Create(Persona);
