@@ -9,8 +9,8 @@ import Curso.R_Catedratico;
 import Tablas.Archivo;
 import Tablas.Recurso;
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.persistence.Query;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 /**
@@ -33,7 +33,7 @@ public class CrearRecurso extends javax.swing.JInternalFrame {
         setVisible(Boolean.TRUE);
         setClosable(Boolean.TRUE);
         //setResizable(Boolean.TRUE);
-        //this.rc=rc;
+        this.rc=rc;
     }
 
     /**
@@ -198,16 +198,20 @@ public class CrearRecurso extends javax.swing.JInternalFrame {
                 if (archivoA != null) {
                     int idA = 0;
                     if (jCheckBox1.isSelected() == Boolean.TRUE) {
-                        idA = rc.getControladorA().getArchivoCount() + 1;
                         String nombre = archivoA.getName().split("\\.")[0];
                         String extension = archivoA.getName().split("\\.")[archivoA.getName().split("\\.").length - 1];
                         double tamanyo = archivoA.length();
-                        Archivo adjunto = new Archivo(idA, nombre, extension, "", tamanyo);
+                        Archivo adjunto = new Archivo(0, nombre, extension, "", tamanyo);
                         rc.getControladorA().create(adjunto);
+                        Query q;
+                        q = rc.getEmf().createEntityManager().createNamedQuery("Archivo.findMaxId");
+                        Object maximo = q.getSingleResult();
+                        if(maximo!=null){
+                            idA=(int)maximo;
+                        }
                     }
-                    int idR = rc.getControladorR().getRecursoCount() + 1;
                     Date fecha = new Date();
-                    Recurso rec = new Recurso(idR, titulo, descripcion, fecha, rc.getIdSeccionCurso(), idA);
+                    Recurso rec = new Recurso(0, titulo, descripcion, fecha, idA, rc.getIdSeccionCurso());
                     rc.getControladorR().create(rec);
             JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Recurso creado con exito.</font></html>");
                     this.dispose();
@@ -215,12 +219,8 @@ public class CrearRecurso extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Debe seleccionar un archivo para continuar.</font></html>");
                 }
             } else {
-                int idA = 0;
-                int idR = rc.getControladorR().getRecursoCount() + 1;
                 Date fecha = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                System.out.println(sdf.format(fecha));
-                Recurso rec = new Recurso(idR, titulo, descripcion, fecha, rc.getIdSeccionCurso(), idA);
+                Recurso rec = new Recurso(0, titulo, descripcion, fecha, 0, rc.getIdSeccionCurso());
                 rc.getControladorR().create(rec);
             JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Recurso creado con exito.</font></html>");
                 this.dispose();

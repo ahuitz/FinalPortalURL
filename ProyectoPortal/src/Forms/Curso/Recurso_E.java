@@ -15,13 +15,12 @@ import java.util.ArrayList;
  * @author Pablo López
  */
 public class Recurso_E extends PrincipalRecurso {
-    private static Recurso_E re;
-
-    public Recurso_E() {
-        //this.botonCrearR.setVisible(false);
-        //this.botonModificarR.setVisible(false);
-    }
-    private Recurso_E(R_Estudiante recursoE) {
+    
+    public Recurso_E(R_Estudiante recursoE) {
+        setIconifiable(Boolean.TRUE);
+        setVisible(Boolean.TRUE);
+        setClosable(Boolean.TRUE);
+        //setResizable(Boolean.TRUE);
         this.botonCrearR.setVisible(false);
         this.botonModificarR.setVisible(false);
         this.r=recursoE;
@@ -33,15 +32,7 @@ public class Recurso_E extends PrincipalRecurso {
         }
     }
     
-    public static Recurso_E getRecursos_E(R_Estudiante recursoE){
-        if(re==null){
-            re=new Recurso_E(recursoE);
-        }
-        return re;
-    }   
-    
-    private void actualizarLista(R_Estudiante recursoE){
-        r=recursoE;
+    public void actualizarLista(){
         r.setRecursos((ArrayList<Recurso>) r.getControladorR().findRecursoEntities());
         this.TablaRecursos.setModel(new ModeloTablaRecurso(r.getRecursos()));        
     }

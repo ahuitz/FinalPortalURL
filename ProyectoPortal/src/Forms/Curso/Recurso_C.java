@@ -15,9 +15,12 @@ import java.util.ArrayList;
  * @author Pablo López
  */
 public class Recurso_C extends PrincipalRecurso {
-    private static Recurso_C rc;
     
-    private Recurso_C(R_Catedratico recursoC) {
+    public Recurso_C(R_Catedratico recursoC) {
+        setIconifiable(Boolean.TRUE);
+        setVisible(Boolean.TRUE);
+        setClosable(Boolean.TRUE);
+        //setResizable(Boolean.TRUE);
         this.r=recursoC;
         this.TablaRecursos.setModel(new ModeloTablaRecurso(r.getRecursos()));
         for(int i=0;i<TablaRecursos.getModel().getColumnCount();i++){
@@ -26,13 +29,6 @@ public class Recurso_C extends PrincipalRecurso {
             }
         }
     }
-    
-    public static Recurso_C getRecursos_C(R_Catedratico recursoC){
-        if(rc==null){
-            rc=new Recurso_C(recursoC);
-        }
-        return rc;
-    }   
     
     public void actualizarLista(){
         r.setRecursos((ArrayList<Recurso>) r.getControladorR().findRecursoEntities());

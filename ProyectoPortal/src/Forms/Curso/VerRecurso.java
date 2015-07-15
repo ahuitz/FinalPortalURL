@@ -26,7 +26,14 @@ public class VerRecurso extends javax.swing.JInternalFrame {
         //setResizable(Boolean.TRUE);
         titulo.setText(r.getTitulo());
         descripcion.setText(r.getDescripcion());
-        archivo.setText(a.getNombre()+"."+a.getExtension()+" - "+a.getTamanio()/1000 + "KB");
+        jCheckBox1.setEnabled(Boolean.FALSE);
+        archivo.setEnabled(Boolean.FALSE);
+        
+        if(a!=null){
+            archivo.setText(a.getNombre()+"."+a.getExtension()+" - "+a.getTamanio()/1000 + "KB");
+            jCheckBox1.setSelected(Boolean.TRUE);
+            archivo.setEnabled(Boolean.TRUE);
+        }
     }
 
     /**
@@ -87,11 +94,11 @@ public class VerRecurso extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(archivo)
-                            .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                            .addComponent(archivo, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titulo, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,7 +111,7 @@ public class VerRecurso extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(archivo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1))

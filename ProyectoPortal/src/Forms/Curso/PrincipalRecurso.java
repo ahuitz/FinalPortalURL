@@ -5,13 +5,14 @@
  */
 package Forms.Curso;
 
-import Forms.Curso.VerRecurso;
 import Curso.CRecurso;
+import Curso.ModeloTablaRecurso;
 import Curso.R_Catedratico;
 import Tablas.Archivo;
 import Tablas.Recurso;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -156,7 +157,7 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
 
     private void botonCrearRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearRActionPerformed
         // TODO add your handling code here:
-        CrearRecurso rc = new CrearRecurso(null);//new CrearRecurso((R_Catedratico) r);
+        CrearRecurso rc = new CrearRecurso((R_Catedratico) r);
         this.getParent().add(rc);
         rc.toFront();
     }//GEN-LAST:event_botonCrearRActionPerformed
@@ -165,13 +166,13 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
         // TODO add your handling code here:
         int fila = TablaRecursos.getSelectedRow();
         if (fila >= 0) {
-            DefaultTableModel modelo = (DefaultTableModel) TablaRecursos.getModel();
+            ModeloTablaRecurso modelo = (ModeloTablaRecurso) TablaRecursos.getModel();
             Date fecha = (Date) modelo.getValueAt(fila, 0);
             String titulo = (String) modelo.getValueAt(fila, 1);
             Query q;
             q = r.getEmf().createEntityManager().createNamedQuery("Recurso.findByFechaPublicacion");
-            q.setParameter("FechaPublicacion", fecha);
-            ArrayList<Recurso> recs = (ArrayList<Recurso>) q.getResultList();
+            q.setParameter("fechaPublicacion", fecha);
+            List<Recurso> recs = q.getResultList();
             Recurso rec = null;
             for (Recurso rec1 : recs) {
                 if (rec1.getTitulo().compareTo(titulo) == 0) {
@@ -181,8 +182,11 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
             }
             q = r.getEmf().createEntityManager().createNamedQuery("Archivo.findById");
             q.setParameter("id", rec.getArchivoid());
-            Archivo ar = (Archivo) q.getResultList().get(0);
-            ModificarRecurso mr = new ModificarRecurso((R_Catedratico) r,rec, ar);
+            List archivos =  q.getResultList();
+            ModificarRecurso mr = new ModificarRecurso((R_Catedratico) r,rec, null);
+            if(archivos.size()>0){
+                mr = new ModificarRecurso((R_Catedratico) r,rec, (Archivo) archivos.get(0));
+            }
             getParent().add(mr);
             mr.toFront();
         } else {
@@ -194,14 +198,13 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
         // TODO add your handling code here:
         int fila = TablaRecursos.getSelectedRow();
         if (fila >= 0) {
-            DefaultTableModel modelo = (DefaultTableModel) TablaRecursos.getModel();
-            //System.out.println( modelo.getValueAt(fila, 0).toString());
+            ModeloTablaRecurso modelo =  (ModeloTablaRecurso) TablaRecursos.getModel();
             Date fecha = (Date) modelo.getValueAt(fila, 0);
             String titulo = (String) modelo.getValueAt(fila, 1);
             Query q;
             q = r.getEmf().createEntityManager().createNamedQuery("Recurso.findByFechaPublicacion");
-            q.setParameter("FechaPublicacion", fecha);
-            ArrayList<Recurso> recs = (ArrayList<Recurso>) q.getResultList();
+            q.setParameter("fechaPublicacion", fecha);
+            List<Recurso> recs = q.getResultList();
             Recurso rec = null;
             for (Recurso rec1 : recs) {
                 if (rec1.getTitulo().compareTo(titulo) == 0) {
@@ -211,8 +214,11 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
             }
             q = r.getEmf().createEntityManager().createNamedQuery("Archivo.findById");
             q.setParameter("id", rec.getArchivoid());
-            Archivo ar = (Archivo) q.getResultList().get(0);
-            VerRecurso vr = new VerRecurso(rec, ar);
+            List archivos =  q.getResultList();
+            VerRecurso vr = new VerRecurso(rec, null);
+            if(archivos.size()>0){
+                vr = new VerRecurso(rec, (Archivo) archivos.get(0));
+            }
             getParent().add(vr);
             vr.toFront();
         } else {

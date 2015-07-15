@@ -10,9 +10,10 @@ import Curso.R_Catedratico;
 import Tablas.Archivo;
 import Tablas.Recurso;
 import java.io.File;
-import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Query;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -43,17 +44,15 @@ public class ModificarRecurso extends javax.swing.JInternalFrame {
         archivoA=null;
         jTitulo.setText(r.getTitulo());
         jDescripcion.setText(r.getDescripcion());
+        jCheckBox1.setSelected(Boolean.FALSE);
+        jArchivo.setEnabled(Boolean.FALSE);
+        BotonBuscar.setEnabled(Boolean.FALSE);
+        jArchivo.setText("");
         if(a!=null){
             jCheckBox1.setSelected(Boolean.TRUE);
             jArchivo.setEnabled(Boolean.TRUE);
             BotonBuscar.setEnabled(Boolean.TRUE);
             jArchivo.setText(a.getNombre()+"."+a.getExtension());
-        }
-        else{
-            jCheckBox1.setSelected(Boolean.FALSE);
-            jArchivo.setEnabled(Boolean.FALSE);
-            BotonBuscar.setEnabled(Boolean.FALSE);
-            jArchivo.setText("");
         }
     }
 
@@ -148,7 +147,7 @@ public class ModificarRecurso extends javax.swing.JInternalFrame {
                             .addComponent(jTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(BotonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +165,7 @@ public class ModificarRecurso extends javax.swing.JInternalFrame {
                     .addComponent(jArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1)
                     .addComponent(BotonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BotonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -182,10 +181,13 @@ public class ModificarRecurso extends javax.swing.JInternalFrame {
         String descripcion = jDescripcion.getText();
         if (titulo != null && titulo.compareTo("") != 0) {
             int idA=0;
+            //Se va conservar o crear un archivo.
             if(jCheckBox1.isSelected()==Boolean.TRUE){
                 if(a!=null||archivoA!=null){
+                    //Modificar recurso
                     if(a!=null){
                         idA=a.getId();
+                        //Se va reemplazar el archivo
                         if(archivoA!=null){                        
                             a.setNombre(archivoA.getName().split("\\.")[0]);
                             a.setExtension(archivoA.getName().split("\\.")[archivoA.getName().split("\\.").length - 1]);
@@ -198,19 +200,26 @@ public class ModificarRecurso extends javax.swing.JInternalFrame {
                             }
                         }
                     }
+                    //Se va crear el archivo
                     else{
-                        idA = rc.getControladorA().getArchivoCount() + 1;
                         String nombre = archivoA.getName().split("\\.")[0];
                         String extension = archivoA.getName().split("\\.")[archivoA.getName().split("\\.").length - 1];
                         double tamanyo = archivoA.length();
-                        a = new Archivo(idA, nombre, extension, "", tamanyo);
-                        rc.getControladorA().create(a);                        
+                        a = new Archivo(0, nombre, extension, "", tamanyo);
+                        rc.getControladorA().create(a);
+                        Query q;
+                        q = rc.getEmf().createEntityManager().createNamedQuery("Archivo.findMaxId");
+                        Object maximo = q.getSingleResult();
+                        if(maximo!=null){
+                            idA=(int)maximo;
+                        }
                     }
                 }
                 else{
                     JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Debe seleccionar un archivo para continuar.</font></html>");
                 }
             }
+            //Se va eliminar el archivo
             else{
                 if(a!=null){
                     try {
