@@ -27,9 +27,12 @@ public class Prueba {
     public static void main(String[] args) {
         // TODO code application logic here
 
-
+        int UsuaCatId = 4;
         ClaseListSecCurso miClaseLisSecCurso = new ClaseListSecCurso();
-        miClaseLisSecCurso.cargarDatosListSeccionCurso();
+        List<ListaSecCurso> miListaSecCurso = miClaseLisSecCurso.cargarDatosListSeccionCurso(UsuaCatId);
+        ClaseListaPorCurso miListaPorCurso = new ClaseListaPorCurso();
+        miListaPorCurso.encontraPorCurso(miListaSecCurso);
+        
         
         ClaseListEstuSeccion miClaseLisEstuSecc = new ClaseListEstuSeccion();
         miClaseLisEstuSecc.cargarListaEstudianteSeccion();

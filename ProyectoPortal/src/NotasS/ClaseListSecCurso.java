@@ -27,14 +27,14 @@ import javax.persistence.Query;
  */
 public class ClaseListSecCurso {
     
-    public List<ListaSecCurso> cargarDatosListSeccionCurso(){
+    public List<ListaSecCurso> cargarDatosListSeccionCurso(int UsuarioCatId){
         Query qSeccCur = ConexionJPA.getInstance("usuario", "usuario").getEm().createNamedQuery("Seccioncurso.findAll");
         List<Seccioncurso> SeccCur = qSeccCur.getResultList();
         Iterator<Seccioncurso> iteradorSeccCur = SeccCur.iterator();
         List<ListaSecCurso> miLisSecCur = new ArrayList<ListaSecCurso>();
         while (iteradorSeccCur.hasNext()) {  
             Seccioncurso SeccCur1 = iteradorSeccCur.next();
-            if (SeccCur1.getUsuarioCatedraticoid() == 3) {
+            if (SeccCur1.getUsuarioCatedraticoid() == UsuarioCatId) {
                 
                 ////////////
                 ////////////SECCION
