@@ -28,4 +28,11 @@ public class AccionesUsuario {
         return persona;
         //System.out.println(persona.getApellido());
     }
+    
+    public String buscarSangreId(int id,EntityManager em){
+        Query q=em.createNamedQuery("Tiposangre.findById");
+        q.setParameter("id", id);
+        Tiposangre tSangre= (Tiposangre) q.getResultList();
+        return tSangre.getTipo();        
+    }
 }
