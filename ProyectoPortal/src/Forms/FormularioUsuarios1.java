@@ -201,6 +201,7 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
     public Config configuracion;
     private String Usuario ;
     private String Contraseña;
+    public static int idpersona;
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         
@@ -228,6 +229,7 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
                     txNombre.setText(info.getNombre());
                     txApellido.setText(info.getApellido());
                     txCarne.setText(info.getCarne());
+                    idpersona= info.getId();
                     Pinfo.setVisible(true);
                     jMenuItem1.setVisible(false);
                     jMenuItem2.setVisible(true);
