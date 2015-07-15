@@ -7,6 +7,7 @@ package Forms.Curso;
 
 import Controladores.ActividadJpaController;
 import Curso.Curso;
+import Tablas.Actividad;
 
 /**
  *
@@ -17,7 +18,7 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
     
     
     Curso curso;
-    ActividadJpaController controladorActividad;
+    Actividad actividad;
     int idActividad;
     
     /**
@@ -30,7 +31,7 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
     public abstract void iniciarComponentes();
     public abstract void modificarActividad();
     public abstract void modificarEntrega();
-    public abstract boolean verDisponiblidad();
+    public abstract boolean verDisponiblidad(Actividad actividad);
     public abstract void agregarEntrega();
     public abstract void calificar();
     /**
@@ -63,8 +64,12 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
         Etiqueta6 = new javax.swing.JLabel();
         jSeparator12 = new javax.swing.JSeparator();
         Boton1 = new javax.swing.JButton();
-        Boton2 = new javax.swing.JButton();
         Boton3 = new javax.swing.JButton();
+        Boton4 = new javax.swing.JButton();
+        Etiqueta7 = new javax.swing.JLabel();
+        Etiqueta8 = new javax.swing.JLabel();
+        Etiqueta9 = new javax.swing.JLabel();
+        Etiqueta10 = new javax.swing.JLabel();
 
         Etiqueta1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Etiqueta1.setText("Titulo");
@@ -76,37 +81,30 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
         Etiqueta2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Etiqueta2.setText("Estado de la Entrega");
 
-        Etiqueta3.setFont(new java.awt.Font("Trebuchet MS", 1, 10)); // NOI18N
+        Etiqueta3.setFont(new java.awt.Font("Trebuchet MS", 3, 12)); // NOI18N
         Etiqueta3.setText("Estado de la Entrega");
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        Etiqueta4.setFont(new java.awt.Font("Trebuchet MS", 1, 10)); // NOI18N
+        Etiqueta4.setFont(new java.awt.Font("Trebuchet MS", 3, 12)); // NOI18N
         Etiqueta4.setText("Estado de Calificacion");
 
         jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        Etiqueta5.setFont(new java.awt.Font("Trebuchet MS", 1, 10)); // NOI18N
+        Etiqueta5.setFont(new java.awt.Font("Trebuchet MS", 3, 12)); // NOI18N
         Etiqueta5.setText("Tiempo Restante");
 
         jSeparator11.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        Etiqueta6.setFont(new java.awt.Font("Trebuchet MS", 1, 10)); // NOI18N
+        Etiqueta6.setFont(new java.awt.Font("Trebuchet MS", 3, 12)); // NOI18N
         Etiqueta6.setText("Fecha de Entrega");
 
-        Boton1.setText("Entregar");
+        Boton1.setText("Entrega");
         Boton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Boton1ActionPerformed(evt);
-            }
-        });
-
-        Boton2.setText("Modificar");
-        Boton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton2ActionPerformed(evt);
             }
         });
 
@@ -117,6 +115,21 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
             }
         });
 
+        Boton4.setText("VerEntregas");
+        Boton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton4ActionPerformed(evt);
+            }
+        });
+
+        Etiqueta7.setFont(new java.awt.Font("Trebuchet MS", 1, 10)); // NOI18N
+
+        Etiqueta8.setFont(new java.awt.Font("Trebuchet MS", 1, 10)); // NOI18N
+
+        Etiqueta9.setFont(new java.awt.Font("Trebuchet MS", 1, 10)); // NOI18N
+
+        Etiqueta10.setFont(new java.awt.Font("Trebuchet MS", 3, 12)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,7 +139,7 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(188, Short.MAX_VALUE)
                 .addComponent(Etiqueta2)
                 .addGap(185, 185, 185))
             .addGroup(layout.createSequentialGroup()
@@ -141,7 +154,9 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                    .addComponent(Etiqueta8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(Etiqueta3)
@@ -149,7 +164,9 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                    .addComponent(Etiqueta7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(Etiqueta6)
@@ -157,7 +174,9 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSeparator8, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                    .addComponent(Etiqueta9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(Etiqueta5)
@@ -165,18 +184,20 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSeparator9, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                    .addComponent(Etiqueta10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Boton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Boton2))
-                                    .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGap(28, 28, 28)
+                                        .addComponent(Boton1))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(220, 220, 220)
                         .addComponent(Etiqueta1)))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Boton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Boton3))
         );
         layout.setVerticalGroup(
@@ -188,14 +209,18 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(Etiqueta2)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(Etiqueta3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Etiqueta3)
+                        .addComponent(Etiqueta7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -203,7 +228,10 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Etiqueta8, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -211,21 +239,27 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator12, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Etiqueta9, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Etiqueta5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Etiqueta10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Boton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Boton1)
-                    .addComponent(Boton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(Boton3))
+                    .addComponent(Boton3)
+                    .addComponent(Boton4)))
         );
 
         pack();
@@ -235,36 +269,37 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
         
-        if(verDisponiblidad()){
-         agregarEntrega();
-        }
+        
         
     }//GEN-LAST:event_Boton1ActionPerformed
     
     private void Boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton3ActionPerformed
         // TODO add your handling code here:
-        modificarActividad();
+        
+        
     }//GEN-LAST:event_Boton3ActionPerformed
 
-    private void Boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton2ActionPerformed
+    private void Boton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton4ActionPerformed
         // TODO add your handling code here:
-        if(verDisponiblidad()){
-         modificarEntrega();
-        }
-    }//GEN-LAST:event_Boton2ActionPerformed
+        
+    }//GEN-LAST:event_Boton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea AreaTexto;
+    protected javax.swing.JTextArea AreaTexto;
     protected javax.swing.JButton Boton1;
-    protected javax.swing.JButton Boton2;
     protected javax.swing.JButton Boton3;
-    private javax.swing.JLabel Etiqueta1;
+    protected javax.swing.JButton Boton4;
+    protected javax.swing.JLabel Etiqueta1;
+    protected javax.swing.JLabel Etiqueta10;
     private javax.swing.JLabel Etiqueta2;
     private javax.swing.JLabel Etiqueta3;
     private javax.swing.JLabel Etiqueta4;
     private javax.swing.JLabel Etiqueta5;
     private javax.swing.JLabel Etiqueta6;
+    protected javax.swing.JLabel Etiqueta7;
+    protected javax.swing.JLabel Etiqueta8;
+    protected javax.swing.JLabel Etiqueta9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;

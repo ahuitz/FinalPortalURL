@@ -7,6 +7,13 @@ package Forms.Curso;
 
 import Controladores.ActividadJpaController;
 import Curso.Curso;
+import Tablas.*;
+
+import Tablas.Actividad;
+import java.awt.Color;
+import java.util.Calendar;
+
+import java.util.Date;
 
 /**
  *
@@ -14,15 +21,24 @@ import Curso.Curso;
  */
 public class VerActividad_Estudiante extends VerActividad {
 
-    public VerActividad_Estudiante(Curso curso,ActividadJpaController controladorActividad,int idActividad) {
+    public VerActividad_Estudiante(Curso curso,int idActividad) {
         this.curso=curso;
-        this.controladorActividad=controladorActividad;
         this.idActividad=idActividad;
+        
     }
-    
+    public VerActividad_Estudiante(Curso curso,Actividad actividad) {
+        this.curso=curso;
+        this.idActividad=idActividad;
+        System.out.println(verDisponiblidad(actividad));
+        iniciarComponentes();
+       
+        
+    }
     @Override
     public void iniciarComponentes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Boton3.setVisible(false);
+        Boton4.setVisible(false);
+        
     }
 
     @Override
@@ -36,8 +52,51 @@ public class VerActividad_Estudiante extends VerActividad {
     }
 
     @Override
-    public boolean verDisponiblidad() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean verDisponiblidad(Actividad actividad) {
+        //Actividad actividad= curso.actividad.obtenerActividad(idActividad);
+        //Entrega entrega=curso.actividad.obtenerEntrega(idActividad);
+        String n=actividad.getTitulo();
+        Etiqueta1.setForeground(Color.BLACK);
+         Etiqueta1.setText(n);
+        AreaTexto.setText(actividad.getDescripcion());
+        Etiqueta9.setText(actividad.getFechaEntrega().toString());
+        
+        long en= actividad.getFechaEntrega().getTime();
+        long horaSistema=Calendar.getInstance().getTime().getTime();
+        long extra= actividad.getTiempoextra().getTime();
+        long nuevos= en-horaSistema;
+        
+        
+        String formato;
+        if(nuevos<0){
+            nuevos=nuevos*(-1);
+            formato="retrasada por:";
+            Etiqueta10.setForeground(Color.red);
+        }else{
+            formato="faltan: ";
+            Etiqueta10.setForeground(Color.BLACK);
+        }
+        long dias=(((((nuevos)/1000)/60)/60)/24)%365;
+        long horas=((((nuevos)/1000)/60)/60)%24;
+        long minutos=(((nuevos)/1000)/60)%60;
+        if(dias>0){
+            formato=formato+dias+" dias ";
+        }
+        if(horas>0){
+            formato=formato+horas+" horas ";
+        }
+        if(minutos>0){
+            formato=formato+minutos+" minutos ";
+        } 
+        Etiqueta10.setText(formato);
+        if((extra-horaSistema)<0){
+            Boton1.setVisible(false);
+            
+            return false;
+        }
+      
+        return true;
+        
     }
 
     @Override

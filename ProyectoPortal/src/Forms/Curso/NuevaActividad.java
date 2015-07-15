@@ -5,36 +5,76 @@
  */
 package Forms.Curso;
 
+import Curso.Curso;
 import Tablas.Actividad;
+import Tablas.Tipoactividad;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+import javax.swing.ComboBoxModel;
+import Controladores.TipoactividadJpaController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Diaz
  */
-public class NuevaActividad extends javax.swing.JFrame {
+public class NuevaActividad extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Entrega
      */
     public NuevaActividad() {
         initComponents();
-        LlenarCombos();
+        //LlenarCombos();
     }
-    public NuevaActividad(Tablas.Actividad actividad) {
+    public NuevaActividad(Curso curso) {
         initComponents();
+       // LlenarCombos();
+        this.curso=curso;
+        Boton3.setText("Aceptar");
+        iniciarLista();
         LlenarCombos();
+        llenarTipoActividad();
+        
+        modificar=false;
     }
+    public NuevaActividad(int idActividad, Curso curso) {
+        initComponents();
+       
+        Boton3.setText("Modificar");
+        Boton5.setVisible(false);
+        modificar=true;
+        this.curso=curso;
+        Etiqueta9.setText("Por favor ingrese de nuevo la hora de las entregas");
+        this.actividad=curso.actividad.obtenerActividad(idActividad);
+        iniciarLista();
+        mostrarDatos(actividad);
+    }
+    
+    boolean modificar;
+    Actividad actividad;
+    Curso curso;
+    List<Tipoactividad> listaActividad;
     int anioE = 0;
     int mesE = 0;
     int diaE = 0;
+    int horaE=0;
+    int minutoE=0;
     
     int anioL = 0;
     int mesL = 0;
     int diaL = 0;
-    
+    int horaL=0;
+    int minutoL=0;
+    public void iniciarLista(){
+        TipoactividadJpaController controlador = new TipoactividadJpaController(curso.conexion.getEmf());
+        listaActividad=controlador.findTipoactividadEntities();
+    }
     public void LlenarCombos(){
         Combo1.removeAllItems();
         Combo2.removeAllItems();
@@ -50,6 +90,68 @@ public class NuevaActividad extends javax.swing.JFrame {
         }
         
     }
+    
+     public void mostrarDatos(Actividad actividad){
+        System.out.println(actividad);
+        Texto1.setText(actividad.getTitulo());
+        AreaText1.setText(actividad.getDescripcion());
+        anioE=actividad.getFechaEntrega().getYear();
+        mesE=actividad.getFechaEntrega().getMonth();
+        diaE=actividad.getFechaEntrega().getDay();
+        Texto2.setText(anioE+"/"+mesE+"/"+diaE);
+        
+      
+        
+        Combo1.removeAllItems();
+        Combo2.removeAllItems();
+        Combo3.removeAllItems();
+        Combo4.removeAllItems();
+        jComboBox1.removeAllItems();
+        
+        Combo1.addItem(actividad.getFechaEntrega().getHours());
+        Combo2.addItem(actividad.getFechaEntrega().getMinutes());
+        Combo3.addItem(actividad.getTiempoextra().getHours());
+        Combo4.addItem(actividad.getTiempoextra().getMinutes());
+        for (Tipoactividad tp : listaActividad) {
+            if (tp.getId() == actividad.getTipoActividadid()) {
+                jComboBox1.addItem(tp.getTipoActividad());
+            }
+
+        }
+        
+               
+        anioL=actividad.getTiempoextra().getYear();
+        mesL=actividad.getTiempoextra().getMonth();
+        diaL=actividad.getTiempoextra().getDay();
+        Texto3.setText(anioL+"/"+mesL+"/"+diaL);
+        if(actividad.getVirtual()){
+            radioBoton1.setSelected(true);
+            
+        }else{
+            radioBoton1.setSelected(false);
+            
+        }
+        if(actividad.getFisica()){
+            radioBoton2.setSelected(true);
+            
+        }else{
+            radioBoton2.setSelected(false);
+        }
+        Texto4.setText(Double.toString(actividad.getPunteo()));
+    }
+    public void llenarTipoActividad(){
+        jComboBox1.removeAllItems();
+        for(Tipoactividad tp:listaActividad){
+            jComboBox1.addItem(tp.getTipoActividad());
+            
+            
+        }
+
+     }
+    
+
+    
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,6 +189,9 @@ public class NuevaActividad extends javax.swing.JFrame {
         radioBoton1 = new javax.swing.JRadioButton();
         radioBoton2 = new javax.swing.JRadioButton();
         Etiqueta8 = new javax.swing.JLabel();
+        Etiqueta9 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        Etiqueta10 = new javax.swing.JLabel();
 
         jDialog2.setMinimumSize(new java.awt.Dimension(446, 310));
 
@@ -118,6 +223,8 @@ public class NuevaActividad extends javax.swing.JFrame {
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
+        setClosable(true);
+
         Texto1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Texto1ActionPerformed(evt);
@@ -147,12 +254,52 @@ public class NuevaActividad extends javax.swing.JFrame {
         });
 
         Combo1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Combo1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Combo1MouseClicked(evt);
+            }
+        });
+        Combo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo1ActionPerformed(evt);
+            }
+        });
 
         Combo2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Combo2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Combo2MouseClicked(evt);
+            }
+        });
+        Combo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo2ActionPerformed(evt);
+            }
+        });
 
         Combo3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Combo3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Combo3MouseClicked(evt);
+            }
+        });
+        Combo3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo3ActionPerformed(evt);
+            }
+        });
 
         Combo4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Combo4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Combo4MouseClicked(evt);
+            }
+        });
+        Combo4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo4ActionPerformed(evt);
+            }
+        });
 
         Etiqueta3.setText("Hora");
 
@@ -202,21 +349,25 @@ public class NuevaActividad extends javax.swing.JFrame {
 
         Etiqueta8.setText("Tipo Entrega");
 
+        Etiqueta9.setForeground(new java.awt.Color(255, 0, 0));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox1MouseClicked(evt);
+            }
+        });
+
+        Etiqueta10.setText("Tipo Actividad");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Boton5, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Boton4, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Boton3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(Etiqueta7)
                             .addComponent(Etiqueta1)
@@ -228,43 +379,58 @@ public class NuevaActividad extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Texto2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Texto2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Boton1))
+                                        .addComponent(Boton1)
+                                        .addGap(18, 18, 18))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(Etiqueta3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(Combo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Etiqueta4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Combo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                                        .addGap(0, 55, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Etiqueta8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(Etiqueta3)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(Combo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(Etiqueta4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(Combo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(20, 20, 20)))))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(Etiqueta5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Combo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(Texto3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Boton2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Combo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(Etiqueta6)
-                                        .addGap(22, 22, 22)
-                                        .addComponent(Combo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Combo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Texto3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Boton2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Texto4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(79, 79, 79)
                                 .addComponent(radioBoton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(radioBoton2)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Etiqueta10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(Boton5, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Boton4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Boton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Etiqueta9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(259, 259, 259)
-                .addComponent(Etiqueta8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,33 +445,36 @@ public class NuevaActividad extends javax.swing.JFrame {
                     .addComponent(Etiqueta2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Boton1)
                     .addComponent(Texto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Boton2)
-                        .addComponent(Texto3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Texto3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Boton1))
+                    .addComponent(Boton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Combo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Etiqueta3))
+                    .addComponent(Etiqueta5)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Combo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Etiqueta6)
-                        .addComponent(Combo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Etiqueta5))
+                        .addComponent(Combo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Combo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Etiqueta4)))
+                        .addComponent(Etiqueta4)
+                        .addComponent(Combo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Etiqueta3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Etiqueta8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Etiqueta7)
                     .addComponent(Texto4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(radioBoton1)
-                    .addComponent(radioBoton2))
-                .addGap(32, 32, 32)
+                    .addComponent(radioBoton2)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Etiqueta10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Etiqueta9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Boton3)
                     .addComponent(Boton4)
@@ -326,7 +495,7 @@ public class NuevaActividad extends javax.swing.JFrame {
         mesE = jCalendar1.getMonthChooser().getMonth() + 1;
         anioE = jCalendar1.getYearChooser().getYear();
         
-        Texto2.setText(anioE+"/"+mesE+"/"+diaE);
+        Texto2.setText(diaE+"/"+mesE+"/"+anioE);
 
         jDialog2.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -342,18 +511,104 @@ public class NuevaActividad extends javax.swing.JFrame {
 
     private void Boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton3ActionPerformed
         // TODO add your handling code here:
-        Actividad actividad= new Actividad();
+        if(modificar){
+            try {
+                curso.actividad.modificarActividad(modificarActividad());
+            } catch (Exception ex) {
+                Logger.getLogger(NuevaActividad.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }else{
+            curso.actividad.publicarActividad(nuevaActividad(), curso.estudiantes);;
+            
+        }
+        
+        //NuevaActividad a= new NuevaActividad( actividad,curso);
+         System.out.println(actividad);
+         //prueba.jDesktopPane1.add(a);
+        //a.show();
+        //a.toFront();
+        
+    }//GEN-LAST:event_Boton3ActionPerformed
+    public Actividad nuevaActividad(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm"); 
+  
+        actividad= new Actividad();
         actividad.setTitulo(Texto1.getText());
         actividad.setDescripcion(AreaText1.getText());
-        Date nuevo = new Date( anioE,mesE, diaE, (int)Combo1.getSelectedItem(), (int)Combo2.getSelectedItem());
+        Date nuevo = sdf.parse( Texto2.getText()+" "+Combo1.getSelectedItem()+":"+Combo2.getSelectedItem(),new ParsePosition(0));
         actividad.setFechaEntrega(nuevo);
-        Date nuevo2 = new Date(anioL,mesL, diaL, (int)Combo3.getSelectedItem(), (int)Combo4.getSelectedItem());
+        Date nuevo2 =sdf.parse(Texto2.getText()+" "+Combo3.getSelectedItem()+":"+(int)Combo4.getSelectedItem(),new ParsePosition(0));
+        actividad.setTiempoextra(nuevo);
+        Calendar fecha = Calendar.getInstance();
+        
+        actividad.setFechaPublicacion(sdf.parse(fecha.getTime().getDate()+"/"+fecha.getTime().getMonth()+"/"+fecha.getTime().getYear()
+                +" "+fecha.getTime().getMinutes()+":"+fecha.getTime().getMinutes(),new ParsePosition(0)));
+        
+        for(Tipoactividad tp:listaActividad){
+            if(((String) jComboBox1.getSelectedItem()).compareTo(tp.getTipoActividad())==0){
+                actividad.setTipoActividadid(tp.getId());
+            }
+            
+            
+        }
+        if(radioBoton1.isSelected()){
+            actividad.setVirtual(true);
+        }else{
+            actividad.setVirtual(false);
+            
+        }
+        if(radioBoton2.isSelected()){
+            actividad.setFisica(true);
+        }else{
+            actividad.setFisica(false);
+            
+        }
+        actividad.setPunteo(Double.parseDouble(Texto4.getText()));
+        return actividad;
+        
+    }
+    
+    public Actividad modificarActividad(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm"); 
+        actividad.setTitulo(Texto1.getText());
+        actividad.setDescripcion(AreaText1.getText());
+        Date nuevo = sdf.parse( Texto2.getText()+" "+Combo1.getSelectedItem()+":"+Combo2.getSelectedItem(),new ParsePosition(0));
         actividad.setFechaEntrega(nuevo);
-        Calendar fecha = new GregorianCalendar();
-        actividad.setFechaPublicacion(new Date(Calendar.YEAR,Calendar.MONTH,Calendar.DATE,Calendar.HOUR,Calendar.MINUTE));
-        System.out.println(actividad);
-    }//GEN-LAST:event_Boton3ActionPerformed
-
+        Date nuevo2 =sdf.parse(Texto2.getText()+" "+Combo3.getSelectedItem()+":"+(int)Combo4.getSelectedItem(),new ParsePosition(0));
+        actividad.setTiempoextra(nuevo);
+        Calendar fecha = Calendar.getInstance();
+        
+        actividad.setFechaPublicacion(sdf.parse(fecha.getTime().getDate()+"/"+fecha.getTime().getMonth()+"/"+fecha.getTime().getYear()
+                +" "+fecha.getTime().getMinutes()+":"+fecha.getTime().getMinutes(),new ParsePosition(0)));
+        
+        for(Tipoactividad tp:listaActividad){
+            if(((String) jComboBox1.getSelectedItem()).compareTo(tp.getTipoActividad())==0){
+                actividad.setTipoActividadid(tp.getId());
+            }
+            
+            
+        }
+        if(radioBoton1.isSelected()){
+            actividad.setVirtual(true);
+        }else{
+            actividad.setVirtual(false);
+            
+        }
+        if(radioBoton2.isSelected()){
+            actividad.setFisica(true);
+        }else{
+            actividad.setFisica(false);
+            
+        }
+        System.out.println(actividad.getTitulo());
+        actividad.setPunteo(Double.parseDouble(Texto4.getText()));
+        return actividad;
+        
+    }
+    
+    
+    
     private void Boton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Boton4ActionPerformed
@@ -361,7 +616,7 @@ public class NuevaActividad extends javax.swing.JFrame {
     private void Boton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Boton5ActionPerformed
-
+    
     private void radioBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBoton1ActionPerformed
         // TODO add your handling code here:
         if(radioBoton1.isSelected()){
@@ -381,6 +636,94 @@ public class NuevaActividad extends javax.swing.JFrame {
             radioBoton2.setSelected(true);
         }
     }//GEN-LAST:event_radioBoton2ActionPerformed
+    boolean b1=true;
+    boolean b2=true;
+    boolean b3=true;
+    boolean b4=true;
+    boolean b5=true;
+    private void Combo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo1ActionPerformed
+        // TODO add your handling code here:
+        
+        
+
+    }//GEN-LAST:event_Combo1ActionPerformed
+
+    private void Combo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo2ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_Combo2ActionPerformed
+
+    private void Combo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo4ActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_Combo4ActionPerformed
+
+    private void Combo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo3ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_Combo3ActionPerformed
+
+    private void Combo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Combo1MouseClicked
+        // TODO add your handling code here:
+        if (b1) {
+            Combo1.removeAllItems();
+            for (int i = 0; i < 24; i++) {
+                Combo1.addItem(i);
+
+            }
+            b1=false;
+
+        }
+    }//GEN-LAST:event_Combo1MouseClicked
+
+    private void Combo2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Combo2MouseClicked
+        // TODO add your handling code here:
+        if (b2) {
+
+            Combo2.removeAllItems();
+            for (int i = 0; i < 60; i++) {
+                Combo2.addItem(i);
+            }
+            b2=false;
+        }
+        
+    }//GEN-LAST:event_Combo2MouseClicked
+
+    private void Combo3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Combo3MouseClicked
+        // TODO add your handling code here:
+        if (b4) {
+            Combo3.removeAllItems();
+            for (int i = 0; i < 24; i++) {
+                Combo3.addItem(i);
+
+            }
+            b4 = false;
+
+        }
+
+    }//GEN-LAST:event_Combo3MouseClicked
+
+    private void Combo4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Combo4MouseClicked
+        // TODO add your handling code here:
+         if (b3) {
+            Combo4.removeAllItems();
+            for (int i = 0; i < 60; i++) {
+                Combo4.addItem(i);
+            }
+            b3 = false;
+
+        }
+
+    }//GEN-LAST:event_Combo4MouseClicked
+
+    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
+        // TODO add your handling code here:
+        if(b5){
+            llenarTipoActividad();
+            b5=false;
+        }
+        
+    }//GEN-LAST:event_jComboBox1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -395,6 +738,7 @@ public class NuevaActividad extends javax.swing.JFrame {
     private javax.swing.JComboBox Combo3;
     private javax.swing.JComboBox Combo4;
     private javax.swing.JLabel Etiqueta1;
+    private javax.swing.JLabel Etiqueta10;
     private javax.swing.JLabel Etiqueta2;
     private javax.swing.JLabel Etiqueta3;
     private javax.swing.JLabel Etiqueta4;
@@ -402,12 +746,14 @@ public class NuevaActividad extends javax.swing.JFrame {
     private javax.swing.JLabel Etiqueta6;
     private javax.swing.JLabel Etiqueta7;
     private javax.swing.JLabel Etiqueta8;
+    private javax.swing.JLabel Etiqueta9;
     private javax.swing.JTextField Texto1;
     private javax.swing.JTextField Texto2;
     private javax.swing.JTextField Texto3;
     private javax.swing.JTextField Texto4;
     private javax.swing.JButton jButton6;
     private com.toedter.calendar.JCalendar jCalendar1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton radioBoton1;

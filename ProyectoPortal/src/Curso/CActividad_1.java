@@ -7,6 +7,9 @@ package Curso;
 
 import Controladores.ActividadJpaController;
 import Controladores.EntregaJpaController;
+import Tablas.Actividad;
+import Tablas.Entrega;
+import Tablas.Usuario;
 
 import java.util.ArrayList;
 
@@ -14,18 +17,34 @@ import java.util.ArrayList;
  *
  * @author Miguel Diaz
  */
-public abstract class Actividad {
+public abstract class CActividad_1 {
 
-    protected ArrayList<Tablas.Actividad> actividades;
-    
-   
+    protected ArrayList<Actividad> actividades;
     protected ActividadJpaController controladorA;
     protected EntregaJpaController controladorE;
     protected int idSeccionCurso;
     
-    public abstract void visualizarActividad();
     
-    public Tablas.Actividad obtenerActividad(int i ){
+    //metodos Estudiantes
+    public abstract void modificarEntrega(Entrega entrega)throws Exception;
+    public abstract Entrega obtenerEntrega(int idActividad);
+    
+    //metodos Catedraticos
+    public abstract ArrayList<Entrega> obtenerEntregas(int idActividad);
+    public abstract void calificarEntrega(ArrayList<Entrega> entrega )throws Exception;
+    public abstract void modificarActividad(Actividad actividad)throws Exception;
+    public abstract void publicarActividad(Tablas.Actividad actividad,ArrayList<Usuario> usuarios);
+    
+    
+    //metodos en comun
+    public abstract void visualizarActividad(Curso curso,int idActividad);
+    public abstract void cargarEntregas();
+    
+    public  void cargarActividades(){
+        
+    }
+    
+    public Actividad obtenerActividad(int i ){
         for(Tablas.Actividad a:actividades){
             if(a.getId()==i){
                 return a;
@@ -33,7 +52,9 @@ public abstract class Actividad {
             
         }
         return null;
-    }    
+    } 
+    
+    
     public ArrayList<Tablas.Actividad> getActividades() {
         return actividades;
     }

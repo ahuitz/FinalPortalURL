@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Curso {
 
-    public Actividad actividad;
+    public CActividad actividad;
     public ArrayList<Usuario> estudiantes;
     public FabricaTipoUsuario fabrica;
     public CRecurso recurso;

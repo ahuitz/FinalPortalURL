@@ -8,6 +8,7 @@ package Forms.Curso;
 import Controladores.ActividadJpaController;
 import Tablas.Actividad;
 import Curso.Curso;
+import java.awt.Color;
 
 /**
  *
@@ -18,23 +19,29 @@ public class VerActividad_Catedratico extends VerActividad{
     
     
     
-    public VerActividad_Catedratico(Curso curso,ActividadJpaController controladorActividad,int idActividad){
+    public VerActividad_Catedratico(Curso curso,int idActividad){
         this.curso=curso;
-        this.controladorActividad=controladorActividad;
         this.idActividad=idActividad;
     }
-
+    
+    public VerActividad_Catedratico(Curso curso, Actividad a){
+        this.curso=curso;
+        this.idActividad=idActividad;
+        this.actividad=a;
+        iniciarComponentes();
+        verDisponiblidad(a);
+    }
     @Override
     public void iniciarComponentes() {
         Boton3.setVisible(true);
-        Boton2.setVisible(false);
         Boton1.setVisible(false);
         
     }
     
     @Override
     public void modificarActividad() {
-       NuevaActividad actividad = new NuevaActividad(curso.actividad.obtenerActividad(idActividad));
+     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
     }
 
     @Override
@@ -43,8 +50,16 @@ public class VerActividad_Catedratico extends VerActividad{
     }
 
     @Override
-    public boolean verDisponiblidad() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean verDisponiblidad(Actividad actividad) {
+        String n=actividad.getTitulo();
+        Etiqueta1.setForeground(Color.BLACK);
+         Etiqueta1.setText(n);
+        AreaTexto.setText(actividad.getDescripcion());
+        Etiqueta9.setText(actividad.getFechaEntrega().toString());
+        Etiqueta7.setText("----------");
+        Etiqueta8.setText("----------");
+        Etiqueta10.setText("----------");
+        return true;
     }
 
     @Override
@@ -54,7 +69,7 @@ public class VerActividad_Catedratico extends VerActividad{
 
     @Override
     public void calificar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
    
 

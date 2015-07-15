@@ -21,7 +21,7 @@ public class FabricaEstudiante implements FabricaTipoUsuario {
     }
 
     @Override
-    public Actividad crearActividad(EntityManagerFactory emf, int idSC) {
+    public CActividad crearActividad(EntityManagerFactory emf, int idSC) {
         return new A_Estudiante(new ActividadJpaController(emf), new EntregaJpaController(emf), idSC);
     }
 

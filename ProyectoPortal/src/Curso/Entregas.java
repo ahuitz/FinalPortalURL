@@ -5,9 +5,10 @@
  */
 package Curso;
 
-import Controladores.EntregaJpaController;
+
 import Tablas.Entrega;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,13 +16,30 @@ import java.util.ArrayList;
  */
 public class Entregas {
 
-  public int idActividad;
-  public ArrayList<Entrega> entregas;
+  private int idActividad;
+  private List<Entrega> entregas;
   
-  public Entregas(int idActividad, EntregaJpaController controladorE) {
+  public Entregas(int idActividad, List<Entrega> E) {
       this.idActividad=idActividad;
-      entregas=(ArrayList<Entrega>)controladorE.findEntregaEntities();
+      this.entregas=E;
       
   }
+
+    public int getIdActividad() {
+        return idActividad;
+    }
+
+    public void setIdActividad(int idActividad) {
+        this.idActividad = idActividad;
+    }
+
+    public List<Entrega> getEntregas() {
+        return entregas;
+    }
+
+    public void setEntregas(List<Entrega> entregas) {
+        this.entregas = entregas;
+    }
+  
 
 }
