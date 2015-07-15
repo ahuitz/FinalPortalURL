@@ -33,7 +33,6 @@ public class ClaseListSecCurso {
         Iterator<Seccioncurso> iteradorSeccCur = SeccCur.iterator();
         List<ListaSecCurso> miLisSecCur = new ArrayList<ListaSecCurso>();
         while (iteradorSeccCur.hasNext()) {  
-            System.out.println("");
             Seccioncurso SeccCur1 = iteradorSeccCur.next();
             if (SeccCur1.getUsuarioCatedraticoid() == 3) {
                 
@@ -109,8 +108,6 @@ public class ClaseListSecCurso {
                     miFacu.getFacultad(), miUsu.getUsuario(), miPer.getNombre(), miPer.getApellido(),
                      miPer.getId());
                 miLisSecCur.add(listSecCurso);
-                
-                System.out.println(listSecCurso);
                 
             }else{
                 iteradorSeccCur.remove();

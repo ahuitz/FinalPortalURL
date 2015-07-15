@@ -31,40 +31,8 @@ public class Prueba {
         ClaseListSecCurso miClaseLisSecCurso = new ClaseListSecCurso();
         miClaseLisSecCurso.cargarDatosListSeccionCurso();
         
-        
-        System.out.println("");
-        System.out.println("");
-        Query EstSecc = ConexionJPA.getInstance("usuario", "usuario").getEm().createNamedQuery("Estudianteseccion.findAll");
-        List<Estudianteseccion> miEstSecc = EstSecc.getResultList();
-        Iterator<Estudianteseccion> iteradorEstSecc = miEstSecc.iterator();
-        while (iteradorEstSecc.hasNext()) {            
-            Estudianteseccion EstSecc1 = iteradorEstSecc.next();
-            
-            
-            ////////////
-            ////////////Usuario
-            Query qUsu = ConexionJPA.getInstance("usuario", "usuario").getEm().createNamedQuery("Usuario.findById");
-            qUsu.setParameter("id", EstSecc1.getUsuarioid());
-            Usuario miUsu = new Usuario();
-            miUsu = (Usuario) qUsu.getSingleResult();
-            ////////////
-            ////////////Persona
-            Query qPer = ConexionJPA.getInstance("usuario", "usuario").getEm().createNamedQuery("Persona.findById");
-            qPer.setParameter("id", miUsu.getPersonaid());
-            Persona miPer = new Persona();
-            miPer = (Persona) qPer.getSingleResult();
-            ////////////
-            ////////////SeccionCurso
-            Query qSecCur = ConexionJPA.getInstance("usuario", "usuario").getEm().createNamedQuery("Seccioncurso.findById");
-            qSecCur.setParameter("id", EstSecc1.getSeccionCursoid());
-            Seccioncurso miSecCur = new Seccioncurso();
-            miSecCur = (Seccioncurso) qSecCur.getSingleResult();
-            
-            System.out.println(EstSecc1.getId() + " " + EstSecc1.getSeccionCursoid() + " " + EstSecc1.getUsuarioid()
-                    + " " + miUsu.getUsuario() + " " + miPer.getNombre() + " " + miPer.getApellido()
-                    + " " + miPer.getId()
-            );
-        }
+        ClaseListEstuSeccion miClaseLisEstuSecc = new ClaseListEstuSeccion();
+        miClaseLisEstuSecc.cargarListaEstudianteSeccion();
         
         
         
@@ -76,6 +44,7 @@ public class Prueba {
         Query qEntr = ConexionJPA.getInstance("usuario", "usuario").getEm().createNamedQuery("Entrega.findAll");
         List<Entrega> miListEnt = qEntr.getResultList();
         Iterator<Entrega> iteradorEnt = miListEnt.iterator();
+        List<ListaEntregaActiv> miLisEntActiv = new ArrayList<ListaEntregaActiv>();
         while (iteradorEnt.hasNext()) {            
             Entrega miEnt = iteradorEnt.next();
             
@@ -122,6 +91,23 @@ public class Prueba {
                     + " " + miSecCur.getId() + " " + miActivi.getFechaEntrega() + " " + miActivi.getFechaPublicacion()
                     + " " + miActivi.getFisica() + " " + miActivi.getVirtual()
             );
+            
+            ListaEntregaActiv miListEntActiv = new ListaEntregaActiv(miEnt.getId(), miEnt.getCalificacion(), miEnt.getNoRealizada() 
+                    ,miEnt.getRealizada(), miActivi.getId(), miActivi.getPunteo()
+                    ,miActivi.getTitulo(), miTipAct.getId(), miTipAct.getTipoActividad(), miUsu.getId() 
+                    ,miUsu.getUsuario(), miPer.getId(), miPer.getNombre(), miPer.getApellido()
+                    ,miSecCur.getId(), miActivi.getFechaEntrega(), miActivi.getFechaPublicacion()
+                    ,miActivi.getFisica(), miActivi.getVirtual());
+            
+            miLisEntActiv.add(miListEntActiv);
+
+        }
+        
+        System.out.println("4");
+        Iterator<ListaEntregaActiv> iteradorListaEntActiv = miLisEntActiv.iterator();
+        while (iteradorListaEntActiv.hasNext()) { 
+            ListaEntregaActiv ListaEntAct = iteradorListaEntActiv.next();
+            System.out.println(ListaEntAct);
         }
     }
     

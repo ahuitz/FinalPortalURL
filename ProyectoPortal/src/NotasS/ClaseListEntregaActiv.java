@@ -9,6 +9,12 @@ package NotasS;
  *
  * @author Saul
  */
-public class ListaEntrega {
+public class ClaseListEntregaActiv {
+    
+    public void cargarDatosListEntregaActividad(){
+        
+        
+        
+    }
     
 }
