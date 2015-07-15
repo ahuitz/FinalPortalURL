@@ -6,6 +6,8 @@
 package Forms;
 import Conexion.*;
 import Tablas.Persona;
+import Tablas.Usuario;
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
@@ -202,6 +204,8 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
     private String Usuario ;
     private String Contraseña;
     public static int idpersona;
+    Persona info = new Persona();
+    public static Usuario us= new Usuario();
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         
@@ -222,9 +226,12 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
                 configuracion=Config.getInstance(Usuario, Contraseña);
             
                 if(conexion!=null){
-                    Persona info = new Persona();
+                    
                     Query obtener= conexion.getEm().createNamedQuery("Persona.findByCarne");
                     obtener.setParameter("carne",configuracion.getCarne());
+                    Query obtenerus= conexion.getEm().createNamedQuery("Usuario.findByUsuario");
+                    obtenerus.setParameter("usuario",configuracion.getUser());
+                    us=(Usuario)obtenerus.getSingleResult();
                     info=(Persona)obtener.getSingleResult();
                     txNombre.setText(info.getNombre());
                     txApellido.setText(info.getApellido());
