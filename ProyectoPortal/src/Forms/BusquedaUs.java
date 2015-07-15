@@ -35,14 +35,9 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
     }
         private DefaultTableModel model;
     public void tableModel(){
-    
     this.jTable1.getColumnModel().getColumn(0).setPreferredWidth(90);
     this.jTable1.getColumnModel().getColumn(1).setPreferredWidth(40);
     this.jTable1.getColumnModel().getColumn(2).setPreferredWidth(30);
-    
-    
-    
-    
     model = (DefaultTableModel)this.jTable1.getModel();
     model.setNumRows(0);
 }
@@ -61,15 +56,16 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
             
         }
     }
-    public void buscarUs(String nombre){
+      public void buscarUs(String nombre){
         EntityManager em = FormularioUsuarios1.conexion.getEm();
         String q="Persona.findByNombre";
         Query qu = em.createNamedQuery(q);
         qu.setParameter("nombre", nombre+"%");
         List<Persona> lista = qu.getResultList();
         for(Persona personaList : lista){
-            if(personaList.getEstado()!=false){model.addRow(new Object[]{
-             personaList.getCarne(), personaList.getNombre()+" "+ personaList.getApellido(), personaList.getEstado()});}
+            if(personaList.getEstado()!=false){
+                model.addRow(new Object[]{
+                personaList.getCarne(), personaList.getNombre()+" "+ personaList.getApellido(), personaList.getEstado()});}
              
         }
     }
@@ -99,8 +95,8 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/save.png"))); // NOI18N
-        guardar.setText("Guardar");
+        guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/nuevo.png"))); // NOI18N
+        guardar.setText("Nuevo");
         guardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         guardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -247,10 +243,9 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
         // TODO add your handling code here:
         
-        if (this.jTextField1.getText().isEmpty()) {
+       if (this.jTextField1.getText().isEmpty()) {
             tableModel();
             cargarTabla();
-            
         }else{
             tableModel();
             buscarUs(this.jTextField1.getText());
