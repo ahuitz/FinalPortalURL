@@ -21,7 +21,8 @@ import javax.persistence.Query;
  */
 public class ClaseListEstuSeccion {
     
-    public void cargarListaEstudianteSeccion(){
+    public List<ListaEstuSeccion> cargarListaEstudianteSeccion(){
+        
         System.out.println("");
         System.out.println("");
         Query EstSecc = ConexionJPA.getInstance("usuario", "usuario").getEm().createNamedQuery("Estudianteseccion.findAll");
@@ -69,6 +70,7 @@ public class ClaseListEstuSeccion {
             ListaEstuSeccion ListaEstSecc = iteradorListaEstSecc.next();
             System.out.println(ListaEstSecc);
         }
+        return miLisEstSecc;
     }
     
 }

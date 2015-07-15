@@ -27,7 +27,7 @@ import javax.persistence.Query;
  */
 public class ClaseListSecCurso {
     
-    public void cargarDatosListSeccionCurso(){
+    public List<ListaSecCurso> cargarDatosListSeccionCurso(){
         Query qSeccCur = ConexionJPA.getInstance("usuario", "usuario").getEm().createNamedQuery("Seccioncurso.findAll");
         List<Seccioncurso> SeccCur = qSeccCur.getResultList();
         Iterator<Seccioncurso> iteradorSeccCur = SeccCur.iterator();
@@ -121,6 +121,7 @@ public class ClaseListSecCurso {
             ListaSecCurso ListaSecCur = iteradorListaSecCur.next();
             System.out.println(ListaSecCur);
         }
+        return miLisSecCur;
     }
     
 }

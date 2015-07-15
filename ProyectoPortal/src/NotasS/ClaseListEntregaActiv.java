@@ -23,7 +23,7 @@ import javax.persistence.Query;
  */
 public class ClaseListEntregaActiv {
     
-    public void cargarDatosListEntregaActividad(){
+    public List<ListaEntregaActiv> cargarDatosListEntregaActividad(){
         
         System.out.println("");
         System.out.println("");
@@ -95,7 +95,7 @@ public class ClaseListEntregaActiv {
             ListaEntregaActiv ListaEntAct = iteradorListaEntActiv.next();
             System.out.println(ListaEntAct);
         }
-        
+        return miLisEntActiv;
     }
     
 }
