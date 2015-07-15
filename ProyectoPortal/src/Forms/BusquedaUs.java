@@ -35,13 +35,14 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
     this.jTable1.getColumnModel().getColumn(0).setPreferredWidth(90);
     this.jTable1.getColumnModel().getColumn(1).setPreferredWidth(40);
     this.jTable1.getColumnModel().getColumn(2).setPreferredWidth(30);
-    this.jTable1.getColumnModel().getColumn(3).setPreferredWidth(30);
+    
     
     
     
     model = (DefaultTableModel)this.jTable1.getModel();
     model.setNumRows(0);
 }
+    
     public void cargarTabla(){
        EntityManager em = FormularioUsuarios1.conexion.getEm();
        String q = "Persona.findAll";
@@ -60,14 +61,13 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
         EntityManager em = FormularioUsuarios1.conexion.getEm();
         String q="Persona.findByNombre";
         Query qu = em.createNamedQuery(q);
-        qu.setParameter("nombre", nombre);
-       List<Persona> lista = qu.getResultList();
+        qu.setParameter("nombre", nombre+"%");
+        List<Persona> lista = qu.getResultList();
         for(Persona personaList : lista){
-             model.addRow(new Object[]{
-             personaList.getCarne(), personaList.getNombre()+" "+ personaList.getApellido(), personaList.getEstado()});
+            if(personaList.getEstado()!=false){model.addRow(new Object[]{
+             personaList.getCarne(), personaList.getNombre()+" "+ personaList.getApellido(), personaList.getEstado()});}
+             
         }
-        
-    
     }
     
     /**
@@ -159,6 +159,11 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
                 "CARNE", "NOMBRE", "ESTADO"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -250,10 +255,24 @@ public class BusquedaUs extends javax.swing.JInternalFrame {
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
         // TODO add your handling code here:
-        tableModel();
+        
+        if (this.jTextField1.getText().isEmpty()) {
+            tableModel();
+            cargarTabla();
+            
+        }else{
+            tableModel();
+            buscarUs(this.jTextField1.getText());
+        }
+        
         
         
     }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
