@@ -32,7 +32,7 @@ public class AccionesUsuario {
     public String buscarSangreId(int id,EntityManager em){
         Query q=em.createNamedQuery("Tiposangre.findById");
         q.setParameter("id", id);
-        Tiposangre tSangre= (Tiposangre) q.getResultList();
+        Tiposangre tSangre= (Tiposangre) q.getSingleResult();
         return tSangre.getTipo();        
     }
 }
