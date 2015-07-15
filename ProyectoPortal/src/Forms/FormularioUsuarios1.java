@@ -6,6 +6,7 @@
 package Forms;
 import Conexion.*;
 import Tablas.Persona;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -27,6 +28,8 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
         
         
     }
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -238,11 +241,8 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        DATOS dat = new DATOS();
-        //dat.show(true);
-        //this.add(dat);
-        this.jDesktopPane1.add(dat);
-        dat.setVisible(true);
+        DatosPersona datos = new DatosPersona();
+        datos.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
