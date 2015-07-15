@@ -5,6 +5,7 @@
  */
 package Curso;
 
+import Conexion.ConexionJPA;
 import Tablas.Seccioncurso;
 import Tablas.Usuario;
 import java.util.ArrayList;
@@ -21,9 +22,9 @@ public class Curso {
     public FabricaTipoUsuario fabrica;
     public CRecurso recurso;
     public Seccioncurso seccion_Curso;
-    public Object conexion;
+    public ConexionJPA conexion;
     public Usuario usuario;
-    
+   
 
     public Curso(Usuario Usuario, Seccioncurso seccion_curso) {
     }
