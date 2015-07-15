@@ -28,10 +28,11 @@ public class Prueba {
         // TODO code application logic here
 
         int UsuaCatId = 4;
+        int Cursoid = 2;
         ClaseListSecCurso miClaseLisSecCurso = new ClaseListSecCurso();
         List<ListaSecCurso> miListaSecCurso = miClaseLisSecCurso.cargarDatosListSeccionCurso(UsuaCatId);
         ClaseListaPorCurso miListaPorCurso = new ClaseListaPorCurso();
-        miListaPorCurso.encontraPorCurso(miListaSecCurso);
+        miListaPorCurso.encontraPorCurso(miListaSecCurso, Cursoid);
         
         
         ClaseListEstuSeccion miClaseLisEstuSecc = new ClaseListEstuSeccion();
