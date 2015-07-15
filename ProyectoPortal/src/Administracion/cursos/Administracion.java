@@ -21,6 +21,7 @@ import Tablas.Cursocarrera;
 import Tablas.Facultad;
 import Tablas.Seccion;
 import Tablas.Seccioncurso;
+import java.util.Date;
 import javax.persistence.EntityManagerFactory;
 
 
@@ -32,8 +33,7 @@ public class Administracion {
     
     EntityManagerFactory emf;
 
-    public Administracion(EntityManagerFactory emf) {
-        this.emf = emf;
+    public Administracion() {
     }
     
     /*
@@ -96,14 +96,24 @@ public class Administracion {
     
     */
     
-    public void crearSeccion(String descripcion, int cupo, int cursocarreraid, int usuariocatedraticoid){
+    public void crearSeccion(String descripcion, int cupo, String curso, String carrera, String catedratico, 
+            String ciclo, int anio){
+        
         SeccionJpaController conSeccion = new SeccionJpaController(emf);
         Seccion seccion = new Seccion(conSeccion.getMaxId() + 1, descripcion);
         conSeccion.create(seccion);
         
+        CursoJpaController conCurso = new CursoJpaController(emf);
+        int idciclo = conCurso.getId(ciclo);
+        CiclocursoJpaController conCiclocurso = new CiclocursoJpaController(emf);
+        int idciclocurso = conCiclocurso.getId(idciclo, anio);
+        CarreraJpaController conCarrera = new CarreraJpaController(emf);
+        int idcarrera = conCarrera.getId(carrera);
+        CursocarreraJpaController conCursocarrera = new CursocarreraJpaController(emf);
+        int idcursocarrera = conCursocarrera.getId(idcarrera, idciclocurso);
+        
         SeccioncursoJpaController conSeccioncurso = new SeccioncursoJpaController(emf);
-        Seccioncurso seccioncurso = new Seccioncurso(conSeccioncurso.getMaxId() + 1, cupo, cupo, seccion.getId(), 
-                cursocarreraid, usuariocatedraticoid);
+        Seccioncurso seccioncurso = new Seccioncurso(conSeccioncurso.getMaxId(), cupo, cupo, seccion.getId(), idcursocarrera, 0);
         conSeccioncurso.create(seccioncurso);
     }
 }
