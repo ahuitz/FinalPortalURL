@@ -43,7 +43,7 @@
                       <Component id="BotonBuscar" min="-2" pref="162" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -66,7 +66,7 @@
                   <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BotonBuscar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace pref="43" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="BotonCancelar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="BotonAceptar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
