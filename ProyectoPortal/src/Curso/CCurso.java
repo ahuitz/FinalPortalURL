@@ -20,13 +20,13 @@ import javax.persistence.Query;
  */
 public class CCurso {
 
-    public FabricaTipoUsuario fabrica;
-    public CActividad actividad;
-    public CRecurso recurso;
-    public ArrayList<Persona> estudiantes;
-    public ArrayList<Integer> usuariosID;
+    private FabricaTipoUsuario fabrica;
+    private CActividad actividad;
+    private CRecurso recurso;
+    private ArrayList<Persona> estudiantes;
+    private ArrayList<Integer> usuariosID;
     public static Usuario usuario;
-    public int idSeccionCurso;
+    private int idSeccionCurso;
 
     public CCurso(String rol, Usuario usuario, int idSeccionCurso) {
         CCurso.usuario=usuario;
@@ -49,6 +49,26 @@ public class CCurso {
             default:
                 break;
         }
+    }
+
+    public CActividad getActividad() {
+        return actividad;
+    }
+
+    public CRecurso getRecurso() {
+        return recurso;
+    }
+
+    public ArrayList<Persona> getEstudiantes() {
+        return estudiantes;
+    }
+
+    public ArrayList<Integer> getUsuariosID() {
+        return usuariosID;
+    }
+
+    public int getIdSeccionCurso() {
+        return idSeccionCurso;
     }
     
     private void obtenerUsuariosID(){
