@@ -140,7 +140,7 @@ public class CiclocursoJpaController implements Serializable {
         try{
             Query q = em.createQuery("SELECT MAX(c.id) FROM Ciclocurso c");
             Object id = q.getSingleResult();
-            if (id == null)
+            if (id != null)
                 return (int) id;
             else
                 return 0;
@@ -149,15 +149,14 @@ public class CiclocursoJpaController implements Serializable {
         }
     }
     
-    public int getId(int cursoid, int anio){
-        EntityManager em = getEntityManager();
-        try{
-            Query q = em.createNamedQuery("SELECT c.id FROM Ciclocurso c WHERE c.cicloid = " + cursoid + 
-                    "AND c.anio = " + anio);
-            return (int) q.getSingleResult();
-        }finally{
-            em.close();
+    public int getId(int cursoid, int ciclo, int anio){
+        List<Ciclocurso> listaciclocurso = findCiclocursoEntities();
+        int id = 0;
+        for(Ciclocurso ciclocurso : listaciclocurso){
+            if ((cursoid == ciclocurso.getCursoid()) && (ciclo == ciclocurso.getCicloid()) && (anio == ciclocurso.getAnio()))
+                id = ciclocurso.getId();
         }
+        return id;
     }
     
 }
