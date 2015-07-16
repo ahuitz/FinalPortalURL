@@ -79,7 +79,7 @@ public class DualController implements Controlador{
         us.setUsuario(TipoEst+num+"15");
         us.setPersonaid(Integer.parseInt(num));
         controladorusuario.create(us);
-        JOptionPane.showMessageDialog(null, "sad", "dsad", JOptionPane.ERROR_MESSAGE); 
+        JOptionPane.showMessageDialog(null,"Su nuevo carne es :"+TipoEst+num+"15" , "Atencion", JOptionPane.INFORMATION_MESSAGE); 
 
         System.out.println(""+us.getUsuario());
       
