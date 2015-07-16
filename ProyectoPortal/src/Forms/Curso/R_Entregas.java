@@ -7,6 +7,7 @@ package Forms.Curso;
 
 import Controladores.ArchivoJpaController;
 import Controladores.DetalleentregaJpaController;
+import Controladores.EntregaJpaController;
 import Controladores.exceptions.NonexistentEntityException;
 import Curso.CCurso;
 import Curso.ModeloTablaArchivos;
@@ -41,7 +42,7 @@ public class R_Entregas extends javax.swing.JInternalFrame {
         this.id= idActividad;
         
         entrega=curso.getActividad().obtenerEntrega(idActividad);
-        controldetalles=null;
+        
         if(entrega.getRealizada()){
             obtenerArchivos();
         }
@@ -58,6 +59,8 @@ public class R_Entregas extends javax.swing.JInternalFrame {
     ModeloTablaArchivos modelo;
     DetalleentregaJpaController controldetalles;
     ArchivoJpaController controlarchivo;
+    EntregaJpaController controladorentrega;
+    
     CCurso curso;
     Entrega entrega;
     int id;
@@ -75,6 +78,9 @@ public class R_Entregas extends javax.swing.JInternalFrame {
             q.setParameter("id", d.getArchivoid());
             archivos.add((Archivo) q.getSingleResult());
         }
+        modelo= new ModeloTablaArchivos(archivos);
+        jTable1.setModel(modelo);
+        
     }
     
     public void eliminar(Archivo arch,int idRow){
@@ -106,25 +112,41 @@ public class R_Entregas extends javax.swing.JInternalFrame {
         
     }
     public void Finalizar(){
-        controlarchivo= new ArchivoJpaController(curso.getActividad().getEmf());
-        controldetalles= new DetalleentregaJpaController(curso.getActividad().getEmf());
-        for(Archivo a :archivos){
-            if(a.getId()==null){
-                try {
-                    controlarchivo.edit(a);
-                } catch (Exception ex) {
-                    Logger.getLogger(R_Entregas.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            controlarchivo= new ArchivoJpaController(curso.getActividad().getEmf());
+            controldetalles= new DetalleentregaJpaController(curso.getActividad().getEmf());
+            controladorentrega= new EntregaJpaController(curso.getActividad().getEmf());
+            for(Archivo a :archivos){
+                if(a.getId()!=null){
+                    try {
+                        controlarchivo.edit(a);
+                    } catch (Exception ex) {
+                        Logger.getLogger(R_Entregas.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }else{
+                    
+                    int arcS= maxArchivosId();
+                    a.setId(arcS);
+                     controlarchivo.create(a);
+                    int arc= maxArchivosId();
+           
+                  
+                    System.out.println("correlativo "+a.getId());
+                   Detalleentrega nuevo= new Detalleentrega(1, new Date(), arc, entrega.getId());
+                   nuevo.setEntregaid(entrega.getId());
+                   nuevo.setArchivoid(arc);
+                   nuevo.setFechaModificacion(new Date());
+                   nuevo.setId(0);
+                   controldetalles= new DetalleentregaJpaController(curso.getActividad().getEmf());
+                    controldetalles.create(nuevo);
+                    
                 }
-                
-            }else{
-                int detalle=maxDetalleentregaadId();
-                int arc= maxArchivosId();
-                a.setId(arc);
-                System.out.println(a);
-                controlarchivo.create(a);
-                controldetalles.create(new Detalleentrega(detalle, new Date(), arc, this.id));
-                
             }
+            entrega.setRealizada(true);
+            controladorentrega.edit(entrega);
+        } catch (Exception ex) {
+            Logger.getLogger(R_Entregas.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -133,7 +155,7 @@ public class R_Entregas extends javax.swing.JInternalFrame {
         Query q;
         EntityManager em=curso.getActividad().getEmf().createEntityManager();
         q=em.createNamedQuery("Detalleentrega.findMaxId");;
-        return q.getFirstResult();
+        return q.getFirstResult() ;
     }
     private int maxArchivosId(){
         Query q;
@@ -166,15 +188,17 @@ public class R_Entregas extends javax.swing.JInternalFrame {
         });
         jPopupMenu1.add(jMenuItem1);
 
+        setClosable(true);
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -244,7 +268,8 @@ public class R_Entregas extends javax.swing.JInternalFrame {
             arch.setNombre(st[0]);
             arch.setTamanio(file.length());
             arch.setExtension(st[1]);
-            arch.setUrl(file.getAbsolutePath());
+            arch.setUrl("sin url");
+            
             archivos.add(arch);
             modelo= new ModeloTablaArchivos(archivos);
             jTable1.setModel(modelo);

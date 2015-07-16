@@ -85,14 +85,14 @@ public class A_Catedratico extends CActividad {
         Query q;
         EntityManager em=emf.createEntityManager();
         q=em.createNamedQuery("Actividad.findMaxId");;
-        return q.getFirstResult();
+        return (int) q.getSingleResult();
     }
     
     private int maxEntregaId(){
         Query q;
         EntityManager em=emf.createEntityManager();
         q=em.createNamedQuery("Entrega.findMaxId");;
-        return q.getFirstResult();
+        return (int) q.getSingleResult();
     }
     
     private void crearEntregas(int idActividad,List<Integer> usuarios){
