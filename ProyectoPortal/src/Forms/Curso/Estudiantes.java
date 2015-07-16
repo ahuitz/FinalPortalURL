@@ -18,35 +18,24 @@ import java.util.ArrayList;
  */
 public class Estudiantes extends javax.swing.JInternalFrame {
 
-    private static Estudiantes est = null;
-    PersonaJpaController controladorE;
-
     /**
      * Creates new form Estudiantes
+     * @param estudiantes
      */
-    private Estudiantes(PersonaJpaController estu) {
+    public Estudiantes(ArrayList<Persona> estudiantes) {
         initComponents();
-        controladorE=estu;
-        jTable1.setModel(new ModeloTablaEstudiante((ArrayList<Persona>) controladorE.findPersonaEntities()));
-    }
-
-    public static Estudiantes getEst(PersonaJpaController estu) {
-        if (est == null) {
-            est = new Estudiantes(estu);
-        } 
-        return est;
-    }
+        setIconifiable(Boolean.TRUE);
+        setVisible(Boolean.TRUE);
+        setClosable(Boolean.TRUE);
+        //setResizable(Boolean.TRUE);
+        this.TablaEstudiantes.setModel(new ModeloTablaEstudiante(estudiantes));
+        for(int i=0;i<TablaEstudiantes.getModel().getColumnCount();i++){
+            for(int j=0;j<TablaEstudiantes.getModel().getRowCount();j++){
+                TablaEstudiantes.getModel().isCellEditable(i, j);                
+            }
+        }
+    }  
     
-    public void actualizarLista(){
-        jTable1.setModel(new ModeloTablaEstudiante((ArrayList<Persona>) controladorE.findPersonaEntities()));
-        
-    }
-   
-   
-    
-    
-   
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,7 +47,7 @@ public class Estudiantes extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TablaEstudiantes = new javax.swing.JTable();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -78,9 +67,11 @@ public class Estudiantes extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("Listado Estudiantes");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaEstudiantes.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        TablaEstudiantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -91,7 +82,8 @@ public class Estudiantes extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        TablaEstudiantes.setRowHeight(30);
+        jScrollPane1.setViewportView(TablaEstudiantes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,11 +92,11 @@ public class Estudiantes extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -114,22 +106,20 @@ public class Estudiantes extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        // TODO add your handling code here:
-        est=null;
-        
+        // TODO add your handling code here:        
     }//GEN-LAST:event_formInternalFrameClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaEstudiantes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

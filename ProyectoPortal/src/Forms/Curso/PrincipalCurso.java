@@ -110,6 +110,11 @@ public class PrincipalCurso extends javax.swing.JInternalFrame {
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jButton4.setText("Participantes");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel2.setText("Personas");
@@ -183,6 +188,13 @@ public class PrincipalCurso extends javax.swing.JInternalFrame {
                 break;
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        Estudiantes ests = new Estudiantes(curso.getEstudiantes());
+        this.getParent().add(ests);
+        ests.toFront();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
