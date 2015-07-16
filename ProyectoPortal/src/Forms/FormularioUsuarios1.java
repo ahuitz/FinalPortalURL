@@ -6,6 +6,7 @@
 package Forms;
 import Conexion.*;
 import Tablas.Persona;
+import Tablas.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
@@ -201,6 +202,7 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
     public Config configuracion;
     private String Usuario ;
     private String Contraseña;
+    public static Usuario us= new Usuario();
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         
@@ -225,6 +227,11 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
                     Query obtener= conexion.getEm().createNamedQuery("Persona.findByCarne");
                     obtener.setParameter("carne",configuracion.getCarne());
                     info=(Persona)obtener.getSingleResult();
+                    
+                    Query obtenerus= conexion.getEm().createNamedQuery("Usuario.findByUsuario");
+                    obtenerus.setParameter("usuario",configuracion.getUser());
+                    us=(Usuario)obtenerus.getSingleResult();
+                    
                     txNombre.setText(info.getNombre());
                     txApellido.setText(info.getApellido());
                     txCarne.setText(info.getCarne());
