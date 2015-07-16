@@ -44,6 +44,12 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
                      txtNacimiento.setText(pe.getFechaNac());
                      txtNombres.setText(pe.getNombre());
                      txtTelefono.setText(pe.getTelefono());
+                     if (pe.getEstado()!=false) {
+                         txtEstado.setText("ACTIVO");
+                    }else
+                         txtEstado.setText("INACTIVO");
+                     
+                     
                 }
     
     }
@@ -112,6 +118,7 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Control-Panel-icon.png"))); // NOI18N
         jLabel17.setText("Principal");
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -472,7 +479,7 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 511, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 516, Short.MAX_VALUE)
                         .addGap(26, 26, 26))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
