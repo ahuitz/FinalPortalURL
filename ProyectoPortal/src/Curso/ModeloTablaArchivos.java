@@ -23,6 +23,10 @@ public class ModeloTablaArchivos extends AbstractTableModel {
       this.archivos= archivos; 
       
     }
+
+    public List<Archivo> getArchivos() {
+        return archivos;
+    }
     
     
     @Override

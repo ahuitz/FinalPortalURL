@@ -9,6 +9,10 @@ import Tablas.Entrega;
 import Tablas.Persona;
 import Tablas.Usuario;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.swing.JRadioButton;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -17,9 +21,10 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModeloTablaEntregas extends AbstractTableModel{
     
-    private ArrayList<Entrega> entregas;
-    private ArrayList<Usuario> usuarios;
-    private ArrayList<Persona> personas;
+    private List<Entrega> entregas;
+    private List<Integer> usuarios;
+    private List<Persona> personas;
+    private CCurso curso;
     
     private String columnas[] = {"Carne","Nombre","Apellido","Entregada", "Punteo"};
                             
@@ -31,13 +36,14 @@ public class ModeloTablaEntregas extends AbstractTableModel{
                             java.lang.Double.class,
                             };
 
-    public ModeloTablaEntregas(ArrayList<Entrega> entregas, ArrayList<Usuario> usuarios, ArrayList<Persona> personas) {
+    public ModeloTablaEntregas(List<Entrega> entregas, List<Integer> usuarios, List<Persona> personas,CCurso curso) {
         this.entregas = entregas;
         this.usuarios = usuarios;
         this.personas = personas;
+        this.curso=curso;
     }
 
-    public ArrayList<Entrega> getEntregas() {
+    public List<Entrega> getEntregas() {
         return entregas;
     }
 
@@ -47,60 +53,79 @@ public class ModeloTablaEntregas extends AbstractTableModel{
     
     @Override
     public int getRowCount() {
-        return usuarios.size();
+        return entregas.size();
     }
 
     @Override
     public int getColumnCount() {
         return columnas.length;
     }
-
+    private Usuario BuscarUsuario(int id){
+        Query q;
+        EntityManager em=curso.getActividad().getEmf().createEntityManager();
+        q=em.createNamedQuery("Usuario.findById");
+        q.setParameter("id", id);
+        return (Usuario) q.getSingleResult();
+        
+    }
+    
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Entrega arch = this.entregas.get(rowIndex);
-
+        
+        
         switch (columnIndex) {
             case 0:
-                Usuario u = usuarios.get(rowIndex);
-                for (Persona p : personas) {
-                    if (p.getId() == u.getPersonaid()) {
-                        return p.getCarne();
+                for(Entrega e: entregas){
+                    for (Integer i: usuarios){
+                        if(e.getUsuarioid()==i){
+                            for(Persona p: personas){
+                                if(p.getId()== (BuscarUsuario(i)).getPersonaid()){
+                                 return p.getCarne();
+                                }
+                            }
+                        }
                     }
-
                 }
 
                 return null;
             case 1:
-                u = usuarios.get(rowIndex);
-                for (Persona p : personas) {
-                    if (p.getId() == u.getPersonaid()) {
-                        return p.getNombre();
+                for(Entrega e: entregas){
+                    for (Integer i: usuarios){
+                        if(e.getUsuarioid()==i){
+                            for(Persona p: personas){
+                                if(p.getId()== (BuscarUsuario(i)).getPersonaid()){
+                                 return p.getNombre();
+                                }
+                            }
+                        }
                     }
-
                 }
 
                 return null;
             case 2:
-                u = usuarios.get(rowIndex);
-                for (Persona p : personas) {
-                    if (p.getId() == u.getPersonaid()) {
-                        return p.getApellido();
+                for(Entrega e: entregas){
+                    for (Integer i: usuarios){
+                        if(e.getUsuarioid()==i){
+                            for(Persona p: personas){
+                                if(p.getId()== (BuscarUsuario(i)).getPersonaid()){
+                                 return p.getApellido();
+                                }
+                            }
+                        }
                     }
-
                 }
 
                 return null;
             case 3:
-                u = usuarios.get(rowIndex);
+               Integer u = usuarios.get(rowIndex);
                 for (Entrega e : entregas) {
-                    if (u.getId() == e.getUsuarioid()) {
+                    if (u == e.getUsuarioid()) {
                         
                         if (e.getNoRealizada()) {
-                            return false;
-
-                        }
-                        if (e.getRealizada()) {
                             return true;
+
+                        }else{
+                            return false;
                         }
                         
                     }
@@ -111,7 +136,7 @@ public class ModeloTablaEntregas extends AbstractTableModel{
             case 4:
                 u = usuarios.get(rowIndex);
                 for (Entrega e : entregas) {
-                    if (u.getId() == e.getUsuarioid()) {
+                    if (u == e.getUsuarioid()) {
                         return e.getCalificacion();
                     }
                 }
@@ -137,19 +162,27 @@ public class ModeloTablaEntregas extends AbstractTableModel{
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        switch (columnIndex) {
-            case 4:
+        switch(columnIndex){
+            case 2: entregas.get(rowIndex);
+                break;
+            case 3: 
+                entregas.get(rowIndex).setNoRealizada((boolean) aValue);
+                break;
+            case 4: 
                 entregas.get(rowIndex).setCalificacion((double) aValue);
-
+                break;
+                
+            default:
+                
+                break;
         }
     }
-
     
     public Entrega obtenerEntrega(int columnIndex) {
 
-        Usuario u = usuarios.get(columnIndex);
+        Integer u = usuarios.get(columnIndex);
         for (Entrega e : entregas) {
-            if (u.getId() == e.getUsuarioid()) {
+            if (u == e.getUsuarioid()) {
                 return e;
             }
         }
