@@ -7,7 +7,7 @@ package Forms;
 import Conexion.*;
 import Tablas.Persona;
 import Tablas.Usuario;
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
+//import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
@@ -229,10 +229,11 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
                     
                     Query obtener= conexion.getEm().createNamedQuery("Persona.findByCarne");
                     obtener.setParameter("carne",configuracion.getCarne());
+                    info=(Persona)obtener.getSingleResult();
                     Query obtenerus= conexion.getEm().createNamedQuery("Usuario.findByUsuario");
                     obtenerus.setParameter("usuario",configuracion.getUser());
                     us=(Usuario)obtenerus.getSingleResult();
-                    info=(Persona)obtener.getSingleResult();
+                   
                     txNombre.setText(info.getNombre());
                     txApellido.setText(info.getApellido());
                     txCarne.setText(info.getCarne());
