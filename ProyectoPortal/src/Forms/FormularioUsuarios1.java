@@ -208,7 +208,7 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
     public static Usuario us= new Usuario();
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        
+       
         JTextField username = new JTextField();
         JTextField password = new JPasswordField();
         Object[] message = {
@@ -240,6 +240,7 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
                     Pinfo.setVisible(true);
                     jMenuItem1.setVisible(false);
                     jMenuItem2.setVisible(true);
+                    
                 }
                 
         } else {
