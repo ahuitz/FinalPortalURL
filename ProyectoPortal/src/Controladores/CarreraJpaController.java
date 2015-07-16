@@ -142,7 +142,7 @@ public class CarreraJpaController implements Serializable {
         try{
             Query q = em.createQuery("SELECT MAX(c.id) FROM Carrera c");
             Object id = q.getSingleResult();
-            if (id == null)
+            if (id != null)
                 return (int) id;
             else
                 return 0;
@@ -152,13 +152,13 @@ public class CarreraJpaController implements Serializable {
     }
     
     public int getId(String nombre){
-        EntityManager em = getEntityManager();
-        try{
-            Query q = em.createNamedQuery("SELECT c.id FROM Carrera c WHERE c.carrera = " + nombre);
-            return (int) q.getSingleResult();
-        }finally{
-            em.close();
+        List<Carrera> listacarrera = findCarreraEntities();
+        int id = 0;
+        for(Carrera carrera : listacarrera){
+            if (carrera.getCarrera().equals(nombre))
+                id = carrera.getId();
         }
+        return id;
     }
     
     public List<String> getCarrera(){

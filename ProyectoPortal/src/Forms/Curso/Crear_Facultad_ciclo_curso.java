@@ -124,9 +124,9 @@ public class Crear_Facultad_ciclo_curso extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Administracion administracion = new Administracion();
         if (creacion == 1)
-            administracion.crearCiclo(jTextField1.getText());
-        else if (creacion == 2)
             administracion.crearFacultad(jTextField1.getText());
+        else if (creacion == 2)
+            administracion.crearCiclo(jTextField1.getText());
         else if (creacion == 3)
             administracion.crearCurso(jTextField1.getText());
         this.dispose();

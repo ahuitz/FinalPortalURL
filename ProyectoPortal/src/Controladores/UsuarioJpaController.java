@@ -8,6 +8,7 @@ package Controladores;
 import Controladores.exceptions.NonexistentEntityException;
 import Tablas.Usuario;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -135,13 +136,23 @@ public class UsuarioJpaController implements Serializable {
         }
     }
     
-    public int getId(int id){
-        EntityManager em = getEntityManager();
-        try{
-            Query q = em.createNamedQuery("SELECT u.id FROM Usuario u WHERE u.personaid = id");
-            return (int) q.getSingleResult();
-        }finally{
-            em.close();
+    public int getId(int idpersona){
+        List<Usuario> listausuarios = findUsuarioEntities();
+        int id = 0;
+        for(Usuario usuario : listausuarios){
+            if (usuario.getPersonaid() == idpersona)
+                id = usuario.getId();
         }
+        return id;
+    }
+    
+    public List<Integer> getCatedraticos(){
+        List<Usuario> listausuarios = findUsuarioEntities();
+        List<Integer> listacatedraticos = new ArrayList<>();
+        for(Usuario usuario : listausuarios){
+            if (usuario.getUsuario().contains("CAT"))
+                listacatedraticos.add(usuario.getPersonaid());
+        }
+        return listacatedraticos;
     }
 }

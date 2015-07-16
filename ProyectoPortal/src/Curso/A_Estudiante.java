@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import Tablas.Entrega;
 import Tablas.Usuario;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,7 +31,18 @@ public class A_Estudiante extends CActividad {
         this.controladorE = new EntregaJpaController(emf);
         this.idSeccionCurso= ISC;
         cargarActividades(emf,ISC);
+        entregas= new ArrayList<>();
         cargarEntregas();
+    }
+     public  void cargarE(EntityManagerFactory emf,int i){
+        Query q;
+        EntityManager em=emf.createEntityManager();
+        q=em.createNamedQuery("Entrega.findByActividadid");
+        //'nombre' es el parametro que esta en la clase usuario ':nombre'
+        q.setParameter("seccionCursoid", i);
+        actividades=q.getResultList();
+        System.out.println(actividades.size());
+        
     }
 
     /**
@@ -61,7 +74,24 @@ public class A_Estudiante extends CActividad {
 
     @Override
     public void cargarEntregas() {
+
+        
+        for (Actividad a : actividades) {
+            entregs(a.getId());
             
+          
+        }
+
+    }
+
+    public void entregs(int id) {
+        Query q;
+        EntityManager em = emf.createEntityManager();
+
+        q = em.createNamedQuery("Entrega.findByActividadid");
+        q.setParameter("actividadid", id);
+        Entrega E = (Entrega) q.getResultList().get(0);
+        entregas.add(E);
 
     }
     //metodos que no se utilizaran
@@ -77,7 +107,7 @@ public class A_Estudiante extends CActividad {
     }
 
     @Override
-    public void publicarActividad(Actividad actividad, List<Usuario> usuarios) {
+    public void publicarActividad(Actividad actividad, List<Integer> usuarios) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

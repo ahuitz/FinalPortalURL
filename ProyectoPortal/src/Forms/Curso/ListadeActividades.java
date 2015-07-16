@@ -29,7 +29,10 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
         if(curso.getRol().compareTo("EST")==0){
             jMenuItem2.setVisible(false);
             jMenuItem3.setVisible(false);
+            jButton1.setVisible(false);
             
+        }else{
+             jMenuItem4.setVisible(false);
         }
     }
     public ListadeActividades() {
@@ -53,6 +56,7 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -76,7 +80,22 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
         jPopupMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Calificar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jPopupMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Entregar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem4);
+
+        setClosable(true);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,6 +115,11 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
         jLabel1.setText("Para mas opciones dele click derecho al seleccionar un Fila");
 
         jButton1.setText("nueva Actividad");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,12 +158,12 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
             Actividad a = modelo.getActividades().get(row);
             if (curso.getRol().compareTo("CAT") == 0) {
                VerActividad_Catedratico verc= new VerActividad_Catedratico(curso, a);
-                NewJFrame.jDesktopPane1.add(verc);
+                this.getParent().add(verc);
                 verc.show();
                 verc.toFront();
             } else {
                 VerActividad_Estudiante vere= new VerActividad_Estudiante(curso, a.getId());
-                NewJFrame.jDesktopPane1.add(vere);
+                 this.getParent().add(vere);
                 vere.show();
                 vere.toFront();
 
@@ -154,14 +178,49 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
         if (row >= 0) {
-            NuevaActividad act = new NuevaActividad();
-            NewJFrame.jDesktopPane1.add(act);
+            NuevaActividad act = new NuevaActividad(modelo.getActividades().get(row).getId(),curso);
+             this.getParent().add(act);
             act.show();
             act.toFront();
 
         }
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        if (row >= 0) {
+            CalificarEntregas cal= new CalificarEntregas(modelo.getActividades().get(row).getId(),curso);
+             this.getParent().add(cal);
+            cal.show();
+            cal.toFront();
+
+        }
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:}
+        int row = jTable1.getSelectedRow();
+        if (row >= 0) {
+            R_Entregas entregas = new R_Entregas(curso, modelo.getActividades().get(row).getId());
+             this.getParent().add(entregas);
+            entregas.show();
+           entregas.toFront();
+
+        }
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        NuevaActividad NUEVA = new NuevaActividad(curso);
+        this.getParent().add(NUEVA);
+        NUEVA.show();
+        NUEVA.toFront();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -170,6 +229,7 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

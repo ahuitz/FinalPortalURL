@@ -18,6 +18,7 @@ import javax.swing.ComboBoxModel;
 import Controladores.TipoactividadJpaController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -525,20 +526,19 @@ public class NuevaActividad extends javax.swing.JInternalFrame {
         if(modificar){
             try {
                 curso.getActividad().modificarActividad(modificarActividad());
+                JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>La actividad se actualizo.</font></html>");
+                dispose();
             } catch (Exception ex) {
                 Logger.getLogger(NuevaActividad.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }else{
-           // curso.actividad.publicarActividad(nuevaActividad(), curso.estudiantes);;
+           curso.getActividad().publicarActividad(nuevaActividad(), curso.getUsuariosID());;
+           JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Se creo la nueva actividad.</font></html>");
+           dispose();
             
         }
         
-        //NuevaActividad a= new NuevaActividad( actividad,curso);
-         System.out.println(actividad);
-         //prueba.jDesktopPane1.add(a);
-        //a.show();
-        //a.toFront();
         
     }//GEN-LAST:event_Boton3ActionPerformed
     public Actividad nuevaActividad(){

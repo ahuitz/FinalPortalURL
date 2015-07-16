@@ -134,15 +134,28 @@ public class Administracion {
         conSeccion.create(seccion);
         
         CursoJpaController conCurso = new CursoJpaController(emf);
-        int idciclo = conCurso.getId(ciclo);
+        int idcurso = conCurso.getId(curso);
+        System.out.println("idcurso " + idcurso);
+        
+        CicloJpaController conCiclo = new CicloJpaController(emf);
+        int idciclo =conCiclo.getId(ciclo);
+        System.out.println("idcilo " + idciclo);
+        
         CiclocursoJpaController conCiclocurso = new CiclocursoJpaController(emf);
-        int idciclocurso = conCiclocurso.getId(idciclo, anio);
+        int idciclocurso = conCiclocurso.getId(idcurso, idciclo, anio);
+        System.out.println("idcilcocurso "+idciclocurso);
+        
         CarreraJpaController conCarrera = new CarreraJpaController(emf);
         int idcarrera = conCarrera.getId(carrera);
+        System.out.println("id carrera " + idcarrera);
+        
         CursocarreraJpaController conCursocarrera = new CursocarreraJpaController(emf);
         int idcursocarrera = conCursocarrera.getId(idcarrera, idciclocurso);
+        System.out.println("idcursocarrera " + idcursocarrera);
+        
         PersonaJpaController conPersona = new PersonaJpaController(emf);
         int idpersona = conPersona.getId(nombrecatedratico, apellidocatedratico);
+        
         UsuarioJpaController conUsuario = new UsuarioJpaController(emf);
         int idusuario = conUsuario.getId(idpersona);
         
@@ -152,29 +165,74 @@ public class Administracion {
         conSeccioncurso.create(seccioncurso);
     }
     
+    public List<String> getSeccionesExistentes(String carrera, String curso, String ciclo, int anio){
+        
+        CursoJpaController conCurso = new CursoJpaController(emf);
+        int idcurso = conCurso.getId(curso);
+        System.out.println("idcurso " + idcurso);
+        
+        CicloJpaController conCiclo = new CicloJpaController(emf);
+        int idciclo =conCiclo.getId(ciclo);
+        System.out.println("idcilo " + idciclo);
+        
+        CiclocursoJpaController conCiclocurso = new CiclocursoJpaController(emf);
+        int idciclocurso = conCiclocurso.getId(idcurso, idciclo, anio);
+        System.out.println("idcilcocurso "+idciclocurso);
+        
+        CarreraJpaController conCarrera = new CarreraJpaController(emf);
+        int idcarrera = conCarrera.getId(carrera);
+        System.out.println("id carrera " + idcarrera);
+        
+        CursocarreraJpaController conCursocarrera = new CursocarreraJpaController(emf);
+        int idcursocarrera = conCursocarrera.getId(idcarrera, idciclocurso);
+        System.out.println("idcursocarrera " + idcursocarrera);
+        
+        SeccioncursoJpaController conSeccioncurso = new SeccioncursoJpaController(emf);
+        SeccionJpaController conSeccion = new SeccionJpaController(emf);
+        return conSeccion.getSeccion(conSeccioncurso.getSeccionId(idcursocarrera));
+    }
+    
+    
     public List<String> getFacultad(){
         FacultadJpaController conFacultad = new FacultadJpaController(emf);
-        return conFacultad.getFacultad();
+        List<Facultad> listafacultad = conFacultad.findFacultadEntities();
+        List<String> listanombres = new ArrayList<String>();
+        for (Facultad facultad : listafacultad)
+            listanombres.add(facultad.getFacultad());
+        return listanombres;
     }
     
     public List<String> getCarrera(){
         CarreraJpaController conCarrera = new CarreraJpaController(emf);
-        return conCarrera.getCarrera();
+        List<Carrera> listacarrera = conCarrera.findCarreraEntities();
+        List<String> listanombres = new ArrayList<String>();
+        for (Carrera carrera : listacarrera)
+            listanombres.add(carrera.getCarrera());
+        return listanombres;
     }
     
     public List<String> getCurso(){
         CursoJpaController conCurso = new CursoJpaController(emf);
-        return conCurso.getCurso();
+        List<Curso> listacurso = conCurso.findCursoEntities();
+        List<String> listanombres = new ArrayList<String>();
+        for (Curso curso : listacurso)
+            listanombres.add(curso.getNombre());
+        return listanombres;
     }
     
     public List<String> getCiclo(){
         CicloJpaController conCiclo = new CicloJpaController(emf);
-        return conCiclo.getCiclo();
+        List<Ciclo> listaciclo = conCiclo.findCicloEntities();
+        List<String> listanombres = new ArrayList<String>();
+        for (Ciclo ciclo : listaciclo)
+            listanombres.add(ciclo.getCiclo());
+        return listanombres;
     }
     
-    public List<String> getNombrepersona(){
+    public List<String> getNombrcatedratico(){
         PersonaJpaController conPersona = new PersonaJpaController(emf);
-        List<Persona> listapersona = conPersona.findPersonaEntities();
+        UsuarioJpaController conUsuario = new UsuarioJpaController(emf);
+        List<Persona> listapersona = conPersona.getPersona(conUsuario.getCatedraticos());
         List<String> listanombres = new ArrayList<String>();
         for(Persona persona : listapersona)
             listanombres.add(persona.getApellido() + "-" + persona.getNombre());

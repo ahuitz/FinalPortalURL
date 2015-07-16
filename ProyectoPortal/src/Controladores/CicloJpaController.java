@@ -137,24 +137,26 @@ public class CicloJpaController implements Serializable {
     
     public int getMaxId(){
         EntityManager em = getEntityManager();
-        int id = 0;
         try{
             Query q = em.createQuery("SELECT MAX(c.id) FROM Ciclo c");
-            id = (int) q.getSingleResult();
-            return id;
+            Object id = q.getSingleResult();
+            if (id != null)
+                return (int) id;
+            else
+                return 0;
         }finally{
             em.close();
         }
     }
     
     public int getId(String nombre){
-        EntityManager em = getEntityManager();
-        try{
-            Query q = em.createNamedQuery("SELECT c.id FROM Ciclo c WHERE c.ciclo = " + nombre);
-            return (int) q.getSingleResult();
-        }finally{
-            em.close();
+        List<Ciclo> listaciclo = findCicloEntities();
+        int id = 0;
+        for(Ciclo ciclo : listaciclo){
+            if (ciclo.getCiclo().equals(nombre))
+                id = ciclo.getId();
         }
+        return id;
     }
     
     public List<String> getCiclo(){

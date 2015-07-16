@@ -71,6 +71,8 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
         Etiqueta9 = new javax.swing.JLabel();
         Etiqueta10 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         Etiqueta1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Etiqueta1.setText("Titulo");
 
@@ -267,6 +269,10 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
 
     private void Boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton1ActionPerformed
         // TODO add your handling code here:
+         R_Entregas entregas = new R_Entregas(curso, idActividad);
+             this.getParent().add(entregas);
+            entregas.show();
+           entregas.toFront();
         
         
         
@@ -275,13 +281,20 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
     
     private void Boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton3ActionPerformed
         // TODO add your handling code here:
+        NuevaActividad NUEVA = new NuevaActividad(idActividad, curso);
+        this.getParent().add(NUEVA);
+        NUEVA.show();
+        NUEVA.toFront();
         
         
     }//GEN-LAST:event_Boton3ActionPerformed
 
     private void Boton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton4ActionPerformed
         // TODO add your handling code here:
-        
+        CalificarEntregas cal= new CalificarEntregas(idActividad, curso);
+             this.getParent().add(cal);
+            cal.show();
+            cal.toFront();
     }//GEN-LAST:event_Boton4ActionPerformed
 
 

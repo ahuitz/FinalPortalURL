@@ -5,10 +5,17 @@
  */
 package Forms.Curso;
 
+import Controladores.EntregaJpaController;
+import Curso.A_Catedratico;
+import Curso.CActividad;
 import Curso.CCurso;
 import Curso.ModeloTablaEntregas;
+import Tablas.Entrega;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,25 +31,24 @@ public class CalificarEntregas extends javax.swing.JInternalFrame {
     }
      public CalificarEntregas(int idActividad, CCurso curso ) {
         initComponents();
-        this.curso= curso;
-        this.idActividad=idActividad;
+        this.curso = curso;
+        this.idActividad = idActividad;
+        iniciarTabla();
+
     }
-     int idActividad;
-     CCurso curso;
-     ModeloTablaEntregas modelo;
-     public void iniciarTabla(){
-//        Query q;
-//        EntityManager em=emf.createEntityManager();
-//        q=em.createNamedQuery("Actividad.findMaxId");;
-//        
-//
-//         
-         
-         
-         
-     }
-     
-     
+    int idActividad;
+    CCurso curso;
+    ModeloTablaEntregas modelo;
+    EntregaJpaController controlador;
+
+    public void iniciarTabla() {
+        A_Catedratico a = (A_Catedratico) curso.getActividad();
+        modelo = new ModeloTablaEntregas(a.obtenerEntregas(idActividad), curso.getUsuariosID(), curso.getEstudiantes(),curso);
+        jTable1.setModel(modelo);
+
+    }
+
+
     
 
     /**
@@ -56,6 +62,9 @@ public class CalificarEntregas extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+
+        setClosable(true);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,6 +79,13 @@ public class CalificarEntregas extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton1.setText("Finzalizar Calificacion");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,20 +93,43 @@ public class CalificarEntregas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        controlador= new EntregaJpaController(curso.getActividad().getEmf());
+        for(Entrega e: modelo.getEntregas()){
+            
+            try {
+                controlador.edit(e);
+                
+            } catch (Exception ex) {
+                Logger.getLogger(CalificarEntregas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Se actualizaron las entregas.</font></html>");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
