@@ -6,6 +6,7 @@
 package Forms.Curso;
 
 import Controladores.ActividadJpaController;
+import Curso.A_Estudiante;
 import Curso.Curso;
 import Tablas.*;
 
@@ -21,9 +22,18 @@ import java.util.Date;
  */
 public class VerActividad_Estudiante extends VerActividad {
 
+    Entrega e;
     public VerActividad_Estudiante(Curso curso,int idActividad) {
+        iniciarComponentes();
         this.curso=curso;
         this.idActividad=idActividad;
+        this.curso=curso;
+        this.idActividad=idActividad;
+        A_Estudiante a=((A_Estudiante)(curso.actividad));
+        a.obtenerEntrega(idActividad);
+        System.out.println(verDisponiblidad(curso.actividad.obtenerActividad(idActividad)));
+        
+       
         
     }
     public VerActividad_Estudiante(Curso curso,Actividad actividad) {
@@ -31,6 +41,7 @@ public class VerActividad_Estudiante extends VerActividad {
         this.idActividad=idActividad;
         System.out.println(verDisponiblidad(actividad));
         iniciarComponentes();
+        
        
         
     }
@@ -60,6 +71,13 @@ public class VerActividad_Estudiante extends VerActividad {
          Etiqueta1.setText(n);
         AreaTexto.setText(actividad.getDescripcion());
         Etiqueta9.setText(actividad.getFechaEntrega().toString());
+        if(e.getRealizada()){
+          Etiqueta7.setText("Entregada");  
+        }else{
+          Etiqueta7.setText("Aun no se entrega");  
+            
+        }
+        
         
         long en= actividad.getFechaEntrega().getTime();
         long horaSistema=Calendar.getInstance().getTime().getTime();
