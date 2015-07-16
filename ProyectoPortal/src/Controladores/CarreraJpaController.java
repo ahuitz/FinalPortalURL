@@ -135,6 +135,8 @@ public class CarreraJpaController implements Serializable {
         }
     }
     
+    /// metodos creados para uso especifico
+    
     public int getMaxId(){
         EntityManager em = getEntityManager();
         try{
@@ -159,4 +161,13 @@ public class CarreraJpaController implements Serializable {
         }
     }
     
+    public List<String> getCarrera(){
+        EntityManager em = getEntityManager();
+        try{
+            Query q = em.createNamedQuery("SELEC c.carrera FROM Carrera c");
+            return q.getResultList();
+        }finally{
+            em.close();
+        }
+    }
 }

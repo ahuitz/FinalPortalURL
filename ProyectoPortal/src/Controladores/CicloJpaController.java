@@ -156,4 +156,14 @@ public class CicloJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<String> getCiclo(){
+        EntityManager em = getEntityManager();
+        try{
+            Query q = em.createNamedQuery("SELEC c.ciclo FROM Ciclo c");
+            return q.getResultList();
+        }finally{
+            em.close();
+        }
+    }
 }
