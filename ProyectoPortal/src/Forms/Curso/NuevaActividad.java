@@ -491,18 +491,29 @@ public class NuevaActividad extends javax.swing.JInternalFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        diaE = jCalendar1.getDayChooser().getDay();
+        if(f){
+          diaE = jCalendar1.getDayChooser().getDay();
         mesE = jCalendar1.getMonthChooser().getMonth() + 1;
         anioE = jCalendar1.getYearChooser().getYear();
         
-        Texto2.setText(diaE+"/"+mesE+"/"+anioE);
+        Texto2.setText(diaE+"/"+mesE+"/"+anioE);  
+        }else{
+             diaL = jCalendar1.getDayChooser().getDay();
+        mesL = jCalendar1.getMonthChooser().getMonth() + 1;
+        anioL = jCalendar1.getYearChooser().getYear();
+        
+        Texto3.setText(diaE+"/"+mesE+"/"+anioE); 
+            
+        }
+        
 
         jDialog2.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
-
+     boolean f;
     private void Boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton1ActionPerformed
         // TODO add your handling code here:
         jDialog2.show();
+        f=true;
     }//GEN-LAST:event_Boton1ActionPerformed
 
     private void Boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton2ActionPerformed
