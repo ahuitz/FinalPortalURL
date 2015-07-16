@@ -95,6 +95,8 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
         });
         jPopupMenu1.add(jMenuItem4);
 
+        setClosable(true);
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -156,12 +158,12 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
             Actividad a = modelo.getActividades().get(row);
             if (curso.getRol().compareTo("CAT") == 0) {
                VerActividad_Catedratico verc= new VerActividad_Catedratico(curso, a);
-                NewJFrame.jDesktopPane1.add(verc);
+                this.getParent().add(verc);
                 verc.show();
                 verc.toFront();
             } else {
                 VerActividad_Estudiante vere= new VerActividad_Estudiante(curso, a.getId());
-                NewJFrame.jDesktopPane1.add(vere);
+                 this.getParent().add(vere);
                 vere.show();
                 vere.toFront();
 
@@ -177,7 +179,7 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
         int row = jTable1.getSelectedRow();
         if (row >= 0) {
             NuevaActividad act = new NuevaActividad(modelo.getActividades().get(row).getId(),curso);
-            NewJFrame.jDesktopPane1.add(act);
+             this.getParent().add(act);
             act.show();
             act.toFront();
 
@@ -191,7 +193,7 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
         int row = jTable1.getSelectedRow();
         if (row >= 0) {
             CalificarEntregas cal= new CalificarEntregas(modelo.getActividades().get(row).getId(),curso);
-            NewJFrame.jDesktopPane1.add(cal);
+             this.getParent().add(cal);
             cal.show();
             cal.toFront();
 
@@ -204,7 +206,7 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
         int row = jTable1.getSelectedRow();
         if (row >= 0) {
             R_Entregas entregas = new R_Entregas(curso, modelo.getActividades().get(row).getId());
-            NewJFrame.jDesktopPane1.add(entregas);
+             this.getParent().add(entregas);
             entregas.show();
            entregas.toFront();
 
@@ -215,7 +217,7 @@ public class ListadeActividades extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         NuevaActividad NUEVA = new NuevaActividad(curso);
-        NewJFrame.jDesktopPane1.add(NUEVA);
+        this.getParent().add(NUEVA);
         NUEVA.show();
         NUEVA.toFront();
     }//GEN-LAST:event_jButton1ActionPerformed
