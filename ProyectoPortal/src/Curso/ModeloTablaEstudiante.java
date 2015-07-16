@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModeloTablaEstudiante extends AbstractTableModel {
     private ArrayList<Persona> estudiantes;
-    private String columnas[] = {"Carne","Nombre", "Apellido", "Estado"};
+    private String columnas[] = {"Carnet","Nombre", "Apellido"};
 
     public ModeloTablaEstudiante(ArrayList<Persona> estudiantes) {
         this.estudiantes=estudiantes;
@@ -41,7 +41,6 @@ public class ModeloTablaEstudiante extends AbstractTableModel {
             case 0: return est.getCarne();
             case 1: return est.getNombre();
             case 2: return est.getApellido();
-            case 3: return est.getEstado();
             
             default: return null;
         }
@@ -54,7 +53,7 @@ public class ModeloTablaEstudiante extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return true;
+        return false;
     }
 
     @Override
@@ -68,16 +67,10 @@ public class ModeloTablaEstudiante extends AbstractTableModel {
             case 2: 
                 estudiantes.get(rowIndex).setApellido((String)aValue);
                 break;
-             case 3: 
-                estudiantes.get(rowIndex).setEstado((Boolean)aValue);
-                break;   
-                
                 
             default:
                 
                 break;
-                
-                
         }
     }
     
