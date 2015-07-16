@@ -48,6 +48,7 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaRecursos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jPopupMenu1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
@@ -116,6 +117,8 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("Recursos:");
 
+        jLabel2.setText("Para mas opciones, presione click derecho sobre un recurso.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,12 +128,14 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botonCrearR, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
+                        .addGap(18, 18, 18)
+                        .addComponent(botonCrearR, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,8 +143,10 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(botonCrearR)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -230,6 +237,7 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
     public javax.swing.JTable TablaRecursos;
     public javax.swing.JButton botonCrearR;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     public javax.swing.JMenuItem jMenuItemModificar;
     private javax.swing.JMenuItem jMenuItemVer;
     private javax.swing.JPopupMenu jPopupMenu1;

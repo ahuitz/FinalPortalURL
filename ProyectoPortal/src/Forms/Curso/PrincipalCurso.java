@@ -25,7 +25,6 @@ import javax.persistence.Query;
  */
 public class PrincipalCurso extends javax.swing.JInternalFrame {
     public CCurso curso;
-    public String rol;
     
     /**
      * Creates new form PrincipalCurso
@@ -39,7 +38,6 @@ public class PrincipalCurso extends javax.swing.JInternalFrame {
         setVisible(Boolean.TRUE);
         setClosable(Boolean.TRUE);
         //setResizable(Boolean.TRUE);
-        this.rol=rol;
         curso = new CCurso(rol, usuario, idSeccionCurso);
         jTextField1.setText(getInfoCurso(idSeccionCurso));
     }
@@ -171,7 +169,7 @@ public class PrincipalCurso extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        switch (rol){
+        switch (curso.getRol()){
             case "EST":{
                 PrincipalRecurso pr = new Recurso_E((R_Estudiante) curso.getRecurso());
                 this.getParent().add(pr);
