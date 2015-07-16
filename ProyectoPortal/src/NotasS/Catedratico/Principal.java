@@ -121,14 +121,6 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Estudiante miEstud = new Estudiante();
-        this.jDesktopPane1.add(miEstud);
-        miEstud.show();
-        try {
-            miEstud.setMaximum(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
     }
     

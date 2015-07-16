@@ -5,17 +5,24 @@
  */
 package NotasS.Catedratico;
 
+import NotasS.ListaSecCurso_EstuSec_EntAct;
+import java.util.List;
+
 /**
  *
  * @author Saul
  */
 public class Estudiante extends javax.swing.JInternalFrame {
 
+    public ListaSecCurso_EstuSec_EntAct miLista;
     /**
      * Creates new form Estudiante
      */
-    public Estudiante() {
+    public Estudiante(ListaSecCurso_EstuSec_EntAct miListaSecCurs_EstuSec_EntrActi) {
         initComponents();
+        this.miLista= miListaSecCurs_EstuSec_EntrActi;
+        cargar();
+                
     }
 
     /**
@@ -66,8 +73,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -144,4 +151,8 @@ public class Estudiante extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void cargar() {
+        
+    }
 }

@@ -7,9 +7,28 @@ package NotasS.Catedratico;
 
 import Conexion.*;
 import Controladores.*;
+import NotasS.ClaseListEntregaActiv;
+import NotasS.ClaseListEstuSeccion;
+import NotasS.ClaseListSecCurso;
+import NotasS.ClaseListaPorCurso;
+import NotasS.ClasePorSeccCurso_EstuSecc;
+import NotasS.ClaseSecCurso_EstSecc_EntAct;
+import NotasS.ListaEntregaActiv;
+import NotasS.ListaEstuSeccion;
+import NotasS.ListaSecCurso;
+import NotasS.ListaSecCurso_EstuSec;
+import NotasS.ListaSecCurso_EstuSec_EntAct;
 import Tablas.*;
+import java.beans.PropertyVetoException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.Query;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,6 +37,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListaEstudiantes extends javax.swing.JInternalFrame {
 
+    
+    ListSelectionModel seleccionEst;
+    List<ListaSecCurso_EstuSec_EntAct> miListaSecCurs_EstuSec_EntrActi3;
+    
     /**
      * Creates new form ListaEstudiantes
      */
@@ -44,22 +67,36 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-
-        setClosable(true);
+        jTextFieldFacultad = new javax.swing.JTextField();
+        jTextFieldCarrera = new javax.swing.JTextField();
+        jTextFieldCurso = new javax.swing.JTextField();
+        jTextFieldSeccion = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextFieldCiclo = new javax.swing.JTextField();
+        jTextFieldAnio = new javax.swing.JTextField();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         TablaEstudiantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Apellido", "Carne"
             }
         ));
+        TablaEstudiantes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        seleccionEst = TablaEstudiantes.getSelectionModel();
+        seleccionEst.addListSelectionListener(new ListSelectionListener(){
+            public void valueChanged(ListSelectionEvent e){
+                if(! e.getValueIsAdjusting()){
+                    tablaEstudianteSeleccion(TablaEstudiantes);
+                }
+
+            }
+
+        });
         jScrollPane1.setViewportView(TablaEstudiantes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -68,14 +105,14 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1037, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -92,34 +129,74 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Curso:");
 
+        jLabel6.setText("Ciclo:");
+
+        jLabel7.setText("Año:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(61, 61, 61)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldFacultad, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(182, 182, 182)
-                        .addComponent(jLabel2)
-                        .addGap(225, 225, 225)
-                        .addComponent(jLabel5)
-                        .addGap(215, 215, 215)
-                        .addComponent(jLabel4)))
-                .addContainerGap(267, Short.MAX_VALUE))
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(14, 14, 14))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextFieldFacultad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5)
+                            .addComponent(jTextFieldCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTextFieldCiclo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -129,10 +206,9 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,31 +231,101 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextFieldAnio;
+    private javax.swing.JTextField jTextFieldCarrera;
+    private javax.swing.JTextField jTextFieldCiclo;
+    private javax.swing.JTextField jTextFieldCurso;
+    private javax.swing.JTextField jTextFieldFacultad;
+    private javax.swing.JTextField jTextFieldSeccion;
     // End of variables declaration//GEN-END:variables
 
     private void CargarDatos() {
+        this.jTextFieldCarrera.setEnabled(Boolean.FALSE);
+        this.jTextFieldCurso.setEnabled(Boolean.FALSE);
+        this.jTextFieldFacultad.setEnabled(Boolean.FALSE);
+        this.jTextFieldSeccion.setEnabled(Boolean.FALSE);
+        this.jTextFieldCiclo.setEnabled(Boolean.FALSE);
+        this.jTextFieldAnio.setEnabled(Boolean.FALSE);
         
-//        CicloJpaController miCtrlCiclo = new CicloJpaController(ConexionJPA.getInstance("usuario", "usuario").getEmf());
-//        List<Ciclo> listaCiclos = miCtrlCiclo.findCicloEntities();
-//        System.out.println("Yeah1");
-//        for (Iterator<Ciclo> iterator = listaCiclos.iterator(); iterator.hasNext();) {
-//            System.out.println("Yeah2");
-//            Ciclo next = iterator.next();
-//            
-//            Object [] datosFila = {next.getId(), next.getCiclo()};
-//            tablaCiclo.addRow(datosFila);
-//        }
+        int UsuaCatId = 4;
+        int Cursoid = 5;
+        int SeccionId = 2;
+        ClaseListSecCurso miClaseLisSecCurso = new ClaseListSecCurso();
+        List<ListaSecCurso> miListaSecCurso = miClaseLisSecCurso.cargarDatosListSeccionCurso(UsuaCatId);
+        ClaseListaPorCurso miListaPorCurso = new ClaseListaPorCurso();
+        miListaSecCurso = miListaPorCurso.encontraPorCurso(miListaSecCurso, Cursoid, SeccionId);
         
-        DefaultTableModel tablaCiclo = (DefaultTableModel) TablaEstudiantes.getModel();
-        EstudianteseccionJpaController miCtrlEstSecc = new EstudianteseccionJpaController(ConexionJPA.getInstance("usuario", "usuario").getEmf());
-        List<Estudianteseccion> ListEstSecc = miCtrlEstSecc.findEstudianteseccionEntities();
-        for (Iterator<Estudianteseccion> iterator = ListEstSecc.iterator(); iterator.hasNext();) {
-            Estudianteseccion next = iterator.next();
-            System.out.println(next.getSeccionCursoid() + " " + next.getUsuarioid());
+        
+        ClaseListEstuSeccion miClaseLisEstuSecc = new ClaseListEstuSeccion();
+        List<ListaEstuSeccion> miListaEstuSecc = miClaseLisEstuSecc.cargarListaEstudianteSeccion();
+        ClasePorSeccCurso_EstuSecc miClasPorSecCur = new ClasePorSeccCurso_EstuSecc();
+        miClasPorSecCur.setMiListSeccionCurso(miListaSecCurso);
+        miClasPorSecCur.setMiListEstuSeccion(miListaEstuSecc);
+        List<ListaSecCurso_EstuSec> miListaSecCurso_EstuSec = miClasPorSecCur.cargarDatosListasSecCurso_EstuSecc();
+        
+        
+        
+        ClaseListEntregaActiv miClaseLisEntActiv = new ClaseListEntregaActiv();
+        List<ListaEntregaActiv> miListaEntAct = miClaseLisEntActiv.cargarDatosListEntregaActividad();
+        ClaseSecCurso_EstSecc_EntAct miClaseSecCur_EstuSec_EntrActi = new ClaseSecCurso_EstSecc_EntAct();
+        miClaseSecCur_EstuSec_EntrActi.setMiListEntAct(miListaEntAct);
+        miClaseSecCur_EstuSec_EntrActi.setMiListSecCur_EstuSecc(miListaSecCurso_EstuSec);
+        List<ListaSecCurso_EstuSec_EntAct> miListaSecCurs_EstuSec_EntrActi = miClaseSecCur_EstuSec_EntrActi.cargarDatosSecCur_EstuSuc_EntAct();
+        
+        miListaSecCurs_EstuSec_EntrActi3 = miListaSecCurs_EstuSec_EntrActi;
+        
+        DefaultTableModel tablaEstudiantes = (DefaultTableModel) TablaEstudiantes.getModel();
+        int cont = 0;
+        System.out.println("");
+        System.out.println("OTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        Iterator<ListaSecCurso_EstuSec_EntAct> iteradorLisSecCur_EstuSec_EntAct = miListaSecCurs_EstuSec_EntrActi.iterator();
+        while (iteradorLisSecCur_EstuSec_EntAct.hasNext()) { 
             
+            ListaSecCurso_EstuSec_EntAct ListaSecCur_EstSec_EntAct = iteradorLisSecCur_EstuSec_EntAct.next();
+            System.out.println(ListaSecCur_EstSec_EntAct);
+            
+            Query qPerso = ConexionJPA.getInstance("usuario", "usuario").getEm().createNamedQuery("Persona.findById");
+            qPerso.setParameter("id", ListaSecCur_EstSec_EntAct.PersonaEstId);
+            Persona miPersona = new Persona();
+            miPersona = (Persona) qPerso.getSingleResult();
+            
+            
+            Object [] datosFila = {ListaSecCur_EstSec_EntAct.getNombreEst(), ListaSecCur_EstSec_EntAct.getApellidoEst(), miPersona.getCarne()};
+            tablaEstudiantes.addRow(datosFila);
+            if (cont == 0) {
+                cont++;
+                this.jTextFieldAnio.setText("" + ListaSecCur_EstSec_EntAct.getCicloCursoAnio());
+                this.jTextFieldCarrera.setText(ListaSecCur_EstSec_EntAct.getCarrera());
+                this.jTextFieldCiclo.setText(ListaSecCur_EstSec_EntAct.getCiclo());
+                this.jTextFieldCurso.setText(ListaSecCur_EstSec_EntAct.getCurso());
+                this.jTextFieldFacultad.setText(ListaSecCur_EstSec_EntAct.getFacultad());
+                this.jTextFieldSeccion.setText(ListaSecCur_EstSec_EntAct.getSeccionDescrip());
+            }
+        }
+        
+    }
+    
+    public void tablaEstudianteSeleccion(JTable tablaEst){
+        if (tablaEst.getSelectedRow() != -1) {
+                
+            ListaSecCurso_EstuSec_EntAct mi = miListaSecCurs_EstuSec_EntrActi3.get(tablaEst.getSelectedRow());
+            
+            System.out.println("asdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+            Estudiante miEstud = new Estudiante(mi);
+            Principal.jDesktopPane1.add(miEstud);
+            miEstud.show();
+            try {
+                miEstud.setMaximum(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
+
+    
 }

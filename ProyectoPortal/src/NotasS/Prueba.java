@@ -47,16 +47,20 @@ public class Prueba {
         
         
         ClaseListEntregaActiv miClaseLisEntActiv = new ClaseListEntregaActiv();
-        miClaseLisEntActiv.cargarDatosListEntregaActividad();
+        List<ListaEntregaActiv> miListaEntAct = miClaseLisEntActiv.cargarDatosListEntregaActividad();
+        ClaseSecCurso_EstSecc_EntAct miClaseSecCur_EstuSec_EntrActi = new ClaseSecCurso_EstSecc_EntAct();
+        miClaseSecCur_EstuSec_EntrActi.setMiListEntAct(miListaEntAct);
+        miClaseSecCur_EstuSec_EntrActi.setMiListSecCur_EstuSecc(miListaSecCurso_EstuSec);
+        List<ListaSecCurso_EstuSec_EntAct> miListaSecCurs_EstuSec_EntrActi = miClaseSecCur_EstuSec_EntrActi.cargarDatosSecCur_EstuSuc_EntAct();
         
         
         
 //        System.out.println("");
 //        System.out.println("OTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-//        Iterator<ListaSecCurso_EstuSec> iteradorLisSecCur_EstuSec = miListaSecCurso_EstuSec.iterator();
-//        while (iteradorLisSecCur_EstuSec.hasNext()) { 
-//            ListaSecCurso_EstuSec ListaSecCur_EstSec = iteradorLisSecCur_EstuSec.next();
-//            System.out.println(ListaSecCur_EstSec );
+//        Iterator<ListaSecCurso_EstuSec_EntAct> iteradorLisSecCur_EstuSec_EntAct = miListaSecCurs_EstuSec_EntrActi.iterator();
+//        while (iteradorLisSecCur_EstuSec_EntAct.hasNext()) { 
+//            ListaSecCurso_EstuSec_EntAct ListaSecCur_EstSec_EntAct = iteradorLisSecCur_EstuSec_EntAct.next();
+//            System.out.println(ListaSecCur_EstSec_EntAct);
 //        }
     }
     

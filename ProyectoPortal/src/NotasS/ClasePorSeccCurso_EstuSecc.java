@@ -51,7 +51,7 @@ public class ClasePorSeccCurso_EstuSecc {
                     ListaSecCurso SeccCur1 = iteradorListaSeccCurso.next();
                     if (ListaEstSecc.getSeccionCursoId() != SeccCur1.getSeccionCursoId()) {
 //                        System.out.println("3");
-                        iteradorListaEstSecc.remove();
+//                        iteradorListaEstSecc.remove();
                     }else{
 //                        System.out.println("4");
                         ListaSecCurso_EstuSec listaSecCur_EstuSec = new ListaSecCurso_EstuSec(SeccCur1.getSeccionCursoId(), SeccCur1.getCursoCarreraId(), SeccCur1.getSeccionId(), SeccCur1.getUsuarioCatId(), SeccCur1.getSeccionDescrip(), SeccCur1.getCicloCursoAnio(), SeccCur1.getCiclo(), SeccCur1.getCurso(), SeccCur1.getCarrera(), SeccCur1.getCicloId(), SeccCur1.getCursoId(), SeccCur1.getFacultad(), SeccCur1.getUsuarioCat(), SeccCur1.getNombreCat(), SeccCur1.getApellidoCat(), SeccCur1.getPersonaCatId(), ListaEstSecc.getEstudianteSeccionId(), ListaEstSecc.getUsuarioEstId(), ListaEstSecc.getUsuarioEst(), ListaEstSecc.getNombreEst(), ListaEstSecc.getApellidoEst(), ListaEstSecc.getPersonaEstId());
@@ -70,7 +70,7 @@ public class ClasePorSeccCurso_EstuSecc {
                     ListaEstuSeccion ListaEstSecc = iteradorListaEstSecc.next();
                     if (ListaEstSecc.getSeccionCursoId() != SeccCur1.getSeccionCursoId()) {
 //                        System.out.println("3");
-                        iteradorListaEstSecc.remove();
+//                        iteradorListaEstSecc.remove();
                     }else{
 //                        System.out.println("4");
                         ListaSecCurso_EstuSec listaSecCur_EstuSec = new ListaSecCurso_EstuSec(SeccCur1.getSeccionCursoId(), SeccCur1.getCursoCarreraId(), SeccCur1.getSeccionId(), SeccCur1.getUsuarioCatId(), SeccCur1.getSeccionDescrip(), SeccCur1.getCicloCursoAnio(), SeccCur1.getCiclo(), SeccCur1.getCurso(), SeccCur1.getCarrera(), SeccCur1.getCicloId(), SeccCur1.getCursoId(), SeccCur1.getFacultad(), SeccCur1.getUsuarioCat(), SeccCur1.getNombreCat(), SeccCur1.getApellidoCat(), SeccCur1.getPersonaCatId(), ListaEstSecc.getEstudianteSeccionId(), ListaEstSecc.getUsuarioEstId(), ListaEstSecc.getUsuarioEst(), ListaEstSecc.getNombreEst(), ListaEstSecc.getApellidoEst(), ListaEstSecc.getPersonaEstId());
