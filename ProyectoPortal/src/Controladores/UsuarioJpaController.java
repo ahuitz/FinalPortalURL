@@ -135,13 +135,13 @@ public class UsuarioJpaController implements Serializable {
         }
     }
     
-    public int getId(int id){
-        EntityManager em = getEntityManager();
-        try{
-            Query q = em.createNamedQuery("SELECT u.id FROM Usuario u WHERE u.personaid = id");
-            return (int) q.getSingleResult();
-        }finally{
-            em.close();
+    public int getId(int idpersona){
+        List<Usuario> listausuarios = findUsuarioEntities();
+        int id = 0;
+        for(Usuario usuario : listausuarios){
+            if (usuario.getPersonaid() == idpersona)
+                id = usuario.getId();
         }
+        return id;
     }
 }

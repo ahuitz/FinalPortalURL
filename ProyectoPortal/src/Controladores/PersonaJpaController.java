@@ -136,14 +136,13 @@ public class PersonaJpaController implements Serializable {
     }
     
     public int getId(String nombre, String apellido){
-        EntityManager em = getEntityManager();
-        try{
-            Query q = em.createNamedQuery("SELECT p.id FROM Persona p WHERE p.nombre = " + nombre
-            + "AND p.apellido = " + apellido);
-            return (int) q.getSingleResult();
-        }finally{
-            em.close();
+        List<Persona> listapersona = findPersonaEntities();
+        int id = 0;
+        for(Persona persona : listapersona){
+            if ((persona.getNombre().equals(nombre)) && (persona.getApellido().equals(apellido)))
+                id = persona.getId();
         }
+        return id;
     }
     
 }

@@ -152,13 +152,13 @@ public class CarreraJpaController implements Serializable {
     }
     
     public int getId(String nombre){
-        EntityManager em = getEntityManager();
-        try{
-            Query q = em.createNamedQuery("SELECT c.id FROM Carrera c WHERE c.carrera = " + nombre);
-            return (int) q.getSingleResult();
-        }finally{
-            em.close();
+        List<Carrera> listacarrera = findCarreraEntities();
+        int id = 0;
+        for(Carrera carrera : listacarrera){
+            if (carrera.getCarrera().equals(nombre))
+                id = carrera.getId();
         }
+        return id;
     }
     
     public List<String> getCarrera(){

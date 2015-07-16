@@ -159,15 +159,6 @@ public class FacultadJpaController implements Serializable {
                 id = facultad.getId();
         }
         return id;
-        /*EntityManager em = getEntityManager();
-        try{
-            Query q = em.createNamedQuery("SELECT f FROM Facultad f WHERE f.facultad = :facultad");
-            q.setParameter("facultad", nombre);
-            Facultad facultad = (Facultad) q.getSingleResult();
-            return facultad.getId();
-        }finally{
-            em.close();
-        }*/
     }
     
     /*public List<String> getFacultad(){
