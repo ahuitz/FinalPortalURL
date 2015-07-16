@@ -7,8 +7,10 @@ package Curso;
 
 import Controladores.RecursoJpaController;
 import Tablas.Recurso;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,7 +31,7 @@ public abstract class CRecurso {
     }
 
     public List getRecursos() {
-        return recursos;
+        return obtenerRecursos();
     }
 
     public void setRecursos(List<Recurso> recursos) {
@@ -48,5 +50,11 @@ public abstract class CRecurso {
         this.emf = emf;
     }
     
+    public List<Recurso> obtenerRecursos(){
+        Query q;
+        q = emf.createEntityManager().createNamedQuery("Recurso.findBySeccionCursoid");
+        q.setParameter("seccionCursoid", idSeccionCurso);
+        return q.getResultList();
+    }
     public abstract List<Recurso> visualizar();
 }

@@ -19,10 +19,10 @@ public class R_Estudiante extends CRecurso {
     public R_Estudiante(EntityManagerFactory emf, int idSC) {
         this.emf=emf;
         this.controladorR = new RecursoJpaController(this.emf);
-        this.recursos = controladorR.findRecursoEntities();
         this.idSeccionCurso=idSC;
+        this.recursos = obtenerRecursos();
     }
-
+    
     @Override
     public List<Recurso> visualizar() {
         return recursos;

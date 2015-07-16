@@ -23,8 +23,8 @@ public class R_Catedratico extends CRecurso {
         this.emf=emf;
         this.controladorR = new RecursoJpaController(this.emf);
         this.controladorA = new ArchivoJpaController(this.emf);
-        this.recursos = controladorR.findRecursoEntities();
         this.idSeccionCurso=idSC;
+        this.recursos = obtenerRecursos();
     }
 
     public ArchivoJpaController getControladorA() {
