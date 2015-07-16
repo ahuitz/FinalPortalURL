@@ -140,7 +140,7 @@ public class CursoJpaController implements Serializable {
         try{
             Query q = em.createQuery("SELECT MAX(c.id) fROM Curso c");
             Object id = q.getSingleResult();
-            if (id == null)
+            if (id != null)
                 return (int) id;
             else
                 return 0;

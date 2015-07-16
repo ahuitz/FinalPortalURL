@@ -142,7 +142,7 @@ public class CarreraJpaController implements Serializable {
         try{
             Query q = em.createQuery("SELECT MAX(c.id) FROM Carrera c");
             Object id = q.getSingleResult();
-            if (id == null)
+            if (id != null)
                 return (int) id;
             else
                 return 0;
