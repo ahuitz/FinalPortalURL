@@ -223,7 +223,7 @@ public class DatosPersona extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Estudiante", "Catedratico" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Estudiante", "Catedratico", "Administrador" }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);

@@ -66,7 +66,14 @@ public class DualController implements Controlador{
             statement.execute("GRANT ALL PRIVILEGES ON * . * TO '"+TipoEst+num+"15'@'localhost';");
             System.out.println("Datos ingresados correctamente");          
             statement.close();
-        us.setRolUsuarioid(1);
+         if(TipoEst=="EST"){   
+        us.setRolUsuarioid(1);}
+         if(TipoEst=="ADM"){
+            us.setRolUsuarioid(2);
+         }
+         if(TipoEst=="CAT"){
+             us.setRolUsuarioid(3);
+         }
         us.setUsuario(TipoEst+num+"15");
         us.setPersonaid(Integer.parseInt(num));
         controladorusuario.create(us);
