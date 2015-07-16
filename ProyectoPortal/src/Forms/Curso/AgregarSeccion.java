@@ -172,7 +172,7 @@ public class AgregarSeccion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         administracion.crearSeccion(descripcion.getText(), Integer.parseInt(cupo.getText().trim()), 
                 (String) curso.getSelectedItem(), (String) carrera.getSelectedItem(), catedratico.getText(), 
-                (String) ciclo.getSelectedItem());
+                (String) ciclo.getSelectedItem(), 0);
         this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
