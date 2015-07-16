@@ -48,6 +48,7 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
         jLabel1 = new javax.swing.JLabel();
         botonVer = new javax.swing.JButton();
 
+        setTitle("Principal recurso");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -94,6 +95,7 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TablaRecursos.setRowHeight(30);
         jScrollPane1.setViewportView(TablaRecursos);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
