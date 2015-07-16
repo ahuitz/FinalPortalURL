@@ -66,19 +66,19 @@ public class DualController implements Controlador{
             statement.execute("GRANT ALL PRIVILEGES ON * . * TO '"+num+"15'@'localhost';");
             System.out.println("Datos ingresados correctamente");          
             statement.close();
+        us.setRolUsuarioid(1);
+        us.setUsuario(TipoEst+num+"15");
+        us.setPersonaid(Integer.parseInt(num));
+        controladorusuario.create(us);
+        System.out.println(""+us.getUsuario());
+      
+        System.out.println("holi");
         } catch (SQLException ex) {
             Logger.getLogger(DualController.class.getName()).log(Level.SEVERE, null, ex);
         }
           
         persona.setCarne(num+"15");
-        controladorpersona.create(persona);
-        us.setRolUsuarioid(1);
-        us.setUsuario(TipoEst+num+"15");
-        us.setPersonaid(Integer.parseInt(num));
-        controladorusuario.create(us);
-        
-      
-       
+        controladorpersona.create(persona);      
     }
     
     
