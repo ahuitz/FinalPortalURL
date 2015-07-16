@@ -6,6 +6,9 @@
 package Forms.Curso;
 
 import Curso.Curso;
+import Curso.ModeloTablaEntregas;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -19,11 +22,25 @@ public class CalificarEntregas extends javax.swing.JInternalFrame {
     public CalificarEntregas() {
         initComponents();
     }
-     public CalificarEntregas(int idInteficacion, Curso curso ) {
+     public CalificarEntregas(int idActividad, Curso curso ) {
         initComponents();
+        this.curso= curso;
+        this.idActividad=idActividad;
     }
-     
-     
+     int idActividad;
+     Curso curso;
+     ModeloTablaEntregas modelo;
+     public void iniciarTabla(){
+//        Query q;
+//        EntityManager em=emf.createEntityManager();
+//        q=em.createNamedQuery("Actividad.findMaxId");;
+//        
+//
+//         
+         
+         
+         
+     }
      
      
     
