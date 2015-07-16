@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Forms;
-
 import Controladores.PersonaJpaController;
 import Controladores.TiposangreJpaController;
 import ModuloUsuarios.AccionesUsuario;
@@ -17,21 +15,18 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.swing.JOptionPane;
-
 /**
  *
- * @author Geek
+ * @author Rosario
  */
-public class DatosPersona extends javax.swing.JDialog {
+public class DatosPersona extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form DatosPersona
+     * Creates new form Datos
      */
     public DatosPersona() {
-       
         initComponents();
         mostrarTipoSangre();
-       
     }
     public void mostrarTipoSangre(){
         EntityManagerFactory emf=FormularioUsuarios1.conexion.getEmf();
@@ -102,6 +97,7 @@ public class DatosPersona extends javax.swing.JDialog {
          emf.close();
          return ta;
      }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,8 +137,6 @@ public class DatosPersona extends javax.swing.JDialog {
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
@@ -220,7 +214,6 @@ public class DatosPersona extends javax.swing.JDialog {
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Estudiante", "Catedratico" }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -399,30 +392,38 @@ public class DatosPersona extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String carne=JOptionPane.showInputDialog(null,"Numero de carne");
         cargarDatos(carne);
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+
+        String car =javax.swing.JOptionPane.showInputDialog("");
+        cargarDatos(car);
+        jButton4.setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+
         String carnen = "";
         String nom = "";
         String ape = "";
@@ -442,28 +443,19 @@ public class DatosPersona extends javax.swing.JDialog {
         cel = jTextField6.getText();
         dpi = jTextField7.getText();
         fechN = jTextField8.getText();
-       
-       // tipoS = (int) jComboBox2.getSelectedItem();
+
+        // tipoS = (int) jComboBox2.getSelectedItem();
         if(editar(carnen, nom, ape, dir, tel,cel, dpi , fechN, gen, est, tipoS)){
             javax.swing.JOptionPane.showMessageDialog(this, "Registro modificado");
         }else{
             javax.swing.JOptionPane.showMessageDialog(this, "NO SE PUEDE MODIFICAR");
         }
-        
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        
-        String car =javax.swing.JOptionPane.showInputDialog("");
-        cargarDatos(car);
-        jButton4.setVisible(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             int elim=JOptionPane.showConfirmDialog(null, "Desea eliminar al usuario");
             if(elim==JOptionPane.YES_OPTION){
                 prs.setEstado(false);
@@ -474,53 +466,12 @@ public class DatosPersona extends javax.swing.JDialog {
             }else if(elim==JOptionPane.NO_OPTION){
                 JOptionPane.showMessageDialog(null,"El usuario sigue ACTIVO");
             }
-            
+
         } catch (Exception ex) {
             Logger.getLogger(DatosPersona.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DatosPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DatosPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DatosPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DatosPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DatosPersona dialog = new DatosPersona();
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

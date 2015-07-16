@@ -248,6 +248,9 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
                             break;
                         case "ADM":
                             System.out.println("ADMINISTRADOR");
+                            DatosPersona pers=new DatosPersona();
+                            this.jDesktopPane2.add(pers);
+                            pers.setVisible(true);
                             break;
                         case "CAT":
                             System.out.println("CATEDRATICO");
