@@ -54,6 +54,8 @@ public class VerRecurso extends javax.swing.JInternalFrame {
         salir = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
 
+        setTitle("Ver recurso");
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("Titulo");
 

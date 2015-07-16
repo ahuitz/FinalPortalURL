@@ -76,6 +76,8 @@ public class ModificarRecurso extends javax.swing.JInternalFrame {
         BotonBuscar = new javax.swing.JButton();
         BotonCancelar = new javax.swing.JButton();
 
+        setTitle("Modificar recurso");
+
         BotonAceptar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         BotonAceptar.setText("Aceptar");
         BotonAceptar.addActionListener(new java.awt.event.ActionListener() {

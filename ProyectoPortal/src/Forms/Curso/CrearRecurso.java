@@ -56,6 +56,8 @@ public class CrearRecurso extends javax.swing.JInternalFrame {
         BotonCancelar = new javax.swing.JButton();
         BotonAceptar = new javax.swing.JButton();
 
+        setTitle("Crear recuso");
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("Título");
 

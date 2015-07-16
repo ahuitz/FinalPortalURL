@@ -5,19 +5,70 @@
  */
 package Forms.Curso;
 
+import Curso.CCurso;
+import Curso.R_Catedratico;
+import Curso.R_Estudiante;
+import Forms.FormularioUsuarios1;
+import Tablas.Carrera;
+import Tablas.Ciclo;
+import Tablas.Ciclocurso;
+import Tablas.Curso;
+import Tablas.Cursocarrera;
+import Tablas.Seccion;
+import Tablas.Seccioncurso;
+import Tablas.Usuario;
+import javax.persistence.Query;
+
 /**
  *
- * @author Pablo
+ * @author Pablo Lopez
  */
 public class PrincipalCurso extends javax.swing.JInternalFrame {
-
+    public CCurso curso;
+    public String rol;
+    
     /**
      * Creates new form PrincipalCurso
+     * @param rol
+     * @param usuario
+     * @param idSeccionCurso
      */
-    public PrincipalCurso() {
+    public PrincipalCurso(String rol, Usuario usuario, int idSeccionCurso) {
         initComponents();
+        setIconifiable(Boolean.TRUE);
+        setVisible(Boolean.TRUE);
+        setClosable(Boolean.TRUE);
+        //setResizable(Boolean.TRUE);
+        this.rol=rol;
+        curso = new CCurso(rol, usuario, idSeccionCurso);
+        jTextField1.setText(getInfoCurso(idSeccionCurso));
     }
 
+    private String getInfoCurso(int idSeccionCurso){
+        Query q;
+        q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Seccioncurso.findById");
+        q.setParameter("id", idSeccionCurso);
+        Seccioncurso sc = (Seccioncurso) q.getSingleResult();
+        q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Seccion.findById");
+        q.setParameter("id", sc.getSeccionid());
+        Seccion seccion = (Seccion) q.getSingleResult();
+        q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Cursocarrera.findById");
+        q.setParameter("id", sc.getId());
+        Cursocarrera cc = (Cursocarrera) q.getSingleResult();
+        q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Carrera.findById");
+        q.setParameter("id", cc.getCarreraid());
+        Carrera c = (Carrera) q.getSingleResult();
+        q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Ciclocurso.findById");
+        q.setParameter("id", cc.getCicloCursoid());
+        Ciclocurso cic = (Ciclocurso) q.getSingleResult();
+        q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Curso.findById");
+        q.setParameter("id", cic.getCursoid());
+        Curso cur = (Curso) q.getSingleResult();
+        q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Ciclo.findById");
+        q.setParameter("id", cic.getCicloid());
+        Ciclo ciclo = (Ciclo) q.getSingleResult();
+        return cur.getNombre()+" "+seccion.getDescripcion()+" ["+ciclo.getCiclo()+" "+cic.getAnio()+"]";
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,18 +87,34 @@ public class PrincipalCurso extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
+        setTitle("Principal curso");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("Curso");
 
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jButton1.setText("Actividades");
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jButton2.setText("Recursos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jButton3.setText("Notas");
 
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jButton4.setText("Participantes");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel2.setText("Personas");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel3.setText("Actividades");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -60,15 +127,17 @@ public class PrincipalCurso extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel3))
-                .addContainerGap(40, Short.MAX_VALUE))
+                        .addComponent(jTextField1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(0, 604, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,23 +146,43 @@ public class PrincipalCurso extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(8, 8, 8)
-                .addComponent(jButton1)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        switch (rol){
+            case "EST":{
+                PrincipalRecurso pr = new Recurso_E((R_Estudiante) curso.getRecurso());
+                this.getParent().add(pr);
+                pr.toFront();
+                break;
+            }
+            case "CAT":{
+                PrincipalRecurso pr = new Recurso_C((R_Catedratico) curso.getRecurso());
+                this.getParent().add(pr);
+                pr.toFront();
+                break;
+            }
+            default:
+                break;
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
