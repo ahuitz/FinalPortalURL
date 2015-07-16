@@ -6,6 +6,7 @@
 package Curso;
 
 import Conexion.ConexionJPA;
+import Forms.FormularioUsuarios1;
 import Tablas.Seccioncurso;
 import Tablas.Usuario;
 import java.util.ArrayList;
@@ -17,16 +18,30 @@ import java.util.ArrayList;
  */
 public class Curso {
 
-    public CActividad actividad;
-    public ArrayList<Usuario> estudiantes;
     public FabricaTipoUsuario fabrica;
+    public CActividad actividad;
     public CRecurso recurso;
-    public Seccioncurso seccion_Curso;
-    public ConexionJPA conexion;
+    public ArrayList<Usuario> estudiantes;
     public Usuario usuario;
-   
+    public int idSeccionCurso;
 
-    public Curso(Usuario Usuario, Seccioncurso seccion_curso) {
+    public Curso(String rol, Usuario usuario, int idSeccionCurso) {
+        this.usuario=usuario;
+        switch(rol){
+            case "EST":{
+                fabrica = new FabricaEstudiante();
+                actividad= fabrica.crearActividad(FormularioUsuarios1.conexion.getEmf(), this.usuario.getId());
+                recurso=fabrica.crearRecurso(FormularioUsuarios1.conexion.getEmf(), idSeccionCurso);
+                break;
+            }
+            case "CAT":{
+                fabrica = new FabricaCatedratico();
+                
+                break;
+            }
+            default:
+                break;
+        }
     }
 
 }
