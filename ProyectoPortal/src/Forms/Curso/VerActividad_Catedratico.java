@@ -7,7 +7,7 @@ package Forms.Curso;
 
 import Controladores.ActividadJpaController;
 import Tablas.Actividad;
-import Curso.Curso;
+import Curso.CCurso;
 import java.awt.Color;
 
 /**
@@ -19,12 +19,12 @@ public class VerActividad_Catedratico extends VerActividad{
     
     
     
-    public VerActividad_Catedratico(Curso curso,int idActividad){
+    public VerActividad_Catedratico(CCurso curso,int idActividad){
         this.curso=curso;
         this.idActividad=idActividad;
     }
     
-    public VerActividad_Catedratico(Curso curso, Actividad a){
+    public VerActividad_Catedratico(CCurso curso, Actividad a){
         this.curso=curso;
         this.idActividad=idActividad;
         this.actividad=a;

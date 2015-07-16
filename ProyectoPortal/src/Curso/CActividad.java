@@ -41,7 +41,7 @@ public abstract class CActividad {
     
     
     //metodos en comun
-    public abstract void visualizarActividad(Curso curso,int idActividad);
+    public abstract void visualizarActividad(CCurso curso,int idActividad);
     public abstract void cargarEntregas();
     
     public  void cargarActividades(EntityManagerFactory emf,int i){

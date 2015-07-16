@@ -51,7 +51,7 @@ public class A_Estudiante extends CActividad {
 
     
     @Override
-    public void visualizarActividad(Curso curso,int idActividad) {
+    public void visualizarActividad(CCurso curso,int idActividad) {
     }
 
     @Override

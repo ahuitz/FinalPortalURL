@@ -5,7 +5,7 @@
  */
 package Forms.Curso;
 
-import Curso.Curso;
+import Curso.CCurso;
 import Tablas.Actividad;
 import Tablas.Tipoactividad;
 import java.text.ParsePosition;
@@ -32,7 +32,7 @@ public class NuevaActividad extends javax.swing.JInternalFrame {
         initComponents();
         //LlenarCombos();
     }
-    public NuevaActividad(Curso curso) {
+    public NuevaActividad(CCurso curso) {
         initComponents();
        // LlenarCombos();
         this.curso=curso;
@@ -43,7 +43,7 @@ public class NuevaActividad extends javax.swing.JInternalFrame {
         
         modificar=false;
     }
-    public NuevaActividad(int idActividad, Curso curso) {
+    public NuevaActividad(int idActividad, CCurso curso) {
         initComponents();
        
         Boton3.setText("Modificar");
@@ -58,7 +58,7 @@ public class NuevaActividad extends javax.swing.JInternalFrame {
     
     boolean modificar;
     Actividad actividad;
-    Curso curso;
+    CCurso curso;
     List<Tipoactividad> listaActividad;
     int anioE = 0;
     int mesE = 0;
@@ -530,7 +530,7 @@ public class NuevaActividad extends javax.swing.JInternalFrame {
             }
             
         }else{
-            curso.actividad.publicarActividad(nuevaActividad(), curso.estudiantes);;
+           // curso.actividad.publicarActividad(nuevaActividad(), curso.estudiantes);;
             
         }
         
