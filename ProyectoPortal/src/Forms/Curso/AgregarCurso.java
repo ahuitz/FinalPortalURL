@@ -51,15 +51,9 @@ public class AgregarCurso extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Curso");
 
-        curso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel2.setText("Ciclo");
 
-        ciclo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel3.setText("Carrera");
-
-        carrera.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -184,10 +178,10 @@ public class AgregarCurso extends javax.swing.JInternalFrame {
         
         List<String> listaciclo = administracion.getCiclo();
         for(String nciclo : listaciclo)
-            curso.addItem(nciclo);
+            ciclo.addItem(nciclo);
         
-        List<String> listacarrera = administracion.getCiclo();
+        List<String> listacarrera = administracion.getCarrera();
         for(String ncarrera : listacarrera)
-            curso.addItem(ncarrera);
+            carrera.addItem(ncarrera);
     }
 }

@@ -134,15 +134,28 @@ public class Administracion {
         conSeccion.create(seccion);
         
         CursoJpaController conCurso = new CursoJpaController(emf);
-        int idciclo = conCurso.getId(ciclo);
+        int idcurso = conCurso.getId(curso);
+        System.out.println("idcurso " + idcurso);
+        
+        CicloJpaController conCiclo = new CicloJpaController(emf);
+        int idciclo =conCiclo.getId(ciclo);
+        System.out.println("idcilo " + idciclo);
+        
         CiclocursoJpaController conCiclocurso = new CiclocursoJpaController(emf);
-        int idciclocurso = conCiclocurso.getId(idciclo, anio);
+        int idciclocurso = conCiclocurso.getId(idcurso, idciclo, anio);
+        System.out.println("idcilcocurso "+idciclocurso);
+        
         CarreraJpaController conCarrera = new CarreraJpaController(emf);
         int idcarrera = conCarrera.getId(carrera);
+        System.out.println("id carrera " + idcarrera);
+        
         CursocarreraJpaController conCursocarrera = new CursocarreraJpaController(emf);
         int idcursocarrera = conCursocarrera.getId(idcarrera, idciclocurso);
+        System.out.println("idcursocarrera " + idcursocarrera);
+        
         PersonaJpaController conPersona = new PersonaJpaController(emf);
         int idpersona = conPersona.getId(nombrecatedratico, apellidocatedratico);
+        
         UsuarioJpaController conUsuario = new UsuarioJpaController(emf);
         int idusuario = conUsuario.getId(idpersona);
         
@@ -188,9 +201,10 @@ public class Administracion {
         return listanombres;
     }
     
-    public List<String> getNombrepersona(){
+    public List<String> getNombrcatedratico(){
         PersonaJpaController conPersona = new PersonaJpaController(emf);
-        List<Persona> listapersona = conPersona.findPersonaEntities();
+        UsuarioJpaController conUsuario = new UsuarioJpaController(emf);
+        List<Persona> listapersona = conPersona.getPersona(conUsuario.getCatedraticos());
         List<String> listanombres = new ArrayList<String>();
         for(Persona persona : listapersona)
             listanombres.add(persona.getApellido() + "-" + persona.getNombre());

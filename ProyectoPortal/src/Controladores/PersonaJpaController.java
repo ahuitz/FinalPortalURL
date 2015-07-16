@@ -8,6 +8,7 @@ package Controladores;
 import Controladores.exceptions.NonexistentEntityException;
 import Tablas.Persona;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -143,6 +144,17 @@ public class PersonaJpaController implements Serializable {
                 id = persona.getId();
         }
         return id;
+    }
+    
+    public List<Persona> getPersona(List<Integer> idcatedraticos){
+        List<Persona> listapersona = new ArrayList<>();
+        EntityManager em = getEntityManager();
+        for (int idcatedratico: idcatedraticos ){
+            Query q = em.createNamedQuery("Persona.findById");
+            q.setParameter("id", idcatedratico);
+            listapersona.add((Persona) q.getSingleResult());
+        }
+        return listapersona;
     }
     
 }
