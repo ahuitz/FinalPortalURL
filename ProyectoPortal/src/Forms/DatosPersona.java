@@ -473,6 +473,7 @@ CreadorPersona creador= new CreadorPersona();
         String car =javax.swing.JOptionPane.showInputDialog("");
         cargarDatos(car);
         jButton4.setVisible(false);
+        jTextField1.setEditable(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
