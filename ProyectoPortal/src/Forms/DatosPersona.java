@@ -6,7 +6,11 @@
 package Forms;
 import Controladores.PersonaJpaController;
 import Controladores.TiposangreJpaController;
+import ModuloUsuarios.ADM;
 import ModuloUsuarios.AccionesUsuario;
+import ModuloUsuarios.CAT;
+import ModuloUsuarios.CreadorPersona;
+import ModuloUsuarios.EST;
 import Tablas.Persona;
 import Tablas.Tiposangre;
 import java.util.List;
@@ -139,6 +143,11 @@ public class DatosPersona extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
 
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel5.setText("Teléfono");
@@ -261,10 +270,6 @@ public class DatosPersona extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
@@ -313,7 +318,12 @@ public class DatosPersona extends javax.swing.JInternalFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jRadioButton2)
                                         .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(0, 36, Short.MAX_VALUE)))
+                        .addGap(0, 36, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField4)
+                        .addGap(16, 16, 16)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -397,9 +407,53 @@ public class DatosPersona extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+CreadorPersona creador= new CreadorPersona();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        Persona pers= new Persona();
+        pers.setApellido(jTextField3.getText());
+        pers.setCelular(jTextField6.getText());
+        pers.setDireccion(jTextField4.getText());
+        pers.setDpi(jTextField7.getText());
+        if(jRadioButton1.isSelected()){
+        pers.setEstado(true);
+        }
+        else{
+        pers.setEstado(false);
+        }
+        pers.setFechaNac(jTextField8.getSelectedText());
+        if(jComboBox1.getSelectedIndex()==0){
+        pers.setGenero(false);
+        }
+        else{
+            pers.setGenero(true);
+            
+        }
+        pers.setNombre(jTextField2.getText());
+        pers.setTelefono(jTextField5.getText());
+        pers.setTipoSangreid(jComboBox2.getSelectedIndex()+1);
+        
+          switch(jComboBox3.getSelectedIndex()){
+                        case 0: 
+                           EST nuevoest= new EST(pers,FormularioUsuarios1.conexion.getEmf(), FormularioUsuarios1.configuracion);
+                           creador.setPersona(nuevoest);
+                           creador.crearpersona();
+                            break;
+                        case 1:
+                           CAT nuevocat= new CAT(pers,FormularioUsuarios1.conexion.getEmf(), FormularioUsuarios1.configuracion);
+                           creador.setPersona(nuevocat);
+                           creador.crearpersona();
+                            break;
+                        case 2:
+                           
+                             ADM nuevoadm= new ADM(pers,FormularioUsuarios1.conexion.getEmf(), FormularioUsuarios1.configuracion);
+                             creador.setPersona(nuevoadm);
+                             creador.crearpersona();
+                            break;
+                    
+                    }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -471,6 +525,10 @@ public class DatosPersona extends javax.swing.JInternalFrame {
             Logger.getLogger(DatosPersona.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
