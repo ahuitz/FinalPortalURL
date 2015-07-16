@@ -68,7 +68,7 @@ public class Config implements ConexionBasica {
     
     private String cortarsiglas(String us){
      String cortado;
-     cortado= us.substring(0, 2);
+     cortado= us.substring(0, 3);
      return cortado;
     }
 }
