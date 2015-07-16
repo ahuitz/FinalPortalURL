@@ -27,7 +27,7 @@ public abstract class CActividad {
     protected ActividadJpaController controladorA;
     protected EntregaJpaController controladorE;
     protected int idSeccionCurso;
-    
+    protected EntityManagerFactory emf;
     
     //metodos Estudiantes
     public abstract void modificarEntrega(Entrega entrega)throws Exception;
@@ -43,6 +43,10 @@ public abstract class CActividad {
     //metodos en comun
     public abstract void visualizarActividad(CCurso curso,int idActividad);
     public abstract void cargarEntregas();
+    
+    public EntityManagerFactory getEmf() {
+        return emf;
+    }
     
     public  void cargarActividades(EntityManagerFactory emf,int i){
         Query q;

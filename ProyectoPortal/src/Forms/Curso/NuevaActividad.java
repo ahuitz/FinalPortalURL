@@ -51,7 +51,7 @@ public class NuevaActividad extends javax.swing.JInternalFrame {
         modificar=true;
         this.curso=curso;
         Etiqueta9.setText("Por favor ingrese de nuevo la hora de las entregas");
-        this.actividad=curso.actividad.obtenerActividad(idActividad);
+        this.actividad=curso.getActividad().obtenerActividad(idActividad);
         iniciarLista();
         mostrarDatos(actividad);
     }
@@ -524,7 +524,7 @@ public class NuevaActividad extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if(modificar){
             try {
-                curso.actividad.modificarActividad(modificarActividad());
+                curso.getActividad().modificarActividad(modificarActividad());
             } catch (Exception ex) {
                 Logger.getLogger(NuevaActividad.class.getName()).log(Level.SEVERE, null, ex);
             }

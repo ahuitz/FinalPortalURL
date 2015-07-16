@@ -28,7 +28,7 @@ import javax.persistence.Query;
 public class A_Catedratico extends CActividad {
    
     public ArrayList<Entregas> entregas;
-    EntityManagerFactory emf;
+    
     
     public A_Catedratico(EntityManagerFactory emf,int ISC) {
         this.controladorA = new ActividadJpaController(emf);
@@ -87,6 +87,7 @@ public class A_Catedratico extends CActividad {
         q=em.createNamedQuery("Actividad.findMaxId");;
         return q.getFirstResult();
     }
+    
     private int maxEntregaId(){
         Query q;
         EntityManager em=emf.createEntityManager();

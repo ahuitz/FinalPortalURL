@@ -26,6 +26,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Entrega.findAll", query = "SELECT e FROM Entrega e"),
+    
+    @NamedQuery(name = "Entrega.findMaxId", query = "SELECT MAX(e.id) FROM Entrega e"),
     @NamedQuery(name = "Entrega.findById", query = "SELECT e FROM Entrega e WHERE e.id = :id"),
     @NamedQuery(name = "Entrega.findByCalificacion", query = "SELECT e FROM Entrega e WHERE e.calificacion = :calificacion"),
     @NamedQuery(name = "Entrega.findByRealizada", query = "SELECT e FROM Entrega e WHERE e.realizada = :realizada"),

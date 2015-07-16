@@ -5,7 +5,7 @@
  */
 package Forms.Curso;
 
-import Curso.Curso;
+import Curso.CCurso;
 import Curso.ModeloTablaEntregas;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -22,13 +22,13 @@ public class CalificarEntregas extends javax.swing.JInternalFrame {
     public CalificarEntregas() {
         initComponents();
     }
-     public CalificarEntregas(int idActividad, Curso curso ) {
+     public CalificarEntregas(int idActividad, CCurso curso ) {
         initComponents();
         this.curso= curso;
         this.idActividad=idActividad;
     }
      int idActividad;
-     Curso curso;
+     CCurso curso;
      ModeloTablaEntregas modelo;
      public void iniciarTabla(){
 //        Query q;

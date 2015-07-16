@@ -29,9 +29,8 @@ public class VerActividad_Estudiante extends VerActividad {
         this.idActividad=idActividad;
         this.curso=curso;
         this.idActividad=idActividad;
-        A_Estudiante a=((A_Estudiante)(curso.actividad));
+        A_Estudiante a=((A_Estudiante)(curso.getActividad()));
         a.obtenerEntrega(idActividad);
-        System.out.println(verDisponiblidad(curso.actividad.obtenerActividad(idActividad)));
         
        
         

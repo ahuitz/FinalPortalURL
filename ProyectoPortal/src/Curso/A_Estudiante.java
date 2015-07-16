@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import Tablas.Entrega;
 import Tablas.Usuario;
 import java.util.List;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -48,6 +49,8 @@ public class A_Estudiante extends CActividad {
         
         return null;
     }
+
+    
 
     
     @Override

@@ -29,6 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Detalleentrega.findAll", query = "SELECT d FROM Detalleentrega d"),
+    
+    @NamedQuery(name = "Detalleentrega.findMaxId", query = "SELECT MAX(d.id) FROM Detalleentrega d"),
     @NamedQuery(name = "Detalleentrega.findById", query = "SELECT d FROM Detalleentrega d WHERE d.id = :id"),
     @NamedQuery(name = "Detalleentrega.findByFechaModificacion", query = "SELECT d FROM Detalleentrega d WHERE d.fechaModificacion = :fechaModificacion"),
     @NamedQuery(name = "Detalleentrega.findByArchivoid", query = "SELECT d FROM Detalleentrega d WHERE d.archivoid = :archivoid"),

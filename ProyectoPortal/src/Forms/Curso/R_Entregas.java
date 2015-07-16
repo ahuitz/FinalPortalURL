@@ -5,8 +5,10 @@
  */
 package Forms.Curso;
 
+import Controladores.ArchivoJpaController;
 import Controladores.DetalleentregaJpaController;
-import Curso.Curso;
+import Controladores.exceptions.NonexistentEntityException;
+import Curso.CCurso;
 import Curso.ModeloTablaArchivos;
 import Tablas.Archivo;
 import Tablas.Detalleentrega;
@@ -14,6 +16,8 @@ import Tablas.Entrega;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.JFileChooser;
@@ -28,11 +32,11 @@ public class R_Entregas extends javax.swing.JInternalFrame {
     /**
      * Creates new form NewJInternalFrame
      */
-    public R_Entregas(Curso curso, int idEntrega) {
+    public R_Entregas(CCurso curso, int idEntrega) {
         initComponents();
         this.curso= curso;
         archivos= new ArrayList<>();
-        entrega=curso.actividad.obtenerEntrega(idEntrega);
+        entrega=curso.getActividad().obtenerEntrega(idEntrega);
         controldetalles=null;
         if(entrega.getRealizada()){
             
@@ -51,12 +55,14 @@ public class R_Entregas extends javax.swing.JInternalFrame {
     List<Detalleentrega> detalle;
     ModeloTablaArchivos modelo;
     DetalleentregaJpaController controldetalles;
-    Curso curso;
+    ArchivoJpaController controlarchivo;
+    CCurso curso;
     Entrega entrega;
     
     public void obtenerArchivos(){
+        detalle=new ArrayList<>();
         Query q;
-        EntityManager em=null;
+        EntityManager em=curso.getActividad().getEmf().createEntityManager();
         q=em.createNamedQuery("Detalleentrega.findByEntregaid");
         q.setParameter("entregaid", entrega.getId());
         detalle= q.getResultList();
@@ -69,24 +75,46 @@ public class R_Entregas extends javax.swing.JInternalFrame {
     }
     
     public void eliminar(Archivo arch,int idRow){
-        DetalleentregaJpaController controldetales;
         if(arch.getId()>0){
             for(Detalleentrega d:detalle){
                 if(d.getArchivoid()==arch.getId()){
+                    try {
+                        controldetalles.destroy(d.getId());
+                    } catch (NonexistentEntityException ex) {
+                        Logger.getLogger(R_Entregas.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                     
                 }
             }
+            obtenerArchivos();
+            modelo= new ModeloTablaArchivos(archivos);
+            jTable1.setModel(modelo);
             
         }else{
+            archivos.remove(idRow);
+            modelo= new ModeloTablaArchivos(archivos);
+            jTable1.setModel(modelo);
             
         }
         
         
         
-        archivos.remove(idRow);
+        
     }
     
-    
+    private int maxDetalleentregaadId(){
+        Query q;
+        EntityManager em=curso.getActividad().getEmf().createEntityManager();
+        q=em.createNamedQuery("Detalleentrega.findMaxId");;
+        return q.getFirstResult();
+    }
+    private int maxArchivosId(){
+        Query q;
+        EntityManager em=curso.getActividad().getEmf().createEntityManager();
+        q=em.createNamedQuery("Archivo.findMaxId");;
+        return q.getFirstResult();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
