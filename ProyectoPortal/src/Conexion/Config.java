@@ -13,6 +13,7 @@ public class Config implements ConexionBasica {
     private String User;
     private String Pass;
     private String carne;
+    private String iniciales;
     private static Config instancia= null;
     
   
@@ -28,12 +29,18 @@ public class Config implements ConexionBasica {
         this.User=user;
         this.Pass=pass;
         this.carne= cortar(user);
+        this.carne=Ciniciales(user);
     }
 
     public String getUser() {
         return User;
     }
 
+    public String getIniciales() {
+        return iniciales;
+    }
+
+    
     public String getPass() {
         return Pass;
     }
@@ -57,5 +64,10 @@ public class Config implements ConexionBasica {
      cortado = us.substring(3);
      return cortado;
     }
-    
+     
+    private String Ciniciales(String us){
+        String cortado;
+        cortado=us.substring(0, 2);
+        return cortado;
+    }
 }
