@@ -10,11 +10,13 @@ import Controladores.DetalleentregaJpaController;
 import Controladores.exceptions.NonexistentEntityException;
 import Curso.CCurso;
 import Curso.ModeloTablaArchivos;
+import Forms.NewJFrame;
 import Tablas.Archivo;
 import Tablas.Detalleentrega;
 import Tablas.Entrega;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,16 +34,16 @@ public class R_Entregas extends javax.swing.JInternalFrame {
     /**
      * Creates new form NewJInternalFrame
      */
-    public R_Entregas(CCurso curso, int idEntrega) {
+    public R_Entregas(CCurso curso, int idActividad) {
         initComponents();
         this.curso= curso;
         archivos= new ArrayList<>();
-        entrega=curso.getActividad().obtenerEntrega(idEntrega);
+        this.id= idActividad;
+        
+        entrega=curso.getActividad().obtenerEntrega(idActividad);
         controldetalles=null;
         if(entrega.getRealizada()){
-            
-        }else{
-            
+            obtenerArchivos();
         }
         
         
@@ -58,6 +60,7 @@ public class R_Entregas extends javax.swing.JInternalFrame {
     ArchivoJpaController controlarchivo;
     CCurso curso;
     Entrega entrega;
+    int id;
     
     public void obtenerArchivos(){
         detalle=new ArrayList<>();
@@ -102,6 +105,29 @@ public class R_Entregas extends javax.swing.JInternalFrame {
         
         
     }
+    public void Finalizar(){
+        controlarchivo= new ArchivoJpaController(curso.getActividad().getEmf());
+        controldetalles= new DetalleentregaJpaController(curso.getActividad().getEmf());
+        for(Archivo a :archivos){
+            if(a.getId()==null){
+                try {
+                    controlarchivo.edit(a);
+                } catch (Exception ex) {
+                    Logger.getLogger(R_Entregas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }else{
+                int detalle=maxDetalleentregaadId();
+                int arc= maxArchivosId();
+                a.setId(arc);
+                System.out.println(a);
+                controlarchivo.create(a);
+                controldetalles.create(new Detalleentrega(detalle, new Date(), arc, this.id));
+                
+            }
+        }
+        
+    }
     
     private int maxDetalleentregaadId(){
         Query q;
@@ -124,11 +150,21 @@ public class R_Entregas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+
+        jMenuItem1.setText("Eliminiar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -151,8 +187,18 @@ public class R_Entregas extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Finalizar entrega");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Cancelar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -209,11 +255,35 @@ public class R_Entregas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Finalizar();
+        JOptionPane.showMessageDialog(this, "<html><FONT SIZE=4>Se finalizo correctamente.</font></html>");
+        dispose();
+        
+    };//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        if (row >= 0) {
+            eliminar(modelo.getArchivos().get(row), row);
+
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

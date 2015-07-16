@@ -74,7 +74,7 @@ public class A_Catedratico extends CActividad {
      * @param usuarios
      */
     @Override
-    public void publicarActividad(Tablas.Actividad actividad,List<Usuario> usuarios) {
+    public void publicarActividad(Tablas.Actividad actividad,List<Integer> usuarios) {
         actividad.setId(maxActividadId());
         actividad.setSeccionCursoid(idSeccionCurso);
         controladorA.create(actividad);
@@ -95,10 +95,10 @@ public class A_Catedratico extends CActividad {
         return q.getFirstResult();
     }
     
-    private void crearEntregas(int idActividad,List<Usuario> usuarios){
+    private void crearEntregas(int idActividad,List<Integer> usuarios){
         
-        for(Usuario u: usuarios){
-            controladorE.create(new Entrega(maxEntregaId(),0, false, true, idActividad, u.getId()));
+        for(Integer u: usuarios){
+            controladorE.create(new Entrega(maxEntregaId(),0, false, true, idActividad, u));
         }
         cargarEntregas();
        

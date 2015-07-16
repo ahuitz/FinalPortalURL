@@ -37,7 +37,7 @@ public abstract class CActividad {
     public abstract List<Entrega> obtenerEntregas(int idActividad);
     public abstract void calificarEntrega(List<Entrega> entrega )throws Exception;
     public abstract void modificarActividad(Actividad actividad)throws Exception;
-    public abstract void publicarActividad(Tablas.Actividad actividad,List<Usuario> usuarios);
+    public abstract void publicarActividad(Tablas.Actividad actividad,List<Integer> usuarios);
     
     
     //metodos en comun

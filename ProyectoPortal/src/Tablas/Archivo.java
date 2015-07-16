@@ -129,7 +129,8 @@ public class Archivo implements Serializable {
 
     @Override
     public String toString() {
-        return "Tablas.Archivo[ id=" + id + " ]";
+        return "Archivo{" + "id=" + id + ", nombre=" + nombre + ", extension=" + extension + ", url=" + url + ", tamanio=" + tamanio + '}';
     }
+
     
 }

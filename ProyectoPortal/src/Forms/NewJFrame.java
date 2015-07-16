@@ -23,7 +23,7 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
         FormularioUsuarios1.conexion= new Conexion.ConexionJPA("root", "root");
-        curso= new CCurso("CAT", new Usuario(1, "EST1629311", 1, 1), 1);
+        curso= new CCurso("EST", new Usuario(1, "EST1629311", 1, 1), 1);
     }
     
     
