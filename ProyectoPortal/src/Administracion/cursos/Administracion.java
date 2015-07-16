@@ -93,7 +93,7 @@ public class Administracion {
         CursocarreraJpaController conCursocarrera = new CursocarreraJpaController(emf);
         Cursocarrera cursocarrera = new Cursocarrera(conCursocarrera.getMaxId() + 1, 
                 descripcion, carreraid, ciclocurso.getId());
-    
+        conCursocarrera.create(cursocarrera);
     }
     
     public void crearCurso(String nombre){
