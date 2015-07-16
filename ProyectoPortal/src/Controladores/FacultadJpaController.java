@@ -142,7 +142,7 @@ public class FacultadJpaController implements Serializable {
         try{
             Query q = em.createQuery("SELECT MAX(f.id) FROM Facultad f");
             Object id = q.getSingleResult();
-            if (id == null)
+            if (id != null)
                 return (int)id;
             else
                 return 0;
@@ -152,16 +152,25 @@ public class FacultadJpaController implements Serializable {
     }
     
     public int getId(String nombre){
-        EntityManager em = getEntityManager();
+        List<Facultad> listafacultad = findFacultadEntities();
+        int id = 0;
+        for(Facultad facultad : listafacultad){
+            if (facultad.getFacultad().equals(nombre))
+                id = facultad.getId();
+        }
+        return id;
+        /*EntityManager em = getEntityManager();
         try{
-            Query q = em.createNamedQuery("SELECT f.id FROM Facultad f WHERE f.facultad = " + nombre);
-            return (int) q.getSingleResult();
+            Query q = em.createNamedQuery("SELECT f FROM Facultad f WHERE f.facultad = :facultad");
+            q.setParameter("facultad", nombre);
+            Facultad facultad = (Facultad) q.getSingleResult();
+            return facultad.getId();
         }finally{
             em.close();
-        }
+        }*/
     }
     
-    public List<String> getFacultad(){
+    /*public List<String> getFacultad(){
         EntityManager em = getEntityManager();
         try{
             Query q = em.createNamedQuery("SELEC f.facultad FROM Facultad f");
@@ -169,6 +178,6 @@ public class FacultadJpaController implements Serializable {
         }finally{
             em.close();
         }
-    }
+    }*/
     
 }

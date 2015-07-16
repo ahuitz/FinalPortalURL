@@ -154,22 +154,38 @@ public class Administracion {
     
     public List<String> getFacultad(){
         FacultadJpaController conFacultad = new FacultadJpaController(emf);
-        return conFacultad.getFacultad();
+        List<Facultad> listafacultad = conFacultad.findFacultadEntities();
+        List<String> listanombres = new ArrayList<String>();
+        for (Facultad facultad : listafacultad)
+            listanombres.add(facultad.getFacultad());
+        return listanombres;
     }
     
     public List<String> getCarrera(){
         CarreraJpaController conCarrera = new CarreraJpaController(emf);
-        return conCarrera.getCarrera();
+        List<Carrera> listacarrera = conCarrera.findCarreraEntities();
+        List<String> listanombres = new ArrayList<String>();
+        for (Carrera carrera : listacarrera)
+            listanombres.add(carrera.getCarrera());
+        return listanombres;
     }
     
     public List<String> getCurso(){
         CursoJpaController conCurso = new CursoJpaController(emf);
-        return conCurso.getCurso();
+        List<Curso> listacurso = conCurso.findCursoEntities();
+        List<String> listanombres = new ArrayList<String>();
+        for (Curso curso : listacurso)
+            listanombres.add(curso.getNombre());
+        return listanombres;
     }
     
     public List<String> getCiclo(){
         CicloJpaController conCiclo = new CicloJpaController(emf);
-        return conCiclo.getCiclo();
+        List<Ciclo> listaciclo = conCiclo.findCicloEntities();
+        List<String> listanombres = new ArrayList<String>();
+        for (Ciclo ciclo : listaciclo)
+            listanombres.add(ciclo.getCiclo());
+        return listanombres;
     }
     
     public List<String> getNombrepersona(){
