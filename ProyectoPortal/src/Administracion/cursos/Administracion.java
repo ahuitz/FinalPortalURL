@@ -25,9 +25,9 @@ import Tablas.Persona;
 import Tablas.Seccion;
 import Tablas.Seccioncurso;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
+import Conexion.ConexionJPA;
 
 
 /**
@@ -39,12 +39,18 @@ public class Administracion {
     EntityManagerFactory emf;
 
     public Administracion() {
+        emf = getEntityManagerFactory();
     }
     
     /*
     Metodo que crea un nuevo ciclo en la base de datos
     @param nombre define el nombre que se le pondra al ciclo
     */
+    
+    private EntityManagerFactory getEntityManagerFactory(){
+        ConexionJPA cn = ConexionJPA.getInstance("root", "root");
+        return cn.getEmf();
+    } 
     
     public void crearCiclo(String nombre){
         CicloJpaController conCiclo = new CicloJpaController(emf);

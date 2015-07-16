@@ -6,6 +6,7 @@
 package Forms.Curso;
 
 import Administracion.cursos.Administracion;
+import java.util.List;
 
 /**
  *
@@ -17,8 +18,12 @@ public class AgregarCurso extends javax.swing.JInternalFrame {
      * Creates new form AgregarCurso
      */
     
+    Administracion administracion;
+    
     public AgregarCurso() {
         initComponents();
+        administracion = new Administracion();
+        dibujar();
     }
 
     /**
@@ -143,7 +148,6 @@ public class AgregarCurso extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Administracion administracion = new Administracion();
         administracion.agregarCurso((String) curso.getSelectedItem(), (String) ciclo.getSelectedItem(),
                 (String) carrera.getSelectedItem(), Integer.parseInt(anio.getText().trim()), 
                 descripcion.getText());
@@ -172,4 +176,18 @@ public class AgregarCurso extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void dibujar() {
+        List<String> listacursos = administracion.getCurso();
+        for(String ncurso : listacursos)
+            curso.addItem(ncurso);
+        
+        List<String> listaciclo = administracion.getCiclo();
+        for(String nciclo : listaciclo)
+            curso.addItem(nciclo);
+        
+        List<String> listacarrera = administracion.getCiclo();
+        for(String ncarrera : listacarrera)
+            curso.addItem(ncarrera);
+    }
 }
