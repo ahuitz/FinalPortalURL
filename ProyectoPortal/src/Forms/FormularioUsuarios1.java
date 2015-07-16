@@ -238,6 +238,21 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
                     Pinfo.setVisible(true);
                     jMenuItem1.setVisible(false);
                     jMenuItem2.setVisible(true);
+                    String iniciales = configuracion.getSiglas();
+                     switch(iniciales){
+                        case "EST": 
+                            PrincipalEst est = new PrincipalEst(info.getCarne());
+                            this.jDesktopPane2.add(est);
+                            est.setVisible(true);
+                            break;
+                        case "ADM":
+                            System.out.println("ADMINISTRADOR");
+                            break;
+                        case "CAT":
+                            System.out.println("CATEDRATICO");
+                            break;
+                    
+                    }
                 }
                 
         } else {
@@ -263,6 +278,9 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
         BusquedaUs bu = new BusquedaUs();
         this.jDesktopPane2.add(bu);
         bu.setVisible(true);
+        PrincipalEst est = new PrincipalEst(this.txCarne.getText());
+                            this.jDesktopPane2.add(est);
+                            est.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
