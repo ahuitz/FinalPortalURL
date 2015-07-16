@@ -6,8 +6,10 @@
 package Controladores;
 
 import Controladores.exceptions.NonexistentEntityException;
+import Forms.Curso.AgregarSeccion;
 import Tablas.Seccioncurso;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -133,6 +135,16 @@ public class SeccioncursoJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public List<Integer> getSeccionId(int cursocarreraid){
+        List<Seccioncurso> listaseccioncurso = findSeccioncursoEntities();
+        List<Integer> id = new ArrayList<>();
+        for(Seccioncurso seccioncurso : listaseccioncurso){
+            if (seccioncurso.getCursoCarreraid() == cursocarreraid)
+                id.add(seccioncurso.getSeccionid());
+        }
+        return id;
     }
     
     public int getMaxId(){
