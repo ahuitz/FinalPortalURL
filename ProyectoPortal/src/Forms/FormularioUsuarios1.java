@@ -242,7 +242,7 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
                     System.out.println(iniciales);
                      switch(iniciales){
                         case "EST": 
-                            PrincipalEst est = new PrincipalEst(this.txCarne.getText());
+                            PrincipalEst est = new PrincipalEst(configuracion.getCarne());
                             this.jDesktopPane2.add(est);
                             est.setVisible(true);
                             break;
