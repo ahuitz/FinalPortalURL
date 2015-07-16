@@ -5,11 +5,8 @@
  */
 package Forms;
 
-import static Forms.FormularioUsuarios1.conexion;
-
-import static Forms.FormularioUsuarios1.us;
+import static Forms.PrincipalEst.pe;
 import Tablas.Persona;
-import Tablas.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -17,19 +14,20 @@ import javax.persistence.Query;
  *
  * @author Geek
  */
-public class PrincipalEst extends javax.swing.JInternalFrame {
+public class PrincipalCat extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form PrincipalEst
+     * Creates new form PrincipalCat
      */
-    public EntityManager em = FormularioUsuarios1.conexion.getEm();
+     public EntityManager em = FormularioUsuarios1.conexion.getEm();
     private String carne;
     public static Persona pe = new Persona();
-    public PrincipalEst(String carne) {
+    public PrincipalCat(String carne) {
         initComponents();
         this.carne=carne;
         mostrardatos();
     }
+    
     public void mostrardatos(){
         if(em!=null){
                      String q="Persona.findByCarne";
@@ -48,10 +46,11 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
                          txtEstado.setText("ACTIVO");
                     }else
                          txtEstado.setText("INACTIVO");
-                     if (pe.getGenero()!=false) {
+                    if (pe.getGenero()!=false) {
                          txtEstado.setText("MASCULINO");
                     }else
                          txtEstado.setText("FEMENINO");
+                    
                      
                      
                 }
@@ -78,11 +77,8 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -126,9 +122,11 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
         jLabel17.setText("Principal");
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Folders-Explorer-icon.png"))); // NOI18N
         jLabel18.setText("Cursos");
 
         jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Filetype-Sheets-icon.png"))); // NOI18N
         jLabel19.setText("Notas");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -162,13 +160,13 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
         jTable1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Curso", "Catedratico", "Seccion", "Nota Actual"
+                "Curso", "Seccion", "No. Estudiantes"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -179,7 +177,7 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -192,18 +190,11 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Información Academica", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 14))); // NOI18N
 
-        jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Promedio Total", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 13))); // NOI18N
-
-        jTextField3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ciclos Cursados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Century Gothic", 0, 13))); // NOI18N
-
         jButton1.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
-        jButton1.setText("Cursos Faltantes");
+        jButton1.setText("Historial Cursos");
 
         jButton2.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
-        jButton2.setText("Pensum");
-
-        jButton3.setFont(new java.awt.Font("Century Gothic", 0, 13)); // NOI18N
-        jButton3.setText("Cursos Ganados");
+        jButton2.setText("Ver Notas");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -213,25 +204,17 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(57, 57, 57)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -452,7 +435,7 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtEstado))
-                    .addComponent(jComboBox1, 0, 245, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, 0, 239, Short.MAX_VALUE))
                 .addGap(208, 208, 208))
         );
         jPanel8Layout.setVerticalGroup(
@@ -483,7 +466,7 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 516, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                         .addGap(26, 26, 26))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -544,7 +527,7 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 21, Short.MAX_VALUE)
+                        .addGap(0, 26, Short.MAX_VALUE)
                         .addComponent(jLabel9)
                         .addGap(2, 2, 2)
                         .addComponent(jLabel16)
@@ -566,7 +549,6 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -601,8 +583,6 @@ public class PrincipalEst extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtCarne;
     private javax.swing.JTextField txtCelular;
