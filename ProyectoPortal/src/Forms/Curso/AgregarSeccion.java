@@ -6,6 +6,7 @@
 package Forms.Curso;
 
 import Administracion.cursos.Administracion;
+import java.util.List;
 
 /**
  *
@@ -23,6 +24,7 @@ public class AgregarSeccion extends javax.swing.JInternalFrame {
     public AgregarSeccion() {
         initComponents();
         administracion = new Administracion();
+        dibujar();
     }
 
     /**
@@ -40,7 +42,6 @@ public class AgregarSeccion extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         cupo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        catedratico = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         carrera = new javax.swing.JComboBox();
         descripcion = new javax.swing.JTextField();
@@ -48,6 +49,7 @@ public class AgregarSeccion extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         ciclo = new javax.swing.JComboBox();
+        catedratico = new javax.swing.JComboBox();
 
         jLabel1.setText("Descripcion de curso");
 
@@ -58,12 +60,6 @@ public class AgregarSeccion extends javax.swing.JInternalFrame {
         jLabel3.setText("Cupo de seccion");
 
         jLabel5.setText("Catedratico");
-
-        catedratico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                catedraticoActionPerformed(evt);
-            }
-        });
 
         jLabel6.setText("Carrera");
 
@@ -87,14 +83,22 @@ public class AgregarSeccion extends javax.swing.JInternalFrame {
 
         ciclo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        catedratico.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -104,12 +108,17 @@ public class AgregarSeccion extends javax.swing.JInternalFrame {
                             .addComponent(carrera, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(catedratico, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                                .addComponent(cupo, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(cupo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(catedratico, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -117,12 +126,6 @@ public class AgregarSeccion extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel4)
                                 .addComponent(ciclo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(46, 46, 46))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,9 +152,9 @@ public class AgregarSeccion extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(catedratico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ciclo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ciclo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(catedratico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -161,14 +164,12 @@ public class AgregarSeccion extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void catedraticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catedraticoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_catedraticoActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String nombres = (String) catedratico.getSelectedItem();
+        String[] nombre = nombres.split("-");
         administracion.crearSeccion(descripcion.getText(), Integer.parseInt(cupo.getText().trim()), 
-                (String) curso.getSelectedItem(), (String) carrera.getSelectedItem(), catedratico.getText(), 
+                (String) curso.getSelectedItem(), (String) carrera.getSelectedItem(), nombre[1], nombre[0],
                 (String) ciclo.getSelectedItem(), 0);
         this.dispose();
         
@@ -182,7 +183,7 @@ public class AgregarSeccion extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox carrera;
-    private javax.swing.JTextField catedratico;
+    private javax.swing.JComboBox catedratico;
     private javax.swing.JComboBox ciclo;
     private javax.swing.JTextField cupo;
     private javax.swing.JComboBox curso;
@@ -196,4 +197,23 @@ public class AgregarSeccion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
+
+    private void dibujar() {
+        
+        List<String> listacarrera = administracion.getCarrera();
+        for (String nombrecarrera : listacarrera)
+            carrera.addItem(nombrecarrera);
+        
+        List<String> listacurso = administracion.getCiclo();
+        for (String nombreciclo : listacurso)
+            curso.addItem(nombreciclo);
+        
+        List<String> listaciclo = administracion.getCiclo();
+        for (String nombreciclo : listaciclo)
+            ciclo.addItem(nombreciclo);
+        
+        List<String> listanombre = administracion.getNombrepersona();
+        for (String nombre : listanombre)
+            catedratico.addItem(nombre);
+    }
 }

@@ -9,7 +9,7 @@ import Administracion.cursos.Administracion;
 
 /**
  *
- * @author est1573011
+ * @author Cristian Flores
  */
 public class AgregarCurso extends javax.swing.JInternalFrame {
 

@@ -6,6 +6,7 @@
 package Forms.Curso;
 
 import Administracion.cursos.Administracion;
+import java.util.List;
 
 /**
  *
@@ -16,8 +17,13 @@ public class CrearCarrera extends javax.swing.JInternalFrame {
     /**
      * Creates new form CrearCarreara
      */
+    
+    Administracion administracion;
+    
     public CrearCarrera() {
         initComponents();
+        administracion = new Administracion();
+        agregar();
     }
 
     /**
@@ -39,8 +45,6 @@ public class CrearCarrera extends javax.swing.JInternalFrame {
         jLabel1.setText("Nombre");
 
         jLabel2.setText("Facultad");
-
-        facultad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +102,6 @@ public class CrearCarrera extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Administracion administracion = new Administracion();
         administracion.crearCarrera(nombre.getText(), (String) facultad.getSelectedItem());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -107,7 +110,12 @@ public class CrearCarrera extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
+    private void agregar(){
+        List<String> lista = administracion.getFacultad();
+        for (String nombrefacultad : lista)
+            facultad.addItem(nombrefacultad);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox facultad;

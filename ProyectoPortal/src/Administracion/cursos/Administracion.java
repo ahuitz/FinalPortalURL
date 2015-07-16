@@ -11,17 +11,22 @@ import Controladores.CiclocursoJpaController;
 import Controladores.CursoJpaController;
 import Controladores.CursocarreraJpaController;
 import Controladores.FacultadJpaController;
+import Controladores.PersonaJpaController;
 import Controladores.SeccionJpaController;
 import Controladores.SeccioncursoJpaController;
+import Controladores.UsuarioJpaController;
 import Tablas.Curso;
 import Tablas.Carrera;
 import Tablas.Ciclo;
 import Tablas.Ciclocurso;
 import Tablas.Cursocarrera;
 import Tablas.Facultad;
+import Tablas.Persona;
 import Tablas.Seccion;
 import Tablas.Seccioncurso;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 
 
@@ -115,8 +120,8 @@ public class Administracion {
     
     */
     
-    public void crearSeccion(String descripcion, int cupo, String curso, String carrera, String catedratico, 
-            String ciclo, int anio){
+    public void crearSeccion(String descripcion, int cupo, String curso, String carrera, String nombrecatedratico, 
+            String apellidocatedratico, String ciclo, int anio){
         
         SeccionJpaController conSeccion = new SeccionJpaController(emf);
         Seccion seccion = new Seccion(conSeccion.getMaxId() + 1, descripcion);
@@ -130,9 +135,43 @@ public class Administracion {
         int idcarrera = conCarrera.getId(carrera);
         CursocarreraJpaController conCursocarrera = new CursocarreraJpaController(emf);
         int idcursocarrera = conCursocarrera.getId(idcarrera, idciclocurso);
+        PersonaJpaController conPersona = new PersonaJpaController(emf);
+        int idpersona = conPersona.getId(nombrecatedratico, apellidocatedratico);
+        UsuarioJpaController conUsuario = new UsuarioJpaController(emf);
+        int idusuario = conUsuario.getId(idpersona);
         
         SeccioncursoJpaController conSeccioncurso = new SeccioncursoJpaController(emf);
-        Seccioncurso seccioncurso = new Seccioncurso(conSeccioncurso.getMaxId(), cupo, cupo, seccion.getId(), idcursocarrera, 0);
+        Seccioncurso seccioncurso = new Seccioncurso(conSeccioncurso.getMaxId(), cupo, cupo, seccion.getId(), idcursocarrera,
+            idusuario);
         conSeccioncurso.create(seccioncurso);
+    }
+    
+    public List<String> getFacultad(){
+        FacultadJpaController conFacultad = new FacultadJpaController(emf);
+        return conFacultad.getFacultad();
+    }
+    
+    public List<String> getCarrera(){
+        CarreraJpaController conCarrera = new CarreraJpaController(emf);
+        return conCarrera.getCarrera();
+    }
+    
+    public List<String> getCurso(){
+        CursoJpaController conCurso = new CursoJpaController(emf);
+        return conCurso.getCurso();
+    }
+    
+    public List<String> getCiclo(){
+        CicloJpaController conCiclo = new CicloJpaController(emf);
+        return conCiclo.getCiclo();
+    }
+    
+    public List<String> getNombrepersona(){
+        PersonaJpaController conPersona = new PersonaJpaController(emf);
+        List<Persona> listapersona = conPersona.findPersonaEntities();
+        List<String> listanombres = new ArrayList<String>();
+        for(Persona persona : listapersona)
+            listanombres.add(persona.getApellido() + "-" + persona.getNombre());
+        return listanombres;
     }
 }
