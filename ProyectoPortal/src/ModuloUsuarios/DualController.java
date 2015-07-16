@@ -64,7 +64,8 @@ public class DualController implements Controlador{
             com.mysql.jdbc.Statement statement;
             statement = (com.mysql.jdbc.Statement) mysql.getBDconexion().createStatement();
             statement.execute("create user '"+TipoEst+num+"15'@'localhost' identified by 'a.2015';"); 
-            statement.execute("GRANT ALL PRIVILEGES ON * . * TO '"+TipoEst+num+"15'@'localhost';");             
+            statement.execute("GRANT ALL PRIVILEGES ON * . * TO '"+TipoEst+num+"15'@'localhost';");    
+            statement.execute("FLUSH PRIVILEGES;");
             System.out.println("Datos ingresados correctamente");          
             statement.close();
          if(TipoEst=="EST"){   
