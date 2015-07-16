@@ -199,7 +199,7 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public static ConexionJPA conexion;
-    public Config configuracion;
+    public static Config configuracion;
     private String Usuario ;
     private String Contraseña;
     public static Usuario us= new Usuario();
