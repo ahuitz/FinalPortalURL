@@ -146,4 +146,14 @@ public class FacultadJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public int getId(String nombre){
+        EntityManager em = getEntityManager();
+        try{
+            Query q = em.createNamedQuery("SELECT f.id FROM Facultad f WHERE f.facultad = " + nombre);
+            return (int) q.getSingleResult();
+        }finally{
+            em.close();
+        }
+    }
 }

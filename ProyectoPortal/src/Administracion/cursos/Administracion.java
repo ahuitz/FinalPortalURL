@@ -64,7 +64,10 @@ public class Administracion {
     @param facultad define el id de la faculta a la que pertenecera
     */
     
-    public void crearCarrera(String nombre, int facultadid){
+    public void crearCarrera(String nombre, String facultad){
+        FacultadJpaController conFacultad = new FacultadJpaController(emf);
+        int facultadid = conFacultad.getId(facultad);
+        
         CarreraJpaController conCarrera = new CarreraJpaController(emf);
         Carrera carrera = new Carrera(conCarrera.getMaxId() + 1, nombre, facultadid);
         conCarrera.create(carrera);
@@ -73,14 +76,30 @@ public class Administracion {
     /*
     */
     
-    public void crearCurso(String nombre, int anio, int cicloid){
+    public void agregarCurso(String curso, String ciclo, String carrera, int anio, String descripcion){
+        CicloJpaController conCiclo = new CicloJpaController(emf);
+        int cicloid = conCiclo.getId(ciclo);
+        
+        CursoJpaController conCurso = new CursoJpaController(emf);
+        int cursoid = conCurso.getId(curso);
+        
+        CarreraJpaController conCarrera = new CarreraJpaController(emf);
+        int carreraid = conCarrera.getId(carrera);
+        
+        CiclocursoJpaController conCiclocurso = new CiclocursoJpaController(emf);
+        Ciclocurso ciclocurso = new Ciclocurso(conCiclocurso.getMaxId() + 1, anio, cicloid, cursoid);
+        conCiclocurso.create(ciclocurso);
+        
+        CursocarreraJpaController conCursocarrera = new CursocarreraJpaController(emf);
+        Cursocarrera cursocarrera = new Cursocarrera(conCursocarrera.getMaxId() + 1, 
+                descripcion, carreraid, ciclocurso.getId());
+    
+    }
+    
+    public void crearCurso(String nombre){
         CursoJpaController conCurso = new CursoJpaController(emf);
         Curso curso = new Curso(conCurso.getMaxId() + 1, nombre);
         conCurso.create(curso);
-        
-        CiclocursoJpaController conCiclocurso = new CiclocursoJpaController(emf);
-        Ciclocurso ciclocurso = new Ciclocurso(conCiclocurso.getMaxId() + 1, anio, cicloid, curso.getId());
-        conCiclocurso.create(ciclocurso);
     }
     
     /*
