@@ -84,6 +84,7 @@ public class DualController implements Controlador{
         us.setUsuario(TipoEst+num+"15");
         us.setPersonaid(Integer.parseInt(num));
         controladorpersona.create(persona);
+        controladorusuario.create(us);
        
     }
     
