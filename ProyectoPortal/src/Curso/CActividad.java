@@ -23,7 +23,7 @@ import javax.persistence.Query;
  */
 public abstract class CActividad {
 
-    protected List<Actividad> actividades;
+    public List<Actividad> actividades;
     protected ActividadJpaController controladorA;
     protected EntregaJpaController controladorE;
     protected int idSeccionCurso;
@@ -55,6 +55,7 @@ public abstract class CActividad {
         //'nombre' es el parametro que esta en la clase usuario ':nombre'
         q.setParameter("seccionCursoid", i);
         actividades=q.getResultList();
+        System.out.println(actividades.size());
         
     }
     
@@ -69,7 +70,7 @@ public abstract class CActividad {
     } 
     
     
-    public List<Tablas.Actividad> getActividades() {
+    public List<Actividad> getActividades() {
         return actividades;
     }
 
