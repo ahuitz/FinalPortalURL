@@ -38,25 +38,12 @@ public class DualController implements Controlador{
         this.configuracion = configuracion;
         this.mysql = ConexionEstandar.getInstace(configuracion.getUser(), configuracion.getPass());
         this.em=emf.createEntityManager();
-        this.controladorpersona=new PersonaJpaController(emf);
         this.controladorusuario= new UsuarioJpaController(emf);
+        this.controladorpersona=new PersonaJpaController(emf);
+        
         this.TipoEst=TipoEst;
         System.out.println(""+this.TipoEst);
-        if(this.TipoEst=="EST"){
-            
-                this.us.setRolUsuarioid(1);
-        
-        }
-        if(this.TipoEst=="ADM"){
-            
-               this.us.setRolUsuarioid(2);
-        
-        }
-        if(this.TipoEst=="CAT"){
-            
-               this.us.setRolUsuarioid(3);
-        
-        }
+       
         
     }
     
@@ -84,10 +71,13 @@ public class DualController implements Controlador{
         }
           
         persona.setCarne(num+"15");
+        controladorpersona.create(persona);
+        us.setRolUsuarioid(1);
         us.setUsuario(TipoEst+num+"15");
         us.setPersonaid(Integer.parseInt(num));
-        controladorpersona.create(persona);
         controladorusuario.create(us);
+        
+      
        
     }
     
