@@ -72,7 +72,7 @@ public class NuevaActividad extends javax.swing.JInternalFrame {
     int horaL=0;
     int minutoL=0;
     public void iniciarLista(){
-        TipoactividadJpaController controlador = new TipoactividadJpaController(curso.conexion.getEmf());
+        TipoactividadJpaController controlador = new TipoactividadJpaController(Forms.FormularioUsuarios1.conexion.getEmf());
         listaActividad=controlador.findTipoactividadEntities();
     }
     public void LlenarCombos(){
