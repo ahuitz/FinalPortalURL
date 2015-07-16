@@ -95,6 +95,7 @@ public class ListaUsuarioCarreraCursos {
             consul.setFacultadiD(miCarr.getFacultadid());
             
             
+            
             consul.setIdCursoCarrera(curcar.getId());
             consul.setDescripsion(curcar.getDescripcion());
             consul.setCursoCarreraiD(Integer.toString(curcar.getCarreraid()));
