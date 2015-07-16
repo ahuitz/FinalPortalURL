@@ -7,7 +7,18 @@ package Forms.Curso;
 
 import Conexion.ConexionJPA;
 import Forms.FormularioUsuarios1;
+import Tablas.Carrera;
+import Tablas.Ciclo;
+import Tablas.Ciclocurso;
+import Tablas.Curso;
+import Tablas.Cursocarrera;
+import Tablas.Estudianteseccion;
+import Tablas.Seccion;
 import Tablas.Usuario;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,6 +31,7 @@ public class PruebasPablo extends javax.swing.JFrame {
      */
     public PruebasPablo() {
         initComponents();
+        FormularioUsuarios1.conexion=ConexionJPA.getInstance("root", "root");
     }
 
     /**
@@ -36,6 +48,7 @@ public class PruebasPablo extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +80,14 @@ public class PruebasPablo extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Probar algoritmo");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -114,6 +135,41 @@ public class PruebasPablo extends javax.swing.JFrame {
         pc.toFront();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        getCursosEstudiante(1);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+              
+
+    public void getCursosEstudiante(int idUsuarioE){
+         Query q;
+            q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Estudianteseccion.findByUsuarioid");
+            q.setParameter("usuarioid",idUsuarioE);
+            List<Estudianteseccion> es = q.getResultList();
+            ArrayList<Curso> cursos = new ArrayList<>();
+            for(int i=0;i<es.size();i++){
+                q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Seccion.findById");
+                q.setParameter("id", es.get(i).getId());
+                Seccion seccion = (Seccion) q.getSingleResult();
+                q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Cursocarrera.findById");
+                q.setParameter("id", es.get(i).getId());
+                Cursocarrera cc = (Cursocarrera) q.getSingleResult();
+                q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Carrera.findById");
+                q.setParameter("id", cc.getCarreraid());
+                Carrera c = (Carrera) q.getSingleResult();
+                q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Ciclocurso.findById");
+                q.setParameter("id", cc.getCicloCursoid());
+                Ciclocurso cic = (Ciclocurso) q.getSingleResult();
+                q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Curso.findById");
+                q.setParameter("id", cic.getCursoid());
+                Curso cur = (Curso) q.getSingleResult();
+                q = FormularioUsuarios1.conexion.getEmf().createEntityManager().createNamedQuery("Ciclo.findById");
+                q.setParameter("id", cic.getCicloid());
+                Ciclo ciclo = (Ciclo) q.getSingleResult();
+                cursos.add(cur);
+                JOptionPane.showMessageDialog(this, "Curso: "+cursos.get(i).getNombre()+"  Seccion: "+seccion.getDescripcion());
+            }   
+    }
     /**
      * @param args the command line arguments
      */
@@ -155,5 +211,6 @@ public class PruebasPablo extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }
