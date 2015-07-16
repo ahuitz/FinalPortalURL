@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(catalog = "permisosus", schema = "")
 @XmlRootElement
 @NamedQueries({
+    @NamedQuery(name = "Entrega.actualizarCalificacion", query = "UPDATE Entrega e SET e.calificacion = :calificacion"),
     @NamedQuery(name = "Entrega.findAll", query = "SELECT e FROM Entrega e"),
     @NamedQuery(name = "Entrega.findById", query = "SELECT e FROM Entrega e WHERE e.id = :id"),
     @NamedQuery(name = "Entrega.findByCalificacion", query = "SELECT e FROM Entrega e WHERE e.calificacion = :calificacion"),

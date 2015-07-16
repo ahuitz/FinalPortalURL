@@ -47,6 +47,7 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
     public ListaEstudiantes() {
         initComponents();
         CargarDatos();
+        esconderColumna();
     }
 
     /**
@@ -83,9 +84,17 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Nombre", "Apellido", "Carne"
+                "Nombre", "Apellido", "Carne", "UsuarioEstId"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TablaEstudiantes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         seleccionEst = TablaEstudiantes.getSelectionModel();
         seleccionEst.addListSelectionListener(new ListSelectionListener(){
@@ -95,9 +104,14 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
                 }
 
             }
-
         });
         jScrollPane1.setViewportView(TablaEstudiantes);
+        if (TablaEstudiantes.getColumnModel().getColumnCount() > 0) {
+            TablaEstudiantes.getColumnModel().getColumn(0).setResizable(false);
+            TablaEstudiantes.getColumnModel().getColumn(1).setResizable(false);
+            TablaEstudiantes.getColumnModel().getColumn(2).setResizable(false);
+            TablaEstudiantes.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,9 +124,9 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -174,18 +188,15 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(14, 14, 14))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextFieldFacultad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldFacultad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel5)
@@ -204,11 +215,12 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,7 +297,7 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
         System.out.println("OTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         Iterator<ListaSecCurso_EstuSec_EntAct> iteradorLisSecCur_EstuSec_EntAct = miListaSecCurs_EstuSec_EntrActi.iterator();
         while (iteradorLisSecCur_EstuSec_EntAct.hasNext()) { 
-            
+            Boolean bandera = Boolean.FALSE;
             ListaSecCurso_EstuSec_EntAct ListaSecCur_EstSec_EntAct = iteradorLisSecCur_EstuSec_EntAct.next();
             System.out.println(ListaSecCur_EstSec_EntAct);
             
@@ -294,9 +306,17 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
             Persona miPersona = new Persona();
             miPersona = (Persona) qPerso.getSingleResult();
             
+            for (int i = 0; i < TablaEstudiantes.getRowCount(); i++) {
+                String nombreEst = TablaEstudiantes.getValueAt(i, 0).toString();
+                if (ListaSecCur_EstSec_EntAct.getNombreEst() == nombreEst) {
+                    bandera = Boolean.TRUE;
+                } 
+            }
             
-            Object [] datosFila = {ListaSecCur_EstSec_EntAct.getNombreEst(), ListaSecCur_EstSec_EntAct.getApellidoEst(), miPersona.getCarne()};
-            tablaEstudiantes.addRow(datosFila);
+            if (bandera == Boolean.FALSE) {
+                Object [] datosFila = {ListaSecCur_EstSec_EntAct.getNombreEst(), ListaSecCur_EstSec_EntAct.getApellidoEst(), miPersona.getCarne(), ListaSecCur_EstSec_EntAct.getUsuarioEstId()};
+                tablaEstudiantes.addRow(datosFila);
+            }
             if (cont == 0) {
                 cont++;
                 this.jTextFieldAnio.setText("" + ListaSecCur_EstSec_EntAct.getCicloCursoAnio());
@@ -312,11 +332,15 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
     
     public void tablaEstudianteSeleccion(JTable tablaEst){
         if (tablaEst.getSelectedRow() != -1) {
-                
-            ListaSecCurso_EstuSec_EntAct mi = miListaSecCurs_EstuSec_EntrActi3.get(tablaEst.getSelectedRow());
             
-            System.out.println("asdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-            Estudiante miEstud = new Estudiante(mi);
+            int filaSelec = TablaEstudiantes.getSelectedRow();
+            
+            String UsEstId = TablaEstudiantes.getValueAt(filaSelec, 3).toString();
+            String carneEst = TablaEstudiantes.getValueAt(filaSelec, 2).toString();
+            int usuarioEstId = Integer.parseInt(UsEstId);
+            System.out.println(usuarioEstId + " int");
+            Estudiante miEstud = new Estudiante(miListaSecCurs_EstuSec_EntrActi3, usuarioEstId, carneEst);
+//            Estudiante miEstud = new Estudiante();
             Principal.jDesktopPane1.add(miEstud);
             miEstud.show();
             try {
@@ -324,7 +348,14 @@ public class ListaEstudiantes extends javax.swing.JInternalFrame {
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
+            this.dispose();
         }
+    }
+
+    private void esconderColumna() {
+        TablaEstudiantes.getColumnModel().getColumn(3).setMaxWidth(0);
+        TablaEstudiantes.getColumnModel().getColumn(3).setMinWidth(0);
+        TablaEstudiantes.getColumnModel().getColumn(3).setPreferredWidth(0);
     }
 
     
