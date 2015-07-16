@@ -422,7 +422,7 @@ CreadorPersona creador= new CreadorPersona();
         else{
         pers.setEstado(false);
         }
-        pers.setFechaNac(jTextField8.getSelectedText());
+        pers.setFechaNac(jTextField8.getText());
         if(jComboBox1.getSelectedIndex()==0){
         pers.setGenero(false);
         }
