@@ -9,6 +9,7 @@ import Conexion.Config;
 import Controladores.PersonaJpaController;
 import Controladores.UsuarioJpaController;
 import Tablas.Persona;
+import Tablas.Usuario;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -30,6 +31,7 @@ public class DualController implements Controlador{
     private Config configuracion;
     private ConexionEstandar mysql;
     private String TipoEst;
+    private Usuario us;
     public DualController(EntityManagerFactory emf, Config configuracion,String TipoEst) {
         this.emf = emf;
         this.configuracion = configuracion;
@@ -38,6 +40,21 @@ public class DualController implements Controlador{
         this.controladorpersona=new PersonaJpaController(emf);
         this.controladorusuario= new UsuarioJpaController(emf);
         this.TipoEst=TipoEst;
+        switch(TipoEst){
+            case "EST":
+                us.setRolUsuarioid(1);
+                break;
+            
+            case "ADM":
+                us.setRolUsuarioid(2);
+                
+                break;
+            case "CAT":    
+            
+                us.setRolUsuarioid(3);
+                break;
+        }
+        
     }
     
     
@@ -64,6 +81,8 @@ public class DualController implements Controlador{
         }
           
         persona.setCarne(num+"15");
+        us.setUsuario(TipoEst+num+"15");
+        us.setPersonaid(Integer.parseInt(num));
         controladorpersona.create(persona);
        
     }
