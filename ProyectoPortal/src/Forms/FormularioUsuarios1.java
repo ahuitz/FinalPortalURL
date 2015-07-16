@@ -253,6 +253,9 @@ public class FormularioUsuarios1 extends javax.swing.JFrame {
                             pers.setVisible(true);
                             break;
                         case "CAT":
+                            PrincipalCat cat= new PrincipalCat(Usuario);
+                            this.jDesktopPane2.add(cat);
+                            cat.setVisible(true);
                             System.out.println("CATEDRATICO");
                             break;
                     
