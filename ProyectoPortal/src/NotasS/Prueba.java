@@ -29,6 +29,8 @@ public class Prueba {
 
         int UsuaCatId = 4;
         int Cursoid = 2;
+        
+        
         ClaseListSecCurso miClaseLisSecCurso = new ClaseListSecCurso();
         List<ListaSecCurso> miListaSecCurso = miClaseLisSecCurso.cargarDatosListSeccionCurso(UsuaCatId);
         ClaseListaPorCurso miListaPorCurso = new ClaseListaPorCurso();
@@ -39,8 +41,7 @@ public class Prueba {
         miClaseLisEstuSecc.cargarListaEstudianteSeccion();
         
         
-        ClaseListEntregaActiv miClaseLisEntActiv = new ClaseListEntregaActiv();
-        miClaseLisEntActiv.cargarDatosListEntregaActividad();
+        
         
         
         
