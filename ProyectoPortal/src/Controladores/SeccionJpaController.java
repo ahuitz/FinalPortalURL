@@ -8,6 +8,7 @@ package Controladores;
 import Controladores.exceptions.NonexistentEntityException;
 import Tablas.Seccion;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -147,5 +148,17 @@ public class SeccionJpaController implements Serializable {
         }finally{
             em.close();
         }
+    }
+    
+    public List<String> getSeccion(List<Integer> idseccions){
+        List<String> listapersona = new ArrayList<>();
+        EntityManager em = getEntityManager();
+        for (int idseccion: idseccions ){
+            Query q = em.createNamedQuery("Seccion.findById");
+            q.setParameter("id", idseccion);
+            Seccion seccion = (Seccion) q.getSingleResult();
+            listapersona.add(seccion.getDescripcion());
+        }
+        return listapersona;
     }
 }

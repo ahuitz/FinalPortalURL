@@ -165,6 +165,34 @@ public class Administracion {
         conSeccioncurso.create(seccioncurso);
     }
     
+    public List<String> getSeccionesExistentes(String carrera, String curso, String ciclo, int anio){
+        
+        CursoJpaController conCurso = new CursoJpaController(emf);
+        int idcurso = conCurso.getId(curso);
+        System.out.println("idcurso " + idcurso);
+        
+        CicloJpaController conCiclo = new CicloJpaController(emf);
+        int idciclo =conCiclo.getId(ciclo);
+        System.out.println("idcilo " + idciclo);
+        
+        CiclocursoJpaController conCiclocurso = new CiclocursoJpaController(emf);
+        int idciclocurso = conCiclocurso.getId(idcurso, idciclo, anio);
+        System.out.println("idcilcocurso "+idciclocurso);
+        
+        CarreraJpaController conCarrera = new CarreraJpaController(emf);
+        int idcarrera = conCarrera.getId(carrera);
+        System.out.println("id carrera " + idcarrera);
+        
+        CursocarreraJpaController conCursocarrera = new CursocarreraJpaController(emf);
+        int idcursocarrera = conCursocarrera.getId(idcarrera, idciclocurso);
+        System.out.println("idcursocarrera " + idcursocarrera);
+        
+        SeccioncursoJpaController conSeccioncurso = new SeccioncursoJpaController(emf);
+        SeccionJpaController conSeccion = new SeccionJpaController(emf);
+        return conSeccion.getSeccion(conSeccioncurso.getSeccionId(idcursocarrera));
+    }
+    
+    
     public List<String> getFacultad(){
         FacultadJpaController conFacultad = new FacultadJpaController(emf);
         List<Facultad> listafacultad = conFacultad.findFacultadEntities();
