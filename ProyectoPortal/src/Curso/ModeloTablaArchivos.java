@@ -8,6 +8,7 @@ package Curso;
 
 import Tablas.Archivo;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -15,10 +16,10 @@ import javax.swing.table.AbstractTableModel;
  * @author EST1629311
  */
 public class ModeloTablaArchivos extends AbstractTableModel {
-    private ArrayList<Archivo> archivos;
+    private List<Archivo> archivos;
     private String columnas[] = {"Nombre","Extension", "Tamano"};
 
-    public ModeloTablaArchivos(ArrayList<Archivo> archivos) {
+    public ModeloTablaArchivos(List<Archivo> archivos) {
       this.archivos= archivos; 
       
     }

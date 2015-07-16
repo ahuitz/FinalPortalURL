@@ -7,7 +7,7 @@ package Forms.Curso;
 
 import Controladores.ActividadJpaController;
 import Curso.A_Estudiante;
-import Curso.Curso;
+import Curso.CCurso;
 import Tablas.*;
 
 import Tablas.Actividad;
@@ -23,7 +23,7 @@ import java.util.Date;
 public class VerActividad_Estudiante extends VerActividad {
 
     Entrega e;
-    public VerActividad_Estudiante(Curso curso,int idActividad) {
+    public VerActividad_Estudiante(CCurso curso,int idActividad) {
         iniciarComponentes();
         this.curso=curso;
         this.idActividad=idActividad;
@@ -36,7 +36,7 @@ public class VerActividad_Estudiante extends VerActividad {
        
         
     }
-    public VerActividad_Estudiante(Curso curso,Actividad actividad) {
+    public VerActividad_Estudiante(CCurso curso,Actividad actividad) {
         this.curso=curso;
         this.idActividad=idActividad;
         System.out.println(verDisponiblidad(actividad));

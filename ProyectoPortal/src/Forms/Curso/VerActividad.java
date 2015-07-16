@@ -6,7 +6,7 @@
 package Forms.Curso;
 
 import Controladores.ActividadJpaController;
-import Curso.Curso;
+import Curso.CCurso;
 import Tablas.Actividad;
 
 /**
@@ -17,7 +17,7 @@ public abstract class VerActividad extends javax.swing.JInternalFrame {
 
     
     
-    Curso curso;
+    CCurso curso;
     Actividad actividad;
     int idActividad;
     
