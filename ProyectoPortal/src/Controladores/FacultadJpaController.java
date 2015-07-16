@@ -135,13 +135,17 @@ public class FacultadJpaController implements Serializable {
         }
     }
     
+    /// metodos creados para devolver datos especificos
+    
     public int getMaxId(){
         EntityManager em = getEntityManager();
-        int id = 0;
         try{
             Query q = em.createQuery("SELECT MAX(f.id) FROM Facultad f");
-            id = (int) q.getSingleResult();
-            return id;
+            Object id = q.getSingleResult();
+            if (id == null)
+                return (int)id;
+            else
+                return 0;
         }finally{
             em.close();
         }
@@ -156,4 +160,15 @@ public class FacultadJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<String> getFacultad(){
+        EntityManager em = getEntityManager();
+        try{
+            Query q = em.createNamedQuery("SELEC f.facultad FROM Facultad f");
+            return q.getResultList();
+        }finally{
+            em.close();
+        }
+    }
+    
 }

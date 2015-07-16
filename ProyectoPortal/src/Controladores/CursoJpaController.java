@@ -159,4 +159,14 @@ public class CursoJpaController implements Serializable {
         }
     }
     
+    public List<String> getCurso(){
+        EntityManager em = getEntityManager();
+        try{
+            Query q = em.createNamedQuery("SELEC c.nombre FROM Curso c");
+            return q.getResultList();
+        }finally{
+            em.close();
+        }
+    }
+    
 }
