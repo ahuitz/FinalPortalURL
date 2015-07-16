@@ -15,6 +15,7 @@ public class FormularioAdministracion extends javax.swing.JFrame {
     
     final private int crearFacultad = 1;
     final private int crearCiclo = 2;
+    final private int crearCurso = 3;
 
     /**
      * Creates new form FormularioAdministracion
@@ -154,21 +155,21 @@ public class FormularioAdministracion extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        CrearCurso crearcurso = new CrearCurso();
+        Crear_Facultad_ciclo_curso crearcurso = new Crear_Facultad_ciclo_curso(crearCurso);
         jDesktopPane1.add(crearcurso);
         crearcurso.show();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        Crear_Facultad_ciclo facultad = new Crear_Facultad_ciclo(crearFacultad);
+        Crear_Facultad_ciclo_curso facultad = new Crear_Facultad_ciclo_curso(crearFacultad);
         jDesktopPane1.add(facultad);
         facultad.show();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
-        Crear_Facultad_ciclo ciclo = new Crear_Facultad_ciclo(crearCiclo);
+        Crear_Facultad_ciclo_curso ciclo = new Crear_Facultad_ciclo_curso(crearCiclo);
         jDesktopPane1.add(ciclo);
         ciclo.show();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
