@@ -26,11 +26,13 @@ public class CCurso {
     private ArrayList<Persona> estudiantes;
     private ArrayList<Integer> usuariosID;
     public static Usuario usuario;
+    private String rol;
     private int idSeccionCurso;
 
     public CCurso(String rol, Usuario usuario, int idSeccionCurso) {
         CCurso.usuario=usuario;
         this.idSeccionCurso=idSeccionCurso;
+        this.rol=rol;
         obtenerPersonas();
         obtenerUsuariosID();
         switch(rol){
@@ -49,6 +51,10 @@ public class CCurso {
             default:
                 break;
         }
+    }
+
+    public String getRol() {
+        return rol;
     }
 
     public CActividad getActividad() {

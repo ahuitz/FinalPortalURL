@@ -23,23 +23,31 @@ public class ModeloTablaActividades extends AbstractTableModel {
     private List<Tipoactividad>listaActividad;
     private String columnas[] = {"Titulo","FechaEntrega", "Tipo de Actividad"};
 
-    public ModeloTablaActividades(List<Actividad> actividades) {
-      this.actividades= nuevaActividades(actividades);
+    public ModeloTablaActividades(List<Actividad> act,String rol) {
+        if (act != null) {
+            List<Actividad> n = new ArrayList<>();
+            for (Actividad a : act) {
+                if (rol.compareTo("CAT") == 0) {
+                    n.add(a);
+                } else {
+                    if (a.getVirtual()) {
+                        n.add(a);
+                    }
+
+                }
+            }
+            this.actividades = n;
+        }
+
       TipoactividadJpaController controlador = new TipoactividadJpaController(Forms.FormularioUsuarios1.conexion.getEmf());
         listaActividad=controlador.findTipoactividadEntities();
       
     }
-    public List<Actividad> nuevaActividades(List<Actividad> archivos){
-        List<Actividad> n= new ArrayList<>();
-        for(Actividad a: actividades){
-            if(a.getVirtual()){
-                n.add(a);
-            }
-        }
-        
-        return n;
-        
+
+    public List<Actividad> getActividades() {
+        return actividades;
     }
+    
     
     @Override
     public int getRowCount() {

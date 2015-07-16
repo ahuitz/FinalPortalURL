@@ -23,10 +23,12 @@ public class A_Estudiante extends CActividad {
     private List<Entrega> entregas;
     
 
-    public A_Estudiante(ActividadJpaController controladorA, EntregaJpaController controladorE,int ISC) {
-        this.controladorA = controladorA;
-        this.controladorE = controladorE;
+    public A_Estudiante(EntityManagerFactory emf,int ISC) {
+        this.emf=emf;
+        this.controladorA = new ActividadJpaController(emf);
+        this.controladorE = new EntregaJpaController(emf);
         this.idSeccionCurso= ISC;
+        cargarActividades(emf,ISC);
         cargarEntregas();
     }
 
