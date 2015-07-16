@@ -22,7 +22,7 @@ public class Recurso_E extends PrincipalRecurso {
         setClosable(Boolean.TRUE);
         //setResizable(Boolean.TRUE);
         this.botonCrearR.setVisible(false);
-        this.botonModificarR.setVisible(false);
+        this.jMenuItemModificar.setVisible(false);
         this.r=recursoE;
         this.TablaRecursos.setModel(new ModeloTablaRecurso(r.getRecursos()));
         for(int i=0;i<TablaRecursos.getModel().getColumnCount();i++){

@@ -41,12 +41,33 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
     private void initComponents() {
 
         jProgressBar1 = new javax.swing.JProgressBar();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItemVer = new javax.swing.JMenuItem();
+        jMenuItemModificar = new javax.swing.JMenuItem();
         botonCrearR = new javax.swing.JButton();
-        botonModificarR = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaRecursos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        botonVer = new javax.swing.JButton();
+
+        jPopupMenu1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+
+        jMenuItemVer.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jMenuItemVer.setText("Ver");
+        jMenuItemVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVerActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItemVer);
+
+        jMenuItemModificar.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jMenuItemModificar.setText("Modificar");
+        jMenuItemModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemModificarActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItemModificar);
 
         setTitle("Principal recurso");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -75,14 +96,6 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
             }
         });
 
-        botonModificarR.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        botonModificarR.setText("Modificar");
-        botonModificarR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonModificarRActionPerformed(evt);
-            }
-        });
-
         TablaRecursos.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         TablaRecursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,19 +108,13 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TablaRecursos.setComponentPopupMenu(jPopupMenu1);
+        TablaRecursos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         TablaRecursos.setRowHeight(30);
         jScrollPane1.setViewportView(TablaRecursos);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("Recursos:");
-
-        botonVer.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        botonVer.setText("Ver");
-        botonVer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonVerActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,33 +125,23 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(botonCrearR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botonModificarR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(botonVer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botonCrearR, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(botonVer)
-                        .addGap(18, 18, 18)
                         .addComponent(botonCrearR)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonModificarR)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -164,39 +161,7 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
         rc.toFront();
     }//GEN-LAST:event_botonCrearRActionPerformed
 
-    private void botonModificarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarRActionPerformed
-        // TODO add your handling code here:
-        int fila = TablaRecursos.getSelectedRow();
-        if (fila >= 0) {
-            ModeloTablaRecurso modelo = (ModeloTablaRecurso) TablaRecursos.getModel();
-            Date fecha = (Date) modelo.getValueAt(fila, 0);
-            String titulo = (String) modelo.getValueAt(fila, 1);
-            Query q;
-            q = r.getEmf().createEntityManager().createNamedQuery("Recurso.findByFechaPublicacion");
-            q.setParameter("fechaPublicacion", fecha);
-            List<Recurso> recs = q.getResultList();
-            Recurso rec = null;
-            for (Recurso rec1 : recs) {
-                if (rec1.getTitulo().compareTo(titulo) == 0) {
-                    rec = rec1;
-                    break;
-                }
-            }
-            q = r.getEmf().createEntityManager().createNamedQuery("Archivo.findById");
-            q.setParameter("id", rec.getArchivoid());
-            List archivos =  q.getResultList();
-            ModificarRecurso mr = new ModificarRecurso((R_Catedratico) r,rec, null);
-            if(archivos.size()>0){
-                mr = new ModificarRecurso((R_Catedratico) r,rec, (Archivo) archivos.get(0));
-            }
-            getParent().add(mr);
-            mr.toFront();
-        } else {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un recurso.", "", JOptionPane.INFORMATION_MESSAGE);
-        }        
-    }//GEN-LAST:event_botonModificarRActionPerformed
-
-    private void botonVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerActionPerformed
+    private void jMenuItemVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVerActionPerformed
         // TODO add your handling code here:
         int fila = TablaRecursos.getSelectedRow();
         if (fila >= 0) {
@@ -226,15 +191,48 @@ public abstract class PrincipalRecurso extends javax.swing.JInternalFrame{
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un recurso.", "", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_botonVerActionPerformed
+    }//GEN-LAST:event_jMenuItemVerActionPerformed
+
+    private void jMenuItemModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModificarActionPerformed
+        // TODO add your handling code here:
+        int fila = TablaRecursos.getSelectedRow();
+        if (fila >= 0) {
+            ModeloTablaRecurso modelo = (ModeloTablaRecurso) TablaRecursos.getModel();
+            Date fecha = (Date) modelo.getValueAt(fila, 0);
+            String titulo = (String) modelo.getValueAt(fila, 1);
+            Query q;
+            q = r.getEmf().createEntityManager().createNamedQuery("Recurso.findByFechaPublicacion");
+            q.setParameter("fechaPublicacion", fecha);
+            List<Recurso> recs = q.getResultList();
+            Recurso rec = null;
+            for (Recurso rec1 : recs) {
+                if (rec1.getTitulo().compareTo(titulo) == 0) {
+                    rec = rec1;
+                    break;
+                }
+            }
+            q = r.getEmf().createEntityManager().createNamedQuery("Archivo.findById");
+            q.setParameter("id", rec.getArchivoid());
+            List archivos =  q.getResultList();
+            ModificarRecurso mr = new ModificarRecurso((R_Catedratico) r,rec, null);
+            if(archivos.size()>0){
+                mr = new ModificarRecurso((R_Catedratico) r,rec, (Archivo) archivos.get(0));
+            }
+            getParent().add(mr);
+            mr.toFront();
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un recurso.", "", JOptionPane.INFORMATION_MESSAGE);
+        }       
+    }//GEN-LAST:event_jMenuItemModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable TablaRecursos;
     public javax.swing.JButton botonCrearR;
-    public javax.swing.JButton botonModificarR;
-    private javax.swing.JButton botonVer;
     private javax.swing.JLabel jLabel1;
+    public javax.swing.JMenuItem jMenuItemModificar;
+    private javax.swing.JMenuItem jMenuItemVer;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
